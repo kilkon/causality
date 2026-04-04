@@ -50,6 +50,6 @@ summary
 
 :::
 
-      확장 읽기: 전체 비교표와 용어 대응은 [모형 설정·식별·추정 보충 문서](../model_spec_identification_estimation.html)를 참고한다.
+      확장 읽기: 전체 비교표와 용어 대응은 [3.1 모형 설정, 식별, 추정](../ch03-01-specification-identification-estimation.html)를 참고한다.
 
       다음 장에서는 이 틀을 DAG의 경로 규칙과 결합해, 편향의 구조와 식별 규칙을 그림으로 읽는 방법을 다룬다.

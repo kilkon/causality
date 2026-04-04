@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>부록 B. 선형 대수와 회귀의 기하학 | 인과효과 추론 (Causal Inference)</title>
+  <title>부록 B. 회귀모형 추정 방법 | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 인과효과 추론 강의를 위해 준비했습니다. 계속 수정중인 원고입니다" />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,8 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  
+  <script>window.__BOOK_EDITOR__ = {"slug": "app-b", "title": "부록 B. 회귀모형 추정 방법", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\app-b.md"};</script>
+
 </head>
 <body>
   <div class="site-shell">
@@ -31,28 +32,28 @@
               <ul class="sidebar-list">
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch01-01-correlation-causation.html">
-                    <span class="sidebar-link-label"></span>
-                    1.1 상관과 인과의 근본적 차이 — 왜 회귀만으로는 부족한가
+                    
+                    1.1 상관과 인과의 근본적 차이 - 왜 회귀만으로는 부족한가
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch01-02-counterfactuals.html">
-                    <span class="sidebar-link-label"></span>
-                    1.2 반사실(counterfactual)의 정의와 직관적 예시
+                    
+                    1.2 반사실과 잠재결과 - 인과효과를 어떻게 정의할 것인가
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch01-03-ladder.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     1.3 인과 사다리와 구조 인과 모형 — 세 층위의 형식화
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch01-04-gender-causality-debate.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     1.4 성별은 원인이 될 수 없는가 — 비판적 검토
                   </a>
                 </li>
@@ -60,180 +61,159 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch02-00-potential-outcomes-framework-overview.html">
                     <span class="sidebar-link-label">2</span>
-                    2장. 잠재결과 프레임워크 — 전체 방향과 학습 로드맵
+                    잠재결과 프레임워크
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch02-01-unit-treatment-potential-outcomes.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     2.1 단위 · 처치 · 잠재결과의 정의
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch02-02-ice-ate-att-atc.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     2.2 개인 인과효과와 평균 인과효과 — ICE · ATE · ATT · ATC
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch02-03-sutva-missingness.html">
-                    <span class="sidebar-link-label"></span>
-                    2.3 SUTVA, 결측 데이터 관점, 형식적 통합
+                    
+                    2.3 SUTVA, 결측 결과, 그리고 잠재결과 프레임워크
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch02-04-generalization-target-population.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     2.4 일반화 가능성과 표적 모집단
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch03-00-modeling-identification-intro.html">
+                    <span class="sidebar-link-label">3</span>
+                    모형 설정, 식별, 추정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch03-01-specification-identification-estimation.html">
                     <span class="sidebar-link-label">3.1</span>
-                    3 장 모형 설정 · 식별 · 추정
+                    모형 설정, 식별, 추정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch03-02-scm-dag-model-specification.html">
                     <span class="sidebar-link-label">3.2</span>
-                    3.2 SCM·DAG에서의 모형 설정
+                    식별의 다양한 의미 - Lewbel의 Identification Zoo
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch03-03-identification-observed-to-causal.html">
                     <span class="sidebar-link-label">3.3</span>
-                    3.3 식별: 관측분포와 인과량의 연결
+                    식별: 관측분포와 인과량의 연결
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch03-04-estimation-sample-implementation.html">
                     <span class="sidebar-link-label">3.4</span>
-                    3.4 추정: 식별된 표현의 표본 구현
+                    추정: 식별된 표현의 표본 구현
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch03-05-why-distinction-chapter3.html">
                     <span class="sidebar-link-label">3.5</span>
-                    3.5 3장에서 왜 이 구분이 필요한가
+                    3장에서 왜 이 구분이 필요한가
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch04-01-dag-bias-structure.html">
                     <span class="sidebar-link-label">4</span>
-                    4장. DAG로 읽는 편향의 구조
+                    DAG로 읽는 편향의 구조
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch04-02-s041.html">
-                    <span class="sidebar-link-label"></span>
-                    4.1.1 경로의 세 원형: 포크(fork) · 파이프(pipe) · 콜라이더(collider)
+                    
+                    4.1 경로의 세 원형: 포크(fork) · 파이프(pipe) · 콜라이더(collider)
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch04-03-s042.html">
-                    <span class="sidebar-link-label"></span>
-                    4.1.2 조상 · 자손 · 조건화(conditioning)의 효과
+                    
+                    4.2 조상 · 자손 · 조건화(conditioning)의 효과
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch04-04-s043.html">
-                    <span class="sidebar-link-label"></span>
-                    4.1.3 백도어(backdoor) 기준과 프론트도어(frontdoor) 기준 — 직관과 공식
+                    
+                    4.3 백도어(backdoor) 기준과 프론트도어(frontdoor) 기준 — 직관과 공식
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch04-05-s044.html">
-                    <span class="sidebar-link-label"></span>
-                    4.1.4 조정 공식(adjustment formula)과 식별(identification)의 개념
+                    
+                    4.4 조정 공식(adjustment formula)과 식별(identification)의 개념
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch04-05a-s044a.html">
-                    <span class="sidebar-link-label"></span>
-                    4.1.5 내생적 선택편향(endogenous selection bias)과 유형별 구조
+                    
+                    4.5 내생적 선택편향(endogenous selection bias)과 유형별 구조
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch04-06-s045.html">
-                    <span class="sidebar-link-label"></span>
-                    4.1.6 콜라이더(충돌) 편향의 방향·크기 — 문헌 개관
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch05-01-identification-estimation.html">
-                    <span class="sidebar-link-label">5</span>
-                    5장. 식별과 추정의 구분
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="parametric_semiparametric_nonparametric.html">
-                    <span class="sidebar-link-label"></span>
-                    모수적·반모수적·비모수적 식별
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="model_spec_identification_estimation.html">
-                    <span class="sidebar-link-label"></span>
-                    모형 설정(Model Specification), 식별(Identification), 추정(Estimation)
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch05-05-s51-roadmap.html">
-                    <span class="sidebar-link-label"></span>
-                    5.1.5 이후 장과의 연결(로드맵)
+                    
+                    4.6 충돌변수(collider) 편의의 방향과 크기
                   </a>
                 </li>
                 </ul>
             </section>
             
             <section class="sidebar-part">
-              <div class="sidebar-part-name">?2? | ??? ?? ???</div>
-              <p class="sidebar-part-desc">??? ??? ????? ????? ???? ? ??? ??? ????.</p>
+              <div class="sidebar-part-name">제2부 | 실험과 내적 타당도</div>
+              <p class="sidebar-part-desc">무작위 실험을 인과추론의 기준점으로 이해하고 그 가정과 한계를 정리합니다.</p>
               <ul class="sidebar-list">
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch06-01-randomization-identification.html">
                     <span class="sidebar-link-label">6</span>
-                    6.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch06-02-s061.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     6.1.1 무작위화가 교란을 제거하는 메커니즘 — DAG로 보기
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch06-03-s062.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     6.1.2 ATE의 비편향 추정량으로서의 차이-in-means
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch06-04-s063.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     6.1.3 실험 설계의 변형: 층화 · 군집 · 요인 설계
                   </a>
                 </li>
@@ -241,34 +221,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-01-compliance-itt-cace.html">
                     <span class="sidebar-link-label">7</span>
-                    7.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-02-s071.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     7.1.1 완전 순응 vs. 부분 순응 — 처치 배정과 처치 수령의 구분
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-03-s072.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     7.1.2 ITT(Intention-to-Treat)와 CACE/LATE의 정의와 차이
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-04-s073.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     7.1.3 도구변수로서의 무작위 배정 — 단조성(monotonicity) 가정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-05-s074.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략
                   </a>
                 </li>
@@ -276,34 +256,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-01-external-validity-transportability.html">
                     <span class="sidebar-link-label">8</span>
-                    8.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-02-s081.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     8.1.1 내적 타당도와 외적 타당도의 긴장
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-03-s082.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     8.1.2 표본 선택과 표적 모집단의 불일치
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-04-s083.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     8.1.3 실험 결과의 외삽: 수송 프레임
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-05-s084.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     8.1.4 현장 실험(field experiment) · 자연 실험(natural experiment)의 위치
                   </a>
                 </li>
@@ -311,44 +291,9 @@
             </section>
             
             <section class="sidebar-part">
-              <div class="sidebar-part-name">?3? | ?? ????? ??? ? ??</div>
-              <p class="sidebar-part-desc">?? ???? ???? ??? ??? ???? ??? ??? ??? ???? ????.</p>
+              <div class="sidebar-part-name">제3부 | 관측 연구에서의 편향과 그 구조</div>
+              <p class="sidebar-part-desc">관측 연구에서 발생하는 편향의 구조를 파악하고 무엇이 식별을 어렵게 만드는지 정리합니다.</p>
               <ul class="sidebar-list">
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="selection_bias_identification.html">
-                    <span class="sidebar-link-label">9</span>
-                    모형 식별과 선택편향
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch09-01-selection-bias-comparability.html">
-                    <span class="sidebar-link-label">9</span>
-                    9.1 장의 핵심 항목
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch09-02-s091.html">
-                    <span class="sidebar-link-label"></span>
-                    9.1.1 선택 편향의 정의와 DAG 표현
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch09-03-s092.html">
-                    <span class="sidebar-link-label"></span>
-                    9.1.2 비교 가능성(comparability) · 교환 가능성(exchangeability) 조건
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch09-04-s093.html">
-                    <span class="sidebar-link-label"></span>
-                    9.1.3 밸런스(balance)의 의미 — 공변량 분포의 유사성
-                  </a>
-                </li>
-                
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="homophily_bias.html">
                     <span class="sidebar-link-label">10</span>
@@ -359,27 +304,27 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-01-covariate-control-limits.html">
                     <span class="sidebar-link-label">10</span>
-                    10.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-02-s101.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     10.1.1 통제(control)가 해결하지 못하는 경우 — 측정 불가 교란
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-03-s102.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     10.1.2 과도한 통제(overcontrol): 매개변수 통제의 위험
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-04-s103.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     10.1.3 동질성(homophily)과 인과 해석의 왜곡
                   </a>
                 </li>
@@ -394,27 +339,27 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch11-01-collider-bias.html">
                     <span class="sidebar-link-label">11</span>
-                    11.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch11-02-s111.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch11-03-s112.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     11.1.2 편향의 방향과 크기 — 수치 예시
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch11-04-s113.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     11.1.3 선택 편향 · 출판 편향 · 건강한 노동자 효과와 콜라이더의 연결
                   </a>
                 </li>
@@ -422,27 +367,27 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch12-01-unobserved-confounding-limits.html">
                     <span class="sidebar-link-label">12</span>
-                    12.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch12-02-s121.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     12.1.1 미측 교란(unobserved confounding)의 DAG 표현
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch12-03-s122.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     12.1.2 관측 가능 조건에서의 식별 불가능성
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch12-04-s123.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     12.1.3 민감도 분석의 필요성 — 이후(제5부·20장)에서 정식으로 다룬다
                   </a>
                 </li>
@@ -450,47 +395,47 @@
             </section>
             
             <section class="sidebar-part">
-              <div class="sidebar-part-name">?4? | ??? ??? ???? ?? ??</div>
-              <p class="sidebar-part-desc">??? ??, ????, ?????, DID, ????? ?? ?? ???? ??? ???? ??? ???.</p>
+              <div class="sidebar-part-name">제4부 | 조건부 독립과 준실험의 식별 전략</div>
+              <p class="sidebar-part-desc">조건부 독립, 도구변수, 회귀불연속, DID, 패널모형을 통해 관측 자료에서 식별을 시도하는 전략을 다룹니다.</p>
               <ul class="sidebar-list">
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch13-01-regression-matching-ipw.html">
                     <span class="sidebar-link-label">13</span>
-                    13.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch13-02-s131.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     13.1.1 조건부 독립 가정(CIA / ignorability)의 의미
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch13-03-s132.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     13.1.2 회귀 조정의 인과적 해석 조건
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch13-04-s133.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     13.1.3 매칭의 직관 — 이웃 매칭 · 성향점수 매칭 · 칼퍼 반경
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch13-05-s134.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     13.1.4 역확률가중(IPW)과 안정화 가중(SIPW)
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch13-06-s135.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     13.1.5 공통 지지(common support) — 외삽 위험과 진단
                   </a>
                 </li>
@@ -498,41 +443,41 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch14-00-instrumental-variables-intro.html">
                     <span class="sidebar-link-label">14</span>
-                    14장. 도구변수 접근법
+                    도구변수 접근법
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch14-01-instrumental-variables.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     14.1 IV의 세 가지 핵심 가정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch14-02-s142.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     14.2 Wald 추정량과 2SLS
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch14-03-s143.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     14.3 LATE 해석
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch14-04-s144.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     14.4 약한 도구 진단과 대응
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch14-05-s145.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     14.5 자연실험형 IV 예시
                   </a>
                 </li>
@@ -540,41 +485,41 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch15-00-rdd-intro.html">
                     <span class="sidebar-link-label">15</span>
-                    15장. 회귀불연속 설계
+                    회귀불연속 설계
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch15-01-rdd.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     15.1 배정변수와 임계값의 역할
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch15-02-s152.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     15.2 Sharp RDD: 연속성 가정과 국소 효과
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch15-03-s153.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     15.3 Fuzzy RDD: IV로의 환원
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch15-04-s154.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     15.4 연속 처치·다중 임계값 확장
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch15-05-s155.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     15.5 조작 검정과 진단 시각화
                   </a>
                 </li>
@@ -582,41 +527,41 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch16-00-did-intro.html">
                     <span class="sidebar-link-label">16</span>
-                    16장. 이중차분법
+                    이중차분법
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch16-01-did.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     16.1 DiD의 기본 직관과 2x2 설계
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch16-02-s162.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     16.2 회귀 표현과 패널자료에서의 DID
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch16-03-s163.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     16.3 동태적 효과와 이벤트 스터디(event-study)
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch16-04-s164.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     16.4 스태거드 도입과 현대적 DID
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch16-05-s165.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     16.5 평행추세와 핵심 가정, 진단
                   </a>
                 </li>
@@ -624,34 +569,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch17-00-panel-models-intro.html">
                     <span class="sidebar-link-label">17</span>
-                    17장. 패널모형
+                    패널모형
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch17-01-panel-fixed-effects.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     17.1 FE의 기본 설정과 인과 해석
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch17-02-s172.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     17.2 FE가 제거하는 것과 제거하지 못하는 것
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch17-03-s173.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     17.3 시간 고정효과와 이중 고정효과(TWFE)의 해석
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch17-04-s174.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     17.4 FE 인과 해석의 조건과 진단
                   </a>
                 </li>
@@ -659,40 +604,40 @@
             </section>
             
             <section class="sidebar-part">
-              <div class="sidebar-part-name">?5? | ??? ? ?? ? ???</div>
-              <p class="sidebar-part-desc">??? ???, ????, ???? ??? ??? ???.</p>
+              <div class="sidebar-part-name">제5부 | 이질성 · 매개 · 강건성</div>
+              <p class="sidebar-part-desc">효과의 이질성, 매개경로, 민감도와 강건성 점검을 다룹니다.</p>
               <ul class="sidebar-list">
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch18-00-cate-intro.html">
                     <span class="sidebar-link-label">18</span>
-                    18장. 조건부 평균처치효과
+                    조건부 평균처치효과
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch18-01-heterogeneous-treatment-effects.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     18.1 CATE의 정의와 식별
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch18-02-s182.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     18.2 서브그룹 분석의 위험
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch18-03-s183.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     18.3 효과 수정자와 교란변수
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch18-04-s184.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     18.4 개인화 처치 규칙(ITR)
                   </a>
                 </li>
@@ -700,34 +645,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch19-00-mediation-intro.html">
                     <span class="sidebar-link-label">19</span>
-                    19장. 매개효과분석
+                    매개효과분석
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch19-01-mediation-effects.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     19.1 총효과, 직접효과, 간접효과의 분해
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch19-02-s192.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     19.2 자연 직접효과와 자연 간접효과의 정의와 식별
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch19-03-s193.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     19.3 교차세계 반사실과 처치 이후 교란
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch19-04-s194.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     19.4 민감도 분석과 강건성 보고
                   </a>
                 </li>
@@ -735,34 +680,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch20-00-sensitivity-intro.html">
                     <span class="sidebar-link-label">20</span>
-                    20장. 민감도 분석
+                    민감도 분석
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch20-01-sensitivity-partial-identification.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     20.1 Rosenbaum 경계와 \(\Gamma\)-민감도
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch20-02-s202.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     20.2 E-value: 비측 교란이 얼마나 강해야 결론이 뒤집히는가
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch20-03-s203.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     20.3 Manski 부분 식별의 직관
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch20-04-s204.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     20.4 민감도 분석을 연구 보고의 표준으로
                   </a>
                 </li>
@@ -770,47 +715,47 @@
             </section>
             
             <section class="sidebar-part">
-              <div class="sidebar-part-name">?6? | ????? ????</div>
-              <p class="sidebar-part-desc">????? ?? ??? ????? ?? ??? ????.</p>
+              <div class="sidebar-part-name">제6부 | 기계학습과 인과추론</div>
+              <p class="sidebar-part-desc">기계학습의 기본 도구와 인과추론의 결합 방법을 소개합니다.</p>
               <ul class="sidebar-list">
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch21-00-ml-foundations.html">
                     <span class="sidebar-link-label">21</span>
-                    21장. 기계학습 방법의 이해
+                    기계학습 방법의 이해
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch21-01-causal-ml.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     21.1 예측과 인과의 목표 차이
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch21-02-s212.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     21.2 DML과 직교화
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch21-03-s213.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     21.3 AIPW와 이중견고성
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch21-04-s214.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     21.4 인과 숲과 CATE
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch21-05-s215.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     21.5 표현학습·신경망과 인과
                   </a>
                 </li>
@@ -818,26 +763,26 @@
             </section>
             
             <section class="sidebar-part">
-              <div class="sidebar-part-name">?7? | ?? ??: ??? ??? ???</div>
-              <p class="sidebar-part-desc">????, ??? ??, ?????? ????? ?? ??? ???.</p>
+              <div class="sidebar-part-name">제7부 | 박사 수준: 반모수 이론과 효율성</div>
+              <p class="sidebar-part-desc">영향함수, 효율성 경계, 부트스트랩과 부분식별의 고급 주제를 다룹니다.</p>
               <ul class="sidebar-list">
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch22-01-influence-function-pathwise-derivative.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     22.1 함수형 파라미터와 비모수 추정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch22-02-s222.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     22.2 영향함수(IF)와 Gateaux 미분 직관
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch22-03-s223.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     22.3 경로미분과 효율적 추정량 도출
                   </a>
                 </li>
@@ -845,34 +790,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch23-01-semiparametric-efficiency-bound.html">
                     <span class="sidebar-link-label">23</span>
-                    23.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch23-02-s231.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     23.1.1 반모수 모형의 정의와 사례
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch23-03-s232.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     23.1.2 Cramér-Rao 한계의 반모수 확장
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch23-04-s233.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     23.1.3 효율적 점수(efficient score)와 접선 공간(tangent space)
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch23-05-s234.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     23.1.4 ATE 추정의 반모수 효율 한계 — 도출 과정
                   </a>
                 </li>
@@ -880,34 +825,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch24-01-bootstrap-failures.html">
                     <span class="sidebar-link-label">24</span>
-                    24.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch24-02-s241.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     24.1.1 표준 부트스트랩의 타당성 조건
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch24-03-s242.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     24.1.2 부트스트랩이 실패하는 경우 — 비정칙(non-regular) 추정량, 경계 문제
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch24-04-s243.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     24.1.3 서브샘플링(subsampling)과 m-out-of-n 부트스트랩
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch24-05-s244.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     24.1.4 이중 기계학습에서의 교차 적합(cross-fitting)과 부트스트랩
                   </a>
                 </li>
@@ -915,34 +860,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch25-01-partial-identification-framework.html">
                     <span class="sidebar-link-label">25</span>
-                    25.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch25-02-s251.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     25.1.1 식별 집합(identification region)의 정의와 구성
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch25-03-s252.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     25.1.2 단조 처치 반응(MTR) · 단조 도구변수(MIV) 가정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch25-04-s253.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     25.1.3 Balke-Pearl 경계, Manski 경계의 계산
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch25-05-s254.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     25.1.4 부분 식별 결과의 보고와 해석
                   </a>
                 </li>
@@ -950,34 +895,34 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch26-01-reproducibility-checklist.html">
                     <span class="sidebar-link-label">26</span>
-                    26.1 장의 핵심 항목
+                    1 장의 핵심 항목
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch26-02-s261.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     26.1.1 연구 질문·식별 가정·추정 절차의 일관성 점검
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch26-03-s262.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     26.1.2 사전분석계획(pre-analysis plan)과 분석 자유도 관리
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch26-04-s263.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     26.1.3 재현 가능 보고 표준: 코드·데이터·민감도 공개
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch26-05-s264.html">
-                    <span class="sidebar-link-label"></span>
+                    
                     26.1.4 정책 해석에서 내부·외부 타당도의 분리 보고
                   </a>
                 </li>
@@ -985,41 +930,54 @@
             </section>
             
             <section class="sidebar-part">
-              <div class="sidebar-part-name">??</div>
+              <div class="sidebar-part-name">부록</div>
               <p class="sidebar-part-desc"></p>
               <ul class="sidebar-list">
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="app-a.html">
-                    <span class="sidebar-link-label">遺濡?A</span>
-                    부록 A. 확률론 기초 복습 — 조건부 기댓값 · 측도론 직관
+                    <span class="sidebar-link-label">부록 A</span>
+                    확률론 기초 - 인과효과 이해를 위한 최소 공통 언어
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="app-b.html" aria-current="page">
-                    <span class="sidebar-link-label">遺濡?B</span>
-                    부록 B. 선형 대수와 회귀의 기하학
+                    <span class="sidebar-link-label">부록 B</span>
+                    회귀모형 추정 방법
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="app-c.html">
-                    <span class="sidebar-link-label">遺濡?C</span>
-                    부록 C. 주요 추정량 정리 및 가정 비교표
+                    <span class="sidebar-link-label">부록 C</span>
+                    통계적 추론과 가설검정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="app-d.html">
-                    <span class="sidebar-link-label">遺濡?D</span>
-                    부록 D. R · Python 실습 코드 (장별)
+                    <span class="sidebar-link-label">부록 D</span>
+                    R · Python 실습 코드 (장별)
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="app-e.html">
-                    <span class="sidebar-link-label">遺濡?E</span>
-                    부록 E. 연습 문제 해답
+                    <span class="sidebar-link-label">부록 E</span>
+                    연습 문제 해답
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">참고문헌</div>
+              <p class="sidebar-part-desc">이 책에서 직접 인용하거나 핵심적으로 참고한 문헌을 APA 스타일로 정리한다.</p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="references.html">
+                    
+                    참고문헌
                   </a>
                 </li>
                 </ul>
@@ -1035,22 +993,254 @@
       
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">?? · 遺濡?B</p>
-        <h1>부록 B. 선형 대수와 회귀의 기하학</h1>
-        <p class="description">기존 사이트에는 아직 본문이 없어서 생성한 플레이스홀더입니다.</p>
+        <p class="breadcrumb">부록 · 부록 B</p>
+        <h1>부록 B. 회귀모형 추정 방법</h1>
+        <p class="description">최소제곱법, 최우추정법, 다중회귀의 선형대수 표현, 추정량의 분산 추정, 그리고 GLS까지 회귀모형 추정의 핵심 논리를 체계적으로 정리한다.</p>
+        
+        <div class="editor-actions">
+          <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
+          <button type="button" class="editor-button" data-open-source="app-b" title="C:\Users\owner\causal inference\causal inference2\content\chapters\app-b.md">Markdown 열기</button>
+          <span class="editor-path">C:\Users\owner\causal inference\causal inference2\content\chapters\app-b.md</span>
+        </div>
         
       </header>
       <section class="chapter-body">
-        <h1 id="부록-b-선형-대수와-회귀의-기하학">부록 B. 선형 대수와 회귀의 기하학</h1>
-<p>이 장은 기존 사이트 목차에는 포함되어 있었지만, 아직 연결된 HTML 본문은 없었습니다.</p>
-<p>새 Markdown 워크플로에서는 이 파일을 바로 편집해서 부록 원고를 채워 넣을 수 있습니다.</p>
+        <h1 id="부록-b-회귀모형-추정-방법">부록 B. 회귀모형 추정 방법</h1>
+<p>이 책의 여러 장에서는 회귀분석이 반복해서 등장한다. 회귀조정, 패널 고정효과, DID, RDD의 국소선형회귀, 2SLS의 1단계와 2단계, 가중회귀, 이분산-강건 표준오차까지 모두 회귀모형의 언어를 사용한다. 하지만 회귀모형을 실제로 어떻게 추정하는지, 왜 그런 식이 나오는지, 그리고 표준오차를 어떻게 계산하는지는 따로 정리해 둘 필요가 있다.</p>
+<p>이 부록의 목표는 다음 다섯 가지이다.</p>
+<ol><li>최소제곱법(OLS)이 무엇을 최소화하는지 설명한다.</li><li>최우추정법(MLE)이 어떻게 회귀모형에 적용되는지 설명한다.</li><li>추정량의 분산과 표준오차를 어떻게 계산하는지 정리한다.</li><li>다중회귀를 선형대수 표기로 정리한다.</li><li>오차 공분산구조가 일반적인 경우 GLS가 어떻게 나오는지 자세히 유도한다.</li></ol>
+<h2 id="b1-회귀모형의-기본-구조">B.1 회귀모형의 기본 구조</h2>
+<p>가장 단순한 선형회귀모형은 다음과 같다.</p>
+<p>\[ Y_i = \beta_0 + \beta_1 X_i + u_i, \qquad i=1,\dots,n. \]</p>
+<p>여기서</p>
+<ul><li>\(Y_i\): 결과변수</li><li>\(X_i\): 설명변수</li><li>\(\beta_0,\beta_1\): 미지의 모수</li><li>\(u_i\): 설명되지 않은 오차항</li></ul>
+<p>이다.</p>
+<p>다중회귀에서는 설명변수가 여러 개가 된다.</p>
+<p>\[ Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \cdots + \beta_k X_{ik} + u_i. \]</p>
+<p>회귀분석의 핵심 질문은 두 가지이다.</p>
+<ol><li>\(\beta\)를 어떻게 추정할 것인가</li><li>그 추정이 얼마나 불확실한가</li></ol>
+<p>최소제곱법과 최우추정법은 첫 번째 질문에 대한 대표적 답이고, 추정량의 분산과 표준오차는 두 번째 질문에 대한 답이다.</p>
+<h2 id="b2-최소제곱법ols의-기본-아이디어">B.2 최소제곱법(OLS)의 기본 아이디어</h2>
+<p>최소제곱법(ordinary least squares)은 잔차(residual)의 제곱합을 최소화하는 추정방법이다. 표본에서 잔차를</p>
+<p>\[ \hat u_i = Y_i - \hat\beta_0 - \hat\beta_1 X_i \]</p>
+<p>라고 하면, OLS는 다음 목적함수를 최소화한다.</p>
+<p>\[ S(\beta_0,\beta_1)=\sum_{i=1}^n (Y_i-\beta_0-\beta_1 X_i)^2. \]</p>
+<p>왜 제곱을 쓰는가? 이유는 세 가지 정도로 이해할 수 있다.</p>
+<ul><li>양수와 음수 잔차가 상쇄되지 않게 하기 위해서</li><li>큰 오차에 더 큰 패널티를 주기 위해서</li><li>미분 가능한 매끈한 목적함수를 얻기 위해서</li></ul>
+<p>OLS는 결국 "관측값과 예측값의 거리"를 가장 작게 만드는 직선을 찾는 과정이다.</p>
+<h2 id="b3-단순회귀에서-ols-추정량의-유도">B.3 단순회귀에서 OLS 추정량의 유도</h2>
+<p>단순회귀의 목적함수를 \(\beta_0,\beta_1\)에 대해 미분하면 정규방정식(normal equations)을 얻는다.</p>
+<p>\[ \frac{\partial S}{\partial \beta_0} = -2\sum_{i=1}^n (Y_i-\beta_0-\beta_1 X_i)=0 \]</p>
+<p>\[ \frac{\partial S}{\partial \beta_1} = -2\sum_{i=1}^n X_i(Y_i-\beta_0-\beta_1 X_i)=0. \]</p>
+<p>이를 정리하면</p>
+<p>\[ \sum_{i=1}^n \hat u_i = 0, \qquad \sum_{i=1}^n X_i \hat u_i = 0 \]</p>
+<p>가 된다. 즉 OLS 잔차는 상수항과 \(X\)에 직교한다.</p>
+<p>이 식을 풀면 잘 알려진 OLS 추정량이 나온다.</p>
+<p>\[ \hat\beta_1 = \frac{\sum_{i=1}^n (X_i-\bar X)(Y_i-\bar Y)} {\sum_{i=1}^n (X_i-\bar X)^2} = \frac{\widehat{\mathrm{Cov}}(X,Y)} {\widehat{\mathrm{Var}}(X)}, \]</p>
+<p>\[ \hat\beta_0 = \bar Y - \hat\beta_1 \bar X. \]</p>
+<p>이 식은 회귀계수가 "표본 공분산 / 표본 분산"의 형태로 주어진다는 것을 보여 준다. 따라서 OLS는 먼저 연관의 구조를 요약하는 추정량이다.</p>
+<h2 id="b4-ols의-기하학적-해석">B.4 OLS의 기하학적 해석</h2>
+<p>OLS는 단순한 계산공식 이상의 의미를 가진다. 기하학적으로 보면 \(Y\)를 설명변수 공간 위로 직교투영(orthogonal projection)하는 것이다. 즉 \(Y\)를 \(X\)가 생성하는 선형공간 위에 가장 가깝게 떨어뜨린 점이 \(\hat Y\)이고, 차이 \(Y-\hat Y\)가 잔차이다.</p>
+<p>이 해석 때문에 OLS는 다음 성질을 가진다.</p>
+<ul><li>잔차는 설명변수 공간과 직교한다.</li><li>적합값과 잔차의 내적은 0이다.</li><li>총제곱합은 설명된 부분과 설명되지 않은 부분으로 분해된다.</li></ul>
+<p>\[ \sum_{i=1}^n (Y_i-\bar Y)^2 = \sum_{i=1}^n (\hat Y_i-\bar Y)^2 + \sum_{i=1}^n (Y_i-\hat Y_i)^2. \]</p>
+<p>이것이 분산분해와 \(R^2\)의 기초이다.</p>
+<h2 id="b5-다중회귀의-행렬-표현">B.5 다중회귀의 행렬 표현</h2>
+<p>다중회귀는 선형대수로 쓰면 훨씬 깔끔하다. \(n\times 1\) 결과벡터를 \(Y\), \(n\times (k+1)\) 설명변수 행렬을 \(X\), \((k+1)\times 1\) 모수벡터를 \(\beta\), 오차벡터를 \(u\)라고 하자.</p>
+<p>\[ Y = X\beta + u. \]</p>
+<p>예를 들어</p>
+<p>\[ X= \begin{bmatrix} 1 &amp; X_{11} &amp; X_{12} &amp; \cdots &amp; X_{1k}\\ 1 &amp; X_{21} &amp; X_{22} &amp; \cdots &amp; X_{2k}\\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\ 1 &amp; X_{n1} &amp; X_{n2} &amp; \cdots &amp; X_{nk} \end{bmatrix}, \qquad \beta= \begin{bmatrix} \beta_0\\ \beta_1\\ \vdots\\ \beta_k \end{bmatrix}. \]</p>
+<p>OLS 목적함수는</p>
+<p>\[ S(\beta)=(Y-X\beta)'(Y-X\beta) \]</p>
+<p>이다.</p>
+<p>이를 \(\beta\)에 대해 미분하면</p>
+<p>\[ \frac{\partial S(\beta)}{\partial \beta} = -2X'(Y-X\beta)=0 \]</p>
+<p>이므로 정규방정식은</p>
+<p>\[ X'X\hat\beta = X'Y \]</p>
+<p>가 된다.</p>
+<p>\(X'X\)가 가역(invertible)이라면 OLS 추정량은</p>
+<p>\[ \hat\beta_{\mathrm{OLS}} = (X'X)^{-1}X'Y \]</p>
+<p>이다.</p>
+<p>이 식은 다중회귀의 핵심이다. 이후 회귀이론의 거의 모든 결과는 여기에서 출발한다.</p>
+<h2 id="b6-xx가-가역이라는-뜻">B.6 \(X'X\)가 가역이라는 뜻</h2>
+<p>\(X'X\)가 역행렬을 갖는다는 것은 설명변수들 사이에 완전한 선형종속이 없다는 뜻이다. 예를 들어</p>
+<p>\[ X_3 = 2X_1 + 5X_2 \]</p>
+<p>처럼 어떤 열이 다른 열들의 선형결합이면 \(X'X\)는 가역이 아니다. 이것이 완전 다중공선성(perfect multicollinearity) 문제이다.</p>
+<p>회귀를 계산할 수 있으려면 설명변수들이 서로 완전히 중복되어서는 안 된다. 인과추론에서는 특히 더미변수 함정(dummy variable trap), 고정효과와 시간더미의 완전 중복 등이 자주 문제 된다.</p>
+<h2 id="b7-ols-추정량의-평균과-분산">B.7 OLS 추정량의 평균과 분산</h2>
+<p>이제 고전 선형회귀모형의 핵심 가정 가운데 하나인</p>
+<p>\[ \mathbb{E}[u\mid X]=0 \]</p>
+<p>를 생각하자. 그러면 \(Y=X\beta+u\)를 OLS 식에 대입해</p>
+<p>\[ \hat\beta = (X'X)^{-1}X'(X\beta+u) = \beta + (X'X)^{-1}X'u \]</p>
+<p>를 얻는다.</p>
+<p>따라서 조건부 기대값은</p>
+<p>\[ \mathbb{E}[\hat\beta\mid X] = \beta + (X'X)^{-1}X'\mathbb{E}[u\mid X] = \beta. \]</p>
+<p>즉 OLS는 불편추정량(unbiased estimator)이다.</p>
+<p>분산은</p>
+<p>\[ \mathrm{Var}(\hat\beta\mid X) = \mathrm{Var}\left((X'X)^{-1}X'u\mid X\right) \]</p>
+<p>\[ = (X'X)^{-1}X'\mathrm{Var}(u\mid X)X(X'X)^{-1}. \]</p>
+<p>이것이 가장 일반적인 형태이다.</p>
+<h2 id="b8-고전적-등분산-가정-아래의-분산">B.8 고전적 등분산 가정 아래의 분산</h2>
+<p>만약 오차항이 구형 공분산구조를 가진다고 하자.</p>
+<p>\[ \mathrm{Var}(u\mid X)=\sigma^2 I_n. \]</p>
+<p>즉</p>
+<ul><li>각 오차의 분산이 동일하고</li><li>서로 상관이 없다는 뜻이다.</li></ul>
+<p>그러면</p>
+<p>\[ \mathrm{Var}(\hat\beta\mid X) = (X'X)^{-1}X'(\sigma^2 I)X(X'X)^{-1} = \sigma^2 (X'X)^{-1}. \]</p>
+<p>이 식은 매우 중요하다. 설명변수의 변동이 클수록 \((X'X)\)가 커져 추정량의 분산은 작아지고, 오차분산 \(\sigma^2\)가 클수록 추정량의 분산은 커진다.</p>
+<h2 id="b9-오차분산-sigma2의-추정">B.9 오차분산 \(\sigma^2\)의 추정</h2>
+<p>\(\sigma^2\)는 보통 알 수 없으므로 표본에서 추정해야 한다. 잔차벡터를</p>
+<p>\[ \hat u = Y - X\hat\beta \]</p>
+<p>라고 하면, 잔차제곱합은</p>
+<p>\[ \hat u'\hat u = \sum_{i=1}^n \hat u_i^2. \]</p>
+<p>고전적 가정 아래 \(\sigma^2\)의 불편추정량은</p>
+<p>\[ \hat\sigma^2 = \frac{\hat u'\hat u}{n-k-1} \]</p>
+<p>이다. 여기서 \(k+1\)은 추정한 모수의 개수(상수항 포함)이다. 자유도 조정이 들어가는 이유는 이미 표본으로부터 \(k+1\)개의 제약을 사용해 \(\beta\)를 추정했기 때문이다.</p>
+<p>그러면 OLS 분산추정량은</p>
+<p>\[ \widehat{\mathrm{Var}}(\hat\beta) = \hat\sigma^2 (X'X)^{-1} \]</p>
+<p>이고, 표준오차는 각 대각원소의 제곱근이다.</p>
+<p>\[ \mathrm{se}(\hat\beta_j) = \sqrt{\widehat{\mathrm{Var}}(\hat\beta_j)}. \]</p>
+<h2 id="b10-이분산-강건-분산추정량">B.10 이분산-강건 분산추정량</h2>
+<p>현실에서는 등분산 가정이 자주 깨진다. 즉</p>
+<p>\[ \mathrm{Var}(u_i\mid X_i)=\sigma_i^2 \]</p>
+<p>가 되어 관측치마다 분산이 다를 수 있다. 이 경우 고전적 분산식 \(\hat\sigma^2(X'X)^{-1}\)는 일반적으로 맞지 않는다.</p>
+<p>그럴 때 사용하는 것이 이분산-강건(heteroskedasticity-robust) 분산추정량이다. 대표적인 샌드위치 형태는</p>
+<p>\[ \widehat{\mathrm{Var}}_{\mathrm{robust}}(\hat\beta) = (X'X)^{-1} \left(\sum_{i=1}^n \hat u_i^2 x_i x_i'\right) (X'X)^{-1}, \]</p>
+<p>여기서 \(x_i\)는 \(i\)번째 관측치의 설명변수 열벡터이다.</p>
+<p>행렬형태로는</p>
+<p>\[ \widehat{\mathrm{Var}}_{\mathrm{robust}}(\hat\beta) = (X'X)^{-1}X'\hat\Omega X(X'X)^{-1} \]</p>
+<p>로 쓸 수 있으며, \(\hat\Omega\)는 보통 대각원소가 \(\hat u_i^2\)인 대각행렬이다.</p>
+<p>인과추론 실증연구에서는 강건 표준오차가 거의 기본이다. 특히 이분산, 군집구조, 패널상관이 있는 경우 고전적 표준오차는 지나치게 낙관적일 수 있다.</p>
+<h2 id="b11-최소제곱법과-최우추정법의-관계">B.11 최소제곱법과 최우추정법의 관계</h2>
+<p>최우추정법(maximum likelihood estimation, MLE)은 관찰된 데이터가 가장 그럴듯하게 발생하게 만드는 모수값을 선택하는 방법이다. 즉 가능도함수(likelihood function)</p>
+<p>\[ L(\theta) = f(Y\mid X;\theta) \]</p>
+<p>를 최대화한다.</p>
+<p>선형회귀에서 오차항이 정규분포를 따른다고 가정하자.</p>
+<p>\[ u_i \mid X \sim N(0,\sigma^2), \qquad \text{i.i.d.} \]</p>
+<p>그러면</p>
+<p>\[ Y_i \mid X_i \sim N(X_i'\beta,\sigma^2) \]</p>
+<p>이고, 밀도함수는</p>
+<p>\[ f(Y_i\mid X_i;\beta,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(Y_i-X_i'\beta)^2}{2\sigma^2}\right\}. \]</p>
+<p>표본 전체의 가능도함수는</p>
+<p>\[ L(\beta,\sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(Y_i-X_i'\beta)^2}{2\sigma^2}\right\}. \]</p>
+<p>로그가능도는</p>
+<p>\[ \ell(\beta,\sigma^2) = -\frac{n}{2}\log(2\pi) -\frac{n}{2}\log(\sigma^2) -\frac{1}{2\sigma^2}\sum_{i=1}^n (Y_i-X_i'\beta)^2. \]</p>
+<p>여기서 \(\beta\)에 관한 부분만 보면, \(\ell\)을 최대화하는 것은 결국</p>
+<p>\[ \sum_{i=1}^n (Y_i-X_i'\beta)^2 \]</p>
+<p>를 최소화하는 것과 같다. 즉 정규오차 가정 아래 OLS와 MLE는 \(\beta\)에 대해 같은 추정량을 준다.</p>
+<p>이 점은 매우 중요하다. OLS는 기하학적/대수적 추정법이고, MLE는 확률모형 기반 추정법이다. 정규오차 가정에서는 둘이 만난다.</p>
+<h2 id="b12-최우추정량으로서의-sigma2">B.12 최우추정량으로서의 \(\sigma^2\)</h2>
+<p>정규선형회귀모형에서 로그가능도를 \(\sigma^2\)에 대해 미분하면</p>
+<p>\[ \hat\sigma^2_{\mathrm{MLE}} = \frac{1}{n}\sum_{i=1}^n \hat u_i^2 \]</p>
+<p>를 얻는다.</p>
+<p>여기서 주의할 점은 MLE와 불편추정량이 다르다는 것이다. 앞서 본 고전적 불편추정량은</p>
+<p>\[ \hat\sigma^2 = \frac{1}{n-k-1}\sum_{i=1}^n \hat u_i^2 \]</p>
+<p>였지만, MLE는 분모가 \(n\)이다. MLE는 작은 표본에서 편향이 있을 수 있으나, 큰 표본에서는 일치성과 점근정규성을 가진다.</p>
+<h2 id="b13-다중회귀에서의-정규성-t-검정-f-검정">B.13 다중회귀에서의 정규성, t-검정, F-검정</h2>
+<p>오차항의 정규성을 가정하면 유한표본에서 OLS 추정량의 정확한 분포를 도출할 수 있다.</p>
+<p>\[ \hat\beta \mid X \sim N\left(\beta,\sigma^2(X'X)^{-1}\right). \]</p>
+<p>이때</p>
+<p>\[ t_j = \frac{\hat\beta_j-\beta_{j,0}}{\mathrm{se}(\hat\beta_j)} \]</p>
+<p>는 적절한 자유도의 \(t\)-분포를 따른다. 여러 제약을 동시에 검정할 때는 \(F\)-검정을 사용한다.</p>
+<p>인과추론에서는 대개 큰 표본 근사를 사용하므로 정규성이 절대적으로 필요한 것은 아니다. 하지만 고전 회귀이론을 이해하려면 정규성 가정 아래 정확한 분포가 어떻게 나오는지 알아두는 것이 좋다.</p>
+<h2 id="b14-가우스-마르코프-정리">B.14 가우스-마르코프 정리</h2>
+<p>가우스-마르코프 정리는 고전 선형회귀모형 아래에서 OLS가 최선의 선형불편추정량(BLUE, Best Linear Unbiased Estimator)임을 말한다. 직관적으로는 다음 뜻이다.</p>
+<ul><li>선형추정량 가운데</li><li>불편성을 만족하는 것들 중에서</li><li>분산이 가장 작은 것이 OLS이다.</li></ul>
+<p>이 정리는 정규성까지 요구하지 않는다. 필요한 것은 선형성, 외생성, 구형오차 등이다. 다만 "최선"이라는 말은 선형불편추정량의 범위 안에서의 최선이지, 모든 가능한 추정량 가운데 항상 최선이라는 뜻은 아니다.</p>
+<h2 id="b15-gls가-필요한-이유">B.15 GLS가 필요한 이유</h2>
+<p>앞서 본 OLS의 분산식</p>
+<p>\[ \mathrm{Var}(\hat\beta\mid X) = (X'X)^{-1}X'\Omega X(X'X)^{-1} \]</p>
+<p>에서 \(\Omega=\sigma^2 I\)이면 간단한 형태가 나온다. 하지만 실제로는</p>
+<p>\[ \Omega = \mathrm{Var}(u\mid X) \]</p>
+<p>가 대각행렬이 아닐 수도 있다. 즉</p>
+<ul><li>이분산이 있을 수 있고</li><li>오차들 사이에 상관이 있을 수 있다.</li></ul>
+<p>예를 들어 패널자료에서는 같은 개인 안에서 오차가 상관될 수 있고, 시계열자료에서는 자기상관이 생길 수 있다. 이 경우 OLS는 여전히 불편일 수 있지만 효율적이지 않다.</p>
+<h2 id="b16-gls의-기본-아이디어">B.16 GLS의 기본 아이디어</h2>
+<p>일반화최소제곱법(generalized least squares, GLS)은 오차공분산구조 \(\Omega\)를 고려하여 가중된 제곱합을 최소화한다. 목적함수는</p>
+<p>\[ Q(\beta)=(Y-X\beta)'\Omega^{-1}(Y-X\beta) \]</p>
+<p>이다.</p>
+<p>이 식의 직관은 분명하다. 분산이 큰 관측치는 덜 믿고, 분산이 작은 관측치는 더 믿으며, 상관된 오차구조도 함께 반영하겠다는 것이다. 즉 OLS가 유클리드 거리의 최소화라면, GLS는 \(\Omega^{-1}\)가 정하는 거리(metric) 아래에서의 최소화이다.</p>
+<h2 id="b17-gls-추정량의-유도">B.17 GLS 추정량의 유도</h2>
+<p>목적함수 \(Q(\beta)\)를 \(\beta\)에 대해 미분하면</p>
+<p>\[ \frac{\partial Q(\beta)}{\partial \beta} = -2X'\Omega^{-1}(Y-X\beta)=0. \]</p>
+<p>따라서 GLS의 정규방정식은</p>
+<p>\[ X'\Omega^{-1}X\hat\beta_{\mathrm{GLS}} = X'\Omega^{-1}Y \]</p>
+<p>이고, \((X'\Omega^{-1}X)\)가 가역이면</p>
+<p>\[ \hat\beta_{\mathrm{GLS}} = (X'\Omega^{-1}X)^{-1}X'\Omega^{-1}Y. \]</p>
+<p>이 식이 GLS의 핵심 공식이다.</p>
+<h2 id="b18-gls를-변환-회귀로-이해하기">B.18 GLS를 변환 회귀로 이해하기</h2>
+<p>GLS는 적절한 선형변환을 거친 뒤 OLS를 하는 것과 같다. \(\Omega\)가 양의 정부호라고 하자. 그러면 어떤 행렬 \(C\)가 존재하여</p>
+<p>\[ C'C = \Omega^{-1} \]</p>
+<p>또는 동등하게 \(\Omega = (C^{-1})(C^{-1})'\)가 된다. 예를 들어 Cholesky 분해를 생각할 수 있다.</p>
+<p>원래 모형</p>
+<p>\[ Y=X\beta+u \]</p>
+<p>의 양변에 \(C\)를 곱하면</p>
+<p>\[ CY = CX\beta + Cu. \]</p>
+<p>새로운 변수</p>
+<p>\[ Y^<em>=CY,\qquad X^</em>=CX,\qquad u^*=Cu \]</p>
+<p>를 정의하면</p>
+<p>\[ Y^<em>=X^</em>\beta + u^* \]</p>
+<p>이고</p>
+<p>\[ \mathrm{Var}(u^*\mid X)=C\Omega C' = I. \]</p>
+<p>즉 변환된 모형에서는 오차가 구형이 된다. 따라서 변환모형에 OLS를 적용하면</p>
+<p>\[ \hat\beta = (X^{<em>'}X^</em>)^{-1}X^{<em>'}Y^</em> \]</p>
+<p>가 되는데, 이를 원래 변수로 다시 쓰면 바로 GLS 공식이 나온다.</p>
+<p>이 해석은 매우 중요하다. GLS는 전혀 새로운 방법이라기보다, 오차구조를 "백색화(whitening)"한 뒤 OLS를 하는 방법이다.</p>
+<h2 id="b19-gls-추정량의-분산">B.19 GLS 추정량의 분산</h2>
+<p>GLS 추정량은</p>
+<p>\[ \hat\beta_{\mathrm{GLS}} = \beta + (X'\Omega^{-1}X)^{-1}X'\Omega^{-1}u \]</p>
+<p>이므로, 조건부 분산은</p>
+<p>\[ \mathrm{Var}(\hat\beta_{\mathrm{GLS}}\mid X) = (X'\Omega^{-1}X)^{-1}X'\Omega^{-1}\Omega \Omega^{-1}X(X'\Omega^{-1}X)^{-1} \]</p>
+<p>\[ = (X'\Omega^{-1}X)^{-1}. \]</p>
+<p>이는 OLS보다 더 간단한 형태처럼 보인다. 핵심은 \(\Omega^{-1}\)를 이용해 미리 오차구조를 반영했기 때문이다. 가우스-마르코프 정리의 일반형에서는 \(\Omega\)가 알려져 있을 때 GLS가 선형불편추정량 가운데 가장 효율적이다.</p>
+<h2 id="b20-특수한-경우-가중최소제곱wls">B.20 특수한 경우: 가중최소제곱(WLS)</h2>
+<p>\(\Omega\)가 대각행렬이라면 GLS는 가중최소제곱(weighted least squares, WLS)이 된다. 예를 들어</p>
+<p>\[ \Omega= \begin{bmatrix} \sigma_1^2 &amp; 0 &amp; \cdots &amp; 0\\ 0 &amp; \sigma_2^2 &amp; \cdots &amp; 0\\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\ 0 &amp; 0 &amp; \cdots &amp; \sigma_n^2 \end{bmatrix} \]</p>
+<p>이면</p>
+<p>\[ Q(\beta)=\sum_{i=1}^n \frac{(Y_i-X_i'\beta)^2}{\sigma_i^2}. \]</p>
+<p>즉 분산이 큰 관측치에는 작은 가중치, 분산이 작은 관측치에는 큰 가중치를 준다. WLS는 GLS의 가장 익숙한 특수형태이다.</p>
+<h2 id="b21-실전에서는-보통-fgls">B.21 실전에서는 보통 FGLS</h2>
+<p>현실에서는 \(\Omega\)를 정확히 아는 경우가 드물다. 그래서 보통은 먼저 \(\Omega\)를 추정하고, 그 추정값 \(\hat\Omega\)를 사용해</p>
+<p>\[ \hat\beta_{\mathrm{FGLS}} = (X'\hat\Omega^{-1}X)^{-1}X'\hat\Omega^{-1}Y \]</p>
+<p>를 계산한다. 이것이 feasible GLS(FGLS)이다.</p>
+<p>예를 들어</p>
+<ul><li>이분산 구조를 함수형태로 가정해서 분산모형을 먼저 추정하거나</li><li>시계열 자기상관 모형을 먼저 적합하거나</li><li>패널자료에서 군집별 공분산구조를 먼저 가정</li></ul>
+<p>하는 방식이 가능하다.</p>
+<p>하지만 FGLS는 \(\hat\Omega\)의 추정이 틀리면 성능이 나빠질 수 있다. 그래서 실증연구에서는 OLS 계수 자체는 유지하되, 분산추정만 강건하게 바꾸는 접근도 널리 사용된다.</p>
+<h2 id="b22-ols-mle-gls의-관계-요약">B.22 OLS, MLE, GLS의 관계 요약</h2>
+<p>세 방법의 관계를 정리하면 다음과 같다.</p>
+<ul><li>OLS는 잔차제곱합을 최소화한다.</li><li>MLE는 가능도함수를 최대화한다.</li><li>정규선형회귀모형에서는 OLS와 MLE가 \(\beta\)에 대해 일치한다.</li><li>GLS는 오차 공분산구조 \(\Omega\)를 반영해 가중된 제곱합을 최소화한다.</li><li>\(\Omega=\sigma^2 I\)이면 GLS는 OLS로 돌아간다.</li></ul>
+<p>즉 OLS는 GLS의 특수한 경우이고, 정규성까지 가정하면 동시에 MLE와도 연결된다.</p>
+<h2 id="b23-인과추론에서-회귀추정법을-읽을-때-확인할-점">B.23 인과추론에서 회귀추정법을 읽을 때 확인할 점</h2>
+<p>인과추론 논문에서 회귀표를 볼 때는 단순히 계수 부호와 유의성만 볼 것이 아니라, 적어도 다음을 확인하는 습관이 필요하다.</p>
+<ul><li>어떤 목적함수를 최소화했는가</li><li>오차구조에 어떤 가정을 두었는가</li><li>표준오차는 고전적 방식인가, 강건한가, 군집화했는가</li><li>추정대상이 조건부 연관인지, 설계상 식별된 인과효과인지</li><li>가중치나 변환이 들어갔는가</li></ul>
+<p>같은 회귀모형처럼 보여도 OLS, WLS, GLS, FGLS, MLE는 서로 다른 정보와 가정에 의존한다. 따라서 추정식 자체보다도 그 추정식이 어떤 데이터생성과정을 상정하고 있는지가 중요하다.</p>
+<h2 id="b24-정리">B.24 정리</h2>
+<p>이 부록의 핵심 내용은 다음과 같다.</p>
+<ul><li>OLS는 잔차제곱합을 최소화해 선형회귀 모수를 추정한다.</li><li>단순회귀에서는 \(\hat\beta_1=\widehat{\mathrm{Cov}}(X,Y)/\widehat{\mathrm{Var}}(X)\)이다.</li><li>다중회귀에서는 행렬식 \(\hat\beta=(X'X)^{-1}X'Y\)가 핵심이다.</li><li>고전 가정 아래 OLS의 분산은 \(\sigma^2(X'X)^{-1}\)이고, \(\sigma^2\)는 잔차제곱합으로 추정한다.</li><li>이분산이 있으면 샌드위치형 강건 분산추정량을 사용한다.</li><li>정규오차 가정 아래 OLS는 MLE와 연결된다.</li><li>오차 공분산이 일반적인 경우에는 GLS가 자연스럽게 등장하며, 이는 \(\Omega^{-1}\)를 가중행렬로 쓰는 최소제곱법이다.</li><li>실제 응용에서는 \(\Omega\)를 모르기 때문에 FGLS나 강건 표준오차가 자주 사용된다.</li></ul>
+<p>회귀모형 추정법을 이해하면, 책의 본문에서 나오는 많은 방법이 서로 완전히 다른 것이 아니라 공통된 수학적 구조를 공유한다는 점이 보이기 시작할 것이다. DID의 TWFE, 패널 고정효과, 로컬 선형회귀, 2SLS, 가중회귀, 심지어 일부 머신러닝 추정법까지도 결국은 어떤 목적함수를 최소화하거나 어떤 확률모형의 가능도를 최대화하는 방식으로 이해할 수 있다.</p>
       </section>
       <nav class="chapter-nav">
-        <a class="nav-prev" href="app-a.html">← 遺濡?A 부록 A. 확률론 기초 복습 — 조건부 기댓값 · 측도론 직관</a>
-        <a class="nav-next" href="app-c.html">遺濡?C 부록 C. 주요 추정량 정리 및 가정 비교표 →</a>
+        <a class="nav-prev" href="app-a.html">← 부록 A 확률론 기초 - 인과효과 이해를 위한 최소 공통 언어</a>
+        <a class="nav-next" href="app-c.html">부록 C 통계적 추론과 가설검정 →</a>
       </nav>
     </article>
     
+    <aside class="editor-drawer" data-editor-root hidden>
+      <div class="editor-drawer-header">
+        <strong>Markdown 편집기</strong>
+        <button type="button" class="editor-close" data-editor-close>닫기</button>
+      </div>
+      <p class="editor-hint" data-editor-hint>현재 장의 Markdown 원고를 불러와 바로 저장할 수 있습니다.</p>
+      <div class="editor-toolbar">
+        <button type="button" class="editor-mini-button" data-editor-load>다시 불러오기</button>
+        <button type="button" class="editor-mini-button primary" data-editor-save>저장</button>
+      </div>
+      <textarea class="editor-textarea" data-editor-textarea spellcheck="false"></textarea>
+      <div class="editor-status" data-editor-status data-kind="neutral">편집기를 열면 원고를 불러옵니다.</div>
+      <div class="chapter-edit-status" data-open-source-status="app-b"></div>
+    </aside>
+        
     
     </main>
   </div>

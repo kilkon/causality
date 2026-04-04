@@ -33,6 +33,32 @@ def parse_front_matter(text: str) -> tuple[dict[str, str], str]:
     return meta, body.lstrip()
 
 
+def normalize_display_title(title: str, label: str) -> str:
+    title = title.strip()
+    label = label.strip()
+    if not label:
+        return title
+
+    patterns = [
+        rf"^{re.escape(label)}\s*[.:]\s*",
+        rf"^{re.escape(label)}\s+",
+        rf"^{re.escape(label)}\s*장\s*[.:]?\s*",
+        rf"^{re.escape(label)}\s*절\s*[.:]?\s*",
+    ]
+
+    for pattern in patterns:
+        stripped = re.sub(pattern, "", title)
+        if stripped != title and stripped.strip():
+            return stripped.strip()
+
+    if title.startswith(label):
+        stripped = title[len(label):].lstrip(" .:-–—")
+        if stripped:
+            return stripped
+
+    return title
+
+
 def slugify_fragment(value: str) -> str:
     value = re.sub(r"<[^>]+>", "", value)
     value = value.strip().lower()
@@ -168,24 +194,35 @@ def flatten_chapters(book: dict) -> list[dict]:
         for chapter in part["chapters"]:
             item = dict(chapter)
             item["part_title"] = part["title"]
-            item["source_path"] = str((CONTENT_DIR / chapter["source"]).resolve())
-            item["source_uri"] = (CONTENT_DIR / chapter["source"]).resolve().as_uri()
+            source_path = (CONTENT_DIR / chapter["source"]).resolve()
+            item["source_path"] = str(source_path)
+            item["source_uri"] = source_path.as_uri()
+            meta, _ = parse_front_matter(source_path.read_text(encoding="utf-8"))
+            raw_title = meta.get("title", chapter["title"])
+            item["meta_title"] = raw_title
+            item["meta_description"] = meta.get("description", "")
+            item["display_title"] = normalize_display_title(raw_title, chapter["label"])
             flat.append(item)
     return flat
 
 
 def build_sidebar(book: dict, current_slug: str | None) -> str:
+    flat_by_slug = {chapter["slug"]: chapter for chapter in flatten_chapters(book)}
     part_blocks = []
     for part in book["parts"]:
         chapter_links = []
         for chapter in part["chapters"]:
             current = ' aria-current="page"' if chapter["slug"] == current_slug else ""
+            display_title = flat_by_slug[chapter["slug"]]["display_title"]
+            label_html = ""
+            if chapter["label"]:
+                label_html = f'<span class="sidebar-link-label">{html.escape(chapter["label"])}</span>'
             chapter_links.append(
                 f"""
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="{chapter['slug']}.html"{current}>
-                    <span class="sidebar-link-label">{html.escape(chapter['label'])}</span>
-                    {html.escape(chapter['title'])}
+                    {label_html}
+                    {html.escape(display_title)}
                   </a>
                 </li>
                 """
@@ -269,12 +306,15 @@ def build_index(book: dict, editable: bool) -> None:
                     f'title="{html.escape(flat_chapter["source_path"])}">Markdown 열기</button>'
                     f'<span class="chapter-edit-status" data-open-source-status="{flat_chapter["slug"]}"></span>'
                 )
+            label_html = ""
+            if chapter["label"]:
+                label_html = f"<strong>{html.escape(chapter['label'])}</strong><br />"
             links.append(
                 f"""
                 <li>
                   <a href="{chapter['slug']}.html" class="chapter-card-link">
-                    <strong>{html.escape(chapter['label'])}</strong><br />
-                    {html.escape(chapter['title'])}
+                    {label_html}
+                    {html.escape(flat_chapter['display_title'])}
                   </a>
                   {edit_controls}
                 </li>
@@ -349,12 +389,12 @@ def write_chapter_page(book: dict, flat: list[dict], index: int, editable: bool)
     prev_link = None if index == 0 else flat[index - 1]
     next_link = None if index == len(flat) - 1 else flat[index + 1]
     prev_html = (
-        f'<a class="nav-prev" href="{prev_link["slug"]}.html">← {html.escape(prev_link["label"])} {html.escape(prev_link["title"])}</a>'
+        f'<a class="nav-prev" href="{prev_link["slug"]}.html">← {html.escape(prev_link["label"])} {html.escape(prev_link["display_title"])}</a>'
         if prev_link
         else '<span class="disabled">← 첫 장입니다</span>'
     )
     next_html = (
-        f'<a class="nav-next" href="{next_link["slug"]}.html">{html.escape(next_link["label"])} {html.escape(next_link["title"])} →</a>'
+        f'<a class="nav-next" href="{next_link["slug"]}.html">{html.escape(next_link["label"])} {html.escape(next_link["display_title"])} →</a>'
         if next_link
         else '<span class="disabled nav-next">마지막 장입니다 →</span>'
     )
@@ -388,7 +428,7 @@ def write_chapter_page(book: dict, flat: list[dict], index: int, editable: bool)
         """
         editor_config = {
             "slug": chapter["slug"],
-            "title": chapter["title"],
+            "title": chapter["meta_title"],
             "sourcePath": chapter["source_path"],
         }
 
@@ -396,8 +436,8 @@ def write_chapter_page(book: dict, flat: list[dict], index: int, editable: bool)
     <article class="chapter-card">
       <header class="chapter-header">
         <p class="breadcrumb">{html.escape(chapter['part_title'])} · {html.escape(chapter['label'])}</p>
-        <h1>{html.escape(meta.get('title', chapter['title']))}</h1>
-        <p class="description">{html.escape(meta.get('description', ''))}</p>
+        <h1>{html.escape(chapter['meta_title'])}</h1>
+        <p class="description">{html.escape(chapter['meta_description'])}</p>
         {header_controls}
       </header>
       <section class="chapter-body">
@@ -410,7 +450,7 @@ def write_chapter_page(book: dict, flat: list[dict], index: int, editable: bool)
     </article>
     {editor_drawer}
     """
-    page = page_shell(book, build_sidebar(book, chapter["slug"]), content, chapter["title"], editor_config=editor_config)
+    page = page_shell(book, build_sidebar(book, chapter["slug"]), content, chapter["meta_title"], editor_config=editor_config)
     (DIST_DIR / f"{chapter['slug']}.html").write_text(page, encoding="utf-8")
 
 

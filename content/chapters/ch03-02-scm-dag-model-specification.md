@@ -1,262 +1,196 @@
 ---
-title: 3.2 SCM·DAG에서의 모형 설정
-description: 모형 설정은 단순한 회귀식 선택이 아니라 어떤 구조를 허용하고 어떤 경로를 배제할지를 정하는 일이다. 이 절은 SCM과 DAG 언어로 모형 설정의 의미를 설명한다.
+title: 3.2 식별의 다양한 의미 - Lewbel의 Identification Zoo
+description: 식별이 단 하나의 개념처럼 보이지만 실제 계량경제학과 인과추론에서는 여러 층위와 변형이 존재한다는 점을 Lewbel의 정리로 설명한다.
 ---
 
-# 3.2 SCM·DAG에서의 모형 설정
+# 3.2 식별의 다양한 의미 - Lewbel의 Identification Zoo
 
-3.1절에서 모형 설정, 식별, 추정을 구분했다면, 이제 첫 단계인 모형 설정이 실제로 무엇을 뜻하는지 더 구체적으로 볼 차례다. SCM과 DAG는 연구자가 어떤 변수 간 구조를 가정하고 있는지를 시각적·형식적으로 드러내 주는 도구다. 즉 모형 설정은 “식 하나를 쓰는 일”이 아니라, 어떤 화살표를 허용하고 어떤 경로를 배제할지를 정하는 일이다.
+3.1절에서 우리는 모형 설정, 식별, 추정을 구분해야 한다고 보았다. 그런데 막상 식별이라는 단어를 조금 더 깊이 들여다보면, 문헌에서는 이 말을 매우 다양한 방식으로 사용한다. 어떤 논문은 점 식별(point identification)을 말하고, 어떤 논문은 부분 식별(partial identification)을 말하며, 또 어떤 논문은 지역 식별(local identification), 약한 식별(weak identification), 식별 at infinity, causal identification, structural identification 같은 표현을 쓴다.
 
-## 1. DAG란 무엇인가
-      **DAG**는 *directed acyclic graph*(방향 비순환 그래프)의 약자이다. 변수(또는 모형의 양)를 **노드**로 두고, 한 노드에서 다른 노드로 향하는 **방향간선(화살표)**으로 직접 인과(또는 직접 의존)를 표시한다. 화살표 방향만 따라 이동할 때 어떤 노드에서 출발해 다시 그 노드로 돌아오는 경로가 없도록 **순환(cycle)**이 없어야 한다.
+Arthur Lewbel의 2019년 논문 *The Identification Zoo*는 바로 이 혼란을 정리한 글이다. Lewbel의 핵심 메시지는 단순하다. 식별은 본래 "관찰 가능한 모집단 분포로부터 관심 모수나 관심 특성이 유일하게 결정되는가"라는 하나의 핵심 뜻을 갖지만, 실제 계량경제학과 인과추론 문헌에서는 이 하나의 뜻이 여러 변형된 형태로 사용되어 왔다는 것이다. 이 절은 그 지도를 소개한다.
 
-<svg width="320" height="130" viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-              <polygon points="0 0, 10 3, 0 6" fill="#1e4d6b"/>
-            </marker>
-          </defs>
-          <circle cx="55" cy="65" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="55" y="72" text-anchor="middle" font-size="17" font-weight="600">A</text>
-          <line x1="81" y1="65" x2="129" y2="65" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr)"/>
-          <circle cx="155" cy="65" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="155" y="72" text-anchor="middle" font-size="17" font-weight="600">B</text>
-          <line x1="181" y1="65" x2="229" y2="65" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr)"/>
-          <circle cx="255" cy="65" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="255" y="72" text-anchor="middle" font-size="17" font-weight="600">C</text>
-        </svg>
+## 3.2.1 Lewbel이 말하는 식별의 출발점
 
-        그림 1. 단순한 사슬(chain)의 연장: \(A \rightarrow B \rightarrow C\). 순환이 없으므로 DAG 조건을 만족한다.
+Lewbel은 계량경제학에서 식별이 궁극적으로 의미하는 바를 다음처럼 정리한다. 관심 모수 또는 관심 대상이 관찰 가능한 모집단(population of observables)으로부터 유일하게 결정되면 식별되었다고 말한다. 직관적으로 쓰면
 
-:::
+\[
+\theta \text{ is identified } \Longleftrightarrow \theta = g(P(O))
+\]
 
-      ## 2. DAG를 구성하는 요소
+인 어떤 함수 \(g\)가 존재하는 경우이다. 여기서 \(O\)는 관찰가능한 자료, \(P(O)\)는 그 모집단 분포, \(\theta\)는 알고 싶은 모수 또는 함수형(functional)이다.
 
-        - **노드(node)**: 통상 하나의 무작위 변수(관측·잠재, 처치, 결과, 공변량 등)에 대응한다.
+이 정의가 중요한 이유는 식별을 표본추정이나 통계적 유의성과 구분해 주기 때문이다. 식별은 유한표본에서 계산이 잘 되는가를 묻는 것이 아니라, 설령 무한히 많은 데이터를 갖고 있어도 관찰 가능한 정보만으로 관심량을 복원할 수 있는가를 묻는 것이다.
 
-        - **방향간선**: \(A \rightarrow B\)는 “\(A\)가 \(B\)의 직접 원인(또는 \(B\)의 직접 부모)”이라는 가정이다. **없는 화살표**는 직접 연결이 없다는 **배제** 가정이다.
+즉 Lewbel은 3.1절의 핵심을 더 정교한 언어로 다시 말한다. 식별은 추정 이전의 문제이다.
 
-        - **비순환성**: 동시성·균형 피드백 등은 단일 시점 DAG만으로 표현하기 어려울 수 있어, 시점별 노드나 다른 도구가 필요할 수 있다.
+## 3.2.2 왜 'Zoo'인가
 
-        - **부모·자식·경로**: \(B\)로 들어오는 화살표의 출발점이 \(B\)의 부모; 나가는 화살표의 끝이 자식이다. 간선을 따라 이은 노드의 열이 **경로**이다.
+Lewbel이 굳이 "동물원(zoo)"이라는 표현을 쓴 이유는, 식별 관련 용어가 너무 많고 서로 겹치기 때문이다. 논문 초반부에서 그는 문헌에 등장하는 수십 개의 용어를 나열한다. 예를 들어
 
-      ## 3. 세 가지 기본 구형(three elementary configurations)
-      인과 그래프를 읽을 때 반복되는 국소 패턴으로, **사슬(chain)**, **갈래(fork)**, **역갈래(inverted fork)**가 대표적이다. 영문 문헌에서는 각각 head-to-tail, common cause(confounder), collider 구조와 연결하여 설명하는 경우가 많다.
+- point identification
+- set identification
+- local identification
+- generic identification
+- weak identification
+- irregular identification
+- identification at infinity
+- structural identification
+- causal identification
+- nonparametric identification
+- semiparametric identification
+- overidentification
 
-      ### 3.1 사슬(chain): \(A \rightarrow B\), \(A \rightarrow C \rightarrow B\) 등
-      화살표가 **머리에서 꼬리로** 이어지는 연속이다. \(A \rightarrow B\)는 \(A\)의 직접 효과만을 나타낸다. \(A \rightarrow C \rightarrow B\)에서는 \(C\)가 **매개변수(mediator)** 역할을 하며, \(A\)에서 \(B\)로 가는 **간접 경로**가 생긴다. 연관은 방향 경로를 따라 전파될 수 있다. 매개변수에 대한 조건부 독립·통제 여부는 식별(예: 자연직접·간접효과 분해)과 밀접하다.
+같은 표현들이 함께 등장한다.
 
-<svg width="300" height="120" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arr2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-              <polygon points="0 0, 10 3, 0 6" fill="#1e4d6b"/>
-            </marker>
-          </defs>
-          <circle cx="70" cy="60" r="28" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="70" y="67" text-anchor="middle" font-size="18" font-weight="600">A</text>
-          <line x1="98" y1="60" x2="182" y2="60" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr2)"/>
-          <circle cx="230" cy="60" r="28" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="230" y="67" text-anchor="middle" font-size="18" font-weight="600">B</text>
-        </svg>
+Lewbel의 문제의식은 "식별이라는 말이 너무 많이 쓰인다"가 아니다. 오히려 각각이 어떤 상황에서 쓰이고, 어떤 층위의 차이를 가리키는지 구분하지 않으면 연구자들끼리 전혀 다른 문제를 놓고 같은 단어를 쓰게 된다는 데 있다.
 
-        그림 2. 길이 1의 사슬: \(A \rightarrow B\).
+## 3.2.3 점 식별(point identification)이 기본 개념이다
 
-:::
+Lewbel은 가장 기본적인 개념으로 점 식별(point identification)을 둔다. 점 식별이란 관심량이 하나의 값으로 유일하게 결정된다는 뜻이다.
 
-<svg width="380" height="120" viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arr3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-              <polygon points="0 0, 10 3, 0 6" fill="#1e4d6b"/>
-            </marker>
-          </defs>
-          <circle cx="60" cy="60" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="60" y="67" text-anchor="middle" font-size="17" font-weight="600">A</text>
-          <line x1="86" y1="60" x2="144" y2="60" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr3)"/>
-          <circle cx="190" cy="60" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="190" y="67" text-anchor="middle" font-size="17" font-weight="600">C</text>
-          <line x1="216" y1="60" x2="274" y2="60" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr3)"/>
-          <circle cx="320" cy="60" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="320" y="67" text-anchor="middle" font-size="17" font-weight="600">B</text>
-        </svg>
+\[
+\theta = g(P(O))
+\]
 
-        그림 3. 길이 2의 사슬(매개): \(A \rightarrow C \rightarrow B\).
+가 정확히 하나의 값을 주면 점 식별이다.
 
-:::
+예를 들어 무작위배정된 실험에서 평균처치효과가
 
-      ### 3.2 갈래(fork): \(A \leftarrow C \rightarrow B\)
-      한 노드 \(C\)에서 **두 갈래**로 화살표가 나간다. \(C\)는 \(A\)와 \(B\)의 **공통 원인(common cause)**이며, 관측연구에서 전형적인 **교란(confounding)** 구조로 그린다. \(A\)와 \(B\) 사이에 직접 화살표가 없어도 \(C\)를 통한 **비인과 경로** \(A \leftarrow C \rightarrow B\)가 있으면 한쪽 변동이 다른 쪽과 연관될 수 있다. \(C\)를 통제(또는 적절히 무작위화하여 \(C\)와 처치를 독립)하는 전략이 백도어 조정의 직관과 연결된다.
+\[
+\mathrm{ATE}
+=
+\mathbb{E}[Y\mid D=1]-\mathbb{E}[Y\mid D=0]
+\]
 
-<svg width="320" height="160" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arr4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-              <polygon points="0 0, 10 3, 0 6" fill="#1e4d6b"/>
-            </marker>
-          </defs>
-          <circle cx="160" cy="45" r="28" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="160" y="52" text-anchor="middle" font-size="18" font-weight="600">C</text>
-          <line x1="140" y1="68" x2="85" y2="118" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr4)"/>
-          <line x1="180" y1="68" x2="235" y2="118" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr4)"/>
-          <circle cx="70" cy="130" r="28" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="70" y="137" text-anchor="middle" font-size="18" font-weight="600">A</text>
-          <circle cx="250" cy="130" r="28" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="250" y="137" text-anchor="middle" font-size="18" font-weight="600">B</text>
-        </svg>
+로 표현되면, 주어진 모집단 분포에서 ATE는 점 식별된 것이다.
 
-        그림 4. 포크(공통 원인): \(A \leftarrow C \rightarrow B\).
+Lewbel의 관점에서 이 정의는 식별의 출발점이자 기준점이다. 다른 많은 개념은 사실 점 식별이 실패하거나 약화되거나 제한된 경우를 이름 붙인 것에 가깝다.
 
-:::
+## 3.2.4 부분 식별(set identification)과 식별 실패
 
-      ### 3.3 역갈래(inverted fork): \(A \rightarrow C \leftarrow B\)
-      두 화살표가 한 노드 \(C\)에 **들어오는** 형태이다. \(C\)는 **충돌변수(collider)**라 부르며, 영문 “inverted fork”가 가리키는 구형과 일치한다. \(A\)와 \(B\) 사이에는 방향 경로가 없으므로, 그래프가 함의하는 바에 따르면(추가 구조 없이) \(A\)와 \(B\)는 **주변적으로 독립**할 수 있다. 그러나 \(C\) 또는 \(C\)의 자손에 **조건을 걸면**(통제·표본 선택·층화 등) \(A\)와 \(B\) 사이에 **인과가 아닌 연관**이 열릴 수 있다. 이는 선택편향·버크슨 편향의 그래프적 표현과 연결된다.
+모든 연구가 점 식별을 달성하는 것은 아니다. 때로는 데이터와 가정만으로 관심량을 하나의 점으로 결정할 수 없고, 가능한 값의 집합만 얻는다. 이것이 부분 식별 또는 집합 식별(set identification)이다.
 
-<svg width="320" height="160" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arr5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-              <polygon points="0 0, 10 3, 0 6" fill="#1e4d6b"/>
-            </marker>
-          </defs>
-          <circle cx="70" cy="130" r="28" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="70" y="137" text-anchor="middle" font-size="18" font-weight="600">A</text>
-          <circle cx="250" cy="130" r="28" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="250" y="137" text-anchor="middle" font-size="18" font-weight="600">B</text>
-          <line x1="95" y1="118" x2="140" y2="68" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr5)"/>
-          <line x1="225" y1="118" x2="180" y2="68" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr5)"/>
-          <circle cx="160" cy="45" r="28" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="160" y="52" text-anchor="middle" font-size="18" font-weight="600">C</text>
-        </svg>
+\[
+\theta \in \Theta(P(O))
+\]
 
-        그림 5. 역갈래(충돌변수): \(A \rightarrow C \leftarrow B\).
+처럼 가능한 값들의 집합 \(\Theta(P(O))\)만 알 수 있다면, 이는 점 식별이 아니라 부분 식별이다.
 
-:::
+이 개념은 매우 중요하다. 왜냐하면 많은 연구가 실제로는 점 식별을 달성하지 못하면서도, 결과를 마치 하나의 정확한 숫자인 것처럼 보고하기 쉽기 때문이다. Lewbel은 이런 구분을 명확히 해야 한다고 강조한다.
 
-        **요약.** 사슬은 인과 전파·매개를, 갈래는 공통 원인·교란을, 역갈래는 충돌변수에서의 조건부 연관(통제·선택에 따른 비인과 경로 개방)을 시각화한다. 복잡한 DAG는 이 세 패턴의 조합으로 읽는다.
+이 점은 Manski의 부분 식별 전통과도 자연스럽게 이어진다. 즉 식별이 안 되는 상황에서 억지로 점추정을 하기보다, 어떤 가정 아래 가능한 값의 범위를 보고하는 것이 더 정직할 수 있다.
 
-:::
+## 3.2.5 지역 식별(local identification)과 전역 식별(global identification)
 
-# 3.2 SCM·DAG에서의 모형 설정
+어떤 모형에서는 특정 모수 근방에서만 유일성이 성립할 수 있다. 이것이 지역 식별(local identification)이다. 반면 모수공간 전체에서 유일성이 성립하면 전역 식별(global identification)이라고 부른다.
 
-## 3.2 SCM·DAG에서의 모형 설정
+직관적으로 말하면, 지역 식별은 "참값 근처에서는 다른 모수값과 구별된다"는 뜻이고, 전역 식별은 "모수공간 어디에서도 같은 관찰분포를 만드는 다른 값이 없다"는 뜻이다.
 
-      모형 설정은 “그럴듯한 회귀식”을 고르는 작업이 아니라, **인과 메커니즘을 수학 객체로 명시**하는 작업이다.
-      SCM은 그 메커니즘을 방정식으로, DAG는 화살표 구조로 표현한다.
+이 구분은 구조모형에서 특히 중요하다. 비선형 모형이나 동시방정식 모형에서는 국소적으로는 식별되지만, 멀리 떨어진 다른 모수값이 같은 관찰분포를 만들 수도 있다. 이 경우 추정 알고리즘은 하나의 해를 찾더라도, 이론적으로는 완전한 전역 식별이 아닐 수 있다.
 
-    \[
-      \mathcal{M}=\langle \mathbf{U},\mathbf{V},\mathcal{F},P(\mathbf{U})\rangle,\qquad
-      V_j=f_j(\mathrm{Pa}(V_j),U_j).
-    \]
+## 3.2.6 generic identification의 의미
 
-:::
+generic identification은 모든 모수값에서 식별이 성립하는 것은 아니지만, "예외적인 특수한 경우를 제외하면" 대부분의 모수값에서 식별된다는 뜻이다. 즉 식별 실패가 measure zero에 가까운 특수한 경우에만 발생한다는 생각이다.
 
-      여기서 \(\mathrm{Pa}(V_j)\)는 \(V_j\)의 부모 노드(직접 원인)다. 즉 DAG의 화살표 하나는
-      “예측 상관”이 아니라 “구조 방정식에서 직접 입력으로 들어가는 변수”라는 가정이다.
-      따라서 **화살표를 그린다**는 것은 통계 모형 선택이 아니라 과학적 주장(배제 가정 포함)을 선언하는 일이다.
+이 개념은 선형구조모형이나 네트워크모형처럼 특정 매개변수 조합에서만 퇴화(degenerate) 현상이 생기는 경우에 유용하다. 실무적으로는 "거의 항상 식별된다"고 말할 수 있지만, 이론적으로는 완전한 전역 식별과는 다르다.
 
-    ## DAG의 기본 문법 (dag.html 요약 반영)
+Lewbel은 이런 표현이 실제로는 매우 다른 강도의 주장을 담고 있으므로, generic이라는 말을 쓸 때 그 예외집합이 무엇인지 분명히 해야 한다고 본다.
 
-      DAG는 노드(변수)와 방향간선(직접 인과)을 사용하며, 순환이 없어야 한다.
-      핵심은 세 가지 경로 원형이다.
+## 3.2.7 weak identification은 무엇이 다른가
 
-      - **사슬(chain)**: \(A \rightarrow C \rightarrow B\) — 매개 경로, \(C\)를 통제하면 경로가 차단될 수 있다.
+weak identification은 점 식별 여부와 추론의 안정성이 만나는 지점에 있다. 관심 모수가 이론적으로는 식별될 수 있어도, 데이터가 그 모수를 충분히 강하게 구별하지 못하면 weak identification 문제가 생긴다.
 
-      - **포크(fork)**: \(A \leftarrow C \rightarrow B\) — 공통원인(교란), \(C\)를 통제해 백도어를 차단한다.
+가장 대표적인 예는 도구변수 모형에서 약한 도구변수(weak instruments)이다. 예를 들어 2SLS에서 도구 \(Z\)가 처치 \(D\)를 거의 설명하지 못하면, 이론상 식별은 되어도 실제 추정량의 분산이 커지고 정규근사도 불안정해진다.
 
-      - **콜라이더(collider)**: \(A \rightarrow C \leftarrow B\) — 기본적으로 경로가 닫혀 있으나 \(C\)를 조건화하면 오히려 경로가 열린다.
+따라서 weak identification은 단순히 "식별이 없다"는 뜻이 아니라, "식별의 정보가 너무 약해서 표준적 추론이 위험해진다"는 뜻이다. 이 개념은 3.1절에서 말한 식별과 추정가능성의 차이를 잘 보여 준다.
 
-      이 세 원형을 잘못 읽으면 모형 설정 단계에서 바로 오류가 난다. 특히 콜라이더 통제는
-      “통제를 많이 할수록 좋다”는 직관을 깨는 대표적 함정이다.
-      자세한 도식은 [DAG 보충 노트](../dag.html)를 함께 참고하라.
+## 3.2.8 identification at infinity와 기능형태에 의한 식별
 
-<svg width="520" height="190" viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg">
-        <text x="260" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="#1e4d6b">경로 원형과 통제 규칙</text>
-        <text x="90" y="42" text-anchor="middle" font-size="10.5" fill="#333">사슬</text>
-        <circle cx="50" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="50" y="74" text-anchor="middle" font-size="10">A</text>
-        <circle cx="90" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="90" y="74" text-anchor="middle" font-size="10">C</text>
-        <circle cx="130" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="130" y="74" text-anchor="middle" font-size="10">B</text>
-        <line x1="64" y1="70" x2="76" y2="70" stroke="#333" marker-end="url(#arr32)"/>
-        <line x1="104" y1="70" x2="116" y2="70" stroke="#333" marker-end="url(#arr32)"/>
+Lewbel은 identification at infinity, 그리고 기능형태(functional form)에 의한 식별도 중요한 범주로 다룬다. 어떤 모형에서는 공변량이나 도구변수가 극단적 값을 가질 때만 특정 효과가 드러나기도 한다. 예를 들어 selection model이나 treatment model에서 support의 꼬리 부분에서만 반사실 비교가 가능해지는 경우가 있다.
 
-        <text x="260" y="42" text-anchor="middle" font-size="10.5" fill="#333">포크(교란)</text>
-        <circle cx="220" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="220" y="74" text-anchor="middle" font-size="10">A</text>
-        <circle cx="260" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="260" y="74" text-anchor="middle" font-size="10">C</text>
-        <circle cx="300" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="300" y="74" text-anchor="middle" font-size="10">B</text>
-        <line x1="260" y1="56" x2="232" y2="66" stroke="#333" marker-end="url(#arr32)"/>
-        <line x1="260" y1="56" x2="288" y2="66" stroke="#333" marker-end="url(#arr32)"/>
+이런 식별은 이론적으로는 가능하지만, 실무적으로는 데이터의 희소성 때문에 매우 불안정할 수 있다. 따라서 "식별된다"는 말만으로 충분하지 않고, 어디에서, 어떤 정보에 기대어 식별되는지도 함께 말해야 한다.
 
-        <text x="430" y="42" text-anchor="middle" font-size="10.5" fill="#333">콜라이더</text>
-        <circle cx="390" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="390" y="74" text-anchor="middle" font-size="10">A</text>
-        <circle cx="430" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="430" y="74" text-anchor="middle" font-size="10">C</text>
-        <circle cx="470" cy="70" r="14" fill="#fff" stroke="#1e4d6b"/><text x="470" y="74" text-anchor="middle" font-size="10">B</text>
-        <line x1="404" y1="70" x2="416" y2="70" stroke="#333" marker-end="url(#arr32)"/>
-        <line x1="456" y1="70" x2="444" y2="70" stroke="#333" marker-end="url(#arr32)"/>
+또한 Lewbel은 고차 모멘트(second and higher moments)나 이분산성을 이용해 "구성된 도구변수(constructed instruments)"를 만들 수 있다는 자신의 연구 전통과도 연결한다. 이 역시 기능형태와 오차구조에 강하게 기대는 식별의 한 예이다.
 
-        <rect x="30" y="112" width="460" height="54" rx="8" fill="#f7fafc" stroke="#c8d3db"/>
-        <text x="50" y="132" font-size="10" fill="#333">규칙:</text>
-        <text x="86" y="132" font-size="10" fill="#333">사슬·포크는 조건화로 닫힐 수 있음</text>
-        <text x="50" y="150" font-size="10" fill="#333">콜라이더는 기본 닫힘, 콜라이더(또는 자손) 조건화 시 열림</text>
-        <defs><marker id="arr32" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#333"/></marker></defs>
-      </svg>
+## 3.2.9 구조모형의 식별과 causal/reduced-form 식별은 어떻게 다른가
 
-      **그림 3.2A.** `dag.html`의 핵심 도식을 3.2 맥락에 맞게 축약한 그림.
+Lewbel 논문에서 매우 중요한 부분은 전통적 구조모형(structural models)과 causal/reduced-form 문헌의 식별을 비교하는 대목이다.
 
-:::
+전통적 구조모형에서는
 
-    ## 연구 사례: 최소임금과 고용(Card & Krueger, 1994)
+- 구조방정식
+- 배제 제약
+- 차수조건과 계수조건
+- reduced form의 존재
 
-      뉴저지-펜실베이니아 패스트푸드 데이터를 DiD로 분석할 때, 핵심은 “처치 더미를 넣은 회귀”가 아니라
-      **시점·지역 고정효과 구조와 평행추세 가정**을 설정하는 것이다. 같은 데이터라도
-      (i) 지역별 경기 충격을 공통으로 둘지, (ii) 사전 추세 차이를 허용할지에 따라 인과 해석이 달라진다.
+같은 개념이 핵심이다. 여기서는 "구조계수(structural parameters)가 관찰가능한 reduced-form 분포로부터 복원되는가"가 중심 질문이다.
 
-<svg width="520" height="180" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg">
-        <text x="260" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#1e4d6b">SCM ↔ DAG 대응</text>
-        <rect x="25" y="40" width="220" height="120" rx="8" fill="#f7fafc" stroke="#9fb2c1"/>
-        <text x="35" y="64" font-size="11" fill="#333">D_t = f_D(Policy_t, U_D)</text>
-        <text x="35" y="86" font-size="11" fill="#333">Y_t = f_Y(D_t, Time_t, U_Y)</text>
-        <text x="35" y="108" font-size="11" fill="#333">Policy_t = g(State)</text>
-        <rect x="280" y="40" width="215" height="120" rx="8" fill="#f7fafc" stroke="#9fb2c1"/>
-        <circle cx="330" cy="75" r="16" fill="#fff" stroke="#1e4d6b"/><text x="330" y="79" text-anchor="middle" font-size="11">정책</text>
-        <circle cx="390" cy="75" r="16" fill="#fff" stroke="#1e4d6b"/><text x="390" y="79" text-anchor="middle" font-size="11">처치</text>
-        <circle cx="450" cy="75" r="16" fill="#fff" stroke="#1e4d6b"/><text x="450" y="79" text-anchor="middle" font-size="11">고용</text>
-        <line x1="346" y1="75" x2="374" y2="75" stroke="#333" marker-end="url(#m32)"/>
-        <line x1="406" y1="75" x2="434" y2="75" stroke="#333" marker-end="url(#m32)"/>
-        <circle cx="390" cy="125" r="16" fill="#fff" stroke="#6b4c9a"/><text x="390" y="129" text-anchor="middle" font-size="10">시간충격</text>
-        <line x1="390" y1="109" x2="390" y2="92" stroke="#333" marker-end="url(#m32)"/>
-        <line x1="403" y1="114" x2="441" y2="88" stroke="#333" marker-end="url(#m32)"/>
-        <defs><marker id="m32" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#333"/></marker></defs>
-      </svg>
+반면 causal inference 또는 treatment-effects 문헌에서는
 
-      **그림 3.2.** 같은 회귀식이어도 어떤 화살표를 허용하는지가 모형 설정의 핵심이다.
+- 잠재결과
+- 무작위배정
+- 조건부 독립성
+- 도구변수 가정
+- RDD 연속성
+- DID 평행추세
 
-:::
+같은 가정이 중심이다. 여기서는 "특정 인과효과가 관찰분포로부터 복원되는가"가 중심 질문이다.
 
- ## 4. 모형 설정·식별을 DAG로 보기
-      **모형 설정**은 어떤 노드를 두고 어떤 방향간선을 인정하는지로, 인과 구조와 배제 가정을 한 번에 고정하는 행위이다. **식별**은 주어진 DAG(와 필요한 부가 가정)와 관측 가능한 분포만으로 \(P(Y\mid do(X))\) 등 관심 인과량이 유일히 정해지는지의 문제이다. **d-separation**, **백도어·프론트도어 기준**, IV의 그래프 표현 등은 모두 이 그래프 위에서 식별 논리를 점검하는 도구이다. DAG가 실제 DGP와 다르면 설정 오류이며, 그 위에서의 식별 결론도 신뢰하기 어렵다. 정식 이론은 Pearl(2009) 등을 참고할 수 있다.
+Lewbel의 중요한 메시지는, 이 둘이 완전히 다른 문제는 아니라는 점이다. 둘 다 결국 관찰가능한 모집단 분포로부터 관심량이 유일하게 결정되는가를 묻는다. 다만 구조모형 문헌은 방정식과 모수의 언어를, causal 문헌은 잠재결과와 설계의 언어를 더 많이 사용해 왔다.
 
-<svg width="360" height="140" viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arr6" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-              <polygon points="0 0, 10 3, 0 6" fill="#1e4d6b"/>
-            </marker>
-          </defs>
-          <circle cx="180" cy="42" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="180" y="49" text-anchor="middle" font-size="16" font-weight="600">U</text>
-          <line x1="158" y1="62" x2="108" y2="98" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr6)"/>
-          <line x1="202" y1="62" x2="252" y2="98" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr6)"/>
-          <circle cx="90" cy="110" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="90" y="117" text-anchor="middle" font-size="16" font-weight="600">T</text>
-          <circle cx="270" cy="110" r="26" fill="#e8f0f5" stroke="#1e4d6b" stroke-width="2"/>
-          <text x="270" y="117" text-anchor="middle" font-size="16" font-weight="600">Y</text>
-          <line x1="116" y1="110" x2="244" y2="110" stroke="#1e4d6b" stroke-width="2" marker-end="url(#arr6)"/>
-        </svg>
+이 점은 이 책의 전체 방향과도 잘 맞는다. 우리는 3.1절에서 세 층위를 구분했고, 이후 장들에서는 설계 기반 식별 전략을 더 많이 보겠지만, Lewbel은 이 모든 것이 넓게 보면 같은 식별 문제의 다른 표현임을 상기시킨다.
 
-        그림 6. 예: 공통 원인 \(U\)가 처치 \(T\)와 결과 \(Y\)에 동시에 영향(\(T \leftarrow U \rightarrow Y\)), \(T \rightarrow Y\). \(T\)와 \(Y\)의 단순 연관은 인과효과와 혼동하기 쉬우며, \(U\)를 통제하거나 무작위 배정 등으로 \(U\)와 \(T\)의 연관을 끊는 식별 전략이 필요하다.
+## 3.2.10 normalization, coherence, completeness
 
-:::
+Lewbel은 식별과 가까운 개념들로 normalization, coherence, completeness도 함께 논의한다.
 
+### normalization
 
-      실증연구에서 식별을 위한 체크포인트는 네 가지다:
-      (1) 어떤 화살표를 허용/배제할지(배제 가정),
-      (2) 교란·매개·콜라이더를 구분해 조건화 전략을 고를지,
-      (3) 관측 불가능 교란 \(U\)를 어떻게 다룰지(설계/감도분석),
-      (4) 시간/공간 의존과 정책 시행 시점을 어떻게 구조화할지.
+정규화(normalization)는 모형의 본질적 내용을 바꾸지 않으면서 스케일이나 방향을 고정하는 제약이다. 예를 들어 잠재지수모형에서 분산을 1로 두는 것은 정규화일 수 있다. 이런 제약은 계산과 해석을 위해 필요하지만, 진짜 식별과 혼동하면 안 된다.
 
-      다음 절에서는 이렇게 설정된 구조 아래에서, 관측분포만으로 관심 인과량을 복원할 수 있는지, 즉 식별의 문제를 본격적으로 다룬다.
+즉 어떤 제약은 "모형을 하나로 대표하도록 표준화"하는 것이고, 어떤 제약은 "관찰자료로부터 유일성 자체를 확보"하는 것이다. Lewbel은 이 둘을 분명히 나누어야 한다고 강조한다.
+
+### coherence
+
+coherence는 대체로 모형이 서로 양립 가능한 구조를 갖는가, 즉 모순 없는 방식으로 정의되는가의 문제와 연결된다. 특히 reduced form의 존재 가능성과 관련해 논의된다.
+
+### completeness
+
+completeness는 모형이 관찰자료의 분포를 충분히 규정하고 있는가, 혹은 어떤 부분이 비워져 있어 여러 observationally equivalent structures가 남는가와 관련된다. 불완전한 모형은 애초에 식별 논의를 어렵게 만든다.
+
+이 개념들은 본문에서 자주 직접 등장하지는 않더라도, 왜 어떤 모형은 식별 이전에 먼저 "모형 자체가 충분히 닫혀 있는가"를 물어야 하는지 이해하게 해 준다.
+
+## 3.2.11 식별은 가설의 강도를 드러내는 언어이기도 하다
+
+Lewbel 논문의 장점은 식별을 단순한 기술용어가 아니라 가정의 강도를 보여주는 언어로 읽게 해 준다는 점이다. 예를 들어
+
+- point identified라고 말하면 강한 유일성 주장을 하는 것이고
+- set identified라고 말하면 유일성을 포기하고 집합으로 말하는 것이며
+- weakly identified라고 말하면 유일성은 있어도 정보가 약하다고 말하는 것이고
+- local identified라고 말하면 전역이 아니라 근방의 유일성만 주장하는 것이다.
+
+즉 식별 용어는 결과를 포장하는 장식어가 아니라, 연구자가 무엇을 얼마나 강하게 주장하는지를 드러내는 메타언어이다.
+
+## 3.2.12 이 책을 읽을 때 Lewbel의 분류를 어떻게 활용할 것인가
+
+이 책의 이후 장들을 읽을 때 Lewbel의 분류는 다음처럼 도움이 된다.
+
+- RCT는 보통 특정 효과의 점 식별을 제공한다.
+- 관측연구의 회귀조정과 매칭은 조건부 독립성 아래의 점 식별 주장이다.
+- IV는 특정 하위집단 효과의 점 식별 또는 국소 식별 논리로 읽을 수 있다.
+- 부분 식별과 민감도 분석 장에서는 점 식별을 포기한 경우를 다룬다.
+- weak IV, weak overlap, irregular problems는 식별과 추론이 함께 흔들리는 경우이다.
+
+즉 Lewbel의 identification zoo는 단순한 용어 정리가 아니라, 이후 장들에서 각 방법이 실제로 어떤 종류의 식별 주장을 하고 있는지를 읽는 지도 역할을 한다.
+
+## 3.2.13 이 절의 정리
+
+핵심을 요약하면 다음과 같다.
+
+- Lewbel은 식별의 기본 뜻을 "관찰 가능한 모집단 분포로부터 관심량이 유일하게 결정되는가"로 정리한다.
+- 점 식별은 기본 개념이고, 부분 식별, 지역 식별, generic identification, weak identification 등은 그 변형된 형태이다.
+- 구조모형 문헌과 causal/reduced-form 문헌은 언어는 다르지만, 결국 같은 식별 문제를 다룬다.
+- normalization, coherence, completeness는 식별과 밀접하지만 동일한 개념은 아니다.
+- 식별 용어는 연구자가 어떤 강도의 주장을 하는지를 드러내는 언어이다.
+
+다음 절에서는 이런 식별 개념을 바탕으로, 관찰자료의 분포에서 인과적 대상까지 어떻게 건너가는지를 더 직접적으로 살펴본다.
