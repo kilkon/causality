@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1.2 반사실(counterfactual)의 정의와 직관적 예시 | 인과효과 추론 (Causal Inference)</title>
+  <meta name="description" content="이 책은 인과효과 추론 강의를 위해 준비했습니다. 계속 수정중인 원고입니다" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
+    };
+  </script>
+  <script defer src="assets/site.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+</head>
+<body>
+  <div class="site-shell">
+    
+    <aside class="sidebar">
+      <a class="brand" href="index.html">
+        <span class="brand-kicker">Markdown Edition</span>
+        <span class="brand-title">인과효과 추론 (Causal Inference)</span>
+      </a>
+      <div class="sidebar-title">Contents</div>
+      
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">제1부 | 인과이론의 기본 개념</div>
+              <p class="sidebar-part-desc"></p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch01-01-correlation-causation.html">
+                    <span class="sidebar-link-label"></span>
+                    1.1 상관과 인과의 근본적 차이 — 왜 회귀만으로는 부족한가
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch01-02-counterfactuals.html" aria-current="page">
+                    <span class="sidebar-link-label"></span>
+                    1.2 반사실(counterfactual)의 정의와 직관적 예시
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch01-03-ladder.html">
+                    <span class="sidebar-link-label"></span>
+                    1.3 인과 사다리와 구조 인과 모형 — 세 층위의 형식화
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch01-04-gender-causality-debate.html">
+                    <span class="sidebar-link-label"></span>
+                    1.4 성별은 원인이 될 수 없는가 — 비판적 검토
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch02-00-potential-outcomes-framework-overview.html">
+                    <span class="sidebar-link-label">2</span>
+                    2장. 잠재결과 프레임워크 — 전체 방향과 학습 로드맵
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch02-01-unit-treatment-potential-outcomes.html">
+                    <span class="sidebar-link-label"></span>
+                    2.1 단위 · 처치 · 잠재결과의 정의
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch02-02-ice-ate-att-atc.html">
+                    <span class="sidebar-link-label"></span>
+                    2.2 개인 인과효과와 평균 인과효과 — ICE · ATE · ATT · ATC
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch02-03-sutva-missingness.html">
+                    <span class="sidebar-link-label"></span>
+                    2.3 SUTVA, 결측 데이터 관점, 형식적 통합
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch02-04-generalization-target-population.html">
+                    <span class="sidebar-link-label"></span>
+                    2.4 일반화 가능성과 표적 모집단
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch03-01-specification-identification-estimation.html">
+                    <span class="sidebar-link-label">3.1</span>
+                    3 장 모형 설정 · 식별 · 추정
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch03-02-scm-dag-model-specification.html">
+                    <span class="sidebar-link-label">3.2</span>
+                    3.2 SCM·DAG에서의 모형 설정
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch03-03-identification-observed-to-causal.html">
+                    <span class="sidebar-link-label">3.3</span>
+                    3.3 식별: 관측분포와 인과량의 연결
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch03-04-estimation-sample-implementation.html">
+                    <span class="sidebar-link-label">3.4</span>
+                    3.4 추정: 식별된 표현의 표본 구현
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch03-05-why-distinction-chapter3.html">
+                    <span class="sidebar-link-label">3.5</span>
+                    3.5 3장에서 왜 이 구분이 필요한가
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch04-01-dag-bias-structure.html">
+                    <span class="sidebar-link-label">4</span>
+                    4장. DAG로 읽는 편향의 구조
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch04-02-s041.html">
+                    <span class="sidebar-link-label"></span>
+                    4.1.1 경로의 세 원형: 포크(fork) · 파이프(pipe) · 콜라이더(collider)
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch04-03-s042.html">
+                    <span class="sidebar-link-label"></span>
+                    4.1.2 조상 · 자손 · 조건화(conditioning)의 효과
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch04-04-s043.html">
+                    <span class="sidebar-link-label"></span>
+                    4.1.3 백도어(backdoor) 기준과 프론트도어(frontdoor) 기준 — 직관과 공식
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch04-05-s044.html">
+                    <span class="sidebar-link-label"></span>
+                    4.1.4 조정 공식(adjustment formula)과 식별(identification)의 개념
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch04-05a-s044a.html">
+                    <span class="sidebar-link-label"></span>
+                    4.1.5 내생적 선택편향(endogenous selection bias)과 유형별 구조
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch04-06-s045.html">
+                    <span class="sidebar-link-label"></span>
+                    4.1.6 콜라이더(충돌) 편향의 방향·크기 — 문헌 개관
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch05-01-identification-estimation.html">
+                    <span class="sidebar-link-label">5</span>
+                    5장. 식별과 추정의 구분
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="parametric_semiparametric_nonparametric.html">
+                    <span class="sidebar-link-label"></span>
+                    모수적·반모수적·비모수적 식별
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="model_spec_identification_estimation.html">
+                    <span class="sidebar-link-label"></span>
+                    모형 설정(Model Specification), 식별(Identification), 추정(Estimation)
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch05-05-s51-roadmap.html">
+                    <span class="sidebar-link-label"></span>
+                    5.1.5 이후 장과의 연결(로드맵)
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">?2? | ??? ?? ???</div>
+              <p class="sidebar-part-desc">??? ??? ????? ????? ???? ? ??? ??? ????.</p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch06-01-randomization-identification.html">
+                    <span class="sidebar-link-label">6</span>
+                    6.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch06-02-s061.html">
+                    <span class="sidebar-link-label"></span>
+                    6.1.1 무작위화가 교란을 제거하는 메커니즘 — DAG로 보기
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch06-03-s062.html">
+                    <span class="sidebar-link-label"></span>
+                    6.1.2 ATE의 비편향 추정량으로서의 차이-in-means
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch06-04-s063.html">
+                    <span class="sidebar-link-label"></span>
+                    6.1.3 실험 설계의 변형: 층화 · 군집 · 요인 설계
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch07-01-compliance-itt-cace.html">
+                    <span class="sidebar-link-label">7</span>
+                    7.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch07-02-s071.html">
+                    <span class="sidebar-link-label"></span>
+                    7.1.1 완전 순응 vs. 부분 순응 — 처치 배정과 처치 수령의 구분
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch07-03-s072.html">
+                    <span class="sidebar-link-label"></span>
+                    7.1.2 ITT(Intention-to-Treat)와 CACE/LATE의 정의와 차이
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch07-04-s073.html">
+                    <span class="sidebar-link-label"></span>
+                    7.1.3 도구변수로서의 무작위 배정 — 단조성(monotonicity) 가정
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch07-05-s074.html">
+                    <span class="sidebar-link-label"></span>
+                    7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch08-01-external-validity-transportability.html">
+                    <span class="sidebar-link-label">8</span>
+                    8.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch08-02-s081.html">
+                    <span class="sidebar-link-label"></span>
+                    8.1.1 내적 타당도와 외적 타당도의 긴장
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch08-03-s082.html">
+                    <span class="sidebar-link-label"></span>
+                    8.1.2 표본 선택과 표적 모집단의 불일치
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch08-04-s083.html">
+                    <span class="sidebar-link-label"></span>
+                    8.1.3 실험 결과의 외삽: 수송 프레임
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch08-05-s084.html">
+                    <span class="sidebar-link-label"></span>
+                    8.1.4 현장 실험(field experiment) · 자연 실험(natural experiment)의 위치
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">?3? | ?? ????? ??? ? ??</div>
+              <p class="sidebar-part-desc">?? ???? ???? ??? ??? ???? ??? ??? ??? ???? ????.</p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="selection_bias_identification.html">
+                    <span class="sidebar-link-label">9</span>
+                    모형 식별과 선택편향
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch09-01-selection-bias-comparability.html">
+                    <span class="sidebar-link-label">9</span>
+                    9.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch09-02-s091.html">
+                    <span class="sidebar-link-label"></span>
+                    9.1.1 선택 편향의 정의와 DAG 표현
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch09-03-s092.html">
+                    <span class="sidebar-link-label"></span>
+                    9.1.2 비교 가능성(comparability) · 교환 가능성(exchangeability) 조건
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch09-04-s093.html">
+                    <span class="sidebar-link-label"></span>
+                    9.1.3 밸런스(balance)의 의미 — 공변량 분포의 유사성
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="homophily_bias.html">
+                    <span class="sidebar-link-label">10</span>
+                    Homophily bias(동질성 편향)
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch10-01-covariate-control-limits.html">
+                    <span class="sidebar-link-label">10</span>
+                    10.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch10-02-s101.html">
+                    <span class="sidebar-link-label"></span>
+                    10.1.1 통제(control)가 해결하지 못하는 경우 — 측정 불가 교란
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch10-03-s102.html">
+                    <span class="sidebar-link-label"></span>
+                    10.1.2 과도한 통제(overcontrol): 매개변수 통제의 위험
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch10-04-s103.html">
+                    <span class="sidebar-link-label"></span>
+                    10.1.3 동질성(homophily)과 인과 해석의 왜곡
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="collider_bias_magnitude_direction.html">
+                    <span class="sidebar-link-label">11</span>
+                    이동됨: 콜라이더 편향의 방향·크기
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch11-01-collider-bias.html">
+                    <span class="sidebar-link-label">11</span>
+                    11.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch11-02-s111.html">
+                    <span class="sidebar-link-label"></span>
+                    11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch11-03-s112.html">
+                    <span class="sidebar-link-label"></span>
+                    11.1.2 편향의 방향과 크기 — 수치 예시
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch11-04-s113.html">
+                    <span class="sidebar-link-label"></span>
+                    11.1.3 선택 편향 · 출판 편향 · 건강한 노동자 효과와 콜라이더의 연결
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch12-01-unobserved-confounding-limits.html">
+                    <span class="sidebar-link-label">12</span>
+                    12.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch12-02-s121.html">
+                    <span class="sidebar-link-label"></span>
+                    12.1.1 미측 교란(unobserved confounding)의 DAG 표현
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch12-03-s122.html">
+                    <span class="sidebar-link-label"></span>
+                    12.1.2 관측 가능 조건에서의 식별 불가능성
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch12-04-s123.html">
+                    <span class="sidebar-link-label"></span>
+                    12.1.3 민감도 분석의 필요성 — 이후(제5부·20장)에서 정식으로 다룬다
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">?4? | ??? ??? ???? ?? ??</div>
+              <p class="sidebar-part-desc">??? ??, ????, ?????, DID, ????? ?? ?? ???? ??? ???? ??? ???.</p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch13-01-regression-matching-ipw.html">
+                    <span class="sidebar-link-label">13</span>
+                    13.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch13-02-s131.html">
+                    <span class="sidebar-link-label"></span>
+                    13.1.1 조건부 독립 가정(CIA / ignorability)의 의미
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch13-03-s132.html">
+                    <span class="sidebar-link-label"></span>
+                    13.1.2 회귀 조정의 인과적 해석 조건
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch13-04-s133.html">
+                    <span class="sidebar-link-label"></span>
+                    13.1.3 매칭의 직관 — 이웃 매칭 · 성향점수 매칭 · 칼퍼 반경
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch13-05-s134.html">
+                    <span class="sidebar-link-label"></span>
+                    13.1.4 역확률가중(IPW)과 안정화 가중(SIPW)
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch13-06-s135.html">
+                    <span class="sidebar-link-label"></span>
+                    13.1.5 공통 지지(common support) — 외삽 위험과 진단
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch14-00-instrumental-variables-intro.html">
+                    <span class="sidebar-link-label">14</span>
+                    14장. 도구변수 접근법
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch14-01-instrumental-variables.html">
+                    <span class="sidebar-link-label"></span>
+                    14.1 IV의 세 가지 핵심 가정
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch14-02-s142.html">
+                    <span class="sidebar-link-label"></span>
+                    14.2 Wald 추정량과 2SLS
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch14-03-s143.html">
+                    <span class="sidebar-link-label"></span>
+                    14.3 LATE 해석
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch14-04-s144.html">
+                    <span class="sidebar-link-label"></span>
+                    14.4 약한 도구 진단과 대응
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch14-05-s145.html">
+                    <span class="sidebar-link-label"></span>
+                    14.5 자연실험형 IV 예시
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch15-00-rdd-intro.html">
+                    <span class="sidebar-link-label">15</span>
+                    15장. 회귀불연속 설계
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch15-01-rdd.html">
+                    <span class="sidebar-link-label"></span>
+                    15.1 배정변수와 임계값의 역할
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch15-02-s152.html">
+                    <span class="sidebar-link-label"></span>
+                    15.2 Sharp RDD: 연속성 가정과 국소 효과
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch15-03-s153.html">
+                    <span class="sidebar-link-label"></span>
+                    15.3 Fuzzy RDD: IV로의 환원
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch15-04-s154.html">
+                    <span class="sidebar-link-label"></span>
+                    15.4 연속 처치·다중 임계값 확장
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch15-05-s155.html">
+                    <span class="sidebar-link-label"></span>
+                    15.5 조작 검정과 진단 시각화
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch16-00-did-intro.html">
+                    <span class="sidebar-link-label">16</span>
+                    16장. 이중차분법
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch16-01-did.html">
+                    <span class="sidebar-link-label"></span>
+                    16.1 DiD의 기본 직관과 2x2 설계
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch16-02-s162.html">
+                    <span class="sidebar-link-label"></span>
+                    16.2 회귀 표현과 패널자료에서의 DID
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch16-03-s163.html">
+                    <span class="sidebar-link-label"></span>
+                    16.3 동태적 효과와 이벤트 스터디(event-study)
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch16-04-s164.html">
+                    <span class="sidebar-link-label"></span>
+                    16.4 스태거드 도입과 현대적 DID
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch16-05-s165.html">
+                    <span class="sidebar-link-label"></span>
+                    16.5 평행추세와 핵심 가정, 진단
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch17-00-panel-models-intro.html">
+                    <span class="sidebar-link-label">17</span>
+                    17장. 패널모형
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch17-01-panel-fixed-effects.html">
+                    <span class="sidebar-link-label"></span>
+                    17.1 FE의 기본 설정과 인과 해석
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch17-02-s172.html">
+                    <span class="sidebar-link-label"></span>
+                    17.2 FE가 제거하는 것과 제거하지 못하는 것
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch17-03-s173.html">
+                    <span class="sidebar-link-label"></span>
+                    17.3 시간 고정효과와 이중 고정효과(TWFE)의 해석
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch17-04-s174.html">
+                    <span class="sidebar-link-label"></span>
+                    17.4 FE 인과 해석의 조건과 진단
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">?5? | ??? ? ?? ? ???</div>
+              <p class="sidebar-part-desc">??? ???, ????, ???? ??? ??? ???.</p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch18-00-cate-intro.html">
+                    <span class="sidebar-link-label">18</span>
+                    18장. 조건부 평균처치효과
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch18-01-heterogeneous-treatment-effects.html">
+                    <span class="sidebar-link-label"></span>
+                    18.1 CATE의 정의와 식별
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch18-02-s182.html">
+                    <span class="sidebar-link-label"></span>
+                    18.2 서브그룹 분석의 위험
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch18-03-s183.html">
+                    <span class="sidebar-link-label"></span>
+                    18.3 효과 수정자와 교란변수
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch18-04-s184.html">
+                    <span class="sidebar-link-label"></span>
+                    18.4 개인화 처치 규칙(ITR)
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch19-00-mediation-intro.html">
+                    <span class="sidebar-link-label">19</span>
+                    19장. 매개효과분석
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch19-01-mediation-effects.html">
+                    <span class="sidebar-link-label"></span>
+                    19.1 총효과, 직접효과, 간접효과의 분해
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch19-02-s192.html">
+                    <span class="sidebar-link-label"></span>
+                    19.2 자연 직접효과와 자연 간접효과의 정의와 식별
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch19-03-s193.html">
+                    <span class="sidebar-link-label"></span>
+                    19.3 교차세계 반사실과 처치 이후 교란
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch19-04-s194.html">
+                    <span class="sidebar-link-label"></span>
+                    19.4 민감도 분석과 강건성 보고
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch20-00-sensitivity-intro.html">
+                    <span class="sidebar-link-label">20</span>
+                    20장. 민감도 분석
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch20-01-sensitivity-partial-identification.html">
+                    <span class="sidebar-link-label"></span>
+                    20.1 Rosenbaum 경계와 \(\Gamma\)-민감도
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch20-02-s202.html">
+                    <span class="sidebar-link-label"></span>
+                    20.2 E-value: 비측 교란이 얼마나 강해야 결론이 뒤집히는가
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch20-03-s203.html">
+                    <span class="sidebar-link-label"></span>
+                    20.3 Manski 부분 식별의 직관
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch20-04-s204.html">
+                    <span class="sidebar-link-label"></span>
+                    20.4 민감도 분석을 연구 보고의 표준으로
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">?6? | ????? ????</div>
+              <p class="sidebar-part-desc">????? ?? ??? ????? ?? ??? ????.</p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch21-00-ml-foundations.html">
+                    <span class="sidebar-link-label">21</span>
+                    21장. 기계학습 방법의 이해
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch21-01-causal-ml.html">
+                    <span class="sidebar-link-label"></span>
+                    21.1 예측과 인과의 목표 차이
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch21-02-s212.html">
+                    <span class="sidebar-link-label"></span>
+                    21.2 DML과 직교화
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch21-03-s213.html">
+                    <span class="sidebar-link-label"></span>
+                    21.3 AIPW와 이중견고성
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch21-04-s214.html">
+                    <span class="sidebar-link-label"></span>
+                    21.4 인과 숲과 CATE
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch21-05-s215.html">
+                    <span class="sidebar-link-label"></span>
+                    21.5 표현학습·신경망과 인과
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">?7? | ?? ??: ??? ??? ???</div>
+              <p class="sidebar-part-desc">????, ??? ??, ?????? ????? ?? ??? ???.</p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch22-01-influence-function-pathwise-derivative.html">
+                    <span class="sidebar-link-label"></span>
+                    22.1 함수형 파라미터와 비모수 추정
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch22-02-s222.html">
+                    <span class="sidebar-link-label"></span>
+                    22.2 영향함수(IF)와 Gateaux 미분 직관
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch22-03-s223.html">
+                    <span class="sidebar-link-label"></span>
+                    22.3 경로미분과 효율적 추정량 도출
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch23-01-semiparametric-efficiency-bound.html">
+                    <span class="sidebar-link-label">23</span>
+                    23.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch23-02-s231.html">
+                    <span class="sidebar-link-label"></span>
+                    23.1.1 반모수 모형의 정의와 사례
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch23-03-s232.html">
+                    <span class="sidebar-link-label"></span>
+                    23.1.2 Cramér-Rao 한계의 반모수 확장
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch23-04-s233.html">
+                    <span class="sidebar-link-label"></span>
+                    23.1.3 효율적 점수(efficient score)와 접선 공간(tangent space)
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch23-05-s234.html">
+                    <span class="sidebar-link-label"></span>
+                    23.1.4 ATE 추정의 반모수 효율 한계 — 도출 과정
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch24-01-bootstrap-failures.html">
+                    <span class="sidebar-link-label">24</span>
+                    24.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch24-02-s241.html">
+                    <span class="sidebar-link-label"></span>
+                    24.1.1 표준 부트스트랩의 타당성 조건
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch24-03-s242.html">
+                    <span class="sidebar-link-label"></span>
+                    24.1.2 부트스트랩이 실패하는 경우 — 비정칙(non-regular) 추정량, 경계 문제
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch24-04-s243.html">
+                    <span class="sidebar-link-label"></span>
+                    24.1.3 서브샘플링(subsampling)과 m-out-of-n 부트스트랩
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch24-05-s244.html">
+                    <span class="sidebar-link-label"></span>
+                    24.1.4 이중 기계학습에서의 교차 적합(cross-fitting)과 부트스트랩
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch25-01-partial-identification-framework.html">
+                    <span class="sidebar-link-label">25</span>
+                    25.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch25-02-s251.html">
+                    <span class="sidebar-link-label"></span>
+                    25.1.1 식별 집합(identification region)의 정의와 구성
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch25-03-s252.html">
+                    <span class="sidebar-link-label"></span>
+                    25.1.2 단조 처치 반응(MTR) · 단조 도구변수(MIV) 가정
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch25-04-s253.html">
+                    <span class="sidebar-link-label"></span>
+                    25.1.3 Balke-Pearl 경계, Manski 경계의 계산
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch25-05-s254.html">
+                    <span class="sidebar-link-label"></span>
+                    25.1.4 부분 식별 결과의 보고와 해석
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch26-01-reproducibility-checklist.html">
+                    <span class="sidebar-link-label">26</span>
+                    26.1 장의 핵심 항목
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch26-02-s261.html">
+                    <span class="sidebar-link-label"></span>
+                    26.1.1 연구 질문·식별 가정·추정 절차의 일관성 점검
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch26-03-s262.html">
+                    <span class="sidebar-link-label"></span>
+                    26.1.2 사전분석계획(pre-analysis plan)과 분석 자유도 관리
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch26-04-s263.html">
+                    <span class="sidebar-link-label"></span>
+                    26.1.3 재현 가능 보고 표준: 코드·데이터·민감도 공개
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="ch26-05-s264.html">
+                    <span class="sidebar-link-label"></span>
+                    26.1.4 정책 해석에서 내부·외부 타당도의 분리 보고
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+            <section class="sidebar-part">
+              <div class="sidebar-part-name">??</div>
+              <p class="sidebar-part-desc"></p>
+              <ul class="sidebar-list">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="app-a.html">
+                    <span class="sidebar-link-label">遺濡?A</span>
+                    부록 A. 확률론 기초 복습 — 조건부 기댓값 · 측도론 직관
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="app-b.html">
+                    <span class="sidebar-link-label">遺濡?B</span>
+                    부록 B. 선형 대수와 회귀의 기하학
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="app-c.html">
+                    <span class="sidebar-link-label">遺濡?C</span>
+                    부록 C. 주요 추정량 정리 및 가정 비교표
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="app-d.html">
+                    <span class="sidebar-link-label">遺濡?D</span>
+                    부록 D. R · Python 실습 코드 (장별)
+                  </a>
+                </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="app-e.html">
+                    <span class="sidebar-link-label">遺濡?E</span>
+                    부록 E. 연습 문제 해답
+                  </a>
+                </li>
+                </ul>
+            </section>
+            
+    </aside>
+    
+    <main class="page">
+      <div class="mobile-bar">
+        <strong>인과효과 추론 (Causal Inference)</strong>
+        <button type="button" data-nav-toggle>목차</button>
+      </div>
+      
+    <article class="chapter-card">
+      <header class="chapter-header">
+        <p class="breadcrumb">제1부 | 인과이론의 기본 개념 · </p>
+        <h1>1.2 반사실(counterfactual)의 정의와 직관적 예시</h1>
+        <p class="description">1.1절은 데이터가 본질적으로 연상(association)의 언어만 제공한다는 점과, 인과 질문이 반사실(counterfactual)로 표현된다는 점을 강조했다. 이 절에서는 반사실을 잠재결과(potential outcomes)의 언어로 정의하고, 인과 추론의 근본 문제와 이를 다루는 직관·예시·가정의 뼈대를 단계적으로 정리한다.</p>
+        
+      </header>
+      <section class="chapter-body">
+        <h1 id="12-반사실counterfactual의-정의와-직관적-예시">1.2 반사실(counterfactual)의 정의와 직관적 예시</h1>
+<p>1.1절은 데이터가 본질적으로 <strong>연상(association)</strong>의 언어만 제공한다는 점과, 인과 질문이 <strong>반사실(counterfactual)</strong>로 표현된다는 점을 강조했다. 이 절에서는 반사실을 <strong>잠재결과(potential outcomes)</strong>의 언어로 정의하고, <strong>인과 추론의 근본 문제</strong>와 이를 다루는 직관·예시·가정의 뼈대를 단계적으로 정리한다.</p>
+<h2 id="120-원인의-결과와-결과의-원인-holland1986의-규범적-출발점">1.2.0 원인의 결과와 결과의 원인 — Holland(1986)의 규범적 출발점</h2>
+<p>이 절의 출발점은 단순한 “두 방향 비교”가 아니다. Holland(1986)의 핵심 주장은 인과 분석은 전통적인 “결과의 원인(causes of effects)” 찾기보다 <strong>“원인의 결과(effects of causes)” 측정에서 시작해야 한다</strong>는 규범적 명제다. 즉 두 질문은 대등한 선택지가 아니라, 통계적 인과추론에서 우선순위가 다르다.</p>
+<p>\[ \text{분석의 출발점: effects of causes} \;\;&gt;\;\; causes of effects \]</p>
+<section class="callout note"><div class="callout-title">note</div><p>그 이유는 명확하다. “결과의 원인”은 지식이 늘수록 계속 수정될 수 있는 설명 개념이지만, “원인의 결과”는 잠재결과 차이로 정밀하게 정의된다.</p>
+<p>\[ \text{단위 }i\text{의 개인 인과효과: }\tau_i = Y_i(1)-Y_i(0) \]</p></section>
+<h2 id="속성attribute과-원인cause의-구분">속성(attribute)과 원인(cause)의 구분</h2>
+<p>Holland가 강조한 두 번째 축은 “원인”과 “속성”의 구분이다. 성별·인종·출생연도 같은 속성은 같은 단위에 대해 조작 가능한 처치가 아니므로, 잠재적으로 노출시킬 수 있는 처치(exposure)와 동일한 의미의 원인으로 다루기 어렵다. 이것이 “NO CAUSATION WITHOUT MANIPULATION” 원칙의 핵심 맥락이다.</p>
+<p>\[ \text{처치로 조작 가능한 변수 }T_i \text{는 인과효과 }Y_i(1)-Y_i(0)\text{를 정의할 수 있지만,} \]</p>
+<section class="callout note"><div class="callout-title">note</div><p>\[ \text{속성 }A_i\text{는 같은 단위에서 }A_i=a,\ a'\text{를 모두 실현시킬 수 없어 같은 방식의 잠재결과 비교가 어렵다.} \]</p></section>
+<h2 id="근본-문제와-두-가지-해결-방향">근본 문제와 두 가지 해결 방향</h2>
+<p>Holland의 근본 문제는 다음처럼 정확히 서술된다: 같은 단위에서 \(Y_i(1)\)와 \(Y_i(0)\)를 동시에 관측할 수 없으므로 개인 효과 \(\tau_i = Y_i(1)-Y_i(0)\)는 직접 관측 불가능하다.</p>
+<p>\[ \text{Fundamental Problem:}\quad \text{cannot observe both }Y_i(1)\text{ and }Y_i(0)\text{ for the same unit }i. \]</p>
+<section class="callout note"><div class="callout-title">note</div><p>Holland는 이 문제를 다루는 두 경로를 구분한다.</p>
+<table class="cf-table" role="table" aria-label="Holland의 근본 문제 해결 방향">
+      <thead>
+        <tr>
+          <th scope="col">해결 방향</th>
+          <th scope="col">핵심 아이디어</th>
+          <th scope="col">핵심 가정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>과학적 해결</td>
+          <td>동일 단위 반복 노출 또는 동질 단위 비교</td>
+          <td>동질성(homogeneity)·불변성(invariance)·시간 안정성</td>
+        </tr>
+        <tr>
+          <td>통계적 해결</td>
+          <td>개인 효과를 포기하고 평균 효과를 목표화</td>
+          <td>무작위 배정 등으로 독립성 확보</td>
+        </tr>
+      </tbody>
+    </table>
+<p>\[ \mathrm{ATE} = E\!\left[Y_i(1)-Y_i(0)\right] = E[Y_i(1)]-E[Y_i(0)] \]</p></section>
+<h2 id="prima-facie-효과와-평균-인과효과의-구분">Prima Facie 효과와 평균 인과효과의 구분</h2>
+<p>관측된 처치군-통제군 평균 차이는 곧바로 평균 인과효과가 아니다. Holland는 이를 prima facie causal effect로 구분한다.</p>
+<p>\[ T_{PF}=E\!\left[Y_i^{\mathrm{obs}}\mid T_i=1\right]-E\!\left[Y_i^{\mathrm{obs}}\mid T_i=0\right],\qquad \mathrm{ATE}=E[Y_i(1)]-E[Y_i(0)] \]</p>
+<section class="callout note"><div class="callout-title">note</div><p>\[ T_{PF}=\mathrm{ATE}+\left\{E[Y_i(0)\mid T_i=1]-E[Y_i(0)\mid T_i=0]\right\} \]</p></section>
+<p>중괄호 항이 선택 편향이다. 무작위 배정 등으로 독립성이 성립할 때에만 \(T_{PF}=\mathrm{ATE}\)가 된다. 따라서 인과 분석의 1차 과제는 “원인의 결과”를 정밀하게 정의하고, 관측 차이를 그 정의와 연결하는 조건을 명시하는 것이다.</p>
+<section class="callout note"><div class="callout-title">note</div><p>summary</p>
+<p>핵심 정리 (Holland 관점)</p>
+<ul><li>“원인의 결과”는 “결과의 원인”과 대등한 선택지가 아니라, 통계적 인과분석의 우선 출발점이다.</li></ul>
+<ul><li>조작 가능성이 없는 속성은 Holland의 엄격한 의미에서 원인으로 취급하기 어렵다.</li></ul>
+<ul><li>근본 문제는 개인 효과의 직접 관측 불가능성이고, 과학적/통계적 해법으로 다뤄야 한다.</li></ul>
+<ul><li>관측 평균 차이 \(T_{PF}\)와 평균 인과효과 \(\mathrm{ATE}\)를 반드시 구분해야 하며, 그 차이는 선택 편향이다.</li></ul></section>
+<p>아래 1.2.1부터는 이 관점을 바탕으로 잠재결과 표기와 반사실 사고를 단계적으로 정리한다.</p>
+<h2 id="121-만약-그랬다면-인간-사고의-가장-자연스러운-형식">1.2.1 「만약 그랬다면」 — 인간 사고의 가장 자연스러운 형식</h2>
+<p>인과적 사고는 일상에 깊게 박혀 있다. 우리는 끊임없이 반사실을 상상한다. 「그날 우산을 가져갔더라면 옷이 젖지 않았을 텐데.」 「그 약을 복용하지 않았더라면 부작용이 없었을 것이다.」 「최저임금을 올리지 않았더라면 고용률이 달랐을까?」 이 문장들은 공통 구조를 갖는다. 실제로 일어난 일(<strong>사실</strong>, factual)을 배경으로, 다르게 행동했더라면 결과가 어떻게 달라졌을지(<strong>반사실</strong>)를 상상하는 것이다.</p>
+<p>철학자 데이비드 루이스(David Lewis)는 1973년에 반사실 조건문을 <strong>가능 세계(possible world)</strong>의 언어로 형식화했다. 「만약 <em>X</em>였다면 <em>Y</em>였을 것이다」라는 문장의 진위는, 현실과 가장 가까운 가능 세계 가운데 <em>X</em>가 참인 세계에서 <em>Y</em>도 참인지를 묻는 방식으로 이해될 수 있다는 아이디어다. 이 철학적 직관은 통계학과 경제학에서 잠재결과라는 수학적 언어로 이어졌고, Pearl의 구조 인과 모형에서는 <em>do</em> 연산자와 반사실 변수로 다시 정련된다.</p>
+<p>아래에서는 반사실의 수학적 정의를 단계적으로 쌓되, 직관이 앞서가지 않도록 표기와 용어만 차분히 고정한다.</p>
+<h2 id="122-반사실의-수학적-정의-잠재결과의-언어">1.2.2 반사실의 수학적 정의 — 잠재결과의 언어</h2>
+<p>반사실을 바로 다루는 표준 언어 가운데 하나가 <strong>잠재결과 프레임워크(potential outcomes framework)</strong>이다. 이 전개는 Neyman(1923)과 Rubin(1974)에 흔히 거슬러 올라가며, 오늘날 인과 추론 교과서에서 널리 쓰인다.</p>
+<p><strong>기본 설정.</strong> 단위(unit) <em>i</em>는 분석 대상이 되는 개별 관측(사람·기업·국가 등)이다. 처치 <em>Ti</em>는 단위 <em>i</em>에 가해진 개입이고, 여기서는 이진(binary) 처치로 단순화하자. <em>Ti</em> = 1이면 처치를 받은 것, <em>Ti</em> = 0이면 받지 않은 것이다. 결과 변수 <em>Yi</em>는 관심 있는 측정값이다.</p>
+<p>잠재결과의 핵심 정의는 다음과 같다.</p>
+<p>\[ Y_i(1) \equiv \text{단위 } i \text{가 처치를 받았을 때 }(T_i=1)\text{의 결과}, \quad Y_i(0) \equiv \text{단위 } i \text{가 처치를 받지 않았을 때 }(T_i=0)\text{의 결과}. \]</p>
+<section class="callout note"><div class="callout-title">note</div><p>이 두 값은 단위 <em>i</em>에 대해 <strong>동시에 정의</strong>된다. 즉, 단위 <em>i</em>는 처치를 받든 받지 않든 각각의 결과를 「가지고 있다」고 가정한다. 잠재결과는 실제로 무엇이 일어났는지와 무관하게 정의되는 <strong>반사실적 양(counterfactual quantities)</strong>이다.</p>
+<p>이제 단위 <em>i</em>에 대한 <strong>개인 인과효과(Individual Causal Effect, ICE)</strong>를</p>
+<p>\[ \tau_i \equiv Y_i(1) - Y_i(0) \]</p></section>
+<p>로 둔다. 이것이 반사실을 수식에 옮긴 핵심이다. <em>τi</em>는 「같은 단위 <em>i</em>가 처치를 받았을 때의 결과」와 「같은 단위 <em>i</em>가 처치를 받지 않았을 때의 결과」의 차이다. 두 상태는 동시에 실현될 수 없다. 하나는 사실이 되고, 다른 하나는 반드시 반사실이 된다.</p>
+<svg width="440" height="200" viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+        <text x="220" y="24" text-anchor="middle" font-size="12" fill="#1e4d6b" font-weight="700">한 단위 <tspan font-style="italic">i</tspan>에 대한 잠재결과 (개념도)</text>
+        <rect x="40" y="50" width="140" height="56" rx="8" fill="#f5e8ec" stroke="#8b2942" stroke-width="1.5"/>
+        <text x="110" y="80" text-anchor="middle" font-size="11" font-weight="600">Y<tspan baseline-shift="sub" font-size="9">i</tspan>(0)</text>
+        <text x="110" y="96" text-anchor="middle" font-size="9" fill="#555">처치 없음</text>
+        <rect x="260" y="50" width="140" height="56" rx="8" fill="#e8f5ef" stroke="#1d6b4a" stroke-width="1.5"/>
+        <text x="330" y="80" text-anchor="middle" font-size="11" font-weight="600">Y<tspan baseline-shift="sub" font-size="9">i</tspan>(1)</text>
+        <text x="330" y="96" text-anchor="middle" font-size="9" fill="#555">처치 있음</text>
+        <text x="220" y="130" text-anchor="middle" font-size="13" fill="#333">ICE<tspan baseline-shift="sub" font-size="10">i</tspan> = Y<tspan baseline-shift="sub" font-size="9">i</tspan>(1) − Y<tspan baseline-shift="sub" font-size="9">i</tspan>(0)</text>
+        <text x="220" y="158" text-anchor="middle" font-size="10" fill="#666">동시에 관측 불가 — 둘 중 하나만 실현</text>
+        <line x1="190" y1="78" x2="250" y2="78" stroke="#999" stroke-width="1" stroke-dasharray="5 3"/>
+        <text x="220" y="72" text-anchor="middle" font-size="9" fill="#888">차이</text>
+      </svg>
+<p><strong>그림 1.</strong> 개인 인과효과(ICE)는 두 잠재결과의 차이다. 데이터에서는 한쪽만 본다.</p>
+<section class="callout note"><div class="callout-title">note</div><h2 id="123-인과-추론의-근본-문제">1.2.3 인과 추론의 근본 문제</h2>
+<p>잠재결과 정의에서 바로 따라오는 사실이 있다. 우리는 <em>Yi</em>(1)과 <em>Yi</em>(0) 중 <strong>하나만</strong> 관측할 수 있다. 단위 <em>i</em>가 처치를 받았다면 <em>Yi</em>(1)은 관측되지만 <em>Yi</em>(0)은 관측되지 않는다. 그 반대도 마찬가지다. 관측 결과와 연결하면</p>
+<p>\[ Y_i^{\mathrm{obs}} = T_i \, Y_i(1) + (1 - T_i) \, Y_i(0). \]</p></section>
+<p>관측된 결과 <em>Yiobs</em>는 실제 처치 상태에 해당하는 잠재결과다. 나머지 한쪽, 즉 일어나지 않은 세계에서의 결과는 <strong>근본적으로 관측 불가능</strong>하다. Holland(1986)는 이를 <strong>인과 추론의 근본 문제(Fundamental Problem of Causal Inference)</strong>라고 불렀다.</p>
+<p>이것은 단순히 표본이 작아서가 아니다. 더 많은 데이터를 모은다고 해서, 동일한 단위·동일한 시점에서 두 잠재결과를 동시에 볼 수 있게 되지는 않는다. 인과 추론은 이 <strong>근본적 결측(missingness)</strong>을 어떤 가정 아래 보완할 것인가를 다루는 학문이라고도 볼 수 있다.</p>
+<p>아래 표는 한 집단에서 관측이 어떻게 「한 칸」만 남기는지를 보여준다.</p>
+<table class="cf-table" role="table" aria-label="잠재결과와 관측 가능성">
+      <thead>
+        <tr>
+          <th scope="col">단위 <em>i</em></th>
+          <th scope="col">처치 <em>T<sub>i</sub></em></th>
+          <th scope="col"><em>Y<sub>i</sub></em>(1)</th>
+          <th scope="col"><em>Y<sub>i</sub></em>(0)</th>
+          <th scope="col">개인효과 <em>τ<sub>i</sub></em></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td><strong>관측됨</strong></td>
+          <td>?</td>
+          <td>?</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>0</td>
+          <td>?</td>
+          <td><strong>관측됨</strong></td>
+          <td>?</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>1</td>
+          <td><strong>관측됨</strong></td>
+          <td>?</td>
+          <td>?</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>0</td>
+          <td>?</td>
+          <td><strong>관측됨</strong></td>
+          <td>?</td>
+        </tr>
+      </tbody>
+    </table>
+<p>물음표로 남은 칸이 곧 반사실이다. 이후 등장하는 모든 식별 전략은, 이 물음표를 어떤 가정 하에서 채울 것인가로 정리될 수 있다.</p>
+<h2 id="124-직관적-예시-아스피린과-두통">1.2.4 직관적 예시 ① — 아스피린과 두통</h2>
+<p>철수가 두통으로 아스피린을 복용했고, 한 시간 뒤 두통이 가라앉았다고 하자. 철수는 「약이 듣었다」고 느낀다. 이것만으로 인과를 말할 수 있을까?</p>
+<p>\[\begin{aligned} Y_{\text{철수}}(1) &amp;= \text{아스피린을 복용했을 때 한 시간 후 두통 강도},\\ Y_{\text{철수}}(0) &amp;= \text{아스피린을 복용하지 않았을 때 한 시간 후 두통 강도}. \end{aligned}\]</p>
+<section class="callout note"><div class="callout-title">note</div><p>철수는 실제로 복용했으므로 우리가 보는 것은 <em>Y</em>철수(1)이다. 그러나 <em>Y</em>철수(0), 즉 「복용하지 않았더라면」의 두통 강도는 관측되지 않는다. 시간 경과만으로도 두통은 나아질 수 있고, 수분 섭취·휴식 등 다른 요인이 작용했을 수도 있다.</p>
+<p>철수의 경험은 <em>Y</em>철수(1)의 값을 알려 줄 뿐, 인과효과 <em>τ</em>철수 = <em>Y</em>철수(1) − <em>Y</em>철수(0)를 계산하려면 필요한 <em>Y</em>철수(0)은 영원히 관측되지 않는다. 이것이 개인 수준에서 인과 추론이 어려운 이유다.</p>
+<p>그렇다고 해서 아무것도 할 수 없는 것은 아니다. 한 가지 전형적인 방향은 개인 수준 <em>τi</em>를 포기하고, 집단 수준의 <strong>평균 인과효과(Average Treatment Effect, ATE)</strong>를 목표로 삼는 것이다.</p>
+<p>\[ \mathrm{ATE} \equiv \mathbb{E}[\tau_i] = \mathbb{E}[Y_i(1) - Y_i(0)] = \mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)]. \]</p></section>
+<p>기댓값의 선형성 덕분에 ATE는 두 평균 잠재결과의 차로 쓸 수 있고, 문제는 이 두 평균을 데이터로부터 어떻게 <strong>식별</strong>할 것인가로 옮겨 간다.</p>
+<h2 id="125-직관적-예시-대학-교육의-임금-효과">1.2.5 직관적 예시 ② — 대학 교육의 임금 효과</h2>
+<p>「대학 교육이 임금을 높이는가?」를 잠재결과로 쓰면 다음과 같다.</p>
+<p>\[\begin{aligned} Y_i(1) &amp;= \text{개인 } i \text{가 대학에 진학했을 때의 임금},\\ Y_i(0) &amp;= \text{개인 } i \text{가 대학에 진학하지 않았을 때의 임금},\\ \tau_i &amp;= Y_i(1) - Y_i(0). \end{aligned}\]</p>
+<section class="callout note"><div class="callout-title">note</div><p>데이터에서 대학 졸업자의 평균 임금이 고졸자보다 높다는 사실은 쉽게 확인된다. 그러나 그 차이가 곧 \(\mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)]\)의 추정인가? 그렇지 않다. 진학하는 사람과 하지 않는 사람은 처치 이전부터 능력·가정환경·동기 등에서 다를 수 있고, 이런 차이가 임금에도 영향을 준다면 단순 비교는 교육 효과와 <strong>선택(selection)</strong>이 뒤섞인 양이다.</p>
+<p>관측되는 단순 비교는 다음과 같이 분해된다.</p>
+<p>\[\begin{aligned} &amp;\mathbb{E}[Y_i^{\mathrm{obs}} \mid T_i = 1] - \mathbb{E}[Y_i^{\mathrm{obs}} \mid T_i = 0] \\ &amp;\quad= \underbrace{\mathbb{E}[Y_i(1) \mid T_i = 1] - \mathbb{E}[Y_i(0) \mid T_i = 1]}_{\text{처치군에서의 평균 처치효과 (ATT)}} \\ &amp;\qquad+ \underbrace{\mathbb{E}[Y_i(0) \mid T_i = 1] - \mathbb{E}[Y_i(0) \mid T_i = 0]}_{\text{선택 편향 (selection bias)}}. \end{aligned}\]</p></section>
+<p>두 번째 항이 선택 편향이다. 대학 진학자들이 진학하지 않았더라도(<em>Yi</em>(0) 기준으로) 원래 고졸 집단보다 임금이 높았을 사람들이라면, 단순 비교는 교육의 효과를 과대추정할 수 있다. 인과 추론의 핵심 과제는 이 편향을 제거하거나, 그 크기를 드러내는 가정을 정당화하는 것이다.</p>
+<h2 id="126-직관적-예시-클로드-베르나르의-실험과-반사실">1.2.6 직관적 예시 ③ — 클로드 베르나르의 실험과 반사실</h2>
+<p>19세기 프랑스 생리학자 클로드 베르나르(Claude Bernard)는 쿠라레(curare)가 근육을 마비시키는 메커니즘을 연구하면서, 개구리에게 쿠라레를 투여했을 때 운동은 마비되나 감각은 유지된다는 관측을 했다. 이것이 인과인지, 단순히 함께 나타나는 패턴인지를 가리려면 어떤 비교가 필요한가?</p>
+<p>베르나르가 비교한 것은, 같은 종류의 개구리를 놓고 <strong>쿠라레를 투여한 경우</strong>와 <strong>투여하지 않은 경우</strong>를 나란히 두는 실험 설계다. 한 마리에게 동시에 두 조건을 줄 수 없다는 점에서, 우리는 다시 한 번 근본 문제에 부딪힌다. 베르나르가 쓴 해법의 한 형태는 <strong>집단 수준의 무작위 배정</strong>에 가깝다. 여러 개구리를 처치군과 통제군에 무작위로 나누면, 잠재결과의 평균이 집단 간에 대등해지도록 비교를 설계할 수 있다는 논리다. 이것이 현대 무작위 대조 시험(RCT)이 지닌 직관의 역사적 한 단면이다.</p>
+<p>실험은 관측 불가능한 반사실을 「직접 보여 주는」 장치가 아니라, 집단 수준에서 반사실을 <strong>대리(proxy)</strong>하는 비교 집단을 구성하는 장치다.</p>
+<svg width="460" height="180" viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg">
+        <text x="230" y="22" text-anchor="middle" font-size="12" fill="#1e4d6b" font-weight="700">실제 세계의 한 경로만 관측</text>
+        <circle cx="100" cy="100" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+        <text x="100" y="105" text-anchor="middle" font-size="11">시작</text>
+        <line x1="118" y1="100" x2="200" y2="100" stroke="#333" stroke-width="2" marker-end="url(#mcf)"/>
+        <defs>
+          <marker id="mcf" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#333"/></marker>
+        </defs>
+        <rect x="200" y="78" width="80" height="44" rx="6" fill="#e8f5ef" stroke="#1d6b4a"/>
+        <text x="240" y="105" text-anchor="middle" font-size="10"><tspan font-style="italic">T</tspan>=1 선택</text>
+        <line x1="280" y1="100" x2="360" y2="100" stroke="#333" stroke-width="2" marker-end="url(#mcf)"/>
+        <rect x="360" y="78" width="80" height="44" rx="6" fill="#e8f0f5" stroke="#1e4d6b"/>
+        <text x="400" y="105" text-anchor="middle" font-size="10"><tspan font-style="italic">Y</tspan> 관측</text>
+        <text x="230" y="150" text-anchor="middle" font-size="10" fill="#666">반대 분기 <tspan font-style="italic">T</tspan>=0에서의 <tspan font-style="italic">Y</tspan>(0)는 같은 실험에서 볼 수 없음</text>
+      </svg>
+<p><strong>그림 2.</strong> 한 단위의 「역사」는 하나의 처치 분기만 밟는다. 반대 분기의 잠재결과는 반사실로 남는다.</p>
+<section class="callout note"><div class="callout-title">note</div><h2 id="127-반사실의-세-가지-층위-pearl의-인과-사다리">1.2.7 반사실의 세 가지 층위 — Pearl의 인과 사다리</h2>
+<p>Pearl(2000, 2018)은 인과적 사고를 세 층위로 나누는 <strong>인과 사다리(ladder of causation)</strong>를 제안했다. 반사실이 전체 지형도에서 어디에 놓이는지를 보여 주는 틀이다(다음 절 1.3에서 더 체계적으로 이어진다).</p>
+<p><strong>1층: 연상(Association)</strong> — \(P(Y \mid X)\). 관측 데이터에서 변수 간 통계적 패턴을 읽는 층위다. 예측·기계학습·표준 회귀의 상당 부분이 이 층위에서 작동한다.</p>
+<p><strong>2층: 개입(Intervention)</strong> — \(P(Y \mid \mathrm{do}(X))\). 실제로 \(X\)를 조작했을 때의 결과를 묻는 층위다. Pearl의 \(\mathrm{do}\) 연산자가 이를 형식화한다. 무작위 실험은 이 층위의 질문에 정면으로 답하도록 설계되는 경우가 많다.</p>
+<p><strong>3층: 반사실(Counterfactual)</strong> — \(P(Y_x \mid X=x',\, Y=y')\)와 같은 언어로 표현되는, 이미 관측된 사실을 전제로 한 「다른 행동이었다면」의 질문이다. 법적 책임, 의학적 귀인, 개인 맞춤 의사결정이 이 층위를 요구한다.</p>
+<p>상위 층위는 하위 층위에 정보를 포함하는 방향으로 이해할 수 있다. 반사실을 일관되게 다룰 수 있으면 개입·연상에 대한 질문도 정리할 수 있는 경우가 많고, 개입 수준의 양을 알면 연상은 따라온다. 그러나 <strong>역방향은 성립하지 않는다</strong>. 연상만으로 개입이나 반사실에 답할 수 없다는 점이, 회귀만으로는 인과 질문이 부족한 이유와 맞닿아 있다.</p>
+<p>\[ \text{반사실} \;\supset\; \text{개입} \;\supset\; \text{연상} \]</p></section>
+<h2 id="128-반사실의-식별-어떤-가정이-필요한가">1.2.8 반사실의 식별 — 어떤 가정이 필요한가</h2>
+<p>처치를 받은 단위 <em>i</em>에 대해 「받지 않았더라면」의 결과 <em>Yi</em>(0)은 원칙적으로 관측되지 않는다. 그렇다면 반사실에 대해 과학적 주장을 어떻게 할 수 있는가? 답은 <strong>가정(assumption)</strong>이다. 특정 가정이 성립할 때, 관측 가능한 통계량이 관심 있는 반사실적 양과 일치한다는 논증을 세울 수 있다.</p>
+<p>가장 단순한 예는 무작위 배정이다. 처치가 무작위로 배정되면</p>
+<p>\[ \{Y_i(1), Y_i(0)\} \perp\!\!\!\perp T_i \]</p>
+<section class="callout note"><div class="callout-title">note</div><p>가 성립한다고 가정할 수 있다. 즉, 잠재결과가 처치 배정과 독립이다. 이 조건 아래에서는</p>
+<p>\[\begin{aligned} \mathbb{E}[Y_i(1)] &amp;= \mathbb{E}[Y_i(1) \mid T_i = 1] = \mathbb{E}[Y_i^{\mathrm{obs}} \mid T_i = 1],\\ \mathbb{E}[Y_i(0)] &amp;= \mathbb{E}[Y_i(0) \mid T_i = 0] = \mathbb{E}[Y_i^{\mathrm{obs}} \mid T_i = 0] \end{aligned}\]</p></section>
+<p>와 같이 평균 잠재결과가 대응하는 처치군·통제군의 표본 평균으로 바뀐다. 따라서 평균의 차(difference in means)가 ATE에 대한 비편향 추정량이 된다.</p>
+<p>\[ \mathrm{ATE} = \mathbb{E}[Y_i(1)] - \mathbb{E}[Y_i(0)] = \mathbb{E}[Y_i^{\mathrm{obs}} \mid T_i = 1] - \mathbb{E}[Y_i^{\mathrm{obs}} \mid T_i = 0]. \]</p>
+<section class="callout note"><div class="callout-title">note</div><p>무작위 실험이 「황금 기준」으로 불리는 이유 가운데 하나가, 강한 가정 하나로 관측 불가능한 반사실적 평균을 관측 가능한 비교로 바꿀 수 있다는 점이다. 이 책 후반의 도구변수·RDD·DiD·매칭 등은 무작위 배정이 없을 때, 다른 가정으로 그 대체 논리를 확보하려는 시도로 읽을 수 있다.</p>
+<h2 id="129-반사실과-도덕적법적-귀인">1.2.9 반사실과 도덕적·법적 귀인</h2>
+<p>반사실적 사고는 과학을 넘어 법과 도덕에서도 중심축을 이룬다. 법철학에서 널리 쓰이는 <strong>「but-for」 기준</strong>이 그 예다. 「피고의 행위가 없었더라면(but for the defendant’s action) 피해가 발생했을 것인가?」는 반사실적 질문이다.</p>
+<p>의약품 부작용 소송을 떠올려 보자. 환자가 약을 복용한 뒤 심장 발작을 겪었다면, 약이 원인인지 판단하려면 「같은 환자가 그 약을 복용하지 않았더라면」이라는 반사실에 답해야 한다. 그러나 그 반사실은 관측되지 않는다. 법원은 역학 연구·임상시험·전문가 증언 등을 통해 이를 간접적으로 추론한다. 이 과정에서 인과 추론의 방법론이 실제 제도와 맞물린다.</p>
+<p>반사실은 학술 용어에 머무르지 않고, 책임을 귀속하고 정책을 평가하며 개인의 결정을 내리는 사고의 틀 그 자체다.</p></section>
+<p>summary</p>
+<p>핵심 요약</p>
+<ul><li>반사실(counterfactual)은 실제로 일어난 일을 전제로 「다르게 행동했더라면 어떤 결과였을까」를 묻는 사고이며, 잠재결과 <em>Yi</em>(1), <em>Yi</em>(0)로 수학화한다.</li></ul>
+<ul><li>개인 인과효과 <em>τi</em> = <em>Yi</em>(1) − <em>Yi</em>(0)에서 한쪽 잠재결과는 항상 관측되지 않는다. 이것이 <strong>인과 추론의 근본 문제</strong>다.</li></ul>
+<ul><li>인과 추론은 이 관측 불가능성을 무작위 배정, 조건부 독립, 연속성 등 <strong>특정 가정</strong>으로 보완하는 학문이다.</li></ul>
+<ul><li>Pearl의 인과 사다리는 연상 → 개입 → 반사실의 셋으로 사고를 나누며, 상위 층위가 하위 층위로 환원되지는 않는다. 회귀는 연상 층위의 도구로 이해될 수 있고, 인과 질문은 그보다 높은 층위를 요구한다.</li></ul>
+<ul><li>무작위 배정은 \(\{Y_i(1), Y_i(0)\} \perp\!\!\!\perp T_i\)를 통해 평균 잠재결과를 처치군·통제군의 관측 평균으로 연결해, 반사실적 평균을 관측 가능한 비교로 대체한다.</li></ul>
+<section class="callout note"><div class="callout-title">note</div><p>다음 절(<a href="ch01-03-ladder.html">1.3 인과 질문의 세 층위 — Pearl의 인과 사다리</a>)에서는 인과 사다리를 한층 체계적으로 정리하고, 세 층위의 질문이 각각 어떤 수학적 언어(구조 인과 모형과 \(\mathrm{do}\) 연산자 등)를 요구하는지로 이어간다.</p></section>
+      </section>
+      <nav class="chapter-nav">
+        <a class="nav-prev" href="ch01-01-correlation-causation.html">←  1.1 상관과 인과의 근본적 차이 — 왜 회귀만으로는 부족한가</a>
+        <a class="nav-next" href="ch01-03-ladder.html"> 1.3 인과 사다리와 구조 인과 모형 — 세 층위의 형식화 →</a>
+      </nav>
+    </article>
+    
+    
+    </main>
+  </div>
+</body>
+</html>
