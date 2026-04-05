@@ -8,77 +8,168 @@ ROOT = Path(__file__).resolve().parents[1]
 BOOK_PATH = ROOT / "content" / "book.json"
 
 
+def u(text: str) -> str:
+    return text.encode("ascii").decode("unicode_escape")
+
+
 BOOK_UPDATES = {
-    "part_title": "Part 3 | Data Complexity in Observational Studies",
-    "part_description": "This part focuses on measurement, missingness, temporal ordering, interference, implementation, and aggregation issues in observational data.",
-    "homophily_bias": ("4.7", "4.7 Homophily Bias"),
-    "ch10-01-covariate-control-limits": ("10", "10. Measurement, Observation, and Missing Data"),
-    "ch10-02-s101": ("10.1", "10.1 Measurement Error and Misclassification"),
-    "ch10-03-s102": ("10.2", "10.2 Missing Data: MCAR, MAR, MNAR"),
-    "ch10-04-s103": ("10.3", "10.3 Strategies for Missingness and Observation Error"),
-    "ch11-01-collider-bias": ("11", "11. Time, Dynamics, and Reverse Causality"),
-    "ch11-02-s111": ("11.1", "11.1 Temporal Order and Reverse Causality"),
-    "ch11-03-s112": ("11.2", "11.2 Baseline Controls, Simultaneity, and Mutual Determination"),
-    "ch11-04-s113": ("11.3", "11.3 Cumulative Treatment, Lagged Effects, and Dynamic Causal Effects"),
-    "ch12-01-unobserved-confounding-limits": ("12", "12. Interference, Implementation, and Aggregation"),
-    "ch12-02-s121": ("12.1", "12.1 Interference and Spillovers: Beyond SUTVA"),
-    "ch12-03-s122": ("12.2", "12.2 Implementation Heterogeneity"),
-    "ch12-04-s123": ("12.3", "12.3 Aggregated Data, Ecological Fallacy, and Multilevel Context"),
+    "part_title": u("\\uc81c3\\ubd80 | \\uad00\\uce21\\uc790\\ub8cc\\uc640 \\ud604\\uc2e4 \\ub370\\uc774\\ud130\\uc758 \\ubcf5\\uc7a1\\uc131"),
+    "part_description": u("\\uad00\\uce21\\uc790\\ub8cc\\uac00 \\uc65c \\uc778\\uacfc\\ucd94\\ub860\\uc744 \\uc5b4\\ub835\\uac8c \\ub9cc\\ub4dc\\ub294\\uc9c0, \\uce21\\uc815\\u00b7\\uacb0\\uce21\\u00b7\\uc2dc\\uac04\\u00b7\\uac04\\uc12d\\u00b7\\uc9d1\\uacc4 \\uc218\\uc900\\uc758 \\ubb38\\uc81c\\ub97c \\uc911\\uc2ec\\uc73c\\ub85c \\uc815\\ub9ac\\ud569\\ub2c8\\ub2e4."),
+    "homophily_bias": (
+        "4.7",
+        u("4.7 \\ub3d9\\uc9c8\\uc131 \\ud3b8\\uc758"),
+    ),
+    "ch10-01-covariate-control-limits": (
+        "10",
+        u("10. \\uce21\\uc815, \\uad00\\uce21, \\uacb0\\uce21\\uc758 \\ubb38\\uc81c"),
+    ),
+    "ch10-02-s101": (
+        "10.1",
+        u("10.1 \\uce21\\uc815\\uc624\\ucc28\\uc640 \\ubd84\\ub958\\uc624\\ucc28"),
+    ),
+    "ch10-03-s102": (
+        "10.2",
+        u("10.2 \\uacb0\\uce21\\uc790\\ub8cc: MCAR, MAR, MNAR"),
+    ),
+    "ch10-04-s103": (
+        "10.3",
+        u("10.3 \\uacb0\\uce21\\uacfc \\uad00\\uce21\\uc624\\ub958\\uc5d0 \\ub300\\ud55c \\ub300\\uc751 \\uc804\\ub7b5"),
+    ),
+    "ch11-01-collider-bias": (
+        "11",
+        u("11. \\uc2dc\\uac04, \\ub3d9\\ud0dc\\uc131, \\uc5ed\\uc778\\uacfc\\uc131"),
+    ),
+    "ch11-02-s111": (
+        "11.1",
+        u("11.1 \\uc2dc\\uac04 \\uc21c\\uc11c\\uc640 \\uc5ed\\uc778\\uacfc\\uc131"),
+    ),
+    "ch11-03-s112": (
+        "11.2",
+        u("11.2 \\uc0ac\\uc804\\uac12 \\ud1b5\\uc81c, \\ub3d9\\uc2dc\\uc131, \\uc0c1\\ud638\\uacb0\\uc815"),
+    ),
+    "ch11-04-s113": (
+        "11.3",
+        u("11.3 \\ub204\\uc801\\ucc98\\uce58, \\uc9c0\\uc5f0\\ud6a8\\uacfc, \\ub3d9\\ud0dc\\uc801 \\uc778\\uacfc\\ud6a8\\uacfc"),
+    ),
+    "ch12-01-unobserved-confounding-limits": (
+        "12",
+        u("12. \\uac04\\uc12d, \\uc9d1\\ud589, \\uc9d1\\uacc4 \\uc218\\uc900\\uc758 \\ubb38\\uc81c"),
+    ),
+    "ch12-02-s121": (
+        "12.1",
+        u("12.1 \\uac04\\uc12d\\uacfc \\ud30c\\uae09\\ud6a8\\uacfc: SUTVA\\ub97c \\ub118\\uc5b4\\uc11c"),
+    ),
+    "ch12-03-s122": (
+        "12.2",
+        u("12.2 \\uc815\\ucc45\\uc9d1\\ud589\\uc758 \\uc774\\uc9c8\\uc131"),
+    ),
+    "ch12-04-s123": (
+        "12.3",
+        u("12.3 \\uc9d1\\uacc4\\uc790\\ub8cc, \\uc0dd\\ud0dc\\ud559\\uc801 \\uc624\\ub958, \\ub2e4\\uc218\\uc900 \\ub9e5\\ub77d"),
+    ),
+    "ch13-01-regression-matching-ipw": (
+        "13",
+        u("13. \\uc870\\uac74\\ubd80 \\ub3c5\\ub9bd \\uac00\\uc815\\ud558\\uc758 \\uc778\\uacfc\\ud6a8\\uacfc \\ucd94\\ub860"),
+    ),
+    "ch13-02-s131": (
+        "",
+        u("13.1.1 \\uc870\\uac74\\ubd80 \\ub3c5\\ub9bd \\uac00\\uc815(CIA / ignorability)\\uc758 \\uc758\\ubbf8"),
+    ),
+    "ch13-03-s132": (
+        "",
+        u("13.1.2 \\ud68c\\uadc0 \\uc870\\uc815\\uc758 \\uc778\\uacfc\\uc801 \\ud574\\uc11d \\uc870\\uac74"),
+    ),
+    "ch13-04-s133": (
+        "",
+        u("13.1.3 \\ub9e4\\uce6d\\uc758 \\uc9c1\\uad00 - \\uc774\\uc6c3 \\ub9e4\\uce6d \\u00b7 \\uc131\\ud5a5\\uc810\\uc218 \\ub9e4\\uce6d \\u00b7 \\uce7c\\ud37c \\ubc18\\uacbd"),
+    ),
+    "ch13-05-s134": (
+        "",
+        u("13.1.4 \\uc5ed\\ud655\\ub960\\uac00\\uc911(IPW)\\uacfc \\uc548\\uc815\\ud654 \\uac00\\uc911(SIPW)"),
+    ),
+    "ch13-06-s135": (
+        "",
+        u("13.1.5 \\uacf5\\ud1b5 \\uc9c0\\uc9c0(common support) - \\uc678\\uc0bd \\uc704\\ud5d8\\uacfc \\uc9c4\\ub2e8"),
+    ),
 }
 
 
 FRONT_MATTER_UPDATES = {
     "content/chapters/homophily_bias.md": (
-        "4.7 Homophily Bias",
+        u("4.7 \\ub3d9\\uc9c8\\uc131 \\ud3b8\\uc758"),
         None,
     ),
     "content/chapters/ch10-01-covariate-control-limits.md": (
-        "10. Measurement, Observation, and Missing Data",
-        "This chapter explains how measurement error, recording error, and missingness distort observational data before causal analysis even begins.",
+        u("10. \\uce21\\uc815, \\uad00\\uce21, \\uacb0\\uce21\\uc758 \\ubb38\\uc81c"),
+        None,
     ),
     "content/chapters/ch10-02-s101.md": (
-        "10.1 Measurement Error and Misclassification",
-        "This section explains how errors in treatment, outcome, and covariate measurement distort causal interpretation.",
+        u("10.1 \\uce21\\uc815\\uc624\\ucc28\\uc640 \\ubd84\\ub958\\uc624\\ucc28"),
+        None,
     ),
     "content/chapters/ch10-03-s102.md": (
-        "10.2 Missing Data: MCAR, MAR, MNAR",
-        "This section distinguishes MCAR, MAR, and MNAR and explains why each missingness structure implies a different inferential problem.",
+        u("10.2 \\uacb0\\uce21\\uc790\\ub8cc: MCAR, MAR, MNAR"),
+        None,
     ),
     "content/chapters/ch10-04-s103.md": (
-        "10.3 Strategies for Missingness and Observation Error",
-        "This section summarizes multiple imputation, inverse probability weighting, validation data, and sensitivity analysis for data quality problems.",
+        u("10.3 \\uacb0\\uce21\\uacfc \\uad00\\uce21\\uc624\\ub958\\uc5d0 \\ub300\\ud55c \\ub300\\uc751 \\uc804\\ub7b5"),
+        None,
     ),
     "content/chapters/ch11-01-collider-bias.md": (
-        "11. Time, Dynamics, and Reverse Causality",
-        "This chapter focuses on temporal ordering, simultaneity, dynamic treatment paths, and reverse causality in observational data.",
+        u("11. \\uc2dc\\uac04, \\ub3d9\\ud0dc\\uc131, \\uc5ed\\uc778\\uacfc\\uc131"),
+        None,
     ),
     "content/chapters/ch11-02-s111.md": (
-        "11.1 Temporal Order and Reverse Causality",
-        "This section explains why apparent causes may actually be consequences and how to diagnose reverse causality.",
+        u("11.1 \\uc2dc\\uac04 \\uc21c\\uc11c\\uc640 \\uc5ed\\uc778\\uacfc\\uc131"),
+        None,
     ),
     "content/chapters/ch11-03-s112.md": (
-        "11.2 Baseline Controls, Simultaneity, and Mutual Determination",
-        "This section explains when baseline adjustment helps and when simultaneity still prevents causal interpretation.",
+        u("11.2 \\uc0ac\\uc804\\uac12 \\ud1b5\\uc81c, \\ub3d9\\uc2dc\\uc131, \\uc0c1\\ud638\\uacb0\\uc815"),
+        None,
     ),
     "content/chapters/ch11-04-s113.md": (
-        "11.3 Cumulative Treatment, Lagged Effects, and Dynamic Causal Effects",
-        "This section explains why treatment can accumulate over time and why delayed effects matter for policy evaluation.",
+        u("11.3 \\ub204\\uc801\\ucc98\\uce58, \\uc9c0\\uc5f0\\ud6a8\\uacfc, \\ub3d9\\ud0dc\\uc801 \\uc778\\uacfc\\ud6a8\\uacfc"),
+        None,
     ),
     "content/chapters/ch12-01-unobserved-confounding-limits.md": (
-        "12. Interference, Implementation, and Aggregation",
-        "This chapter explains how spillovers, implementation heterogeneity, and aggregation change the meaning of causal effects.",
+        u("12. \\uac04\\uc12d, \\uc9d1\\ud589, \\uc9d1\\uacc4 \\uc218\\uc900\\uc758 \\ubb38\\uc81c"),
+        None,
     ),
     "content/chapters/ch12-02-s121.md": (
-        "12.1 Interference and Spillovers: Beyond SUTVA",
-        "This section explains how one unit's treatment can affect another unit's outcome.",
+        u("12.1 \\uac04\\uc12d\\uacfc \\ud30c\\uae09\\ud6a8\\uacfc: SUTVA\\ub97c \\ub118\\uc5b4\\uc11c"),
+        None,
     ),
     "content/chapters/ch12-03-s122.md": (
-        "12.2 Implementation Heterogeneity",
-        "This section explains why the same policy label can correspond to different realized treatments across places and institutions.",
+        u("12.2 \\uc815\\ucc45\\uc9d1\\ud589\\uc758 \\uc774\\uc9c8\\uc131"),
+        None,
     ),
     "content/chapters/ch12-04-s123.md": (
-        "12.3 Aggregated Data, Ecological Fallacy, and Multilevel Context",
-        "This section explains how interpretation changes when evidence is available only at an aggregated level.",
+        u("12.3 \\uc9d1\\uacc4\\uc790\\ub8cc, \\uc0dd\\ud0dc\\ud559\\uc801 \\uc624\\ub958, \\ub2e4\\uc218\\uc900 \\ub9e5\\ub77d"),
+        None,
+    ),
+    "content/chapters/ch13-01-regression-matching-ipw.md": (
+        u("13. \\uc870\\uac74\\ubd80 \\ub3c5\\ub9bd \\uac00\\uc815\\ud558\\uc758 \\uc778\\uacfc\\ud6a8\\uacfc \\ucd94\\ub860"),
+        None,
+    ),
+    "content/chapters/ch13-02-s131.md": (
+        u("13.1.1 \\uc870\\uac74\\ubd80 \\ub3c5\\ub9bd \\uac00\\uc815(CIA / ignorability)\\uc758 \\uc758\\ubbf8"),
+        None,
+    ),
+    "content/chapters/ch13-03-s132.md": (
+        u("13.1.2 \\ud68c\\uadc0 \\uc870\\uc815\\uc758 \\uc778\\uacfc\\uc801 \\ud574\\uc11d \\uc870\\uac74"),
+        None,
+    ),
+    "content/chapters/ch13-04-s133.md": (
+        u("13.1.3 \\ub9e4\\uce6d\\uc758 \\uc9c1\\uad00 - \\uc774\\uc6c3 \\ub9e4\\uce6d \\u00b7 \\uc131\\ud5a5\\uc810\\uc218 \\ub9e4\\uce6d \\u00b7 \\uce7c\\ud37c \\ubc18\\uacbd"),
+        None,
+    ),
+    "content/chapters/ch13-05-s134.md": (
+        u("13.1.4 \\uc5ed\\ud655\\ub960\\uac00\\uc911(IPW)\\uacfc \\uc548\\uc815\\ud654 \\uac00\\uc911(SIPW)"),
+        None,
+    ),
+    "content/chapters/ch13-06-s135.md": (
+        u("13.1.5 \\uacf5\\ud1b5 \\uc9c0\\uc9c0(common support) - \\uc678\\uc0bd \\uc704\\ud5d8\\uacfc \\uc9c4\\ub2e8"),
+        None,
     ),
 }
 
@@ -120,7 +211,7 @@ def fix_front_matter() -> None:
 def main() -> None:
     fix_book_json()
     fix_front_matter()
-    print("fixed toc labels in ascii")
+    print("fixed part 3 and chapter 13 labels in Korean")
 
 
 if __name__ == "__main__":

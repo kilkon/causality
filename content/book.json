@@ -145,7 +145,7 @@
           "slug": "homophily_bias",
           "source": "chapters/homophily_bias.md",
           "label": "4.7",
-          "title": "4.7 Homophily Bias"
+          "title": "4.7 동질성 편의"
         }
       ]
     },
@@ -243,79 +243,79 @@
     {
       "id": "part-3",
       "title": "제3부 | 관측자료와 현실 데이터의 복잡성",
-      "description": "관측자료가 왜 인과추론을 어렵게 만드는지, 측정·결측·시간·간섭·집계수준의 문제를 중심으로 정리합니다.",
+      "description": "관측자료가 왜 인과추론을 어렵게 만드는지, 측정·결측·시간·간섭·집계 수준의 문제를 중심으로 정리합니다.",
       "chapters": [
         {
           "slug": "ch10-01-covariate-control-limits",
           "source": "chapters/ch10-01-covariate-control-limits.md",
           "label": "10",
-          "title": "10. Measurement, Observation, and Missing Data"
+          "title": "10. 측정, 관측, 결측의 문제"
         },
         {
           "slug": "ch10-02-s101",
           "source": "chapters/ch10-02-s101.md",
           "label": "10.1",
-          "title": "10.1 Measurement Error and Misclassification"
+          "title": "10.1 측정오차와 분류오차"
         },
         {
           "slug": "ch10-03-s102",
           "source": "chapters/ch10-03-s102.md",
           "label": "10.2",
-          "title": "10.2 Missing Data: MCAR, MAR, MNAR"
+          "title": "10.2 결측자료: MCAR, MAR, MNAR"
         },
         {
           "slug": "ch10-04-s103",
           "source": "chapters/ch10-04-s103.md",
           "label": "10.3",
-          "title": "10.3 Strategies for Missingness and Observation Error"
+          "title": "10.3 결측과 관측오류에 대한 대응 전략"
         },
         {
           "slug": "ch11-01-collider-bias",
           "source": "chapters/ch11-01-collider-bias.md",
           "label": "11",
-          "title": "11. Time, Dynamics, and Reverse Causality"
+          "title": "11. 시간, 동태성, 역인과성"
         },
         {
           "slug": "ch11-02-s111",
           "source": "chapters/ch11-02-s111.md",
           "label": "11.1",
-          "title": "11.1 Temporal Order and Reverse Causality"
+          "title": "11.1 시간 순서와 역인과성"
         },
         {
           "slug": "ch11-03-s112",
           "source": "chapters/ch11-03-s112.md",
           "label": "11.2",
-          "title": "11.2 Baseline Controls, Simultaneity, and Mutual Determination"
+          "title": "11.2 사전값 통제, 동시성, 상호결정"
         },
         {
           "slug": "ch11-04-s113",
           "source": "chapters/ch11-04-s113.md",
           "label": "11.3",
-          "title": "11.3 Cumulative Treatment, Lagged Effects, and Dynamic Causal Effects"
+          "title": "11.3 누적처치, 지연효과, 동태적 인과효과"
         },
         {
           "slug": "ch12-01-unobserved-confounding-limits",
           "source": "chapters/ch12-01-unobserved-confounding-limits.md",
           "label": "12",
-          "title": "12. Interference, Implementation, and Aggregation"
+          "title": "12. 간섭, 집행, 집계 수준의 문제"
         },
         {
           "slug": "ch12-02-s121",
           "source": "chapters/ch12-02-s121.md",
           "label": "12.1",
-          "title": "12.1 Interference and Spillovers: Beyond SUTVA"
+          "title": "12.1 간섭과 파급효과: SUTVA를 넘어서"
         },
         {
           "slug": "ch12-03-s122",
           "source": "chapters/ch12-03-s122.md",
           "label": "12.2",
-          "title": "12.2 Implementation Heterogeneity"
+          "title": "12.2 정책집행의 이질성"
         },
         {
           "slug": "ch12-04-s123",
           "source": "chapters/ch12-04-s123.md",
           "label": "12.3",
-          "title": "12.3 Aggregated Data, Ecological Fallacy, and Multilevel Context"
+          "title": "12.3 집계자료, 생태학적 오류, 다수준 맥락"
         }
       ]
     },
@@ -328,7 +328,7 @@
           "slug": "ch13-01-regression-matching-ipw",
           "source": "chapters/ch13-01-regression-matching-ipw.md",
           "label": "13",
-          "title": "13.1 장의 핵심 항목"
+          "title": "13. 조건부 독립 가정하의 인과효과 추론"
         },
         {
           "slug": "ch13-02-s131",
@@ -346,7 +346,7 @@
           "slug": "ch13-04-s133",
           "source": "chapters/ch13-04-s133.md",
           "label": "",
-          "title": "13.1.3 매칭의 직관 — 이웃 매칭 · 성향점수 매칭 · 칼퍼 반경"
+          "title": "13.1.3 매칭의 직관 - 이웃 매칭 · 성향점수 매칭 · 칼퍼 반경"
         },
         {
           "slug": "ch13-05-s134",
@@ -358,7 +358,7 @@
           "slug": "ch13-06-s135",
           "source": "chapters/ch13-06-s135.md",
           "label": "",
-          "title": "13.1.5 공통 지지(common support) — 외삽 위험과 진단"
+          "title": "13.1.5 공통 지지(common support) - 외삽 위험과 진단"
         },
         {
           "slug": "ch14-00-instrumental-variables-intro",

@@ -1,9 +1,9 @@
 ---
-title: 10. Measurement, Observation, and Missing Data
+title: 10. 측정, 관측, 결측의 문제
 description: This chapter explains how measurement error, recording error, and missingness distort observational data before causal analysis even begins.
 ---
 
-# 10. Measurement, Observation, and Missing Data
+# 10. 측정, 관측, 결측의 문제
 
 관측자료의 가장 현실적인 문제는 교란을 모두 통제하지 못한다는 점만이 아니다. 더 앞선 단계에서, 우리가 손에 쥐고 있는 데이터 자체가 현실을 정확히 반영하지 않을 수 있다. 처치가 잘못 기록되기도 하고, 결과가 부정확하게 측정되기도 하며, 일부 응답은 빠지고, 행정자료는 특정 집단을 체계적으로 놓치기도 한다. 이 장은 이러한 `데이터 생성 과정(data-generating and data-recording process)` 자체가 인과추론을 어떻게 흔드는지를 다룬다.
 
