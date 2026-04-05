@@ -242,86 +242,80 @@
     },
     {
       "id": "part-3",
-      "title": "제3부 | 관측 연구에서의 편향과 그 구조",
-      "description": "관측 연구에서 발생하는 편향의 구조를 파악하고 무엇이 식별을 어렵게 만드는지 정리합니다.",
+      "title": "?3? | ????? ?? ???? ???",
+      "description": "????? ? ????? ??? ????, ????????????????? ??? ???? ?????.",
       "chapters": [
         {
           "slug": "ch10-01-covariate-control-limits",
           "source": "chapters/ch10-01-covariate-control-limits.md",
           "label": "10",
-          "title": "10.1 장의 핵심 항목"
+          "title": "10?. ??, ??, ??? ??"
         },
         {
           "slug": "ch10-02-s101",
           "source": "chapters/ch10-02-s101.md",
-          "label": "",
-          "title": "10.1.1 통제(control)가 해결하지 못하는 경우 — 측정 불가 교란"
+          "label": "10.1",
+          "title": "10.1 ????? ????"
         },
         {
           "slug": "ch10-03-s102",
           "source": "chapters/ch10-03-s102.md",
-          "label": "",
-          "title": "10.1.2 과도한 통제(overcontrol): 매개변수 통제의 위험"
+          "label": "10.2",
+          "title": "10.2 ????? ??: MCAR, MAR, MNAR"
         },
         {
           "slug": "ch10-04-s103",
           "source": "chapters/ch10-04-s103.md",
-          "label": "",
-          "title": "10.1.3 동질성(homophily)과 인과 해석의 왜곡"
-        },
-        {
-          "slug": "collider_bias_magnitude_direction",
-          "source": "chapters/collider_bias_magnitude_direction.md",
-          "label": "11",
-          "title": "이동됨: 콜라이더 편향의 방향·크기"
+          "label": "10.3",
+          "title": "10.3 ??? ????? ?? ??"
         },
         {
           "slug": "ch11-01-collider-bias",
           "source": "chapters/ch11-01-collider-bias.md",
           "label": "11",
-          "title": "11.1 장의 핵심 항목"
+          "title": "11?. ??, ???, ????"
         },
         {
           "slug": "ch11-02-s111",
           "source": "chapters/ch11-02-s111.md",
-          "label": "",
-          "title": "11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘"
+          "label": "11.1",
+          "title": "11.1 ?? ??? ????"
         },
         {
           "slug": "ch11-03-s112",
           "source": "chapters/ch11-03-s112.md",
-          "label": "",
-          "title": "11.1.2 편향의 방향과 크기 — 수치 예시"
+          "label": "11.2",
+          "title": "11.2 ??? ??, ???, ????"
         },
         {
           "slug": "ch11-04-s113",
           "source": "chapters/ch11-04-s113.md",
-          "label": "",
-          "title": "11.1.3 선택 편향 · 출판 편향 · 건강한 노동자 효과와 콜라이더의 연결"
+          "label": "11.3",
+          "title": "11.3 ????, ????, ??? ????"
         },
         {
           "slug": "ch12-01-unobserved-confounding-limits",
           "source": "chapters/ch12-01-unobserved-confounding-limits.md",
           "label": "12",
-          "title": "12.1 장의 핵심 항목"
+          "title": "12?. ??, ??, ?? ??? ??"
         },
         {
           "slug": "ch12-02-s121",
           "source": "chapters/ch12-02-s121.md",
-          "label": "",
-          "title": "12.1.1 미측 교란(unobserved confounding)의 DAG 표현"
+          "label": "12.1",
+          "title": "12.1 ??? spillover: SUTVA? ??"
         },
         {
           "slug": "ch12-03-s122",
           "source": "chapters/ch12-03-s122.md",
-          "label": "",
-          "title": "12.1.2 관측 가능 조건에서의 식별 불가능성"
+          "label": "12.2",
+          "title": "12.2 ????? ???? implementation heterogeneity"
         },
         {
           "slug": "ch12-04-s123",
           "source": "chapters/ch12-04-s123.md",
-          "label": "",
-          "title": "12.1.3 민감도 분석의 필요성 — 이후(제5부·20장)에서 정식으로 다룬다"
+          "label": "12.3",
+          "title": "12.3 ????, ???? ??, ??? ??"
         }
       ]
     },

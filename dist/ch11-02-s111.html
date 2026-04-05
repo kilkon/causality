@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘 | 인과효과 추론 (Causal Inference)</title>
+  <title>11.1 시간 순서와 역인과성 | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 인과효과 추론 강의를 위해 준비했습니다. 계속 수정중인 원고입니다" />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "ch11-02-s111", "title": "11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch11-02-s111.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "ch11-02-s111", "title": "11.1 시간 순서와 역인과성", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch11-02-s111.md"};</script>
 
 </head>
 <body>
@@ -298,97 +298,90 @@
             </section>
             
             <section class="sidebar-part">
-              <div class="sidebar-part-name">제3부 | 관측 연구에서의 편향과 그 구조</div>
-              <p class="sidebar-part-desc">관측 연구에서 발생하는 편향의 구조를 파악하고 무엇이 식별을 어렵게 만드는지 정리합니다.</p>
+              <div class="sidebar-part-name">?3? | ????? ?? ???? ???</div>
+              <p class="sidebar-part-desc">????? ? ????? ??? ????, ????????????????? ??? ???? ?????.</p>
               <ul class="sidebar-list">
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-01-covariate-control-limits.html">
                     <span class="sidebar-link-label">10</span>
-                    1 장의 핵심 항목
+                    측정, 관측, 결측의 문제
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-02-s101.html">
-                    
-                    10.1.1 통제(control)가 해결하지 못하는 경우 — 측정 불가 교란
+                    <span class="sidebar-link-label">10.1</span>
+                    측정오차와 분류오차
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-03-s102.html">
-                    
-                    10.1.2 과도한 통제(overcontrol): 매개변수 통제의 위험
+                    <span class="sidebar-link-label">10.2</span>
+                    결측자료의 구조: MCAR, MAR, MNAR
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-04-s103.html">
-                    
-                    10.1.3 동질성(homophily)과 인과 해석의 왜곡
-                  </a>
-                </li>
-                
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="collider_bias_magnitude_direction.html">
-                    <span class="sidebar-link-label">11</span>
-                    이동됨: 콜라이더 편향의 방향·크기
+                    <span class="sidebar-link-label">10.3</span>
+                    결측과 관측오류의 대응 전략
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch11-01-collider-bias.html">
                     <span class="sidebar-link-label">11</span>
-                    1 장의 핵심 항목
+                    시간, 동태성, 역인과성
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch11-02-s111.html" aria-current="page">
-                    
-                    11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘
+                    <span class="sidebar-link-label">11.1</span>
+                    시간 순서와 역인과성
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch11-03-s112.html">
-                    
-                    11.1.2 편향의 방향과 크기 — 수치 예시
+                    <span class="sidebar-link-label">11.2</span>
+                    사전값 통제, 동시성, 상호결정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch11-04-s113.html">
-                    
-                    11.1.3 선택 편향 · 출판 편향 · 건강한 노동자 효과와 콜라이더의 연결
+                    <span class="sidebar-link-label">11.3</span>
+                    누적처치, 지연효과, 동태적 인과효과
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch12-01-unobserved-confounding-limits.html">
                     <span class="sidebar-link-label">12</span>
-                    1 장의 핵심 항목
+                    간섭, 집행, 집계 수준의 문제
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch12-02-s121.html">
-                    
-                    12.1.1 미측 교란(unobserved confounding)의 DAG 표현
+                    <span class="sidebar-link-label">12.1</span>
+                    간섭과 spillover: SUTVA를 넘어
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch12-03-s122.html">
-                    
-                    12.1.2 관측 가능 조건에서의 식별 불가능성
+                    <span class="sidebar-link-label">12.2</span>
+                    정책집행의 이질성과 implementation heterogeneity
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch12-04-s123.html">
-                    
-                    12.1.3 민감도 분석의 필요성 — 이후(제5부·20장)에서 정식으로 다룬다
+                    <span class="sidebar-link-label">12.3</span>
+                    집계자료, 생태학적 오류, 다수준 맥락
                   </a>
                 </li>
                 </ul>
@@ -993,9 +986,9 @@
       
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">제3부 | 관측 연구에서의 편향과 그 구조 · </p>
-        <h1>11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘</h1>
-        <p class="description">이 절은 11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
+        <p class="breadcrumb">?3? | ????? ?? ???? ??? · 11.1</p>
+        <h1>11.1 시간 순서와 역인과성</h1>
+        <p class="description">결과가 원인을 만든 것처럼 보이는 역인과성 문제를 설명하고, 이를 진단하고 줄이는 전략을 정리한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1005,15 +998,24 @@
         
       </header>
       <section class="chapter-body">
-        <h1 id="1111-콜라이더-조건화가-편향을-유발하는-메커니즘">11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘</h1>
-<p>이 절은 <strong>11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘</strong>의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
-<h2 id="1111-콜라이더-조건화가-편향을-유발하는-메커니즘">11.1.1 콜라이더 조건화가 편향을 유발하는 메커니즘</h2>
-<p>이 절은 해당 주제의 <strong>식별 가정</strong>, <strong>추정 절차</strong>, <strong>해석 한계</strong>를 함께 제시한다. 핵심은 추정량 자체보다, 그 추정량이 어떤 반사실 질문에 대응하는지 명확히 하는 데 있다.</p>
-<p>실무에서는 대안 사양, 진단 그래프, 민감도 분석을 병행해 결과가 특정 모형 선택에 과도하게 의존하지 않는지 점검해야 한다.</p>
+        <h1 id="111-시간-순서와-역인과성">11.1 시간 순서와 역인과성</h1>
+<p>역인과성(reverse causality)은 결과가 원인에 영향을 주는데도, 분석에서 이를 반대로 읽는 문제다. 예를 들어 “건강한 사람이 더 많이 운동한다”는 관계를 “운동이 건강을 만든다”로 곧바로 읽을 수는 없다. 둘 다 일부는 맞을 수 있기 때문이다.</p>
+<p>가장 단순한 선형식으로 쓰면</p>
+<p>\[ Y = \beta D + \varepsilon \]</p>
+<p>를 추정하고 싶지만, 실제로는</p>
+<p>\[ D = \pi Y + \nu \]</p>
+<p>처럼 결과가 다시 처치에 영향을 줄 수 있다. 이 경우 \(D\) 와 \(\varepsilon\) 가 상관되어 OLS는 인과효과를 식별하지 못한다.</p>
+<h2 id="실제-사례-1-건강과-운동">실제 사례 1: 건강과 운동</h2>
+<p>운동이 건강을 개선한다는 가설은 매우 자연스럽지만, 동시에 건강한 사람이 운동할 가능성이 더 높다는 것도 사실이다. 단면자료에서 운동 빈도와 건강지표의 상관을 보면 긍정적 관계가 나타날 수 있지만, 그 관계가 모두 처치효과라고 말할 수는 없다. 건강 상태가 운동 선택을 바꾸는 역인과성이 존재하기 때문이다.</p>
+<h2 id="실제-사례-2-소득과-사교육">실제 사례 2: 소득과 사교육</h2>
+<p>사교육이 학업성취를 높일 수 있지만, 이미 성적이 높은 학생일수록 사교육에 더 투자될 수도 있다. 또는 성적이 낮아서 보충하려고 사교육에 더 참여할 수도 있다. 이런 경우 단순한 회귀의 부호 자체가 어느 방향으로 왜곡될지 불분명해진다.</p>
+<h2 id="해결-방법">해결 방법</h2>
+<ol><li>시간 순서를 더 선명하게 만드는 종단자료를 사용한다.</li><li>처치 이전의 값과 처치 이후의 값을 분리한다.</li><li>외생적 충격이나 제도변화 같은 식별전략을 도입한다.</li><li>event-study, panel, lag structure를 활용한다.</li></ol>
+<p>가장 중요한 원칙은 “관측된 상관이 어느 시점의 누구를 반영하는가”를 묻는 것이다. 그 질문 없이 인과효과를 읽으면 역인과성은 거의 피할 수 없다.</p>
       </section>
       <nav class="chapter-nav">
-        <a class="nav-prev" href="ch11-01-collider-bias.html">← 11 1 장의 핵심 항목</a>
-        <a class="nav-next" href="ch11-03-s112.html"> 11.1.2 편향의 방향과 크기 — 수치 예시 →</a>
+        <a class="nav-prev" href="ch11-01-collider-bias.html">← 11 시간, 동태성, 역인과성</a>
+        <a class="nav-next" href="ch11-03-s112.html">11.2 사전값 통제, 동시성, 상호결정 →</a>
       </nav>
     </article>
     
