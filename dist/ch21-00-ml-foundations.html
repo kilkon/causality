@@ -1016,8 +1016,122 @@
 <p>기계학습에서 자료를 나누는 이유는 모델이 훈련자료를 얼마나 잘 외웠는지가 아니라, 새로운 데이터에서 얼마나 잘 작동하는지 보기 위해서다. 가장 기본적인 분할은 다음과 같다.</p>
 <ul><li><strong>training set</strong>: 모델을 학습시키는 자료</li><li><strong>validation set</strong>: 하이퍼파라미터를 고르거나 모델을 비교하는 자료</li><li><strong>test set</strong>: 최종 일반화 성능을 평가하는 자료</li></ul>
 <p>이 분리는 매우 중요하다. 검증용 자료까지 반복적으로 들여다보면 사실상 그 자료에도 과적합하게 된다.</p>
+<figure class="figure">
+  <svg viewBox="0 0 920 190" role="img" aria-label="train, validation, test 자료분할의 시각적 설명">
+    <rect x="40" y="60" width="840" height="44" rx="22" fill="#f3e7da" stroke="#cfb397"/>
+    <rect x="40" y="60" width="500" height="44" rx="22" fill="#d4eadf" stroke="#7fa68d"/>
+    <rect x="540" y="60" width="180" height="44" fill="#faefc8" stroke="#c9b164"/>
+    <rect x="720" y="60" width="160" height="44" rx="22" fill="#dce9f8" stroke="#7fa1c9"/>
+    <text x="290" y="88" text-anchor="middle" font-size="24" fill="#204a33">Train</text>
+    <text x="630" y="88" text-anchor="middle" font-size="24" fill="#7c5a00">Validation</text>
+    <text x="800" y="88" text-anchor="middle" font-size="24" fill="#23466e">Test</text>
+    <text x="290" y="140" text-anchor="middle" font-size="18" fill="#385a46">모형 적합, 변수 선택, 손실 최소화</text>
+    <text x="630" y="140" text-anchor="middle" font-size="18" fill="#826600">튜닝, 모델 비교, 조기 종료</text>
+    <text x="800" y="140" text-anchor="middle" font-size="18" fill="#335c86">최종 성능의 1회 평가</text>
+  </svg>
+  <figcaption>같은 표본을 세 역할로 나누는 이유는 학습, 선택, 최종 평가를 분리해 일반화 성능을 과장하지 않기 위해서다.</figcaption>
+</figure>
+<h3 id="왜-굳이-세-조각으로-나누는가">왜 굳이 세 조각으로 나누는가</h3>
+<p>자료분할은 단지 계산 절차가 아니라 <strong>통계적 역할 분담</strong>이다. 훈련자료는 모형이 패턴을 배우는 공간이고, 검증자료는 여러 후보 중 무엇을 택할지 결정하는 공간이며, 테스트자료는 마지막에 한 번만 열어 보는 평가 공간이다. 세 집합을 섞어 쓰면 모형의 성능을 낙관적으로 보게 된다.</p>
+<p>이를 더 형식적으로 적으면, 예측 함수 \(f\)의 목표는 모집단 위험</p>
+<p>\[ R(f)=\mathbb{E}[L(Y,f(X))] \]</p>
+<p>을 낮추는 것이다. 그러나 우리가 실제로 최소화하는 것은 훈련자료에서의 경험위험</p>
+<p>\[ \hat R_{\text{train}}(f)=\frac{1}{n_{\text{train}}}\sum_{i \in \mathcal{I}_{\text{train}}} L(Y_i,f(X_i)) \]</p>
+<p>이다. 문제는 \(\hat R_{\text{train}}(f)\)가 충분히 작다고 해서 진짜 위험 \(R(f)\)도 작은 것은 아니라는 점이다. 훈련자료에서의 오차는 “얼마나 잘 외웠는가”를 반영할 수 있지만, 테스트자료의 오차는 “얼마나 잘 일반화하는가”를 더 잘 반영한다.</p>
+<h3 id="각-데이터셋의-역할">각 데이터셋의 역할</h3>
+<h4 id="train-set">train set</h4>
+<p>train set은 파라미터를 실제로 추정하는 곳이다. 선형회귀라면 계수 \(\beta\)를 적합하고, 트리라면 분할 규칙을 찾고, 신경망이라면 가중치를 경사하강법으로 갱신한다. 즉</p>
+<p>\[ \hat f_{\text{train}} = \arg\min_{f \in \mathcal{F}} \hat R_{\text{train}}(f) \]</p>
+<p>를 계산하는 단계다. 데이터가 많을수록 좋지만, 너무 많은 자유도를 가진 모형을 쓰면 훈련자료의 우연한 잡음까지 배우게 된다.</p>
+<h4 id="validation-set">validation set</h4>
+<p>validation set은 “학습”이 아니라 “선택”을 위한 자료다. 예를 들어</p>
+<ul><li>트리의 최대 깊이를 몇으로 할지</li><li>랜덤포레스트의 트리 수를 몇 개로 할지</li><li>정규화 강도를 얼마나 줄지</li><li>학습을 몇 epoch에서 멈출지</li></ul>
+<p>를 정할 때 사용한다. 즉 후보 모형 \(f_1,\dots,f_M\) 가운데</p>
+<p>\[ \hat m = \arg\min_{m \in \{1,\dots,M\}} \hat R_{\text{valid}}(f_m) \]</p>
+<p>을 선택하는 단계다. validation set은 “최종 성능을 재는 곳”이 아니라 “의사결정을 돕는 곳”이다. 따라서 validation 점수를 여러 번 들여다보며 튜닝하면, validation set도 사실상 train set처럼 사용하게 된다.</p>
+<h4 id="test-set">test set</h4>
+<p>test set은 연구자가 모델 구조, 하이퍼파라미터, 전처리 규칙을 모두 확정한 뒤 마지막에 한 번만 사용해야 한다. 이때 계산하는</p>
+<p>\[ \hat R_{\text{test}}(\hat f) = \frac{1}{n_{\text{test}}}\sum_{i \in \mathcal{I}_{\text{test}}} L(Y_i,\hat f(X_i)) \]</p>
+<p>가 우리가 보고하고 싶은 일반화 성능의 가장 정직한 근사치다. 만약 test set을 여러 번 들여다보며 다시 설계를 바꾸면 더 이상 test set이 아니다.</p>
+<h3 id="실제-연구에서의-분할-비율은-어떻게-정하는가">실제 연구에서의 분할 비율은 어떻게 정하는가</h3>
+<p>자주 쓰이는 비율은 <code>60-20-20</code>, <code>70-15-15</code>, <code>80-10-10</code> 등이다. 정답이 하나 있는 것은 아니다. 표본이 아주 크면 test set을 넉넉하게 확보해도 되지만, 표본이 작다면 validation과 test를 따로 떼는 것이 부담이 될 수 있다. 그래서 표본이 작을수록 단순한 hold-out보다 교차검증이 더 자주 쓰인다.</p>
+<p>정책평가 자료에서는 일반적인 iid 표본 분할만으로 충분하지 않은 경우도 많다. 예를 들어 학교, 병원, 지역 단위로 군집이 있으면 단위를 섞어 무작위 분할하기보다 <strong>군집 수준 분할</strong>을 해야 과도하게 낙관적인 성능평가를 피할 수 있다. 시계열 자료에서는 미래를 예측해야 하므로 뒤 시점을 test로 두는 <strong>시간순 분할</strong>이 필요하다.</p>
 <h3 id="교차검증cross-validation">교차검증(cross-validation)</h3>
 <p>표본이 크지 않을 때는 자료를 한 번만 나누는 대신 \(K\)-fold cross-validation을 많이 사용한다. 데이터를 \(K\)개 폴드로 나눈 뒤, 매번 한 폴드를 검증용으로 쓰고 나머지를 훈련에 써서 평균 성능을 계산한다. 이렇게 하면 표본을 더 효율적으로 쓰면서도 일반화 성능을 평가할 수 있다.</p>
+<figure class="figure">
+  <svg viewBox="0 0 920 300" role="img" aria-label="5-fold 교차검증의 시각적 설명">
+    <text x="40" y="34" font-size="22" fill="#6e2810">5-fold cross-validation</text>
+    <g font-size="18">
+      <text x="40" y="85" fill="#4b4b4b">1회차</text>
+      <text x="40" y="125" fill="#4b4b4b">2회차</text>
+      <text x="40" y="165" fill="#4b4b4b">3회차</text>
+      <text x="40" y="205" fill="#4b4b4b">4회차</text>
+      <text x="40" y="245" fill="#4b4b4b">5회차</text>
+    </g>
+    <g>
+      <rect x="140" y="62" width="120" height="26" fill="#faefc8" stroke="#c9b164"/>
+      <rect x="260" y="62" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="380" y="62" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="500" y="62" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="620" y="62" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="140" y="102" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="260" y="102" width="120" height="26" fill="#faefc8" stroke="#c9b164"/>
+      <rect x="380" y="102" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="500" y="102" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="620" y="102" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="140" y="142" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="260" y="142" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="380" y="142" width="120" height="26" fill="#faefc8" stroke="#c9b164"/>
+      <rect x="500" y="142" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="620" y="142" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="140" y="182" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="260" y="182" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="380" y="182" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="500" y="182" width="120" height="26" fill="#faefc8" stroke="#c9b164"/>
+      <rect x="620" y="182" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="140" y="222" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="260" y="222" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="380" y="222" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="500" y="222" width="120" height="26" fill="#d4eadf" stroke="#7fa68d"/>
+      <rect x="620" y="222" width="120" height="26" fill="#faefc8" stroke="#c9b164"/>
+    </g>
+    <text x="770" y="84" font-size="18" fill="#6a5600">노랑 = validation</text>
+    <text x="770" y="118" font-size="18" fill="#365744">초록 = training</text>
+    <text x="140" y="280" font-size="18" fill="#4b4b4b">각 폴드가 한 번씩 검증용으로 쓰이고, 성능을 평균낸다.</text>
+  </svg>
+  <figcaption>교차검증은 하나의 검증셋에 운이 좋게 맞거나 나쁘게 맞는 문제를 줄이고, 제한된 표본을 더 효율적으로 활용하게 해준다.</figcaption>
+</figure>
+<p>교차검증을 더 자세히 쓰면 다음과 같다. 전체 표본 인덱스를 \(\mathcal{I}_1,\dots,\mathcal{I}_K\)라는 \(K\)개 폴드로 나눈다. \(k\)번째 반복에서는 \(\mathcal{I}_k\)를 검증용으로 두고 나머지 \(\mathcal{I}_{-k}\)를 훈련용으로 쓴다. 그러면 각 반복의 검증 위험은</p>
+<p>\[ \hat R^{(k)} = \frac{1}{|\mathcal{I}_k|} \sum_{i\in \mathcal{I}_k} L\!\left(Y_i,\hat f^{(-k)}(X_i)\right) \]</p>
+<p>로 계산되고, 최종 CV 점수는</p>
+<p>\[ \hat R_{\text{CV}} = \frac{1}{K}\sum_{k=1}^K \hat R^{(k)} \]</p>
+<p>가 된다.</p>
+<p>이 방식의 직관은 단순하다. 검증셋을 한 번만 떼면 우연한 표본 구성에 따라 점수가 흔들릴 수 있는데, \(K\)-fold CV는 그 흔들림을 평균화한다. 그래서 표본이 중간 크기일 때는 single hold-out보다 더 안정적인 선택기준을 제공하는 경우가 많다.</p>
+<h4 id="k는-어떻게-정하는가">\(K\)는 어떻게 정하는가</h4>
+<p>실무에서는 \(K=5\) 또는 \(K=10\)이 가장 흔하다. \(K\)를 크게 하면 각 반복의 훈련자료가 많아져 편향은 줄어들 수 있지만, 계산량이 증가하고 분산이 꼭 줄어드는 것은 아니다. \(K=n\)인 leave-one-out cross-validation은 개념적으로는 매력적이지만 계산비용이 크고, 선택 기준이 생각보다 불안정할 수도 있다.</p>
+<h4 id="중첩-교차검증nested-cross-validation">중첩 교차검증(nested cross-validation)</h4>
+<p>하이퍼파라미터 선택과 최종 성능평가를 엄격히 분리하려면 nested CV를 쓸 수 있다. 바깥쪽 CV는 성능 평가용, 안쪽 CV는 튜닝용으로 사용한다. 이렇게 하면 validation 단계에서의 탐색이 최종 평가에 스며드는 문제를 더 줄일 수 있다. 계산량은 커지지만 작은 표본에서 모델 비교를 더 정직하게 하고 싶을 때 유용하다.</p>
+<h4 id="정책평가-데이터에서의-교차검증-주의점">정책평가 데이터에서의 교차검증 주의점</h4>
+<p>정책평가 데이터에서는 무작정 무작위 폴드를 나누면 안 되는 경우가 자주 있다. 예를 들어 같은 학교 학생이 여러 명 있는 자료, 같은 병원 환자가 반복 측정된 자료, 같은 지역의 연도별 패널자료에서는 관측치들이 서로 독립이 아니다. 이때 개인 단위 무작위 폴드를 쓰면 train과 validation에 사실상 같은 군집 정보가 동시에 들어가 성능이 부풀려질 수 있다. 따라서</p>
+<ul><li>학교·병원·지역 단위로 묶어 나누는 <strong>grouped CV</strong></li><li>시간을 보존하는 <strong>rolling/forward CV</strong></li><li>지역별 확산정책에 맞춘 <strong>block CV</strong></li></ul>
+<p>같은 방식이 더 적절할 수 있다.</p>
+<h3 id="자료분할과-부트스트랩은-어떻게-다른가">자료분할과 부트스트랩은 어떻게 다른가</h3>
+<p>자료분할과 부트스트랩은 둘 다 원자료를 여러 번 다룬다는 점에서 비슷해 보이지만 목적이 다르다.</p>
+<ul><li>자료분할과 교차검증의 핵심 목적: <strong>일반화 성능 평가와 모델 선택</strong></li><li>부트스트랩의 핵심 목적: <strong>표집 불확실성 근사와 안정성 평가</strong></li></ul>
+<p>자료분할은 일부 관측치를 의도적으로 “보지 않은 자료”로 남겨 두는 절차다. 반면 부트스트랩은 원자료에서 크기 \(n\)의 표본을 <strong>복원추출</strong>해 다시 만드는 절차다. 따라서 부트스트랩 표본에는 같은 관측치가 여러 번 들어갈 수 있고, 어떤 관측치는 아예 빠질 수도 있다.</p>
+<p>이를 식으로 쓰면 부트스트랩 \(b\)번째 표본은</p>
+<p>\[ \{Z_1^{<em>(b)},\dots,Z_n^{</em>(b)}\} \]</p>
+<p>처럼 원자료 \(\{Z_1,\dots,Z_n\}\)에서 복원추출로 구성된다. 이 표본마다 추정량 \(\hat\theta^{*(b)}\)를 계산해 그 분포를 본다. 즉 부트스트랩은 “표본을 다시 뽑았더라면 추정량이 얼마나 달라졌을까”를 모의실험하는 아이디어에 가깝다.</p>
+<h3 id="왜-둘을-함께-배워야-하는가">왜 둘을 함께 배워야 하는가</h3>
+<p>기계학습에서는 자료분할과 부트스트랩이 서로 다른 역할을 하면서도 자주 연결된다.</p>
+<p>첫째, <strong>bagging</strong>은 부트스트랩 표본마다 불안정한 학습기, 특히 트리를 적합한 뒤 이를 평균내는 방법이다. 여기서 부트스트랩은 분산을 줄이기 위한 학습 장치다.</p>
+<p>\[ \hat f_{\text{bag}}(x) = \frac{1}{B}\sum_{b=1}^B \hat f^{*(b)}(x) \]</p>
+<p>둘째, 부트스트랩으로 만든 각 학습기의 성능을 평가할 때는 여전히 out-of-bag 관측치나 별도의 검증자료가 필요할 수 있다. 즉 <strong>부트스트랩은 학습과 불확실성에 관한 도구이고, 자료분할은 평가와 선택에 관한 도구</strong>라고 이해하는 편이 정확하다.</p>
+<p>셋째, 인과추론으로 넘어가면 이 구분이 더 중요해진다. 예를 들어 DML의 cross-fitting은 자료분할을 이용해 nuisance 함수의 과적합이 최종 인과효과 추정에 직접 스며드는 것을 줄인다. 반면 causal forest나 bootstrap-based inference는 숲의 안정성이나 불확실성 평가와 더 가까운 문제를 다룬다. 즉 자료분할은 “정직한 평가와 직교화”에, 부트스트랩은 “안정성, 분산 추정, 앙상블”에 더 가까운 도구다.</p>
+<h3 id="실제-사례로-보는-차이">실제 사례로 보는 차이</h3>
+<p>예를 들어 지방정부가 취업지원정책의 성과를 예측하는 모델을 만든다고 하자. 연구자는 행정자료로 개인의 취업 여부를 예측하는 랜덤포레스트를 적합한다. 이때</p>
+<ul><li>train set은 트리를 학습시키는 데 쓰이고</li><li>validation set은 트리 수, 깊이, 최소 leaf 크기 등을 고르는 데 쓰이며</li><li>test set은 “이 모델이 새로운 지역이나 새로운 시점에서 얼마나 잘 맞는가”를 평가하는 데 쓰인다.</li></ul>
+<p>반면 부트스트랩은 같은 랜덤포레스트 내부에서 각 트리를 다르게 학습시키는 재료로 들어가거나, 최종 성능지표의 표집 변동성을 가늠하는 데 사용될 수 있다. 즉 같은 프로젝트 안에서도 자료분할과 부트스트랩은 서로 다른 질문에 답한다.</p>
 <h2 id="213-부트스트랩의-기본-아이디어">21.3 부트스트랩의 기본 아이디어</h2>
 <p>부트스트랩은 원자료에서 복원추출을 반복하여 통계량의 불확실성을 근사하는 방법이다. 데이터 \(Z_1,\dots,Z_n\)가 있을 때, 이를 다시 뽑은 부트스트랩 표본 \(Z_1^<em>,\dots,Z_n^</em>\)에서 같은 추정량을 반복 계산한다.</p>
 <p>\[ \hat\theta^{*(b)},\quad b=1,\dots,B. \]</p>
