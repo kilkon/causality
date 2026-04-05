@@ -41,6 +41,8 @@ description:
 
 - Griffith, G. J., Morris, T. T., Tudball, M. J., Herbert, A., Mancano, G., Pike, L., Sharp, G. C., Sterne, J. A. C., Palmer, T. M., Davey Smith, G., Tilling, K., Zuccolo, L., Davies, N. M., & Hemani, G. (2020). Collider bias undermines our understanding of COVID-19 disease risk and severity. *Nature Communications, 11*, Article 5749. https://doi.org/10.1038/s41467-020-19478-2
 
+- Ho, F. (2025). Regression adjustment for causal inference. *BMJ Medicine, 4*(1), e000816. https://doi.org/10.1136/bmjmed-2023-000816
+
 - Heckman, J. J., Ichimura, H., Smith, J., & Todd, P. E. (1998). Characterizing selection bias using experimental data. *Econometrica, 66*(5), 1017-1098. https://doi.org/10.2307/2999630
 
 - Heckman, J. J., Ichimura, H., & Todd, P. E. (1997). Matching as an econometric evaluation estimator: Evidence from evaluating a job training programme. *The Review of Economic Studies, 64*(4), 605-654. https://doi.org/10.2307/2971733
@@ -64,6 +66,8 @@ description:
 - Manski, C. F. (2013). *Public policy in an uncertain world: Analysis and decisions*. Harvard University Press.
 
 - Mill, J. S. (1974). *A system of logic, ratiocinative and inductive*. University of Toronto Press. (Original work published 1843)
+
+- Lourenço, L., Weber, L., Garcia, L., Ramos, V., & Souza, J. (2024). Machine learning algorithms to estimate propensity scores in health policy evaluation: A scoping review. *International Journal of Environmental Research and Public Health, 21*(11), 1484. https://doi.org/10.3390/ijerph21111484
 
 - Neyman, J. (1990). On the application of probability theory to agricultural experiments: Essay on principles. Section 9. *Statistical Science, 5*(4), 465-472. https://doi.org/10.1214/ss/1177012031 (Original work published 1923)
 
