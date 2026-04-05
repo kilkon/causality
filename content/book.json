@@ -152,7 +152,7 @@
     {
       "id": "part-2",
       "title": "제2부 | 실험과 내적 타당도",
-      "description": "무작위 실험을 인과추론의 기준점으로 이해하고 그 가정과 한계를 정리합니다.",
+      "description": "",
       "chapters": [
         {
           "slug": "ch06-01-randomization-identification",
@@ -243,7 +243,7 @@
     {
       "id": "part-3",
       "title": "제3부 | 관측자료와 현실 데이터의 복잡성",
-      "description": "관측자료가 왜 인과추론을 어렵게 만드는지, 측정·결측·시간·간섭·집계 수준의 문제를 중심으로 정리합니다.",
+      "description": "",
       "chapters": [
         {
           "slug": "ch10-01-covariate-control-limits",
@@ -322,7 +322,7 @@
     {
       "id": "part-4",
       "title": "제4부 | 조건부 독립과 준실험의 식별 전략",
-      "description": "조건부 독립, 도구변수, 회귀불연속, DID, 패널모형을 통해 관측 자료에서 식별을 시도하는 전략을 다룹니다.",
+      "description": "",
       "chapters": [
         {
           "slug": "ch13-01-regression-matching-ipw",
@@ -503,7 +503,7 @@
     {
       "id": "part-5",
       "title": "제5부 | 이질성 · 매개 · 강건성",
-      "description": "효과의 이질성, 매개경로, 민감도와 강건성 점검을 다룹니다.",
+      "description": "",
       "chapters": [
         {
           "slug": "ch18-00-cate-intro",
@@ -600,7 +600,7 @@
     {
       "id": "part-6",
       "title": "제6부 | 기계학습과 인과추론",
-      "description": "기계학습의 기본 도구와 인과추론의 결합 방법을 소개합니다.",
+      "description": "",
       "chapters": [
         {
           "slug": "ch21-00-ml-foundations",
@@ -643,7 +643,7 @@
     {
       "id": "part-7",
       "title": "제7부 | 박사 수준: 반모수 이론과 효율성",
-      "description": "영향함수, 효율성 경계, 부트스트랩과 부분식별의 고급 주제를 다룹니다.",
+      "description": "",
       "chapters": [
         {
           "slug": "ch22-01-influence-function-pathwise-derivative",
@@ -825,7 +825,7 @@
     {
       "id": "part-9",
       "title": "참고문헌",
-      "description": "이 책에서 직접 인용하거나 핵심적으로 참고한 문헌을 APA 스타일로 정리한다.",
+      "description": "",
       "chapters": [
         {
           "slug": "references",
