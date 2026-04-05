@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Homophily bias(동질성 편향) | 인과효과 추론 (Causal Inference)</title>
+  <title>4.7 Homophily bias(??? ??) | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 인과효과 추론 강의를 위해 준비했습니다. 계속 수정중인 원고입니다" />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "homophily_bias", "title": "Homophily bias(동질성 편향)", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\homophily_bias.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "homophily_bias", "title": "4.7 Homophily bias(??? ??)", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\homophily_bias.md"};</script>
 
 </head>
 <body>
@@ -183,6 +183,13 @@
                     4.6 충돌변수(collider) 편의의 방향과 크기
                   </a>
                 </li>
+                
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="homophily_bias.html" aria-current="page">
+                    <span class="sidebar-link-label">4.7</span>
+                    Homophily bias(??? ??)
+                  </a>
+                </li>
                 </ul>
             </section>
             
@@ -294,13 +301,6 @@
               <div class="sidebar-part-name">제3부 | 관측 연구에서의 편향과 그 구조</div>
               <p class="sidebar-part-desc">관측 연구에서 발생하는 편향의 구조를 파악하고 무엇이 식별을 어렵게 만드는지 정리합니다.</p>
               <ul class="sidebar-list">
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="homophily_bias.html" aria-current="page">
-                    <span class="sidebar-link-label">10</span>
-                    Homophily bias(동질성 편향)
-                  </a>
-                </li>
-                
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch10-01-covariate-control-limits.html">
                     <span class="sidebar-link-label">10</span>
@@ -993,8 +993,8 @@
       
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">제3부 | 관측 연구에서의 편향과 그 구조 · 10</p>
-        <h1>Homophily bias(동질성 편향)</h1>
+        <p class="breadcrumb">제1부 | 인과이론의 기본 개념 · 4.7</p>
+        <h1>4.7 Homophily bias(??? ??)</h1>
         <p class="description">Homophily bias in social network analysis는 사회연결망 분석에서 핵심적이면서도 자주 오해되는 편향 가운데 하나이다. 유사한 특성을 가진 행위자들끼리 서로 더 쉽게 연결되는 경향(homophily) 때문에, 관찰된 네트워크 위의 상관을 사회적 영향(social influence), 전염(contagion), 또는 또래효과(peer effects)로 잘못 해석하게 되는 문제를 가리킨다. 다시 말해, 사람들 사이의 유사성이 연결 때문에 생긴 것인지, 아니면 원래 유사한 사람들이 서로 연결되었기 때문인지를 구분하기 어려워지는 데서 오는 식별상의 편향이다.</p>
         
         <div class="editor-actions">
@@ -1005,7 +1005,7 @@
         
       </header>
       <section class="chapter-body">
-        <h1 id="homophily-bias동질성-편향">Homophily bias(동질성 편향)</h1>
+        <h1 id="47-homophily-bias-">4.7 Homophily bias(??? ??)</h1>
 <p><strong>Homophily bias in social network analysis</strong>는 사회연결망 분석에서 핵심적이면서도 자주 오해되는 편향 가운데 하나이다. <strong>유사한 특성을 가진 행위자들끼리 서로 더 쉽게 연결되는 경향(homophily)</strong> 때문에, 관찰된 네트워크 위의 상관을 <strong>사회적 영향(social influence)</strong>, <strong>전염(contagion)</strong>, 또는 <strong>또래효과(peer effects)</strong>로 잘못 해석하게 되는 문제를 가리킨다. 다시 말해, 사람들 사이의 유사성이 <strong>연결 때문에 생긴 것인지</strong>, 아니면 <strong>원래 유사한 사람들이 서로 연결되었기 때문인지</strong>를 구분하기 어려워지는 데서 오는 식별상의 편향이다.</p>
 <p>그래프·충돌변수 관점에서의 정식화는 Elwert &amp;amp; Winship(2014) Figure 12 및 Shalizi &amp;amp; Thomas(2011) 논의와 연결된다. <a href="selection_bias_identification.html#homophily-collider">선택편향 문서 §7.3</a>을 함께 보면 좋다.</p>
 <h2 id="1-homophily의-기본-개념">1. Homophily의 기본 개념</h2>
@@ -1095,8 +1095,8 @@
 <section class="callout note"><div class="callout-title">note</div><p>보충: <a href="collider_bias_magnitude_direction.html">충돌변수 편향의 방향·크기</a> · <a href="dag.html">DAG 보충(dag.html)</a></p></section>
       </section>
       <nav class="chapter-nav">
-        <a class="nav-prev" href="ch08-05-s084.html">← 8.4 현장실험과 자연실험의 위치</a>
-        <a class="nav-next" href="ch10-01-covariate-control-limits.html">10 1 장의 핵심 항목 →</a>
+        <a class="nav-prev" href="ch04-06-s045.html">←  4.6 충돌변수(collider) 편의의 방향과 크기</a>
+        <a class="nav-next" href="ch06-01-randomization-identification.html">6 1 장의 핵심 항목 →</a>
       </nav>
     </article>
     

@@ -140,6 +140,12 @@
           "source": "chapters/ch04-06-s045.md",
           "label": "",
           "title": "4.6 콜라이더(충돌) 편향의 방향·크기 — 문헌 개관"
+        },
+        {
+          "slug": "homophily_bias",
+          "source": "chapters/homophily_bias.md",
+          "label": "4.7",
+          "title": "4.7 Homophily bias(??? ??)"
         }
       ]
     },
@@ -239,12 +245,6 @@
       "title": "제3부 | 관측 연구에서의 편향과 그 구조",
       "description": "관측 연구에서 발생하는 편향의 구조를 파악하고 무엇이 식별을 어렵게 만드는지 정리합니다.",
       "chapters": [
-        {
-          "slug": "homophily_bias",
-          "source": "chapters/homophily_bias.md",
-          "label": "10",
-          "title": "Homophily bias(동질성 편향)"
-        },
         {
           "slug": "ch10-01-covariate-control-limits",
           "source": "chapters/ch10-01-covariate-control-limits.md",

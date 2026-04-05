@@ -1,9 +1,9 @@
 ---
-title: Homophily bias(동질성 편향)
+title: 4.7 Homophily bias(??? ??)
 description: Homophily bias in social network analysis는 사회연결망 분석에서 핵심적이면서도 자주 오해되는 편향 가운데 하나이다. 유사한 특성을 가진 행위자들끼리 서로 더 쉽게 연결되는 경향(homophily) 때문에, 관찰된 네트워크 위의 상관을 사회적 영향(social influence), 전염(contagion), 또는 또래효과(peer effects)로 잘못 해석하게 되는 문제를 가리킨다. 다시 말해, 사람들 사이의 유사성이 연결 때문에 생긴 것인지, 아니면 원래 유사한 사람들이 서로 연결되었기 때문인지를 구분하기 어려워지는 데서 오는 식별상의 편향이다.
 ---
 
-# Homophily bias(동질성 편향)
+# 4.7 Homophily bias(??? ??)
 
 **Homophily bias in social network analysis**는 사회연결망 분석에서 핵심적이면서도 자주 오해되는 편향 가운데 하나이다. **유사한 특성을 가진 행위자들끼리 서로 더 쉽게 연결되는 경향(homophily)** 때문에, 관찰된 네트워크 위의 상관을 **사회적 영향(social influence)**, **전염(contagion)**, 또는 **또래효과(peer effects)**로 잘못 해석하게 되는 문제를 가리킨다. 다시 말해, 사람들 사이의 유사성이 **연결 때문에 생긴 것인지**, 아니면 **원래 유사한 사람들이 서로 연결되었기 때문인지**를 구분하기 어려워지는 데서 오는 식별상의 편향이다.
 
