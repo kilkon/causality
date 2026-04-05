@@ -242,8 +242,8 @@
     },
     {
       "id": "part-3",
-      "title": "Part 3 | Data Complexity in Observational Studies",
-      "description": "This part focuses on measurement, missingness, temporal ordering, interference, implementation, and aggregation issues in observational data.",
+      "title": "제3부 | 관측자료와 현실 데이터의 복잡성",
+      "description": "관측자료가 왜 인과추론을 어렵게 만드는지, 측정·결측·시간·간섭·집계수준의 문제를 중심으로 정리합니다.",
       "chapters": [
         {
           "slug": "ch10-01-covariate-control-limits",
