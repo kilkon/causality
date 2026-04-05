@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>8.1.1 내적 타당도와 외적 타당도의 긴장 | 인과효과 추론 (Causal Inference)</title>
+  <title>8.1 내적 타당도와 외적 타당도의 긴장 | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 인과효과 추론 강의를 위해 준비했습니다. 계속 수정중인 원고입니다" />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "ch08-02-s081", "title": "8.1.1 내적 타당도와 외적 타당도의 긴장", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch08-02-s081.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "ch08-02-s081", "title": "8.1 내적 타당도와 외적 타당도의 긴장", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch08-02-s081.md"};</script>
 
 </head>
 <body>
@@ -256,35 +256,35 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-01-external-validity-transportability.html">
                     <span class="sidebar-link-label">8</span>
-                    1 장의 핵심 항목
+                    외적 타당도, 내적 타당도, 그리고 일반화의 문제
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-02-s081.html" aria-current="page">
-                    
-                    8.1.1 내적 타당도와 외적 타당도의 긴장
+                    <span class="sidebar-link-label">8.1</span>
+                    내적 타당도와 외적 타당도의 긴장
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-03-s082.html">
-                    
-                    8.1.2 표본 선택과 표적 모집단의 불일치
+                    <span class="sidebar-link-label">8.2</span>
+                    연구 표본과 목표 모집단의 불일치
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-04-s083.html">
-                    
-                    8.1.3 실험 결과의 외삽: 수송 프레임
+                    <span class="sidebar-link-label">8.3</span>
+                    실험 결과의 일반화와 transportability
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-05-s084.html">
-                    
-                    8.1.4 현장 실험(field experiment) · 자연 실험(natural experiment)의 위치
+                    <span class="sidebar-link-label">8.4</span>
+                    현장실험과 자연실험의 위치
                   </a>
                 </li>
                 </ul>
@@ -993,9 +993,9 @@
       
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">제2부 | 실험과 내적 타당도 · </p>
-        <h1>8.1.1 내적 타당도와 외적 타당도의 긴장</h1>
-        <p class="description">내적 타당도(internal validity)와 외적 타당도(external validity) 사이의 긴장은 “좋은 연구(내부) vs 현실적 연구(외적)”의 단순 선택이 아니다. (i) 무엇을 효과로 정의할 것인가(estimand), (ii) 그 효과를 식별하기 위해 어떤 설계·분석 제한을 두는가, (iii) 그 추정치를 어느 모집단·맥락으로 옮길 것인가(transport/generalization) 이 세 층위가 맞물려 생긴다. 무작위화는 (적절히 시행될 때) 처치 배정의 교란을 줄여 표본 내 인과효과(예: SATE) 식별을 돕지만, 연구 참여·선정까지 무작위화하지는 않는 경우가 대부분이므로 “실험 참가자·실험 환경에서의 효과”를 “정책 대상 모집단·현장”으로 곧바로 확장하지는 못한다. 최근 문헌은 estimand의 사전 명료화, 효능(efficacy)–효과(effectiveness)·설명적–실용적 연속선상에서의 설계 투명화, 표본선택·맥락 차이를 반영한 일반화·이식 분석(가중·표준화, selection diagram / transport formula)으로 긴장을 관리할 수 있음을 제시한다.</p>
+        <p class="breadcrumb">제2부 | 실험과 내적 타당도 · 8.1</p>
+        <h1>8.1 내적 타당도와 외적 타당도의 긴장</h1>
+        <p class="description">비교가능성을 높이는 설계가 왜 일반화 가능성을 자동으로 보장하지 않는지 설명한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1005,125 +1005,14 @@
         
       </header>
       <section class="chapter-body">
-        <h1 id="811-내적-타당도와-외적-타당도의-긴장">8.1.1 내적 타당도와 외적 타당도의 긴장</h1>
-<p>내적 타당도(internal validity)와 외적 타당도(external validity) 사이의 <strong>긴장</strong>은 “좋은 연구(내부) vs 현실적 연구(외적)”의 단순 선택이 아니다. (i) <strong>무엇을 효과로 정의할 것인가</strong>(estimand), (ii) 그 효과를 식별하기 위해 어떤 <strong>설계·분석 제한</strong>을 두는가, (iii) 그 추정치를 <strong>어느 모집단·맥락으로 옮길 것인가</strong>(transport/generalization) 이 세 층위가 맞물려 생긴다. 무작위화는 (적절히 시행될 때) <strong>처치 배정</strong>의 교란을 줄여 표본 내 인과효과(예: SATE) 식별을 돕지만, <strong>연구 참여·선정</strong>까지 무작위화하지는 않는 경우가 대부분이므로 “실험 참가자·실험 환경에서의 효과”를 “정책 대상 모집단·현장”으로 곧바로 확장하지는 못한다. 최근 문헌은 estimand의 사전 명료화, 효능(efficacy)–효과(effectiveness)·설명적–실용적 연속선상에서의 설계 투명화, 표본선택·맥락 차이를 반영한 <strong>일반화·이식 분석</strong>(가중·표준화, selection diagram / transport formula)으로 긴장을 관리할 수 있음을 제시한다.</p>
-<h2 id="811-내적-타당도와-외적-타당도의-긴장">8.1.1 내적 타당도와 외적 타당도의 긴장</h2>
-<p>정책·실무 관점의 합리적 방향은 “내부만 극대화”도 “외적만 기대”도 아니라, (i) <strong>적용 대상·맥락</strong>을 명시하고, (ii) 설계 단계부터 일반화 가능성을 고려(다지역·다맥락, 폭넓은 포함 기준, 측정·순응·간섭 관리), (iii) 분석 단계에서 일반화·이식 <strong>가정을 명시</strong>하고 <strong>민감도 분석</strong>을 포함하는 증거 생산 포트폴리오를 구축하는 것이다.</p>
-<h2 id="개념적-틀과-용어">개념적 틀과 용어</h2>
-<p>Shadish, Cook &amp;amp; Campbell가 정리한 일반화된 인과추론 관점에서는 내적 타당도를 “관찰된 공변(covariation)이 인과관계를 반영하는가”에 관한 추론의 타당성으로, 외적 타당도를 “그 인과관계가 사람(persons), 환경(settings), 처치(treatments), 측정(measurements)의 변이에 걸쳐 성립하는가”에 관한 타당성으로 본다 (<em>Experimental and Quasi-Experimental Designs for Generalized Causal Inference</em>). 고전적으로 Campbell &amp;amp; Stanley는 내·외적 타당도를 구분하고 설계별 무효화 요인(threats)을 체계화하였다.</p>
-<p>잠재결과 언어에서 평균 처치효과는</p>
-<p>\[ \mathrm{ATE}=\mathbb{E}\bigl[Y(1)-Y(0)\bigr] \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>로 쓰이지만, 실질적 질문은 <strong>“어느 집단에서의 ATE인가”</strong>이다. 표본선정 지시변수 \(S\in\{0,1\}\)를 두면, RCT가 흔히 식별·추정하는 대상은</p>
-<p>\[ \mathrm{SATE}=\mathbb{E}\bigl[Y(1)-Y(0)\mid S=1\bigr] \]</p></section>
-<p>이고, 정책이 원하는 것은 종종 표적 모집단에서의</p>
-<p>\[ \mathrm{TATE}=\mathbb{E}\bigl[Y(1)-Y(0)\mid S=0\bigr] \quad\text{또는}\quad \mathrm{PATE}=\mathbb{E}\bigl[Y(1)-Y(0)\bigr] \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>이다. \(P(X\mid S=1)\neq P(X\mid S=0)\)이고 효과 이질성(effect modification)이 있으면 SATE와 TATE는 체계적으로 달라질 수 있다.</p>
-<p>임상·규제 통계에서는 이런 “무엇을 추정할 것인가”를 <strong>estimand</strong>로 명시한다. ICH E9(R1)은 estimand를 임상 질문을 반영하는 처치효과의 정밀한 기술로 규정하고, estimand가 설계·수행·분석의 주요 결정요인이 되어야 함을 강조한다. 불순응이 있는 격려 설계에서는 LATE(국소 평균 처치효과)가 “도구변수에 반응하는 순응자(compliers)”에 한정된 estimand로 등장하며, 그 <strong>국소성</strong> 자체가 외적 타당도 논쟁의 축이 된다(Angrist–Imbens 계열).</p>
-<h2 id="연구문제-설정에서의-긴장">연구문제 설정에서의 긴장</h2>
-<p>연구문제 설정은 긴장의 <strong>발원지</strong>이다. 내적 타당도를 높이려는 설계는 보통 (i) 처치를 좁고 엄격하게 정의하고, (ii) 참여자를 제한하며, (iii) 측정·순응·환경을 통제해 “이상적 조건”을 만든다. 이는 <strong>무엇이 식별되는가</strong>를 바꾸고 연구문제를 <strong>국소화</strong>한다.</p>
-<ul><li><strong>모집단·맥락.</strong> 설명적(explanatory) 시험은 적격 기준을 강화해 순응이 낮을 집단을 배제하거나 동반 처치를 제한해 최대 효능을 보려 한다. 질문은 “현장 효과”가 아니라 “통제된 조건에서의 효과”로 이동한다.</li></ul>
-<ul><li><strong>처치 버전·구현.</strong> 실용적(pragmatic) 설계는 현장에 맡기는 구현 변동을 허용해 적용가능성을 높이려 한다. 반면 엄격 통제는 버전을 단일화해 내적 타당도는 올리나, 정책 확산 시 나타나는 다양한 구현을 대표하지 못할 수 있다.</li></ul>
-<ul><li><strong>Estimand 선택.</strong> ATE/ATT/LATE/ITT 등 선택이 외적 해석 범위를 스스로 제한한다. 단순 per-protocol 비교는 콜라이더·선택 구조 하에서 편향될 수 있어, ICH E9(R1)은 estimand에 정렬된 분석과 민감도를 요구한다. IV의 LATE는 추가 가정 없이 전체 ATE로 확대해석하기 어렵다.</li></ul>
-<p>요컨대 내적 타당도를 위한 통제는 (a) 모집단 축소, (b) 처치 단일화, (c) estimand 국소화로 연구문제 자체를 바꾼다. <strong>누구·무엇·어디·어떤 평균/하위집단</strong>을 문서화하지 않으면 내적 타당도 “성공”이 무리한 일반화로 이어질 수 있다.</p>
-<h2 id="연구결과-해석에서의-긴장">연구결과 해석에서의 긴장</h2>
-<p>해석 단계의 핵심 위험은 <strong>추정 범위를 넘는 주장(overclaiming)</strong>이며, 통계적 불확실성뿐 아니라 <strong>일반화 가정의 불확실성</strong>을 누락할 때 커진다.</p>
-<ul><li><strong>추론 범위(scope of inference).</strong> “표본 내(내부)”와 “표본 밖(외적)”을 분리해 서술해야 한다. RCT는 원칙적으로 <strong>해당 시험에 참여한 표본</strong>에서의 효과를 제공하며, 다른 집단으로의 확장에는 “대표적이다”는 선언이 아니라 효과변동성과 목표 모집단에서의 분포에 대한 논증이 필요하다.</li></ul>
-<ul><li><strong>이질성·효과변동성.</strong> 실험실과 현장의 감시·규범·과업·선택이 다르면 결과가 대응하지 않을 수 있다. Levitt &amp;amp; List 등이 논의한 대로, 기제와 맥락의 상호작용을 해석에 포함해야 한다.</li></ul>
-<ul><li><strong>표본선택 vs 일반화 오류.</strong> 전자는 “누가 들어왔는가”, 후자는 “들어온 집단·환경을 넘어 얼마나 확장했는가”이다. 처치 배정은 무작위여도 참여 메커니즘이 비무작위이면 외적 타당도는 별도 문제로 남는다.</li></ul>
-<ul><li><strong>불확실성 보고.</strong> SE·CI뿐 아니라 일반화·이식 가정(효과조절자, 모형, positivity)에 대한 민감도를 함께 제시하는 것이 권고된다. STROBE 국문 안내 등은 보고 부실이 일반화 가능성 평가를 방해할 수 있음을 직접 언급한다.</li></ul>
-<h2 id="자료수집실험설계에서의-긴장">자료수집·실험설계에서의 긴장</h2>
-<p>설계는 흔히 내부–외적 <strong>trade-off</strong>로만 그려지지만, 요인 조합에 따라 둘을 동시에 개선할 여지도 논의된다 (예: Loudon 등이 제한된 표본에서 실용적 vs 설명적 시험의 위험편향 차이를 명확히 보지 못했다고 보고한 선행—표본 확대 필요성은 별론). 아래는 설계 유형별로 자주 논의되는 긴장 구조를 요약한 표이다.</p>
-<table class="vt-table" aria-label="설계 유형과 내부·외적 타당도">
-  <thead>
-    <tr>
-      <th>설계·환경</th>
-      <th>내적 타당도에 유리한 점(및 위협)</th>
-      <th>외적 타당도에 유리한 점(및 위협)</th>
-      <th>완화 전략(예시)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>실험실·고통제 RCT</td>
-      <td>교란 통제·프로토콜 일관성으로 식별 용이(내부↑). 인공 맥락·선택된 참여자.</td>
-      <td>현장과의 차이로 일반화 실패 위험.</td>
-      <td>현장 실험·복제, 기제 중심 이론, 효과조절자 측정.</td>
-    </tr>
-    <tr>
-      <td>현장 RCT·실용적 시험</td>
-      <td>무작위화로 내부 유지 가능. 간섭·탈락·순응 등 운영 위협 증가 가능.</td>
-      <td>다양한 참여자·기관·결과 포함으로 적용가능성↑.</td>
-      <td>클러스터/다단계 배정, 순응·구현 충실도 측정, 사전분석계획.</td>
-    </tr>
-    <tr>
-      <td>다지역·다기관 RCT</td>
-      <td>사이트 이질로 복잡도↑(내부 위협 가능)하나 무작위·층화로 완화 가능.</td>
-      <td>설정(settings) 변이를 포함해 외적 논증에 직접 기여.</td>
-      <td>층화·블록, 사이트 고정/랜덤효과, 사전 하위집단 계획.</td>
-    </tr>
-    <tr>
-      <td>격려 설계·불순응</td>
-      <td>ITT는 배정 효과에 강하나 실제 수혜 효과는 별도; 단순 per-protocol은 편향 위험.</td>
-      <td>부분 참여 현실을 반영하나 LATE는 국소 효과로 확장 제약.</td>
-      <td>ITT+LATE 병행, 순응·탈락 구조 모형, 민감도.</td>
-    </tr>
-  </tbody>
-</table>
-<p>설계에서 특히 중요한 실무 이슈는 <strong>불순응</strong>, <strong>탈락·결측</strong>, <strong>간섭(interference / spillover)</strong>이다. 불순응은 정책 배정 효과(ITT)와 실제 처치 수혜를 분리한다. ICH E9(R1)은 per-protocol의 함정을 경고한다. 탈락이 처치·결과(또는 그 결정요인)에 동시에 영향을 받으면, 관측 표본에 조건화한 분석이 <strong>선택편향</strong>을 유도할 수 있다(4장·9장 DAG와 연결). 간섭은 SUTVA 위반이며, Hudgens &amp;amp; Halloran 등은 감염병 백신 등에서 간접효과·총효과 estimand와 설계를 논의한다—현장성을 높일수록 간섭이 잦아질 수 있다는 점에서 긴장이 생긴다. <strong>프리등록·사전분석계획(PAP)</strong>은 외적 타당도를 직접 “늘리기”보다 분석 자유도를 제한해 내부·보고 신뢰를 강화하고, 이후 일반화 논증의 출발점을 단단히 한다.</p>
-<svg width="520" height="120" viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, 'Malgun Gothic', sans-serif">
-    <defs>
-      <marker id="m81" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#37474f"/></marker>
-    </defs>
-    <text x="260" y="18" text-anchor="middle" font-size="11" fill="#455a64">탈락 \(M\)이 콜라이더: \(T \rightarrow M \leftarrow U \rightarrow Y\). \(M{=}0\)만 분석 시 비인과 경로 개방 가능</text>
-    <circle cx="70" cy="70" r="22" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/><text x="70" y="76" text-anchor="middle" font-size="12" font-weight="700">T</text>
-    <circle cx="210" cy="70" r="22" fill="#eceff1" stroke="#455a64" stroke-width="2"/><text x="210" y="76" text-anchor="middle" font-size="12" font-weight="700">M</text>
-    <circle cx="350" cy="70" r="22" fill="#fff8e1" stroke="#f57f17" stroke-width="2"/><text x="350" y="76" text-anchor="middle" font-size="11" font-weight="700">U</text>
-    <circle cx="470" cy="70" r="22" fill="#fce4ec" stroke="#8b2942" stroke-width="2"/><text x="470" y="76" text-anchor="middle" font-size="12" font-weight="700">Y</text>
-    <line x1="92" y1="70" x2="188" y2="70" stroke="#37474f" stroke-width="2" marker-end="url(#m81)"/>
-    <line x1="328" y1="70" x2="232" y2="70" stroke="#37474f" stroke-width="2" marker-end="url(#m81)"/>
-    <line x1="372" y1="70" x2="448" y2="70" stroke="#37474f" stroke-width="2" marker-end="url(#m81)"/>
-  </svg></section>
-<h2 id="인과추론-이론에서의-긴장-식별-vs-이식">인과추론 이론에서의 긴장: 식별 vs 이식</h2>
-<p>내적 타당도는 <strong>식별(identification)</strong>—관측 분포로부터 \(P(y\mid do(x))\) 또는 \(\mathbb{E}[Y\mid do(x)]\)를 복원할 수 있는가—에 가깝고, 외적 타당도는 <strong>일반화·이식(generalization / transportability)</strong>—다른 모집단·도메인에서의 개입 분포를 어떻게 구성할 것인가—에 해당한다.</p>
-<p>무작위화는 표본 내부에서 \(T\)와 잠재결과의 <strong>교환가능성(exchangeability)</strong>을 제공하지만, 표본선정 \(S\)가 비무작위인 층위는 별개다. 관찰연구에서는 \((Y(1),Y(0))\perp T\mid X\) 같은 조건부 무시 가능성이 필요하며, Rosenbaum &amp;amp; Rubin의 성향점수는 그 조정 도구로 이해된다. SCM에서 백도어 기준은 \(X\)의 후손이 아닌 공변량 집합이 백도어 경로를 차단하면 조정 가능함을 말한다. 그러나 외적 타당도는 백도어만으로 끝나지 않는다: 같은 함수형 인과량이라도 도메인이 바뀌면 값이 달라질 수 있다.</p>
-<p>Bareinboim &amp;amp; Pearl의 <strong>transportability</strong>는 소스 도메인의 실험 정보와 타깃 도메인의 관측 정보를 결합하는 조건과 알고리즘을 제시한다. selection diagram으로 도메인 차이를 표기하고, 전형적인 transport formula는 다음과 같은 표준화 형태로 쓰인다:</p>
-<p>\[ P^<em>(y\mid do(x))=\sum_z P(y\mid do(x),z)\,P^</em>(z), \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>여기서 \(^*\)는 타깃 분포이다. 이는 “\(z\)로 층화한 효과는 소스에서 재사용하고, 타깃에서는 \(z\)의 주변분포만 다르다”는 강한 불변성 가정을 드러낸다.</p>
-<svg width="520" height="140" viewBox="0 0 520 140" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, 'Malgun Gothic', sans-serif">
-    <defs>
-      <marker id="m82" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#37474f"/></marker>
-    </defs>
-    <text x="260" y="20" text-anchor="middle" font-size="11" fill="#455a64">도메인 선택 \(S\)가 공변량 \(X\)의 분포를 바꾸되, \(X\!\to\!Y\), \(T\!\to\!Y\) 구조는 공유된다는 개념(요약)</text>
-    <circle cx="90" cy="85" r="24" fill="#fff8e1" stroke="#f57f17" stroke-width="2"/><text x="90" y="91" text-anchor="middle" font-size="12" font-weight="700">S</text>
-    <circle cx="230" cy="85" r="24" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/><text x="230" y="91" text-anchor="middle" font-size="12" font-weight="700">X</text>
-    <circle cx="380" cy="55" r="22" fill="#eceff1" stroke="#455a64" stroke-width="2"/><text x="380" y="61" text-anchor="middle" font-size="12" font-weight="700">T</text>
-    <circle cx="380" cy="115" r="22" fill="#fce4ec" stroke="#8b2942" stroke-width="2"/><text x="380" y="121" text-anchor="middle" font-size="12" font-weight="700">Y</text>
-    <line x1="114" y1="85" x2="206" y2="85" stroke="#37474f" stroke-width="2" marker-end="url(#m82)"/>
-    <line x1="252" y1="78" x2="360" y2="62" stroke="#37474f" stroke-width="2" marker-end="url(#m82)"/>
-    <line x1="252" y1="92" x2="360" y2="108" stroke="#37474f" stroke-width="2" marker-end="url(#m82)"/>
-    <line x1="380" y1="77" x2="380" y2="93" stroke="#37474f" stroke-width="2" marker-end="url(#m82)"/>
-  </svg></section>
-<p>일반화 문헌에서는 참여확률 \(\pi(x)=P(S=1\mid X=x)\)를 추정해 trial 표본을 타깃 분포로 재가중하는 IPSW류 절차를 논의한다. 조건부 효과 \(\tau(x)=\mathbb{E}[Y\mid T{=}1,S{=}1,X{=}x]-\mathbb{E}[Y\mid T{=}0,S{=}1,X{=}x]\)를 타깃 \(X\) 분포에 대해 적분하면</p>
-<p>\[ \mathrm{TATE}=\mathbb{E}_{X\sim P^*}\bigl[\tau(X)\bigr] \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>형태로 표현할 수 있다. 전제에는 \(X\)를 조건화했을 때 표본선택이 잠재결과와 독립이라는 측면의 가정과 trial–타깃 간 <strong>positivity(겹침)</strong>가 포함된다. 선택편향은 “외적 문제”로만 오해되기 쉬우나, 위 DAG처럼 탈락이 콜라이더가 되면 <strong>내부</strong> 식별도 훼손될 수 있다. 요약하면, 내적 타당도는 그래프 안에서 경로를 차단해 \(P(y\mid do(x))\)를 추정하는 문제이고, 외적 타당도는 selection diagram 하에서 \(P^*(y\mid do(x))\)를 구성하는 문제이며, 후자를 전자만으로 대체할 수 없다는 점이 이론적 긴장의 핵심이다.</p>
-<h2 id="정책적-함의와-권고">정책적 함의와 권고</h2>
-<ul><li><strong>Estimand-first.</strong> 누구에게, 어떤 중재(버전 포함), 어떤 결과·시점, 어떤 시행 맥락에서, 불순응·탈락·간섭을 어떻게 다룰지가 설계·분석·해석을 지배한다(ICH E9(R1)과 정합).</li></ul>
-<ul><li><strong>설계 단계의 외적 목표.</strong> 실용적 시험은 임상적으로 의미 있는 비교, 다양한 참여, 이질적 환경, 폭넓은 결과를 특징으로 논의된다. PRECIS-2 등은 적용가능성 차원의 설계 점검 언어를 제공한다(내적 타당도는 별도 평가 필요).</li></ul>
-<ul><li><strong>정량적 일반화·이식 + 가정·민감도.</strong> sampling score/IPSW는 “두 번째 다리”를 제공하나, 구조에 따라 이식이 원천적으로 불가한 경우도 있다. 보고서에는 positivity, 효과조절자 측정 한계, 모형 의존성, 시나리오 민감도를 함께 두는 것이 타당하다.</li></ul>
-<ul><li><strong>국내·규제 맥락.</strong> AGREE II 한국어판 등은 지침 질을 비뚤림 평가뿐 아니라 권고의 내·외적 타당도·적용가능성과 연결한다. STROBE 국문 설명과 맞물려, 보고 요건이 일반화 판단에 필요한 정보를 담도록 설계되어야 한다.</li></ul>
-<p>종합하면, 이 긴장은 “한쪽을 포기하는 필연적 교환”이라기보다 연구문제·estimand 명료화, 설계로 적용가능성 확보, 이식·일반화 가정의 정량화·공개, 보고·재현 장치로 신뢰를 고정하는 방식으로 <strong>관리</strong>되어야 한다.</p></section>
-<p>summary</p>
-<p>핵심 요약</p>
-<ul><li>긴장은 estimand·설계 제한·transport/generalization의 세 층위가 겹친 결과다.</li></ul>
-<ul><li>무작위화는 배정 교란을 줄이나 참여·선정 비무작위는 외적 타당도를 자동으로 주지 않는다.</li></ul>
-<ul><li>SATE·TATE·PATE·LATE 등 <strong>어느 평균</strong>인지 먼저 밝히고, 해석 범위를 내부/외적으로 분리해 서술한다.</li></ul>
-<ul><li>식별(backdoor 등)과 이식(selection diagram, transport formula, 재가중)은 연속적이나 동일하지 않다.</li></ul>
-<ul><li>불순응·탈락·간섭·PAP은 설계·보고 단계에서 긴장을 완화하거나 신뢰를 고정하는 실무 축이다.</li></ul>
-<section class="callout note"><div class="callout-title">note</div></section>
+        <h1 id="81-내적-타당도와-외적-타당도의-긴장">8.1 내적 타당도와 외적 타당도의 긴장</h1>
+<p>내적 타당도와 외적 타당도는 모두 중요하지만, 실제 연구설계에서는 종종 서로 다른 방향의 압력을 만든다. 엄격한 참가 기준, 통제된 환경, 제한된 실행 조건은 비교가능성을 높여 표본 안의 인과효과 해석을 강하게 만든다. 그러나 바로 그 이유 때문에 결과를 더 넓은 현실 세계로 옮겨 읽기는 어려워질 수 있다.</p>
+<p>예를 들어 특정 도시의 저소득층 가구만 포함한 에너지 보조금 실험은 표본 안에서는 매우 설득력 있는 ITT를 줄 수 있다. 하지만 이 결과를 곧바로 전국 가구 전체의 정책효과로 읽는 것은 다른 문제다. 지역의 기후, 에너지 가격, 행정 집행력, 가구구성이 다르면 효과도 달라질 수 있기 때문이다.</p>
+<p>따라서 내적 타당도와 외적 타당도는 대체 관계라기보다 질문이 다르다. 전자는 “이 연구 안에서 인과적으로 말할 수 있는가”, 후자는 “그 결과를 어디까지 옮겨 말할 수 있는가”를 묻는다.</p>
       </section>
       <nav class="chapter-nav">
-        <a class="nav-prev" href="ch08-01-external-validity-transportability.html">← 8 1 장의 핵심 항목</a>
-        <a class="nav-next" href="ch08-03-s082.html"> 8.1.2 표본 선택과 표적 모집단의 불일치 →</a>
+        <a class="nav-prev" href="ch08-01-external-validity-transportability.html">← 8 외적 타당도, 내적 타당도, 그리고 일반화의 문제</a>
+        <a class="nav-next" href="ch08-03-s082.html">8.2 연구 표본과 목표 모집단의 불일치 →</a>
       </nav>
     </article>
     

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>8.1.2 표본 선택과 표적 모집단의 불일치 | 인과효과 추론 (Causal Inference)</title>
+  <title>8.2 연구 표본과 목표 모집단의 불일치 | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 인과효과 추론 강의를 위해 준비했습니다. 계속 수정중인 원고입니다" />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "ch08-03-s082", "title": "8.1.2 표본 선택과 표적 모집단의 불일치", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch08-03-s082.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "ch08-03-s082", "title": "8.2 연구 표본과 목표 모집단의 불일치", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch08-03-s082.md"};</script>
 
 </head>
 <body>
@@ -256,35 +256,35 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-01-external-validity-transportability.html">
                     <span class="sidebar-link-label">8</span>
-                    1 장의 핵심 항목
+                    외적 타당도, 내적 타당도, 그리고 일반화의 문제
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-02-s081.html">
-                    
-                    8.1.1 내적 타당도와 외적 타당도의 긴장
+                    <span class="sidebar-link-label">8.1</span>
+                    내적 타당도와 외적 타당도의 긴장
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-03-s082.html" aria-current="page">
-                    
-                    8.1.2 표본 선택과 표적 모집단의 불일치
+                    <span class="sidebar-link-label">8.2</span>
+                    연구 표본과 목표 모집단의 불일치
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-04-s083.html">
-                    
-                    8.1.3 실험 결과의 외삽: 수송 프레임
+                    <span class="sidebar-link-label">8.3</span>
+                    실험 결과의 일반화와 transportability
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch08-05-s084.html">
-                    
-                    8.1.4 현장 실험(field experiment) · 자연 실험(natural experiment)의 위치
+                    <span class="sidebar-link-label">8.4</span>
+                    현장실험과 자연실험의 위치
                   </a>
                 </li>
                 </ul>
@@ -993,9 +993,9 @@
       
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">제2부 | 실험과 내적 타당도 · </p>
-        <h1>8.1.2 표본 선택과 표적 모집단의 불일치</h1>
-        <p class="description">관찰연구에서 추정되는 것은 “모든 국민”이 아니라 연구에 들어온 집단에서 정의된 인과량이다. 표적 모집단(정책·임상에서 실제로 개입을 적용하려는 집단)과 연구 표본이 다르면, 같은 분석 절차라도 다른 estimand를 복원하거나, 표본에서의 연관을 목표 모집단의 ATE로 오인할 위험이 생긴다. 이 절은 잠재결과·선택 지시변수로 불일치를 정식화하고, 해석 오류로 문서화된 사례와 연결한다(8.1.1의 SATE·TATE 논의와 이어짐).</p>
+        <p class="breadcrumb">제2부 | 실험과 내적 타당도 · 8.2</p>
+        <h1>8.2 연구 표본과 목표 모집단의 불일치</h1>
+        <p class="description">연구 표본에서 추정된 효과와 정책이 적용될 모집단의 효과가 왜 달라질 수 있는지를 설명한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1005,58 +1005,17 @@
         
       </header>
       <section class="chapter-body">
-        <h1 id="812-표본-선택과-표적-모집단의-불일치">8.1.2 표본 선택과 표적 모집단의 불일치</h1>
-<p>관찰연구에서 추정되는 것은 “모든 국민”이 아니라 <strong>연구에 들어온 집단</strong>에서 정의된 인과량이다. 표적 모집단(정책·임상에서 실제로 개입을 적용하려는 집단)과 연구 표본이 다르면, 같은 분석 절차라도 <strong>다른 estimand</strong>를 복원하거나, 표본에서의 연관을 <strong>목표 모집단의 ATE</strong>로 오인할 위험이 생긴다. 이 절은 잠재결과·선택 지시변수로 불일치를 정식화하고, 해석 오류로 문서화된 사례와 연결한다(8.1.1의 SATE·TATE 논의와 이어짐).</p>
-<h2 id="812-표본-선택과-표적-모집단의-불일치">8.1.2 표본 선택과 표적 모집단의 불일치</h2>
-<h2 id="인과효과-측정에서-누구의-효과인가">인과효과 측정에서 “누구의 효과”인가</h2>
-<p>연구 참여(또는 자료 접근 가능성)를 나타내는 지시변수 \(S\in\{0,1\}\)를 두자. \(S=1\)이면 연구 표본에 포함된다. 처치 \(T\)와 결과 \(Y\)에 대한 <strong>정책·임상 관심</strong>은 흔히 표적 모집단에서의 평균 효과이다. 예를 들어 전 국민 또는 특정 자격 집단에서</p>
-<p>\[ \tau_{\mathrm{target}}=\mathbb{E}\bigl[Y(1)-Y(0)\bigr] \quad\text{또는}\quad \mathbb{E}\bigl[Y(1)-Y(0)\mid G=g\bigr] \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>와 같은 양이다. 그러나 관측 표본에서 식별·추정되는 것은 조건부로</p>
-<p>\[ \tau_{\mathrm{study}}=\mathbb{E}\bigl[Y(1)-Y(0)\mid S=1\bigr] \]</p></section>
-<p>에 가까운 양(또는 그 하위집단 ATT/LATE 등)인 경우가 많다. \(\tau_{\mathrm{study}}\neq \tau_{\mathrm{target}}\)이 될 수 있는 대표 이유는 다음 두 가지이다.</p>
-<ul><li><strong>공변량 분포의 차이.</strong> \(P(X\mid S=1)\neq P(X)\)이면, 같은 조건부 효과 함수 \(\tau(x)=\mathbb{E}[Y(1)-Y(0)\mid X=x]\)를 가정해도 주변 평균은 다르다:</li></ul>
-<p>\(\mathbb{E}[\tau(X)\mid S=1]\neq \mathbb{E}[\tau(X)]\).</p>
-<ul><li><strong>효과 이질성(effect modification).</strong> \(\tau(x)\)가 \(x\)에 따라 변하면 분포 차이가 곧 평균 효과 차이로 이어진다. “표본에서의 ATE”를 “모집단 ATE”로 읽는 것은 별도 가정 없이는 정당화되지 않는다.</li></ul>
-<p>무작위 배정이 \(T\)와 \(Y(t)\)의 교란을 표본 <em>내부</em>에서 제거해도, <strong>누가 \(S=1\)</strong>에 들어왔는지는 다른 층위이다. 관찰연구에서 종종 \(T\) 자체가 “치료를 받을 사람”의 선택과 결합되어 있으면, 표본 정의와 처치 선택이 동시에 비무작위가 되어 \(\tau_{\mathrm{study}}\)의 해석이 더욱 좁아진다(성향점수·IV 등은 <em>그 표본 안에서의</em> 식별을 돕는 도구일 뿐, 표본–모집단 불일치를 소멸시키지는 않는다).</p>
-<h2 id="표본모집단-불일치를-다루는-식별-스케치">표본–모집단 불일치를 다루는 식별 스케치</h2>
-<p>이상화하면, 표본에서 \(\tau(x)\)를 일관추정할 수 있고 다음이 성립한다고 가정하자:</p>
-<p>\[ (Y(1),Y(0))\perp S \mid X,\qquad P(S=1\mid X=x)&gt;0 \ \Rightarrow\ P^*(X=x)&gt;0 \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>(표본 선택이 \(X\)를 조건으로 할 때 잠재결과와 독립이고, 타깃 분포 \(P^*\)와 겹침이 있다.) 그러면 표적 모집단에서의 평균은 표준화·재가중으로</p>
-<p>\[ \mathbb{E}_{X\sim P^*}\bigl[\tau(X)\bigr] \]</p></section>
-<p>형태를 목표로 삼을 수 있다(8.1.1·이후 수송 절의 transport formula·IPSW와 연결). 실무에서 어려운 점은 (i) \(X\)에 담기지 않은 선택 메커니즘 \(U\)가 \(S,T,Y\)에 동시에 관여하는 경우, (ii) 타깃 분포 \(P^*(X)\)를 정의·추정하는 자료가 부족한 경우이다. 이때 “연구 결과를 그대로 정책 효과로 번역”하는 해석은 <strong>과대 주장(overclaiming)</strong>이 된다.</p>
-<h2 id="관찰연구-사례-불일치가-해석-문제로-드러난-경우">관찰연구 사례: 불일치가 해석 문제로 드러난 경우</h2>
-<h4 id="1-폐경-후-호르몬-요법hrt과-심혈관-위험">1) 폐경 후 호르몬 요법(HRT)과 심혈관 위험</h4>
-<p>1980–90년대 여러 <strong>관찰 코호트</strong>(예: 간호사 건강 연구 <em>Nurses’ Health Study</em> 등)는 에스트로겐·프로게스틴 복용과 낮은 관상동맥질환 위험의 <strong>연관</strong>을 보고했다. 이후 무작위 시험(Women’s Health Initiative 등)과 재분석에서는 적응증·제형·시점에 따라 위험 프로파일이 달라질 수 있음이 밝혀졌고, 관찰연구에서 보이던 “보호 효과”는 <strong>건강 상태·의료 이용·순응(healthy user bias, confounding by indication)</strong> 등으로 강하게 뒤틀릴 수 있음이 널리 인정되었다.</p>
-<p><strong>인과 해석 측면.</strong> 관찰 표본에서 추정된 연관은 “HRT를 선택해 복용하는 <em>특정 하위집단</em>”에서의 비교에 가깝고, 정책 질문인 “무작위로 HRT를 배정했을 때 전체(또는 표적) 폐경 여성에서의 평균 효과”와 동일한 estimand가 아니다. 연구·언론에서 이를 “모든 폐경 여성에게 심혈관 이득” 수준으로 일반화한 것은 <strong>표적 모집단과 estimand의 혼동</strong> 사례로 자주 인용된다.</p>
-<h4 id="2-covid-19-초기-확진입원-코호트와-치명률">2) COVID-19 초기 확진·입원 코호트와 치명률</h4>
-<p>팬데믹 초기 다수 국가에서 검사·입원이 <strong>증상·중증도에 따라 선별</strong>되었다. 이때 병원 기반 또는 확진자만 모은 코호트의 사망 비율(CFR)을 “일반 인구의 감염 치명률(IFR)” 또는 무증상 포함 전체 위험으로 <strong>직접 해석</strong>한 보도·추정이 나타났다.</p>
-<p><strong>인과·예측 측면.</strong> \(S=1\)은 “검사·의료 시스템에 들어온 사람”에 가깝고, 감염 \(T\) 또는 중증도와 \(S\)가 강하게 연관되면 표본은 인구와 극단적으로 다르다. 병원 코호트에서의 사망 비율은 “입원·검사 선별된 집단에서의 조건부 위험”에 가깝고, 전 국민 대상 개입·자원 배분을 위한 baseline 위험으로 바꿔 쓰면 <strong>표본–모집단 불일치로 인한 수치 왜곡</strong>이 된다. 이후 표본 확대·무작위 항체 조사·메타분석 등으로 IFR 범위가 재정렬된 것은 “어떤 \(S\)에서 정의된 양인지”를 분리한 결과이다.</p>
-<h4 id="3-프레이밍함framingham-위험-점수의-외삽">3) 프레이밍함(Framingham) 위험 점수의 외삽</h4>
-<p><strong>Framingham Heart Study</strong>를 기반으로 한 장기 코호트 연구에서 개발된 심혈관질환 <strong>발생 위험</strong> 예측은, 통상 다음과 같은 공변량 벡터에 의존하는 함수로 요약된다.</p>
-<p>\[ \mathrm{Risk}= f(\text{age},\ \text{sex},\ \text{blood pressure},\ \text{cholesterol},\ \text{smoking},\ \text{diabetes}) \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>실무에서는 이 \(f\)가 <strong>Cox 비례위험(proportional hazards) 모형</strong>이나 <strong>로지스틱 회귀</strong>(일정 기간 내 사건 여부) 형태로 추정되는 경우가 많다. 핵심 구성요소는 세 가지로 정리할 수 있다.</p>
-<ul><li><strong>입력 공변량 \(X\)</strong>: 연령, 성별, 혈압, 콜레스테롤, 흡연, 당뇨 등 위 식에 해당하는 예측 변수.</li></ul>
-<ul><li><strong>회귀계수 \(\beta\)</strong>: 각 \(X\)가 위험(또는 로그 위험·로그 오즈)에 미치는 방향·크기를 나타내는 추정량으로, <em>개발 코호트</em>에서 적합된다.</li></ul>
-<ul><li><strong>기저 위험(baseline hazard) \(h_0(t)\)</strong> 또는 <strong>절편(intercept)</strong>: Cox에서는 시간에 따른 기저 위험 곡선, 로지스틱에서는 사건 로그 오즈의 기준 수준으로, 모집단의 <em>절대 위험 수준</em>을 고정하는 층이다.</li></ul>
-<p>즉 임상에서 쓰는 “프레이밍함 점수”는 \(\beta\)와 기저 위험·절편이 <strong>한 번에 묶인</strong> 예측 규칙이며, 외삽 시에는 계수만이 아니라 <strong>기저 위험·\(X\)의 주변분포</strong>가 표적 모집단과 맞는지까지 함께 묻게 된다.</p>
-<p>원 개발 코호트는 <strong>지역·인종 구성이 제한적</strong>이었다. 동일 \(\beta\)·동일 보정 절차를 다른 인종·지역·사회경제 집단에 적용할 때 과소·과대 예측이 보고되어, <strong>재교정(recalibration)</strong>·집단별 검증이 권고되었다.</p>
-<p><strong>인과와의 연결.</strong> 이는 전형적인 “처치 효과”라기보다 <strong>예측·위험 스코어의 외적 타당도</strong> 문제이나, 구조는 같다: 개발 표본에서의 \(\mathbb{E}[Y\mid X]\) 또는 위험 함수가 표적 모집단의 \(X\) 분포·기저 위험과 맞지 않으면, 같은 공식도 다른 모집단에서는 <strong>다른 양</strong>을 가리킨다. 정책·임상에서 “프레이밍함 점수 = 보편적 진실”로 읽은 경우 재현 실패·불신이 발생했다.</p></section>
-<p>note</p>
-<p><strong>공통 교훈.</strong> 세 사례 모두 “분석이 틀렸다”기보다 <strong>보고된 수치가 어떤 모집단·어떤 선택 규칙 \(S\) 아래의 estimand인지</strong>가 불명확한 채 표적 질문으로 옮겨졌을 때 해석 문제가 커진다. 관찰연구 보고서(STROBE 등)에서 참여율·선정 기준·외삽 한계를 요구하는 이유와 맞닿아 있다.</p>
-<section class="callout note"><div class="callout-title">note</div><h2 id="실무-점검">실무 점검</h2>
-<ul><li>추정 목표를 문장으로 적을 때 <strong>“\(S=1\)인 사람들 가운데서…”</strong>를 빼도 여전히 참인지 확인한다.</li></ul>
-<ul><li>가능하면 표적 모집단 자료(등록·인구조사·다른 설문)와 \(X\) 분포를 비교하고, 겹침·공변량 공백을 기록한다.</li></ul>
-<ul><li>일반화·재가중을 쓸 경우 사용한 가정(조건부 선택 무시 가능성, positivity)을 본문에 명시하고 민감도를 제시한다.</li></ul></section>
-<p>summary</p>
-<p>핵심 요약</p>
-<ul><li>연구 표본(\(S=1\))에서의 평균 인과효과와 표적 모집단의 ATE는 효과 이질성·\(X\) 분포 차이 때문에 다를 수 있다.</li></ul>
-<ul><li>내부 식별(교란 통제 등)과 표본–모집단 일치는 별개; 성향점수·회귀는 표본 내 편향을 줄이는 데 초점이 있다.</li></ul>
-<ul><li>HRT 관찰연구 일반화, COVID 초기 병원·검사 코호트 치명률 해석, Framingham 점수 외삽은 대표적인 “estimand·모집단 혼동” 사례이다.</li></ul>
-<section class="callout note"><div class="callout-title">note</div></section>
+        <h1 id="82-연구-표본과-목표-모집단의-불일치">8.2 연구 표본과 목표 모집단의 불일치</h1>
+<p>외적 타당도 문제의 핵심은 연구 표본과 목표 모집단이 다를 수 있다는 점이다. 효과가 이질적이라면, 같은 방법으로 정확하게 추정된 효과라도 누구에게 평균을 냈느냐에 따라 값이 달라진다.</p>
+<p>\[ \tau(x)=\mathbb{E}[Y(1)-Y(0)\mid X=x] \]</p>
+<p>라고 하면 연구 표본에서의 평균효과와 목표 모집단에서의 평균효과는 각각</p>
+<p>\[ \mathbb{E}[\tau(X)\mid S=1], \qquad \mathbb{E}[\tau(X)\mid S=0] \]</p>
+<p>로 달라질 수 있다. 따라서 외적 타당도는 단순한 대표성의 문제가 아니라, 효과이질성과 표본선택이 결합되는 문제다.</p>
+<p>예를 들어 프로그램이 “잘 작동할 가능성이 높은 지역”에서 먼저 평가되었다면, 연구 결과는 설계상 강할 수 있어도 정책 전체를 대표하지 않을 수 있다. 이런 점에서 표본효과와 정책효과를 구분하지 않으면 강한 실험이 오히려 과장된 정책 주장을 낳을 수 있다.</p>
       </section>
       <nav class="chapter-nav">
-        <a class="nav-prev" href="ch08-02-s081.html">←  8.1.1 내적 타당도와 외적 타당도의 긴장</a>
-        <a class="nav-next" href="ch08-04-s083.html"> 8.1.3 실험 결과의 외삽: 수송 프레임 →</a>
+        <a class="nav-prev" href="ch08-02-s081.html">← 8.1 내적 타당도와 외적 타당도의 긴장</a>
+        <a class="nav-next" href="ch08-04-s083.html">8.3 실험 결과의 일반화와 transportability →</a>
       </nav>
     </article>
     
