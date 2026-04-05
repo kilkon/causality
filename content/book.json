@@ -145,7 +145,7 @@
           "slug": "homophily_bias",
           "source": "chapters/homophily_bias.md",
           "label": "4.7",
-          "title": "4.7 Homophily bias(??? ??)"
+          "title": "4.7 Homophily Bias"
         }
       ]
     },
@@ -242,80 +242,80 @@
     },
     {
       "id": "part-3",
-      "title": "?3? | ????? ?? ???? ???",
-      "description": "????? ? ????? ??? ????, ????????????????? ??? ???? ?????.",
+      "title": "Part 3 | Data Complexity in Observational Studies",
+      "description": "This part focuses on measurement, missingness, temporal ordering, interference, implementation, and aggregation issues in observational data.",
       "chapters": [
         {
           "slug": "ch10-01-covariate-control-limits",
           "source": "chapters/ch10-01-covariate-control-limits.md",
           "label": "10",
-          "title": "10?. ??, ??, ??? ??"
+          "title": "10. Measurement, Observation, and Missing Data"
         },
         {
           "slug": "ch10-02-s101",
           "source": "chapters/ch10-02-s101.md",
           "label": "10.1",
-          "title": "10.1 ????? ????"
+          "title": "10.1 Measurement Error and Misclassification"
         },
         {
           "slug": "ch10-03-s102",
           "source": "chapters/ch10-03-s102.md",
           "label": "10.2",
-          "title": "10.2 ????? ??: MCAR, MAR, MNAR"
+          "title": "10.2 Missing Data: MCAR, MAR, MNAR"
         },
         {
           "slug": "ch10-04-s103",
           "source": "chapters/ch10-04-s103.md",
           "label": "10.3",
-          "title": "10.3 ??? ????? ?? ??"
+          "title": "10.3 Strategies for Missingness and Observation Error"
         },
         {
           "slug": "ch11-01-collider-bias",
           "source": "chapters/ch11-01-collider-bias.md",
           "label": "11",
-          "title": "11?. ??, ???, ????"
+          "title": "11. Time, Dynamics, and Reverse Causality"
         },
         {
           "slug": "ch11-02-s111",
           "source": "chapters/ch11-02-s111.md",
           "label": "11.1",
-          "title": "11.1 ?? ??? ????"
+          "title": "11.1 Temporal Order and Reverse Causality"
         },
         {
           "slug": "ch11-03-s112",
           "source": "chapters/ch11-03-s112.md",
           "label": "11.2",
-          "title": "11.2 ??? ??, ???, ????"
+          "title": "11.2 Baseline Controls, Simultaneity, and Mutual Determination"
         },
         {
           "slug": "ch11-04-s113",
           "source": "chapters/ch11-04-s113.md",
           "label": "11.3",
-          "title": "11.3 ????, ????, ??? ????"
+          "title": "11.3 Cumulative Treatment, Lagged Effects, and Dynamic Causal Effects"
         },
         {
           "slug": "ch12-01-unobserved-confounding-limits",
           "source": "chapters/ch12-01-unobserved-confounding-limits.md",
           "label": "12",
-          "title": "12?. ??, ??, ?? ??? ??"
+          "title": "12. Interference, Implementation, and Aggregation"
         },
         {
           "slug": "ch12-02-s121",
           "source": "chapters/ch12-02-s121.md",
           "label": "12.1",
-          "title": "12.1 ??? spillover: SUTVA? ??"
+          "title": "12.1 Interference and Spillovers: Beyond SUTVA"
         },
         {
           "slug": "ch12-03-s122",
           "source": "chapters/ch12-03-s122.md",
           "label": "12.2",
-          "title": "12.2 ????? ???? implementation heterogeneity"
+          "title": "12.2 Implementation Heterogeneity"
         },
         {
           "slug": "ch12-04-s123",
           "source": "chapters/ch12-04-s123.md",
           "label": "12.3",
-          "title": "12.3 ????, ???? ??, ??? ??"
+          "title": "12.3 Aggregated Data, Ecological Fallacy, and Multilevel Context"
         }
       ]
     },

@@ -1,9 +1,9 @@
 ---
-title: 11장. 시간, 동태성, 역인과성
-description: 시간 순서, 역인과성, 동시성, 누적처치처럼 관측자료에서 인과 방향을 흐리게 만드는 문제를 정리한다.
+title: 11. Time, Dynamics, and Reverse Causality
+description: This chapter focuses on temporal ordering, simultaneity, dynamic treatment paths, and reverse causality in observational data.
 ---
 
-# 11장. 시간, 동태성, 역인과성
+# 11. Time, Dynamics, and Reverse Causality
 
 관측자료 분석에서 가장 자주 놓치는 조건은 시간 순서다. 인과추론에서 원인은 결과보다 앞서 있어야 하지만, 현실의 데이터는 종종 특정 시점의 단면(snapshot)만 제공하거나, 처치와 결과가 반복적으로 상호작용한 뒤 남은 한 장면만 보여 준다. 이때 상관을 보았다고 해서 방향을 곧바로 확정할 수는 없다.
 
