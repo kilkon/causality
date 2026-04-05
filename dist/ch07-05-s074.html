@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략 | 인과효과 추론 (Causal Inference)</title>
+  <title>7.4 이탈자(attrition)와 무응답 처리 전략 | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 인과효과 추론 강의를 위해 준비했습니다. 계속 수정중인 원고입니다" />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "ch07-05-s074", "title": "7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch07-05-s074.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "ch07-05-s074", "title": "7.4 이탈자(attrition)와 무응답 처리 전략", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch07-05-s074.md"};</script>
 
 </head>
 <body>
@@ -221,35 +221,35 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-01-compliance-itt-cace.html">
                     <span class="sidebar-link-label">7</span>
-                    1 장의 핵심 항목
+                    순응, ITT, CACE와 실험의 내적 타당도
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-02-s071.html">
-                    
-                    7.1.1 완전 순응 vs. 부분 순응 — 처치 배정과 처치 수령의 구분
+                    <span class="sidebar-link-label">7.1</span>
+                    완전 순응 vs. 부분 순응: 처치 배정과 처치 수령의 구분
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-03-s072.html">
-                    
-                    7.1.2 ITT(Intention-to-Treat)와 CACE/LATE의 정의와 차이
+                    <span class="sidebar-link-label">7.2</span>
+                    ITT와 CACE/LATE의 정의와 차이
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-04-s073.html">
-                    
-                    7.1.3 도구변수로서의 무작위 배정 — 단조성(monotonicity) 가정
+                    <span class="sidebar-link-label">7.3</span>
+                    도구변수로서의 무작위 배정과 단조성 가정
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch07-05-s074.html" aria-current="page">
-                    
-                    7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략
+                    <span class="sidebar-link-label">7.4</span>
+                    이탈자(attrition)와 무응답 처리 전략
                   </a>
                 </li>
                 
@@ -993,9 +993,9 @@
       
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">제2부 | 실험과 내적 타당도 · </p>
-        <h1>7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략</h1>
-        <p class="description">이 절은 7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
+        <p class="breadcrumb">제2부 | 실험과 내적 타당도 · 7.4</p>
+        <h1>7.4 이탈자(attrition)와 무응답 처리 전략</h1>
+        <p class="description">추적조사 이탈과 비순응이 실험의 내적 타당도에 어떤 위협을 만들며, 연구자가 어떤 분석 전략을 써야 하는지 설명한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1005,19 +1005,62 @@
         
       </header>
       <section class="chapter-body">
-        <h1 id="714-이탈자attrition-무응답noncompliance-처리-전략">7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략</h1>
-<p>이 절은 <strong>7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략</strong>의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
-<h2 id="714-이탈자attrition-무응답noncompliance-처리-전략">7.1.4 이탈자(attrition) · 무응답(noncompliance) 처리 전략</h2>
-<p>이 절은 해당 주제의 <strong>식별 가정</strong>, <strong>추정 절차</strong>, <strong>해석 한계</strong>를 함께 제시한다. 핵심은 추정량 자체보다, 그 추정량이 어떤 반사실 질문에 대응하는지 명확히 하는 데 있다.</p>
-<p>실무에서는 대안 사양, 진단 그래프, 민감도 분석을 병행해 결과가 특정 모형 선택에 과도하게 의존하지 않는지 점검해야 한다.</p>
-<section class="callout note"><div class="callout-title">note</div><p>summary</p>
-<p>핵심 요약</p>
-<ul><li>이 장의 방법은 추정 기술보다 식별 가정의 타당성이 우선이다.</li></ul>
-<ul><li>단일 결과값보다 진단·민감도·대안 사양을 함께 보고해야 해석이 견고해진다.</li></ul>
-<ul><li>다음 장과의 연결은 동일한 질문을 다른 가정/설계로 재해석하는 데 있다.</li></ul></section>
+        <h1 id="74-이탈자attrition와-무응답-처리-전략">7.4 이탈자(attrition)와 무응답 처리 전략</h1>
+<p>부분 순응이 처치 수령의 문제라면, 이탈자(attrition)와 무응답은 <strong>결과를 누구에게서 관찰할 수 있는가</strong>의 문제다. 이는 실험의 내적 타당도에 직접적인 위협이 될 수 있다. 특히 결과 관측 여부 \(R_i\) 가 처치 상태나 잠재결과와 연관되면, 무작위 배정으로 만든 비교가능성이 사후적으로 무너질 수 있다.</p>
+<p>\[ R_i = 1 \quad \text{if outcome is observed}, \qquad R_i = 0 \quad \text{otherwise}. \]</p>
+<p>만약 \(R_i\) 가 처치군에서 더 낮고, 동시에 나쁜 결과를 가진 사람이 더 쉽게 이탈한다면, 관측된 표본만 비교한 결과는 처치효과를 과대평가할 수 있다. 따라서 이탈은 단순한 표본 감소가 아니라 선택편의 문제다.</p>
+<h2 id="처리-전략의-기본-원칙">처리 전략의 기본 원칙</h2>
+<p>좋은 실험 보고는 보통 다음 순서로 이 문제를 다룬다.</p>
+<ol><li>처치군과 통제군의 추적률을 먼저 비교한다.</li><li>누가 이탈했는지 기초변수 기준으로 진단한다.</li><li>주분석은 가능한 한 ITT 원칙을 유지한다.</li><li>결측 보정, 가중치, 경계값 분석으로 민감도 점검을 수행한다.</li></ol>
+<h2 id="자주-쓰이는-대응-방법">자주 쓰이는 대응 방법</h2>
+<h3 id="1-추적률-비교와-균형-점검">1. 추적률 비교와 균형 점검</h3>
+<p>가장 먼저 할 일은 \(P(R=1 \mid Z=1)\) 과 \(P(R=1 \mid Z=0)\) 를 비교하는 것이다. 두 집단의 추적률이 크게 다르면 경고 신호다. 이어서 기초 공변량별로 누가 빠졌는지 살펴봐야 한다.</p>
+<h3 id="2-가중치-보정">2. 가중치 보정</h3>
+<p>결과가 관찰될 확률 \(\pi_i = P(R_i=1 \mid Z_i, X_i)\) 를 추정할 수 있다면, 역확률가중을 사용해 관측된 표본을 재가중할 수 있다.</p>
+<p>\[ \hat{\tau}_{\text{IPW-attrition}} = \frac{1}{n}\sum_{i=1}^n \frac{R_i Z_i Y_i}{\hat{\pi}_i}</p>
+<ul><li>\frac{1}{n}\sum_{i=1}^n \frac{R_i (1-Z_i) Y_i}{\hat{\pi}_i}.</li></ul>
+<p>\]</p>
+<p>이는 “관측되기 어려운 사람”에게 더 큰 가중을 주어 원래 실험표본을 복원하려는 접근이다.</p>
+<h3 id="3-경계값과-민감도-분석">3. 경계값과 민감도 분석</h3>
+<p>Lee bounds 같은 방법은 이탈이 단조적으로 발생한다고 가정하고 효과의 상하한을 제시한다. 이런 접근은 점추정보다 보수적이지만, 강한 결론을 피하고 불확실성을 정직하게 드러낸다는 장점이 있다.</p>
+<h2 id="비순응과-이탈은-어떻게-다른가">비순응과 이탈은 어떻게 다른가</h2>
+<p>비순응은 \(Z \rightarrow D\) 단계의 문제이고, 이탈은 \(Y\) 의 관측 단계 문제다. 둘은 동시에 나타날 수 있다. 예를 들어 처치군에서 프로그램을 덜 받은 사람들이 사후조사에도 더 많이 빠진다면, 수령효과 해석과 결과 관측 문제가 겹친다. 이런 경우 연구자는 ITT, 추적률 분석, 가중치 보정, 경계값 분석을 함께 제시해야 한다.</p>
+<h2 id="시각화-이탈이-만드는-사후-선택">시각화: 이탈이 만드는 사후 선택</h2>
+<svg viewBox="0 0 840 260" role="img" aria-label="이탈이 실험의 내적 타당도에 미치는 영향" class="chapter-figure">
+  <style>
+    .node { fill: #f8fafc; stroke: #334155; stroke-width: 2; rx: 12; ry: 12; }
+    .warn { fill: #fff1f2; stroke: #dc2626; stroke-width: 2; rx: 12; ry: 12; }
+    .txt { font: 16px 'Noto Sans KR', sans-serif; fill: #111827; }
+    .small { font: 14px 'Noto Sans KR', sans-serif; fill: #475569; }
+    .arrow { stroke: #475569; stroke-width: 2.4; fill: none; marker-end: url(#m5); }
+  </style>
+  <defs>
+    <marker id="m5" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"></path>
+    </marker>
+  </defs>
+  <rect class="node" x="50" y="95" width="130" height="70"></rect>
+  <text class="txt" x="115" y="136" text-anchor="middle">배정 \(Z\)</text>
+  <rect class="node" x="285" y="40" width="130" height="70"></rect>
+  <text class="txt" x="350" y="81" text-anchor="middle">결과 \(Y\)</text>
+  <rect class="warn" x="285" y="150" width="130" height="70"></rect>
+  <text class="txt" x="350" y="191" text-anchor="middle">관측 여부 \(R\)</text>
+  <rect class="node" x="550" y="95" width="180" height="70"></rect>
+  <text class="txt" x="640" y="126" text-anchor="middle">관측된 표본의 평균 비교</text>
+  <text class="small" x="640" y="151" text-anchor="middle">\(R=1\) 인 사람만 사용</text>
+  <path class="arrow" d="M180 110 L285 85"></path>
+  <path class="arrow" d="M180 150 L285 175"></path>
+  <path class="arrow" d="M415 75 L550 110"></path>
+  <path class="arrow" d="M415 185 L550 150"></path>
+</svg>
+<p>이 구조에서 \(R\) 이 처치와 결과에 모두 영향을 받으면, <code>관측된 사람만 비교하는 분석</code>은 사후 선택편의에 노출된다. 따라서 실험의 내적 타당도를 지키려면, 이탈을 단순 결측이 아니라 식별 문제로 다루어야 한다.</p>
+<h2 id="이-절의-정리">이 절의 정리</h2>
+<p>무작위실험의 내적 타당도는 배정 단계에서만 관리되는 것이 아니다. 추적과 관측 단계까지 포함해 유지되어야 한다. 좋은 실험 분석은 대체로 다음을 함께 제시한다.</p>
+<ol><li>ITT 추정치</li><li>비순응 구조와 CACE/LATE 해석</li><li>추적률과 이탈 패턴</li><li>가중치 또는 경계값 기반 민감도 분석</li></ol>
+<p>이 네 요소를 같이 보고할 때 비로소 “이 실험 결과를 얼마나 믿을 수 있는가”에 설득력 있게 답할 수 있다.</p>
       </section>
       <nav class="chapter-nav">
-        <a class="nav-prev" href="ch07-04-s073.html">←  7.1.3 도구변수로서의 무작위 배정 — 단조성(monotonicity) 가정</a>
+        <a class="nav-prev" href="ch07-04-s073.html">← 7.3 도구변수로서의 무작위 배정과 단조성 가정</a>
         <a class="nav-next" href="ch08-01-external-validity-transportability.html">8 1 장의 핵심 항목 →</a>
       </nav>
     </article>
