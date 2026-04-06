@@ -757,31 +757,31 @@
           "slug": "ch26-01-reproducibility-checklist",
           "source": "chapters/ch26-01-reproducibility-checklist.md",
           "label": "26",
-          "title": "26.1 장의 핵심 항목"
+          "title": "26장 재현가능성 체크리스트"
         },
         {
           "slug": "ch26-02-s261",
           "source": "chapters/ch26-02-s261.md",
-          "label": "",
-          "title": "26.1.1 연구 질문·식별 가정·추정 절차의 일관성 점검"
+          "label": "26.1",
+          "title": "26.1 연구 질문·식별 가정·추정 절차의 일관성 점검"
         },
         {
           "slug": "ch26-03-s262",
           "source": "chapters/ch26-03-s262.md",
-          "label": "",
-          "title": "26.1.2 사전분석계획(pre-analysis plan)과 분석 자유도 관리"
+          "label": "26.2",
+          "title": "26.2 사전분석계획(pre-analysis plan)과 분석 자유도 관리"
         },
         {
           "slug": "ch26-04-s263",
           "source": "chapters/ch26-04-s263.md",
-          "label": "",
-          "title": "26.1.3 재현 가능 보고 표준: 코드·데이터·민감도 공개"
+          "label": "26.3",
+          "title": "26.3 재현 가능 보고 표준: 코드·데이터·민감도 공개"
         },
         {
           "slug": "ch26-05-s264",
           "source": "chapters/ch26-05-s264.md",
-          "label": "",
-          "title": "26.1.4 정책 해석에서 내부·외부 타당도의 분리 보고"
+          "label": "26.4",
+          "title": "26.4 정책 해석에서 내부·외부 타당도의 분리 보고"
         }
       ]
     },
