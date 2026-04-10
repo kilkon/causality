@@ -141,14 +141,20 @@
           "label": "",
           "title": "4.6 콜라이더(충돌) 편향의 방향·크기 — 문헌 개관"
         },
-        {
-          "slug": "homophily_bias",
-          "source": "chapters/homophily_bias.md",
-          "label": "4.7",
-          "title": "4.7 동질성 편의"
-        }
-      ]
-    },
+          {
+            "slug": "homophily_bias",
+            "source": "chapters/homophily_bias.md",
+            "label": "4.7",
+            "title": "4.7 동질성 편의"
+          },
+          {
+            "slug": "ch04-08-dag-case-study",
+            "source": "chapters/ch04-08-dag-case-study.md",
+            "label": "4.8",
+            "title": "4.8 DAG를 이용한 편향 가능성 분석 사례"
+          }
+        ]
+      },
     {
       "id": "part-2",
       "title": "제2부 | 실험과 내적 타당도",
