@@ -1014,7 +1014,7 @@
 <p>예를 들어 어느 지역에만 청년고용 보조금이 도입되었다고 하자. 정책 후 취업률이 5%p 상승했다고 해서 그 전체를 정책효과로 읽을 수는 없다. 경기회복 때문에 비교지역도 2%p 상승했을 수 있기 때문이다. 이때 DiD는 “정책지역은 5%p, 비교지역은 2%p 올랐으니, 순효과는 3%p”라고 해석한다.</p>
 <p>즉 DiD는 처치군의 변화를 있는 그대로 읽지 않고, 비교군의 자연변화를 기준선으로 삼아 다시 조정한다.</p>
 <h2 id="시각적으로-보면-무엇이-일어나는가">시각적으로 보면 무엇이 일어나는가</h2>
-<p>아래 그림은 <code>단순 사후 비교</code>, <code>단순 전후 비교</code>, <code>DiD</code>가 서로 어떻게 다른지를 한 번에 보여준다. 왼쪽의 회색 점선은 처치군이 정책을 받지 않았더라면 따라갔을 것으로 가정하는 반사실 경로이고, 실제 처치군 관측값은 그보다 더 위에 있다. DiD 효과는 바로 이 두 값의 수직 거리다.</p>
+<p>아래 그림은 <code>단순 사후 비교</code>, <code>단순 전후 비교</code>, <code>DiD</code>가 서로 어떻게 다른지를 한 번에 보여준다. 그림 안에서는 설명이 겹치지 않도록 핵심 위치를 기호로만 표시했고, 각 기호의 의미는 그림 아래에서 따로 해설한다.</p>
 <figure class="chapter-figure">
   <svg viewBox="0 0 920 430" role="img" aria-labelledby="did-visual-title did-visual-desc">
     <title id="did-visual-title">Difference-in-Differences의 비교 구조</title>
@@ -1038,19 +1038,26 @@
     <text x="640" y="122" font-size="17" fill="#d06b36">처치군 관측값</text>
     <circle cx="620" cy="175" r="6" fill="#7b8794"></circle>
     <line x1="240" y1="215" x2="620" y2="175" stroke="#7b8794" stroke-width="4" stroke-dasharray="10 7"></line>
-    <text x="410" y="162" font-size="15" fill="#6d7782">처치가 없었더라면: 비교군 추세를 따른 반사실 경로</text>
+    <circle cx="410" cy="152" r="16" fill="#7b8794"></circle>
+    <text x="410" y="158" text-anchor="middle" font-size="16" fill="#ffffff">A</text>
     <line x1="620" y1="175" x2="620" y2="120" stroke="#2f5d50" stroke-width="5"></line>
     <polygon points="620,120 612,136 628,136" fill="#2f5d50"></polygon>
-    <text x="638" y="153" font-size="17" fill="#2f5d50">DiD 효과</text>
+    <circle cx="655" cy="148" r="16" fill="#2f5d50"></circle>
+    <text x="655" y="154" text-anchor="middle" font-size="16" fill="#ffffff">B</text>
     <line x1="665" y1="195" x2="665" y2="120" stroke="#c44b4b" stroke-width="4"></line>
-    <text x="681" y="162" font-size="15" fill="#c44b4b">단순 사후 비교</text>
+    <circle cx="705" cy="160" r="16" fill="#c44b4b"></circle>
+    <text x="705" y="166" text-anchor="middle" font-size="16" fill="#ffffff">C</text>
     <line x1="205" y1="215" x2="205" y2="120" stroke="#a56a00" stroke-width="4"></line>
-    <text x="118" y="168" font-size="15" fill="#a56a00">처치군의 단순 전후 변화</text>
-    <rect x="110" y="22" width="700" height="42" rx="10" fill="#fff3e8" stroke="#e6c4a8"></rect>
-    <text x="460" y="48" text-anchor="middle" font-size="16" fill="#7a3f18">핵심: DiD는 처치군의 변화 전체를 읽지 않고, 비교군의 공통 변화를 뺀 나머지만 정책효과로 해석한다.</text>
+    <circle cx="155" cy="165" r="16" fill="#a56a00"></circle>
+    <text x="155" y="171" text-anchor="middle" font-size="16" fill="#ffffff">D</text>
+    <rect x="310" y="22" width="300" height="42" rx="10" fill="#fff3e8" stroke="#e6c4a8"></rect>
+    <text x="460" y="48" text-anchor="middle" font-size="17" fill="#7a3f18">2x2 Difference-in-Differences</text>
   </svg>
   <figcaption>2x2 DiD의 핵심 비교 구조. 사후의 단순 수준 차이나 처치군의 단순 전후 변화와 달리, DiD는 반사실 경로와의 차이를 정책효과로 읽는다.</figcaption>
 </figure>
+<p>그림의 기호를 해설하면 다음과 같다.</p>
+<ul><li><code>A</code>: 처치가 없었더라면 처치군이 따라갔을 것으로 가정하는 반사실 경로</li><li><code>B</code>: 실제 처치군 결과와 반사실 경로 사이의 차이, 즉 DiD가 읽어내려는 정책효과</li><li><code>C</code>: 사후 시점에서 처치군과 비교군을 그냥 비교했을 때의 단순 사후 차이</li><li><code>D</code>: 처치군만 놓고 사전과 사후를 비교했을 때의 단순 전후 변화</li></ul>
+<p>이렇게 보면 DiD는 <code>C</code>나 <code>D</code>를 그대로 효과로 읽지 않고, 비교군의 공통 변화를 반영한 반사실 경로 <code>A</code>를 만든 뒤 그와 실제 관측값의 차이 <code>B</code>만을 효과로 해석한다는 점이 분명해진다.</p>
 <p>이 그림에서 중요한 점은 두 집단의 <strong>출발 수준이 완전히 같을 필요는 없다는 것</strong>이다. DiD는 출발점 차이 자체보다, 정책이 없었을 때 두 집단의 <strong>변화 방향과 변화 폭</strong>이 얼마나 비슷했을지를 더 중요하게 본다.</p>
 <h2 id="숫자로-보면-더-분명하다">숫자로 보면 더 분명하다</h2>
 <p>간단한 예를 들어 보자.</p>
