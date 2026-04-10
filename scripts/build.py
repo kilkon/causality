@@ -88,6 +88,56 @@ def apply_inline(text: str) -> str:
     return text
 
 
+def split_table_row(line: str) -> list[str]:
+    raw = line.strip()
+    if raw.startswith("|"):
+      raw = raw[1:]
+    if raw.endswith("|"):
+      raw = raw[:-1]
+    return [cell.strip() for cell in raw.split("|")]
+
+
+def is_markdown_table(lines: list[str], index: int) -> bool:
+    if index + 1 >= len(lines):
+        return False
+    header = lines[index].strip()
+    divider = lines[index + 1].strip()
+    if "|" not in header or "|" not in divider:
+        return False
+    cells = split_table_row(divider)
+    if not cells:
+        return False
+    return all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells)
+
+
+def render_markdown_table(lines: list[str], index: int) -> tuple[str, int]:
+    header_cells = split_table_row(lines[index])
+    body_index = index + 2
+    body_rows: list[list[str]] = []
+
+    while body_index < len(lines):
+        row = lines[body_index].strip()
+        if not row or "|" not in row:
+            break
+        body_rows.append(split_table_row(row))
+        body_index += 1
+
+    thead = "".join(f"<th>{apply_inline(cell)}</th>" for cell in header_cells)
+    tbody_rows: list[str] = []
+    for row in body_rows:
+        padded = row + [""] * max(0, len(header_cells) - len(row))
+        cells = padded[: len(header_cells)]
+        tbody_rows.append("".join(f"<td>{apply_inline(cell)}</td>" for cell in cells))
+
+    table_html = (
+        "<table>"
+        f"<thead><tr>{thead}</tr></thead>"
+        f"<tbody>{''.join(f'<tr>{row}</tr>' for row in tbody_rows)}</tbody>"
+        "</table>"
+    )
+    return table_html, body_index
+
+
 def render_markdown(markdown: str) -> tuple[str, list[dict[str, str]]]:
     lines = markdown.splitlines()
     i = 0
@@ -135,6 +185,11 @@ def render_markdown(markdown: str) -> tuple[str, list[dict[str, str]]]:
                 f'<section class="callout {html.escape(kind)}"><div class="callout-title">{html.escape(kind)}</div>{inner_html}</section>'
             )
             i += 1
+            continue
+
+        if is_markdown_table(lines, i):
+            table_html, i = render_markdown_table(lines, i)
+            out.append(table_html)
             continue
 
         if stripped.startswith("#"):
