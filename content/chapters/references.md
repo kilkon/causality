@@ -11,6 +11,8 @@ description:
 
 - Angrist, J. D., & Pischke, J.-S. (2009). *Mostly harmless econometrics: An empiricist's companion*. Princeton University Press.
 
+- Angrist, J., Hull, P., & Walters, C. R. (2024). Time-varying treatments and new targeted IV estimands: A strategy trial analysis of revascularization. *AEA Papers and Proceedings, 114*, 604-609. https://doi.org/10.1257/pandp.20241065
+
 - Athey, S., & Imbens, G. W. (2017). The state of applied econometrics: Causality and policy evaluation. *Journal of Economic Perspectives, 31*(2), 3-32. https://doi.org/10.1257/jep.31.2.3
 
 - Banack, H. R., Mayeda, E. R., Fox, M. P., Naimi, A. I., & Whitcomb, B. W. (2025). Collider stratification bias II: Magnitude of bias. *American Journal of Epidemiology, 194*(4), 774-785. https://doi.org/10.1093/aje/kwae353
@@ -59,11 +61,15 @@ description:
 
 - LaLonde, R. J. (1986). Evaluating the econometric evaluations of training programs with experimental data. *The American Economic Review, 76*(4), 604-620.
 
+- Lloyd, T., & Yang, D. (2025). The long shadow of early education: Evidence from a natural experiment in the Philippines. *NBER Working Paper* No. 33600. https://doi.org/10.3386/w33600
+
 - Lewbel, A. (2019). The identification zoo: Meanings of identification in econometrics. *Journal of Economic Literature, 57*(4), 835-903. https://doi.org/10.1257/jel.20181361
 
 - Lewis, D. (1973). *Counterfactuals*. Harvard University Press.
 
 - Manski, C. F. (2013). *Public policy in an uncertain world: Analysis and decisions*. Harvard University Press.
+
+- Mogstad, M., Torgovitsky, A., & Walters, C. R. (2024). Policy evaluation with multiple instrumental variables. *Journal of Econometrics, 243*(1), Article 105718. https://doi.org/10.1016/j.jeconom.2024.105718
 
 - Mill, J. S. (1974). *A system of logic, ratiocinative and inductive*. University of Toronto Press. (Original work published 1843)
 
@@ -88,6 +94,8 @@ description:
 - Rubin, D. B. (1980). Randomization analysis of experimental data: The Fisher randomization test comment. *Journal of the American Statistical Association, 75*(371), 591-593. https://doi.org/10.1080/01621459.1980.10477520
 
 - Russell, B. (1913). On the notion of cause. *Proceedings of the Aristotelian Society, 13*, 1-26.
+
+- Rose, E. K., & Shem-Tov, Y. (2024). Instrumental variables for ordered treatments with applications to the Oregon Health Insurance Experiment. *Journal of Econometrics, 240*(2), Article 105639. https://doi.org/10.1016/j.jeconom.2024.105639
 
 - Smith, J. A., & Todd, P. E. (2005). Does matching overcome LaLonde's critique of nonexperimental estimators? *Journal of Econometrics, 125*(1-2), 305-353. https://doi.org/10.1016/j.jeconom.2004.04.011
 
