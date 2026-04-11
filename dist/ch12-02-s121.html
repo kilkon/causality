@@ -995,7 +995,7 @@
       <header class="chapter-header">
         <p class="breadcrumb">제3부 | 관측자료와 현실 데이터의 복잡성 · 10.1</p>
         <h1>10.1 간섭과 파급효과: SUTVA를 넘어서</h1>
-        <p class="description">This section explains how one unit&#x27;s treatment can affect another unit&#x27;s outcome.</p>
+        <p class="description">한 단위의 처치가 다른 단위의 결과에 영향을 주는 간섭 문제를 정책평가 사례와 함께 설명한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1006,19 +1006,49 @@
       </header>
       <section class="chapter-body">
         <h1 id="101-간섭과-파급효과-sutva를-넘어서">10.1 간섭과 파급효과: SUTVA를 넘어서</h1>
-<p>SUTVA는 보통 “다른 사람의 처치가 내 결과에 영향을 주지 않는다”는 가정을 포함한다. 하지만 현실의 많은 정책은 이 가정을 자연스럽게 위반한다. 백신, 교육, 범죄예방, 현금지원, 정보확산, 네트워크 플랫폼 개입은 모두 한 사람의 처치가 다른 사람의 결과를 바꿀 수 있다.</p>
-<p>따라서 잠재결과도 더 이상 \(Y_i(d_i)\) 만으로 충분하지 않고,</p>
+<p>많은 인과추론 모형은 각 단위의 결과가 자신의 처치 상태에만 의존한다고 가정한다. 이것이 SUTVA의 중요한 부분이다. 하지만 실제 정책은 사람과 조직이 서로 연결된 사회 속에서 작동한다. 백신, 교육개입, 정보제공, 세제 인센티브, 지역개발 사업처럼 많은 정책은 한 사람의 처치가 다른 사람의 결과를 바꿀 수 있다. 이를 간섭(interference) 또는 파급효과(spillover)라고 부른다.</p>
+<h2 id="1011-잠재결과를-어떻게-다시-써야-하는가">10.1.1 잠재결과를 어떻게 다시 써야 하는가</h2>
+<p>간섭이 없을 때는 잠재결과를 \(Y_i(d_i)\)로 쓰지만, 간섭이 있으면 다른 사람들의 처치도 결과에 영향을 주므로</p>
 <p>\[ Y_i(d_i, d_{-i}) \]</p>
-<p>처럼 다른 사람들의 처치 벡터 \(d_{-i}\) 에도 의존할 수 있다.</p>
-<h2 id="왜-중요한가">왜 중요한가</h2>
-<p>간섭이 있으면 “처치효과” 하나만 말하는 것이 부정확해질 수 있다. 직접효과, 간접효과, 전체효과, 노출효과 같은 여러 개념이 필요해진다. 예를 들어 백신정책에서는 내가 백신을 맞아서 생기는 보호효과뿐 아니라, 주변 사람이 맞아서 생기는 집단면역 효과도 중요하다.</p>
-<h2 id="실제-사례-1-백신과-집단면역">실제 사례 1: 백신과 집단면역</h2>
-<p>백신 접종의 효과를 개인수준에서만 보면, 접종 여부와 감염 여부의 관계를 측정하게 된다. 하지만 접종률이 높은 지역에서는 미접종자도 위험이 낮아질 수 있다. 따라서 단순한 개인 비교는 전체 정책효과를 과소평가하거나 잘못 분해할 수 있다.</p>
-<h2 id="실제-사례-2-교육정책과-peer-effects">실제 사례 2: 교육정책과 peer effects</h2>
-<p>보충수업이 일부 학생에게 제공되면, 교실 분위기나 학습 네트워크를 통해 다른 학생의 성과까지 바뀔 수 있다. 이 경우 “처치받지 않은 학생”은 더 이상 순수 통제군이 아니다. 이미 spillover를 통해 영향을 받고 있기 때문이다.</p>
-<h2 id="해결-방법">해결 방법</h2>
-<ol><li>클러스터 단위로 무작위화한다.</li><li>partial interference를 가정해 집단 내부 간섭만 모델링한다.</li><li>노출 매핑(exposure mapping)을 통해 주변 처치강도를 정의한다.</li><li>직접효과와 간접효과를 구분해 estimand를 다시 쓴다.</li></ol>
-<p>간섭은 단순한 예외가 아니라, 정책이 사회 속에서 작동한다는 사실의 표현이다. 따라서 이를 무시하기보다, 어떤 형태의 간섭을 허용하고 어떤 효과를 정의할 것인지 먼저 명시해야 한다.</p>
+<p>처럼 써야 한다. 여기서 \(d_{-i}\)는 나를 제외한 다른 단위들의 처치 상태다. 즉 내가 같은 처치를 받더라도, 내 주변 사람들이 어떤 처치를 받았는지에 따라 내 결과가 달라질 수 있다.</p>
+<h2 id="1012-정책평가-사례">10.1.2 정책평가 사례</h2>
+<h3 id="백신과-공중보건">백신과 공중보건</h3>
+<p>백신 정책에서는 나의 접종이 나를 보호하는 직접효과만 있는 것이 아니라, 주변 사람들의 접종이 감염확률을 낮추는 간접효과도 있다. 따라서 단순히 “접종자와 비접종자의 감염률 차이”만 보면 정책의 전체 효과를 과소평가할 수 있다.</p>
+<h3 id="학교-프로그램과-peer-effects">학교 프로그램과 peer effects</h3>
+<p>학급 단위 교육프로그램에서는 일부 학생만 개입을 받더라도, 학급 분위기와 또래 상호작용을 통해 다른 학생의 성취도도 달라질 수 있다. 이 경우 통제군이라고 불린 학생도 실제로는 완전한 통제군이 아니다.</p>
+<h3 id="지역기반-복지정책">지역기반 복지정책</h3>
+<p>지역사회 상담서비스나 고용정보 제공사업은 대상자 개인뿐 아니라 가족, 이웃, 같은 주민센터 이용자에게도 영향을 줄 수 있다. 특히 정보나 행동규범이 퍼지는 정책에서는 spillover를 무시하기 어렵다.</p>
+<h2 id="1013-시각적-직관">10.1.3 시각적 직관</h2>
+<figure class="figure">
+  <svg viewBox="0 0 920 280" role="img" aria-label="간섭과 파급효과">
+    <circle cx="220" cy="120" r="46" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <circle cx="460" cy="120" r="46" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <circle cx="700" cy="120" r="46" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="220" y="126" text-anchor="middle" font-size="20" fill="#1d4ed8">A</text>
+    <text x="460" y="126" text-anchor="middle" font-size="20" fill="#166534">B</text>
+    <text x="700" y="126" text-anchor="middle" font-size="20" fill="#991b1b">C</text>
+    <line x1="266" y1="120" x2="414" y2="120" stroke="#64748b" stroke-width="4" marker-end="url(#arr-int)"/>
+    <line x1="506" y1="120" x2="654" y2="120" stroke="#64748b" stroke-width="4" marker-end="url(#arr-int)"/>
+    <text x="220" y="190" text-anchor="middle" font-size="15" fill="#1e3a8a">처치 받은 단위</text>
+    <text x="460" y="190" text-anchor="middle" font-size="15" fill="#166534">주변 단위의 결과 변화</text>
+    <text x="700" y="190" text-anchor="middle" font-size="15" fill="#991b1b">더 멀리 퍼지는 효과</text>
+    <text x="460" y="235" text-anchor="middle" font-size="17" fill="#334155">정책효과는 직접효과만이 아니라 네트워크와 집단구조를 따라 확산될 수 있다.</text>
+    <defs>
+      <marker id="arr-int" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+      </marker>
+    </defs>
+  </svg>
+  <figcaption>간섭이 있으면 한 단위의 처치가 다른 단위의 결과에도 영향을 주므로, 통제군도 더 이상 완전한 비처치 상태가 아니다.</figcaption>
+</figure>
+<h2 id="1014-왜-중요한가">10.1.4 왜 중요한가</h2>
+<p>간섭이 있으면 “처치효과”라는 말 자체가 하나가 아니게 된다. 보통 다음을 구분해야 한다.</p>
+<ul><li>직접효과: 내가 처치를 받았을 때의 효과</li><li>간접효과: 주변이 처치를 받았기 때문에 생기는 효과</li><li>전체효과: 직접효과와 간접효과를 합친 효과</li><li>파급효과: 집단이나 네트워크 전체에 퍼지는 효과</li></ul>
+<p>정책평가에서는 무엇을 estimand로 삼는지 먼저 명확히 해야 한다. 백신정책에서는 전체효과가 중요할 수 있고, 교육보조에서는 직접효과와 peer effect를 구분하는 것이 중요할 수 있다.</p>
+<h2 id="1015-어떻게-대응할-것인가">10.1.5 어떻게 대응할 것인가</h2>
+<p>간섭을 완전히 제거하기 어렵다면, 오히려 이를 설계와 분석 안에 명시적으로 넣어야 한다.</p>
+<ol><li>군집 단위 무작위화(cluster randomization)를 사용한다.</li><li>partial interference를 가정해 집단 내부 간섭만 허용한다.</li><li>exposure mapping으로 주변 처치 강도를 정의한다.</li><li>직접효과와 간접효과를 분리한 estimand를 설정한다.</li></ol>
+<p>간섭은 “가정 위반”이면서 동시에 “정책이 사회 속에서 작동한다는 증거”이기도 하다. 따라서 정책평가 연구자는 간섭을 무조건 제거할 대상으로만 보지 말고, <strong>어떤 종류의 파급효과를 정책적으로 알고 싶은지</strong>를 먼저 생각할 필요가 있다.</p>
       </section>
       <nav class="chapter-nav">
         <a class="nav-prev" href="ch12-01-unobserved-confounding-limits.html">← 10 간섭, 집행, 집계 수준의 문제</a>

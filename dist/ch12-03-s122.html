@@ -995,7 +995,7 @@
       <header class="chapter-header">
         <p class="breadcrumb">제3부 | 관측자료와 현실 데이터의 복잡성 · 10.2</p>
         <h1>10.2 정책집행의 이질성</h1>
-        <p class="description">This section explains why the same policy label can correspond to different realized treatments across places and institutions.</p>
+        <p class="description">같은 정책 이름 아래에서도 실제 처치가 어떻게 다르게 구현되는지, 그것이 정책평가 해석에 왜 중요한지 설명한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1006,17 +1006,49 @@
       </header>
       <section class="chapter-body">
         <h1 id="102-정책집행의-이질성">10.2 정책집행의 이질성</h1>
-<p>정책평가에서 “처치”는 종종 하나의 이름으로 불리지만, 실제 구현은 동일하지 않다. 같은 직업훈련 프로그램도 어떤 지역에서는 충실하게 시행되고, 다른 지역에서는 예산 부족이나 담당자 재량 때문에 약하게 시행될 수 있다. 이런 차이는 단순한 잡음이 아니라, 처치의 정의 자체를 흔든다.</p>
-<p>형식적으로는 같은 \(D=1\) 이라도 실제 처치 강도 \(A\) 가 다를 수 있다.</p>
-<p>\[ D_i = 1 \quad \text{but} \quad A_i \in \{a_1, a_2, a_3, \dots\}. \]</p>
-<p>이 경우 분석가는 “정책 참여”의 효과를 추정한다고 생각하지만, 사실은 여러 버전의 처치를 섞어 평균낸 효과를 보고 있을 수 있다.</p>
-<h2 id="실제-사례-고용서비스-전달체계">실제 사례: 고용서비스 전달체계</h2>
-<p>실업자 대상 취업지원 프로그램은 중앙정부 기준상 하나의 사업일 수 있어도, 상담 인력 수준, 민간위탁 여부, 담당자 숙련도, 지역 노동시장 상황에 따라 실제 처치 내용은 크게 다를 수 있다. 그러면 어떤 지역에서 관찰된 효과를 다른 지역으로 옮기는 문제는 단순한 모집단 일반화가 아니라, 처치 버전의 차이까지 함께 다뤄야 한다.</p>
-<h2 id="왜-중요한가">왜 중요한가</h2>
-<ol><li>처치가 균일하지 않으면 consistency 가정이 약해진다.</li><li>효과이질성이 사람의 특성 때문인지 집행 버전 차이 때문인지 구분이 어렵다.</li><li>정책확대 시 “무엇을 복제해야 하는가”가 불분명해진다.</li></ol>
-<h2 id="해결-방법">해결 방법</h2>
-<ol><li>구현 충실도(fidelity)를 별도 자료로 측정한다.</li><li>지역·기관 수준 변수를 함께 기록한다.</li><li>처치를 이분형이 아니라 강도나 버전으로 재정의한다.</li><li>다수준 모형과 이질성 분석을 결합한다.</li></ol>
-<p>정책평가에서 중요한 것은 “효과가 있었는가”뿐 아니라 “무엇이 실제로 시행되었는가”다. implementation heterogeneity를 무시하면 정책의 내용이 아니라 정책의 이름만 분석하는 셈이 될 수 있다.</p>
+<p>정책평가에서 자주 놓치는 사실은, 우리가 같은 정책이라고 부르는 것이 실제 현장에서는 서로 다른 처치로 구현된다는 점이다. 중앙정부 문서에서는 하나의 사업명 아래 묶여 있어도, 실제 집행은 지역, 기관, 담당자, 예산, 조직문화에 따라 크게 다를 수 있다. 이를 정책집행의 이질성(implementation heterogeneity)이라고 부를 수 있다.</p>
+<h2 id="1021-왜-중요한가">10.2.1 왜 중요한가</h2>
+<p>정책효과 추정은 보통 \(D=1\)을 “정책을 받은 상태”로 간주한다. 하지만 실제로는</p>
+<p>\[ D_i=1 \quad \text{but} \quad A_i \in \{a_1,a_2,a_3,\dots\} \]</p>
+<p>처럼 같은 참여 표시 아래에서도 실제 노출 강도 \(A_i\)는 크게 다를 수 있다. 이 경우 연구자가 추정하는 것은 단일한 정책효과가 아니라, 서로 다른 구현 방식이 뒤섞인 평균효과일 수 있다.</p>
+<h2 id="1022-정책평가-사례">10.2.2 정책평가 사례</h2>
+<h3 id="직업훈련-프로그램">직업훈련 프로그램</h3>
+<p>같은 취업지원 프로그램이라도 어떤 지역은 1:1 상담, 민간기업 연계, 사후추적까지 충실히 제공하고, 다른 지역은 형식적인 집단교육 몇 회에 그칠 수 있다. 이 경우 “프로그램 참여 효과”라는 한 문장만으로는 무엇이 실제로 효과를 냈는지 이해하기 어렵다.</p>
+<h3 id="복지행정과-street-level-bureaucracy">복지행정과 street-level bureaucracy</h3>
+<p>복지급여 신청 지원에서도 담당 공무원의 재량, 적극성, 설명 방식에 따라 시민이 경험하는 행정절차와 정보량이 크게 달라질 수 있다. 같은 제도라도 어떤 주민센터는 적극적으로 신청을 돕고, 다른 주민센터는 형식적 안내에 그칠 수 있다. 이 경우 정책의 명목상 존재보다 실제 집행 품질이 더 중요해진다.</p>
+<h2 id="1023-시각적-직관">10.2.3 시각적 직관</h2>
+<figure class="figure">
+  <svg viewBox="0 0 920 280" role="img" aria-label="정책집행의 이질성">
+    <rect x="360" y="36" width="200" height="56" rx="14" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="460" y="70" text-anchor="middle" font-size="20" fill="#1d4ed8">같은 정책 이름</text>
+    <rect x="90" y="145" width="220" height="72" rx="16" fill="#ecfeff" stroke="#0891b2"/>
+    <rect x="350" y="145" width="220" height="72" rx="16" fill="#ecfdf5" stroke="#16a34a"/>
+    <rect x="610" y="145" width="220" height="72" rx="16" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="200" y="178" text-anchor="middle" font-size="18" fill="#0f766e">지역 A</text>
+    <text x="200" y="201" text-anchor="middle" font-size="15" fill="#0f766e">고강도 집행</text>
+    <text x="460" y="178" text-anchor="middle" font-size="18" fill="#166534">지역 B</text>
+    <text x="460" y="201" text-anchor="middle" font-size="15" fill="#166534">중간 수준 집행</text>
+    <text x="720" y="178" text-anchor="middle" font-size="18" fill="#991b1b">지역 C</text>
+    <text x="720" y="201" text-anchor="middle" font-size="15" fill="#991b1b">형식적 집행</text>
+    <line x1="460" y1="92" x2="200" y2="145" stroke="#64748b" stroke-width="3"/>
+    <line x1="460" y1="92" x2="460" y2="145" stroke="#64748b" stroke-width="3"/>
+    <line x1="460" y1="92" x2="720" y2="145" stroke="#64748b" stroke-width="3"/>
+    <text x="460" y="252" text-anchor="middle" font-size="17" fill="#334155">같은 정책도 실제로는 다른 처치 묶음(bundle)일 수 있다.</text>
+  </svg>
+  <figcaption>정책평가에서 중요한 것은 정책 이름이 아니라 실제 구현 강도와 내용이다.</figcaption>
+</figure>
+<h2 id="1024-왜-해석이-어려워지는가">10.2.4 왜 해석이 어려워지는가</h2>
+<p>집행 이질성이 크면 적어도 세 가지 문제가 생긴다.</p>
+<ol><li>consistency 가정이 약해진다.</li></ol>
+<p>같은 \(D=1\)이 같은 처치를 뜻하지 않을 수 있다.</p>
+<ol><li>효과 이질성과 집행 차이가 섞인다.</li></ol>
+<p>어떤 지역에서 효과가 큰 이유가 대상자 특성 때문인지, 집행품질 때문인지 구분하기 어려울 수 있다.</p>
+<ol><li>정책확산 시 복제가능성이 불분명해진다.</li></ol>
+<p>무엇을 복제해야 같은 효과가 나는지 모호해진다.</p>
+<h2 id="1025-대응-전략">10.2.5 대응 전략</h2>
+<p>정책집행의 이질성은 숨기기보다 측정해야 한다.</p>
+<ol><li>구현 충실도(fidelity)를 별도 변수로 수집한다.</li><li>기관·지역 수준 정보를 함께 결합한다.</li><li>처치를 이분형이 아니라 강도나 버전으로 정의한다.</li><li>다수준 모형이나 이질적 효과 분석을 활용한다.</li></ol>
+<p>정책평가에서 중요한 것은 “정책이 있었는가”만이 아니라, <strong>정책이 실제로 어떻게 집행되었는가</strong>다. implementation heterogeneity를 무시하면 정책의 효과가 아니라 정책 이름의 평균효과만 보고 있을 위험이 있다.</p>
       </section>
       <nav class="chapter-nav">
         <a class="nav-prev" href="ch12-02-s121.html">← 10.1 간섭과 파급효과: SUTVA를 넘어서</a>
