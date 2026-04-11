@@ -330,7 +330,7 @@ def page_shell(book: dict, sidebar: str, content: str, title: str, editor_config
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   {editor_script}
 </head>
-<body>
+  <body>
   <div class="site-shell">
     {sidebar}
     <main class="page">
@@ -341,9 +341,12 @@ def page_shell(book: dict, sidebar: str, content: str, title: str, editor_config
       {content}
     </main>
   </div>
-</body>
-</html>
-"""
+  <div class="page-credit" aria-label="copyright">
+    &copy; 서울대 행정대학원 고길곤
+  </div>
+  </body>
+  </html>
+  """
 
 
 def build_index(book: dict, editable: bool) -> None:
