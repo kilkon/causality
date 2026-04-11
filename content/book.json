@@ -13,13 +13,13 @@
           "slug": "ch01-01-correlation-causation",
           "source": "chapters/ch01-01-correlation-causation.md",
           "label": "",
-          "title": "1.1 상관과 인과의 근본적 차이 — 왜 회귀만으로는 부족한가"
+          "title": "1.1 상관과 인과의 근본적 차이 - 왜 회귀만으로는 부족한가"
         },
         {
           "slug": "ch01-02-counterfactuals",
           "source": "chapters/ch01-02-counterfactuals.md",
           "label": "",
-          "title": "1.2 반사실(counterfactual)의 정의와 직관적 예시"
+          "title": "1.2 반사실과 잠재결과 - 인과효과를 어떻게 정의할 것인가"
         },
         {
           "slug": "ch01-03-ladder",
@@ -37,7 +37,7 @@
           "slug": "ch02-00-potential-outcomes-framework-overview",
           "source": "chapters/ch02-00-potential-outcomes-framework-overview.md",
           "label": "2",
-          "title": "2장. 잠재결과 프레임워크 — 전체 방향과 학습 로드맵"
+          "title": "2장. 잠재결과 프레임워크"
         },
         {
           "slug": "ch02-01-unit-treatment-potential-outcomes",
@@ -55,7 +55,7 @@
           "slug": "ch02-03-sutva-missingness",
           "source": "chapters/ch02-03-sutva-missingness.md",
           "label": "",
-          "title": "2.3 SUTVA, 결측 데이터 관점, 형식적 통합"
+          "title": "2.3 SUTVA, 결측 결과, 그리고 잠재결과 프레임워크"
         },
         {
           "slug": "ch02-04-generalization-target-population",
@@ -73,13 +73,13 @@
           "slug": "ch03-01-specification-identification-estimation",
           "source": "chapters/ch03-01-specification-identification-estimation.md",
           "label": "3.1",
-          "title": "3.1 모형 설정, 식별, 추정의 구분"
+          "title": "3.1 모형 설정, 식별, 추정"
         },
         {
           "slug": "ch03-02-scm-dag-model-specification",
           "source": "chapters/ch03-02-scm-dag-model-specification.md",
           "label": "3.2",
-          "title": "3.2 ??? ??? ?? - Lewbel? Identification Zoo"
+          "title": "3.2 식별의 다양한 의미 - Lewbel의 Identification Zoo"
         },
         {
           "slug": "ch03-03-identification-observed-to-causal",
@@ -115,7 +115,7 @@
           "slug": "ch04-03-s042",
           "source": "chapters/ch04-03-s042.md",
           "label": "",
-          "title": "4.2 조상 · 자손 · 조건화(conditioning)의 효과"
+          "title": "4.2 조상 · 자손 · 조건화(conditioning)의 구분과 효과"
         },
         {
           "slug": "ch04-04-s043",
@@ -139,7 +139,7 @@
           "slug": "ch04-06-s045",
           "source": "chapters/ch04-06-s045.md",
           "label": "",
-          "title": "4.6 콜라이더(충돌) 편향의 방향·크기 — 문헌 개관"
+          "title": "4.6 충돌변수(collider) 편의의 방향과 크기"
         },
         {
           "slug": "homophily_bias",
@@ -164,31 +164,31 @@
           "slug": "ch06-01-randomization-identification",
           "source": "chapters/ch06-01-randomization-identification.md",
           "label": "5",
-          "title": "5?. ????? ??"
+          "title": "5장. 무작위화와 식별"
         },
         {
           "slug": "ch06-02-s061",
           "source": "chapters/ch06-02-s061.md",
-          "label": "",
-          "title": "5.1.1 무작위화가 교란을 제거하는 메커니즘 — DAG로 보기"
+          "label": "5.1",
+          "title": "5.1 무작위화가 교란을 제거하는 메커니즘 — DAG로 보기"
         },
         {
           "slug": "ch06-03-s062",
           "source": "chapters/ch06-03-s062.md",
-          "label": "",
-          "title": "5.1.2 ATE의 비편향 추정량으로서의 평균차이(difference in means)"
+          "label": "5.2",
+          "title": "5.2 ATE의 비편향 추정량으로서의 평균차이(difference in means)"
         },
         {
           "slug": "ch06-04-s063",
           "source": "chapters/ch06-04-s063.md",
-          "label": "",
-          "title": "5.1.3 실험 설계의 변형: 층화 · 군집 · 요인 설계"
+          "label": "5.3",
+          "title": "5.3 실험 설계의 변형: 층화 · 군집 · 요인 설계"
         },
         {
           "slug": "ch07-01-compliance-itt-cace",
           "source": "chapters/ch07-01-compliance-itt-cace.md",
           "label": "6",
-          "title": "6?. ??, ITT, CACE? ??? ?? ???"
+          "title": "6장. 순응, ITT, CACE와 실험의 내적 타당도"
         },
         {
           "slug": "ch07-02-s071",
@@ -218,31 +218,31 @@
           "slug": "ch08-01-external-validity-transportability",
           "source": "chapters/ch08-01-external-validity-transportability.md",
           "label": "7",
-          "title": "7?. ?? ???, ?? ???, ??? ???? ??"
+          "title": "7장. 외적 타당도, 내적 타당도, 그리고 일반화의 문제"
         },
         {
           "slug": "ch08-02-s081",
           "source": "chapters/ch08-02-s081.md",
           "label": "7.1",
-          "title": "7.1 ?? ???? ?? ???? ??"
+          "title": "7.1 내적 타당도와 외적 타당도의 긴장"
         },
         {
           "slug": "ch08-03-s082",
           "source": "chapters/ch08-03-s082.md",
           "label": "7.2",
-          "title": "7.2 ?? ??? ?? ???? ???"
+          "title": "7.2 연구 표본과 목표 모집단의 불일치"
         },
         {
           "slug": "ch08-04-s083",
           "source": "chapters/ch08-04-s083.md",
           "label": "7.3",
-          "title": "7.3 ?? ??? ???? transportability"
+          "title": "7.3 실험 결과의 일반화와 transportability"
         },
         {
           "slug": "ch08-05-s084",
           "source": "chapters/ch08-05-s084.md",
           "label": "7.4",
-          "title": "7.4 ????? ????? ??"
+          "title": "7.4 현장실험과 자연실험의 위치"
         }
       ]
     },
@@ -255,7 +255,7 @@
           "slug": "ch10-01-covariate-control-limits",
           "source": "chapters/ch10-01-covariate-control-limits.md",
           "label": "8",
-          "title": "8?. ??, ??, ??? ??"
+          "title": "8장. 측정, 관측, 결측의 문제"
         },
         {
           "slug": "ch10-02-s101",
@@ -279,7 +279,7 @@
           "slug": "ch11-01-collider-bias",
           "source": "chapters/ch11-01-collider-bias.md",
           "label": "9",
-          "title": "9?. ??, ???, ????"
+          "title": "9장. 시간, 동태성, 역인과성"
         },
         {
           "slug": "ch11-02-s111",
@@ -303,7 +303,7 @@
           "slug": "ch12-01-unobserved-confounding-limits",
           "source": "chapters/ch12-01-unobserved-confounding-limits.md",
           "label": "10",
-          "title": "10?. ??, ??, ?? ??? ??"
+          "title": "10장. 간섭, 집행, 집계 수준의 문제"
         },
         {
           "slug": "ch12-02-s121",
@@ -334,174 +334,174 @@
           "slug": "ch13-01-regression-matching-ipw",
           "source": "chapters/ch13-01-regression-matching-ipw.md",
           "label": "11",
-          "title": "11?. ??? ?? ???? ???? ??"
+          "title": "11장. 조건부 독립 가정하의 인과효과 추론"
         },
         {
           "slug": "ch13-02-s131",
           "source": "chapters/ch13-02-s131.md",
-          "label": "",
-          "title": "11.1.1 조건부 독립 가정(CIA / ignorability)의 의미"
+          "label": "11.1",
+          "title": "11.1 조건부 독립 가정(CIA / ignorability)의 의미"
         },
         {
           "slug": "ch13-03-s132",
           "source": "chapters/ch13-03-s132.md",
-          "label": "",
-          "title": "11.1.2 회귀 조정의 인과적 해석 조건"
+          "label": "11.2",
+          "title": "11.2 회귀 조정의 인과적 해석 조건"
         },
         {
           "slug": "ch13-04-s133",
           "source": "chapters/ch13-04-s133.md",
-          "label": "",
-          "title": "11.1.3 매칭의 직관 - 이웃 매칭 · 성향점수 매칭 · 칼퍼 반경"
+          "label": "11.3",
+          "title": "11.3 매칭의 직관 - 이웃 매칭 · 성향점수 매칭 · 칼리퍼 반경"
         },
         {
           "slug": "ch13-05-s134",
           "source": "chapters/ch13-05-s134.md",
-          "label": "",
-          "title": "11.1.4 역확률가중(IPW)과 안정화 가중(SIPW)"
+          "label": "11.4",
+          "title": "11.4 역확률가중(IPW)과 안정화 가중(SIPW)"
         },
         {
           "slug": "ch13-06-s135",
           "source": "chapters/ch13-06-s135.md",
-          "label": "",
-          "title": "11.1.5 공통 지지(common support) - 외삽 위험과 진단"
+          "label": "11.5",
+          "title": "11.5 공통 지지(common support) - 외삽 위험과 진단"
         },
         {
           "slug": "ch14-00-instrumental-variables-intro",
           "source": "chapters/ch14-00-instrumental-variables-intro.md",
           "label": "12",
-          "title": "12?. ???? ???"
+          "title": "12장. 도구변수 접근법"
         },
         {
           "slug": "ch14-01-instrumental-variables",
           "source": "chapters/ch14-01-instrumental-variables.md",
-          "label": "",
+          "label": "12.1",
           "title": "12.1 IV의 세 가지 핵심 가정"
         },
         {
           "slug": "ch14-02-s142",
           "source": "chapters/ch14-02-s142.md",
-          "label": "",
+          "label": "12.2",
           "title": "12.2 Wald 추정량과 2SLS"
         },
         {
           "slug": "ch14-03-s143",
           "source": "chapters/ch14-03-s143.md",
-          "label": "",
+          "label": "12.3",
           "title": "12.3 LATE 해석"
         },
         {
           "slug": "ch14-04-s144",
           "source": "chapters/ch14-04-s144.md",
-          "label": "",
+          "label": "12.4",
           "title": "12.4 약한 도구 진단과 대응"
         },
         {
           "slug": "ch14-05-s145",
           "source": "chapters/ch14-05-s145.md",
-          "label": "",
+          "label": "12.5",
           "title": "12.5 자연실험형 IV 예시"
         },
         {
           "slug": "ch15-00-rdd-intro",
           "source": "chapters/ch15-00-rdd-intro.md",
           "label": "13",
-          "title": "13?. ????? ??"
+          "title": "13장. 회귀불연속 설계"
         },
         {
           "slug": "ch15-01-rdd",
           "source": "chapters/ch15-01-rdd.md",
-          "label": "",
+          "label": "13.1",
           "title": "13.1 배정변수와 임계값의 역할"
         },
         {
           "slug": "ch15-02-s152",
           "source": "chapters/ch15-02-s152.md",
-          "label": "",
+          "label": "13.2",
           "title": "13.2 Sharp RDD: 연속성 가정과 국소 효과"
         },
         {
           "slug": "ch15-03-s153",
           "source": "chapters/ch15-03-s153.md",
-          "label": "",
+          "label": "13.3",
           "title": "13.3 Fuzzy RDD: IV로의 환원"
         },
         {
           "slug": "ch15-04-s154",
           "source": "chapters/ch15-04-s154.md",
-          "label": "",
+          "label": "13.4",
           "title": "13.4 연속 처치·다중 임계값 확장"
         },
         {
           "slug": "ch15-05-s155",
           "source": "chapters/ch15-05-s155.md",
-          "label": "",
+          "label": "13.5",
           "title": "13.5 조작 검정과 진단 시각화"
         },
         {
           "slug": "ch16-00-did-intro",
           "source": "chapters/ch16-00-did-intro.md",
           "label": "14",
-          "title": "14?. ?????"
+          "title": "14장. 이중차분법"
         },
         {
           "slug": "ch16-01-did",
           "source": "chapters/ch16-01-did.md",
-          "label": "",
+          "label": "14.1",
           "title": "14.1 DiD의 기본 직관과 2x2 설계"
         },
         {
           "slug": "ch16-02-s162",
           "source": "chapters/ch16-02-s162.md",
-          "label": "",
-          "title": "14.2 회귀 표현과 패널자료에서의 DID"
+          "label": "14.2",
+          "title": "14.2 회귀 표현과 패널자료에서의 DiD"
         },
         {
           "slug": "ch16-03-s163",
           "source": "chapters/ch16-03-s163.md",
-          "label": "",
+          "label": "14.3",
           "title": "14.3 동태적 효과와 이벤트 스터디(event-study)"
         },
         {
           "slug": "ch16-04-s164",
           "source": "chapters/ch16-04-s164.md",
-          "label": "",
+          "label": "14.4",
           "title": "14.4 스태거드 도입과 현대적 DID"
         },
         {
           "slug": "ch16-05-s165",
           "source": "chapters/ch16-05-s165.md",
-          "label": "",
+          "label": "14.5",
           "title": "14.5 평행추세와 핵심 가정, 진단"
         },
         {
           "slug": "ch17-00-panel-models-intro",
           "source": "chapters/ch17-00-panel-models-intro.md",
           "label": "15",
-          "title": "15?. ????"
+          "title": "15장. 패널모형"
         },
         {
           "slug": "ch17-01-panel-fixed-effects",
           "source": "chapters/ch17-01-panel-fixed-effects.md",
-          "label": "",
+          "label": "15.1",
           "title": "15.1 FE의 기본 설정과 인과 해석"
         },
         {
           "slug": "ch17-02-s172",
           "source": "chapters/ch17-02-s172.md",
-          "label": "",
+          "label": "15.2",
           "title": "15.2 FE가 제거하는 것과 제거하지 못하는 것"
         },
         {
           "slug": "ch17-03-s173",
           "source": "chapters/ch17-03-s173.md",
-          "label": "",
+          "label": "15.3",
           "title": "15.3 시간 고정효과와 이중 고정효과(TWFE)의 해석"
         },
         {
           "slug": "ch17-04-s174",
           "source": "chapters/ch17-04-s174.md",
-          "label": "",
+          "label": "15.4",
           "title": "15.4 FE 인과 해석의 조건과 진단"
         }
       ]
@@ -515,90 +515,90 @@
           "slug": "ch18-00-cate-intro",
           "source": "chapters/ch18-00-cate-intro.md",
           "label": "16",
-          "title": "16?. ??? ??????"
+          "title": "16장. 조건부 평균처치효과"
         },
         {
           "slug": "ch18-01-heterogeneous-treatment-effects",
           "source": "chapters/ch18-01-heterogeneous-treatment-effects.md",
-          "label": "",
+          "label": "16.1",
           "title": "16.1 CATE의 정의와 식별"
         },
         {
           "slug": "ch18-02-s182",
           "source": "chapters/ch18-02-s182.md",
-          "label": "",
+          "label": "16.2",
           "title": "16.2 서브그룹 분석의 위험"
         },
         {
           "slug": "ch18-03-s183",
           "source": "chapters/ch18-03-s183.md",
-          "label": "",
+          "label": "16.3",
           "title": "16.3 효과 수정자와 교란변수"
         },
         {
           "slug": "ch18-04-s184",
           "source": "chapters/ch18-04-s184.md",
-          "label": "",
+          "label": "16.4",
           "title": "16.4 개인화 처치 규칙(ITR)"
         },
         {
           "slug": "ch19-00-mediation-intro",
           "source": "chapters/ch19-00-mediation-intro.md",
           "label": "17",
-          "title": "17?. ??????"
+          "title": "17장. 매개효과분석"
         },
         {
           "slug": "ch19-01-mediation-effects",
           "source": "chapters/ch19-01-mediation-effects.md",
-          "label": "",
+          "label": "17.1",
           "title": "17.1 총효과, 직접효과, 간접효과의 분해"
         },
         {
           "slug": "ch19-02-s192",
           "source": "chapters/ch19-02-s192.md",
-          "label": "",
+          "label": "17.2",
           "title": "17.2 자연 직접효과와 자연 간접효과의 정의와 식별"
         },
         {
           "slug": "ch19-03-s193",
           "source": "chapters/ch19-03-s193.md",
-          "label": "",
+          "label": "17.3",
           "title": "17.3 교차세계 반사실과 처치 이후 교란"
         },
         {
           "slug": "ch19-04-s194",
           "source": "chapters/ch19-04-s194.md",
-          "label": "",
+          "label": "17.4",
           "title": "17.4 민감도 분석과 강건성 보고"
         },
         {
           "slug": "ch20-00-sensitivity-intro",
           "source": "chapters/ch20-00-sensitivity-intro.md",
           "label": "18",
-          "title": "18?. ??? ??"
+          "title": "18장. 민감도 분석"
         },
         {
           "slug": "ch20-01-sensitivity-partial-identification",
           "source": "chapters/ch20-01-sensitivity-partial-identification.md",
-          "label": "",
+          "label": "18.1",
           "title": "18.1 Rosenbaum 경계와 \\(\\Gamma\\)-민감도"
         },
         {
           "slug": "ch20-02-s202",
           "source": "chapters/ch20-02-s202.md",
-          "label": "",
+          "label": "18.2",
           "title": "18.2 E-value: 비측 교란이 얼마나 강해야 결론이 뒤집히는가"
         },
         {
           "slug": "ch20-03-s203",
           "source": "chapters/ch20-03-s203.md",
-          "label": "",
+          "label": "18.3",
           "title": "18.3 Manski 부분 식별의 직관"
         },
         {
           "slug": "ch20-04-s204",
           "source": "chapters/ch20-04-s204.md",
-          "label": "",
+          "label": "18.4",
           "title": "18.4 민감도 분석을 연구 보고의 표준으로"
         }
       ]
@@ -612,36 +612,36 @@
           "slug": "ch21-00-ml-foundations",
           "source": "chapters/ch21-00-ml-foundations.md",
           "label": "19",
-          "title": "19?. ???? ??? ??"
+          "title": "19장. 기계학습 방법의 이해"
         },
         {
           "slug": "ch21-01-causal-ml",
           "source": "chapters/ch21-01-causal-ml.md",
-          "label": "",
+          "label": "19.1",
           "title": "19.1 예측과 인과의 목표 차이"
         },
         {
           "slug": "ch21-02-s212",
           "source": "chapters/ch21-02-s212.md",
-          "label": "",
+          "label": "19.2",
           "title": "19.2 DML과 직교화"
         },
         {
           "slug": "ch21-03-s213",
           "source": "chapters/ch21-03-s213.md",
-          "label": "",
+          "label": "19.3",
           "title": "19.3 AIPW와 이중견고성"
         },
         {
           "slug": "ch21-04-s214",
           "source": "chapters/ch21-04-s214.md",
-          "label": "",
+          "label": "19.4",
           "title": "19.4 인과 숲과 CATE"
         },
         {
           "slug": "ch21-05-s215",
           "source": "chapters/ch21-05-s215.md",
-          "label": "",
+          "label": "19.5",
           "title": "19.5 표현학습·신경망과 인과"
         }
       ]
@@ -655,115 +655,115 @@
           "slug": "ch22-01-influence-function-pathwise-derivative",
           "source": "chapters/ch22-01-influence-function-pathwise-derivative.md",
           "label": "20",
-          "title": "20?. ????? ????"
+          "title": "20장. 함수형 파라미터와 비모수 추정"
         },
         {
           "slug": "ch22-02-s222",
           "source": "chapters/ch22-02-s222.md",
-          "label": "",
-          "title": "20.2 영향함수(IF)와 Gateaux 미분 직관"
+          "label": "20.1",
+          "title": "20.1 영향함수(IF)와 Gateaux 미분 직관"
         },
         {
           "slug": "ch22-03-s223",
           "source": "chapters/ch22-03-s223.md",
-          "label": "",
-          "title": "20.3 경로미분과 효율적 추정량 도출"
+          "label": "20.2",
+          "title": "20.2 경로미분과 효율적 추정량 도출"
         },
         {
           "slug": "ch23-01-semiparametric-efficiency-bound",
           "source": "chapters/ch23-01-semiparametric-efficiency-bound.md",
           "label": "21",
-          "title": "21?. ??? ?? ??"
+          "title": "21장. 반모수 효율 경계"
         },
         {
           "slug": "ch23-02-s231",
           "source": "chapters/ch23-02-s231.md",
-          "label": "",
-          "title": "21.1.1 반모수 모형의 정의와 사례"
+          "label": "21.1",
+          "title": "21.1 반모수 모형의 정의와 사례"
         },
         {
           "slug": "ch23-03-s232",
           "source": "chapters/ch23-03-s232.md",
-          "label": "",
-          "title": "21.1.2 Cramér-Rao 한계의 반모수 확장"
+          "label": "21.2",
+          "title": "21.2 Cramér-Rao 한계의 반모수 확장"
         },
         {
           "slug": "ch23-04-s233",
           "source": "chapters/ch23-04-s233.md",
-          "label": "",
-          "title": "21.1.3 효율적 점수(efficient score)와 접선 공간(tangent space)"
+          "label": "21.3",
+          "title": "21.3 효율적 점수(efficient score)와 접선 공간(tangent space)"
         },
         {
           "slug": "ch23-05-s234",
           "source": "chapters/ch23-05-s234.md",
-          "label": "",
-          "title": "21.1.4 ATE 추정의 반모수 효율 한계 — 도출 과정"
+          "label": "21.4",
+          "title": "21.4 ATE 추정의 반모수 효율 한계 — 도출 과정"
         },
         {
           "slug": "ch24-01-bootstrap-failures",
           "source": "chapters/ch24-01-bootstrap-failures.md",
           "label": "22",
-          "title": "22?. ?????? ?? ??"
+          "title": "22장. 부트스트랩과 실패 사례"
         },
         {
           "slug": "ch24-02-s241",
           "source": "chapters/ch24-02-s241.md",
-          "label": "",
-          "title": "22.1.1 표준 부트스트랩의 타당성 조건"
+          "label": "22.1",
+          "title": "22.1 표준 부트스트랩의 타당성 조건"
         },
         {
           "slug": "ch24-03-s242",
           "source": "chapters/ch24-03-s242.md",
-          "label": "",
-          "title": "22.1.2 부트스트랩이 실패하는 경우 — 비정칙(non-regular) 추정량, 경계 문제"
+          "label": "22.2",
+          "title": "22.2 부트스트랩이 실패하는 경우 — 비정칙(non-regular) 추정량, 경계 문제"
         },
         {
           "slug": "ch24-04-s243",
           "source": "chapters/ch24-04-s243.md",
-          "label": "",
-          "title": "22.1.3 서브샘플링(subsampling)과 m-out-of-n 부트스트랩"
+          "label": "22.3",
+          "title": "22.3 서브샘플링(subsampling)과 m-out-of-n 부트스트랩"
         },
         {
           "slug": "ch24-05-s244",
           "source": "chapters/ch24-05-s244.md",
-          "label": "",
-          "title": "22.1.4 이중 기계학습에서의 교차 적합(cross-fitting)과 부트스트랩"
+          "label": "22.4",
+          "title": "22.4 이중 기계학습에서의 교차 적합(cross-fitting)과 부트스트랩"
         },
         {
           "slug": "ch25-01-partial-identification-framework",
           "source": "chapters/ch25-01-partial-identification-framework.md",
           "label": "23",
-          "title": "23?. ????? ?????"
+          "title": "23장. 부분식별의 프레임워크"
         },
         {
           "slug": "ch25-02-s251",
           "source": "chapters/ch25-02-s251.md",
-          "label": "",
-          "title": "23.1.1 식별 집합(identification region)의 정의와 구성"
+          "label": "23.1",
+          "title": "23.1 식별 집합(identification region)의 정의와 구성"
         },
         {
           "slug": "ch25-03-s252",
           "source": "chapters/ch25-03-s252.md",
-          "label": "",
-          "title": "23.1.2 단조 처치 반응(MTR) · 단조 도구변수(MIV) 가정"
+          "label": "23.2",
+          "title": "23.2 단조 처치 반응(MTR) · 단조 도구변수(MIV) 가정"
         },
         {
           "slug": "ch25-04-s253",
           "source": "chapters/ch25-04-s253.md",
-          "label": "",
-          "title": "23.1.3 Balke-Pearl 경계, Manski 경계의 계산"
+          "label": "23.3",
+          "title": "23.3 Balke-Pearl 경계, Manski 경계의 계산"
         },
         {
           "slug": "ch25-05-s254",
           "source": "chapters/ch25-05-s254.md",
-          "label": "",
-          "title": "23.1.4 부분 식별 결과의 보고와 해석"
+          "label": "23.4",
+          "title": "23.4 부분 식별 결과의 보고와 해석"
         },
         {
           "slug": "ch26-01-reproducibility-checklist",
           "source": "chapters/ch26-01-reproducibility-checklist.md",
           "label": "24",
-          "title": "24?. ????? ?????"
+          "title": "24장. 재현가능성 체크리스트"
         },
         {
           "slug": "ch26-02-s261",
@@ -800,19 +800,19 @@
           "slug": "app-a",
           "source": "chapters/app-a.md",
           "label": "부록 A",
-          "title": "부록 A. 확률론 기초 복습 — 조건부 기댓값 · 측도론 직관"
+          "title": "부록 A. 확률론 기초 - 인과효과 이해를 위한 최소 공통 언어"
         },
         {
           "slug": "app-b",
           "source": "chapters/app-b.md",
           "label": "부록 B",
-          "title": "부록 B. 선형 대수와 회귀의 기하학"
+          "title": "부록 B. 회귀모형 추정 방법"
         },
         {
           "slug": "app-c",
           "source": "chapters/app-c.md",
           "label": "부록 C",
-          "title": "부록 C. 주요 추정량 정리 및 가정 비교표"
+          "title": "부록 C. 통계적 추론과 가설검정"
         },
         {
           "slug": "app-d",
