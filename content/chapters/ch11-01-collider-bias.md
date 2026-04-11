@@ -3,10 +3,7 @@ title: 11. 시간, 동태성, 역인과성
 description: This chapter focuses on temporal ordering, simultaneity, dynamic treatment paths, and reverse causality in observational data.
 ---
 
-# 11. 시간, 동태성, 역인과성
-
-관측자료 분석에서 가장 자주 놓치는 조건은 시간 순서다. 인과추론에서 원인은 결과보다 앞서 있어야 하지만, 현실의 데이터는 종종 특정 시점의 단면(snapshot)만 제공하거나, 처치와 결과가 반복적으로 상호작용한 뒤 남은 한 장면만 보여 준다. 이때 상관을 보았다고 해서 방향을 곧바로 확정할 수는 없다.
-
+# 9?. ??, ???, ????
 예를 들어 소득과 건강은 서로 영향을 주고, 교육과 기대도 함께 변하며, 정책 참여와 노동시장 성과는 여러 시점에 걸쳐 누적적으로 연결된다. 따라서 “무엇이 먼저였는가”와 “효과가 즉시 나타나는가 아니면 지연되는가”를 구분하지 않으면, 관측자료 분석은 쉽게 역인과성(reverse causality)이나 동시성(simultaneity)의 함정에 빠진다.
 
 ## 왜 시간 문제가 중요한가
