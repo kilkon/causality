@@ -1028,25 +1028,38 @@
 <p>복지수급자에게 제공되는 반복 상담은 1회 노출보다 일정 기간 누적 참여가 중요할 수 있다. 또한 상담을 많이 받을수록 취업확률이 높아질 수도 있지만, 반대로 취업이 잘 되지 않는 사람이 더 오래 상담체계 안에 남게 될 수도 있다. 즉 누적처치와 선택이 함께 얽힌다.</p>
 <h2 id="934-시각적-직관">9.3.4 시각적 직관</h2>
 <figure class="figure">
-  <svg viewBox="0 0 920 260" role="img" aria-label="누적처치와 지연효과">
-    <rect x="70" y="90" width="150" height="56" rx="12" fill="#dbeafe" stroke="#2563eb"/>
-    <rect x="280" y="90" width="150" height="56" rx="12" fill="#dbeafe" stroke="#2563eb"/>
-    <rect x="490" y="90" width="150" height="56" rx="12" fill="#dbeafe" stroke="#2563eb"/>
-    <text x="145" y="123" text-anchor="middle" font-size="18" fill="#1d4ed8">\(D_1\)</text>
-    <text x="355" y="123" text-anchor="middle" font-size="18" fill="#1d4ed8">\(D_2\)</text>
-    <text x="565" y="123" text-anchor="middle" font-size="18" fill="#1d4ed8">\(D_3\)</text>
-    <rect x="730" y="75" width="140" height="86" rx="16" fill="#dcfce7" stroke="#16a34a"/>
-    <text x="800" y="111" text-anchor="middle" font-size="20" fill="#166534">\(Y_t\)</text>
-    <text x="800" y="136" text-anchor="middle" font-size="15" fill="#166534">현재 결과</text>
-    <line x1="220" y1="118" x2="730" y2="118" stroke="#64748b" stroke-width="4" marker-end="url(#arr-dyn)"/>
-    <line x1="430" y1="118" x2="730" y2="118" stroke="#64748b" stroke-width="4" marker-end="url(#arr-dyn)"/>
-    <line x1="640" y1="118" x2="730" y2="118" stroke="#64748b" stroke-width="4" marker-end="url(#arr-dyn)"/>
-    <text x="475" y="98" text-anchor="middle" font-size="14" fill="#475569">초기 처치의 지연효과</text>
-    <text x="585" y="152" text-anchor="middle" font-size="14" fill="#475569">중간 시점 처치의 누적효과</text>
-    <text x="685" y="98" text-anchor="middle" font-size="14" fill="#475569">최근 처치의 직접효과</text>
-    <text x="455" y="205" text-anchor="middle" font-size="17" fill="#334155">현재 결과는 각 시점 처치가 누적되고 지연되어 합쳐진 결과로 이해해야 한다.</text>
+  <svg viewBox="0 0 940 360" role="img" aria-label="누적처치와 지연효과의 시각적 직관">
+    <line x1="90" y1="75" x2="680" y2="75" stroke="#94a3b8" stroke-width="4" marker-end="url(#arr-dyn-clean)"/>
+    <circle cx="150" cy="75" r="7" fill="#1d4ed8"/>
+    <circle cx="360" cy="75" r="7" fill="#1d4ed8"/>
+    <circle cx="570" cy="75" r="7" fill="#1d4ed8"/>
+    <text x="150" y="50" text-anchor="middle" font-size="15" fill="#334155">시점 1</text>
+    <text x="360" y="50" text-anchor="middle" font-size="15" fill="#334155">시점 2</text>
+    <text x="570" y="50" text-anchor="middle" font-size="15" fill="#334155">시점 3</text>
+    <rect x="85" y="110" width="130" height="56" rx="12" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="295" y="110" width="130" height="56" rx="12" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="505" y="110" width="130" height="56" rx="12" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="150" y="143" text-anchor="middle" font-size="18" fill="#1d4ed8">\(D_1\)</text>
+    <text x="360" y="143" text-anchor="middle" font-size="18" fill="#1d4ed8">\(D_2\)</text>
+    <text x="570" y="143" text-anchor="middle" font-size="18" fill="#1d4ed8">\(D_3\)</text>
+    <rect x="755" y="108" width="130" height="64" rx="14" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="820" y="141" text-anchor="middle" font-size="20" fill="#166534">\(Y_t\)</text>
+    <text x="820" y="162" text-anchor="middle" font-size="14" fill="#166534">현재 결과</text>
+    <line x1="215" y1="138" x2="755" y2="138" stroke="#64748b" stroke-width="3.5" marker-end="url(#arr-dyn-clean)"/>
+    <line x1="425" y1="138" x2="755" y2="138" stroke="#64748b" stroke-width="3.5" marker-end="url(#arr-dyn-clean)"/>
+    <line x1="635" y1="138" x2="755" y2="138" stroke="#64748b" stroke-width="3.5" marker-end="url(#arr-dyn-clean)"/>
+    <circle cx="300" cy="116" r="17" fill="#f59e0b"/>
+    <circle cx="520" cy="196" r="17" fill="#f59e0b"/>
+    <circle cx="680" cy="116" r="17" fill="#f59e0b"/>
+    <text x="300" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">A</text>
+    <text x="520" y="202" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">B</text>
+    <text x="680" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">C</text>
+    <rect x="70" y="235" width="800" height="88" rx="16" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="95" y="266" font-size="15" fill="#334155">A. 초기 처치 \(D_1\)은 현재 결과에 늦게 나타나는 지연효과를 만들 수 있다.</text>
+    <text x="95" y="292" font-size="15" fill="#334155">B. 중간 시점 처치 \(D_2\)는 앞선 처치와 합쳐져 누적효과를 형성할 수 있다.</text>
+    <text x="95" y="318" font-size="15" fill="#334155">C. 최근 처치 \(D_3\)는 현재 결과에 가장 직접적인 단기효과를 남길 수 있다.</text>
     <defs>
-      <marker id="arr-dyn" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <marker id="arr-dyn-clean" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
         <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
       </marker>
     </defs>
