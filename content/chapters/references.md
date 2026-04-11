@@ -118,3 +118,7 @@ description:
 - VanderWeele, T. J., & Ding, P. (2017). Sensitivity analysis in observational research: Introducing the E-value. *Annals of Internal Medicine, 167*(4), 268-274. https://doi.org/10.7326/M16-2607
 
 - VanderWeele, T. J., & Robins, J. M. (2009). Properties of monotonic effects on directed acyclic graphs. *Journal of Machine Learning Research, 10*, 699-718.
+
+- Hirano, K., Imbens, G. W., & Ridder, G. (2003). Efficient estimation of average treatment effects using the estimated propensity score. *Econometrica, 71*(4), 1161-1189. https://doi.org/10.1111/1468-0262.00442
+
+- Robins, J. M., Hernán, M. A., & Brumback, B. (2000). Marginal structural models and causal inference in epidemiology. *Epidemiology, 11*(5), 550-560. https://doi.org/10.1097/00001648-200009000-00011
