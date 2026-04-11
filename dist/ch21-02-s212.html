@@ -995,7 +995,7 @@
       <header class="chapter-header">
         <p class="breadcrumb">제6부 | 기계학습과 인과추론 · 19.2</p>
         <h1>19.2 DML과 직교화</h1>
-        <p class="description">이 절은 19.2 DML과 직교화의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
+        <p class="description">이중 기계학습의 핵심 직관인 nuisance 함수 추정, 직교 score, 교차 적합을 정책평가 맥락에서 설명한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1006,11 +1006,70 @@
       </header>
       <section class="chapter-body">
         <h1 id="192-dml과-직교화">19.2 DML과 직교화</h1>
-<p>이 절은 <strong>19.2 DML과 직교화</strong>의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
-<h2 id="192-dml과-직교화">19.2 DML과 직교화</h2>
-<p>DML(Double/Debiased ML)은 nuisance 함수(\(m(X), e(X)\))를 ML로 유연하게 추정하되, Neyman orthogonality를 이용해 1차 오차의 영향을 줄인다.</p>
-<p>\[ \psi(W;\theta,\eta) = (D-e(X))(Y-m(X)) - \theta (D-e(X))^2 \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>\(\eta=(m,e)\)의 추정오차가 작을수록 좋지만, 핵심은 교차적합(cross-fitting)과 직교 score로 편향을 낮추는 데 있다.</p></section>
+<p>정책평가에서 기계학습을 쓰고 싶을 때 가장 먼저 부딪히는 문제는 간단하다. 예측모형은 매우 유연하지만, 우리가 원하는 것은 예측 정확도 자체가 아니라 인과효과 \(\theta\)다. 공변량이 많고 비선형성이 강한 환경에서 전통적 회귀모형만으로는 \(m(X)=\mathbb{E}[Y\mid X]\)와 \(e(X)=\mathbb{E}[D\mid X]\)를 충분히 잘 근사하기 어렵다. 반대로 기계학습 모형을 그대로 쓰면 과적합 때문에 인과효과 추정이 불안정해질 수 있다. DML(Double/Debiased Machine Learning)은 바로 이 두 문제를 연결하는 틀이다.</p>
+<p>핵심 아이디어는 다음과 같다. 처치효과 \(\theta\) 자체를 직접 복잡한 모형으로 추정하려고 하지 말고, 먼저 결과모형과 성향점수모형 같은 nuisance 함수들을 유연하게 추정한 뒤, 그 오차에 덜 민감한 <strong>직교적(orthogonal)</strong> score를 사용해 \(\theta\)를 계산하자는 것이다.</p>
+<h2 id="1921-기본-설정">19.2.1 기본 설정</h2>
+<p>가장 단순한 partially linear regression 모형을 생각해 보자.</p>
+<p>\[ Y = \theta D + g(X) + U, \qquad \mathbb{E}[U \mid D,X]=0 \]</p>
+<p>\[ D = m(X) + V, \qquad \mathbb{E}[V \mid X]=0 \]</p>
+<p>여기서</p>
+<ul><li>\(Y\): 결과</li><li>\(D\): 처치</li><li>\(X\): 고차원 공변량</li><li>\(g(X)\): 결과에 대한 공변량의 영향</li><li>\(m(X)\): 처치에 대한 공변량의 영향</li></ul>
+<p>이다. 정책평가의 예로는 다음을 생각할 수 있다.</p>
+<ul><li>\(D\): 직업훈련 프로그램 참여 여부</li><li>\(Y\): 1년 후 고용 여부나 소득</li><li>\(X\): 연령, 성별, 학력, 과거 고용이력, 지역, 구직기간, 건강상태, 복지 수급 이력 등</li></ul>
+<p>이때 전통적 회귀는 \(g(X)\)와 \(m(X)\)를 비교적 단순한 선형식으로 두는 경우가 많다. 하지만 실제 행정자료에서는 비선형성, 상호작용, 희귀 하위집단 효과가 강하므로 랜덤포레스트, 부스팅, lasso, neural net 같은 유연한 도구가 유리할 수 있다.</p>
+<h2 id="1922-직교화의-의미">19.2.2 직교화의 의미</h2>
+<p>DML의 대표 score는 다음과 같이 쓸 수 있다.</p>
+<p>\[ \psi(W;\theta,\eta) = (D-e(X))(Y-m(X))-\theta(D-e(X))^2 \]</p>
+<p>여기서 \(W=(Y,D,X)\), \(\eta=(m,e)\)다. 이 식은 흔히 “잔차화(residualization)”의 관점에서 이해하면 직관적이다.</p>
+<ol><li>먼저 \(Y\)에서 \(X\)가 설명하는 부분 \(m(X)\)를 뺀다.</li><li>\(D\)에서도 \(X\)가 설명하는 부분 \(e(X)\)를 뺀다.</li><li>남은 잔차들끼리의 관계로 \(\theta\)를 추정한다.</li></ol>
+<p>즉</p>
+<p>\[ \tilde Y = Y-\hat m(X), \qquad \tilde D = D-\hat e(X) \]</p>
+<p>를 만든 뒤</p>
+<p>\[ \tilde Y = \theta \tilde D + \text{error} \]</p>
+<p>를 회귀하는 것과 같은 직관이다.</p>
+<h3 id="왜-이것이-중요한가">왜 이것이 중요한가</h3>
+<p>직교화의 핵심은 nuisance 함수 \(\eta\)의 작은 추정오차가 \(\theta\)에 미치는 1차 영향을 없애도록 score를 설계했다는 점이다. 이를 Neyman orthogonality라고 부른다. 수식으로는 진짜 nuisance \(\eta_0\) 근방에서</p>
+<p>\[ \partial_{\eta}\mathbb{E}\big[\psi(W;\theta_0,\eta)\big]\big|_{\eta=\eta_0}=0 \]</p>
+<p>가 되도록 만든 것이다. 따라서 \(\hat m(X)\), \(\hat e(X)\)가 완벽하지 않아도, 일정한 속도로만 수렴하면 \(\hat\theta\)는 여전히 잘 작동한다.</p>
+<p>이것이 정책평가에서 중요한 이유는 명확하다. 현실 자료에서 nuisance 함수는 언제나 어느 정도 틀리기 때문이다. DML은 “nuisance 모형을 완벽하게 맞춰야만 인과효과를 추정할 수 있다”는 부담을 줄여 준다.</p>
+<h2 id="1923-교차-적합cross-fitting">19.2.3 교차 적합(cross-fitting)</h2>
+<p>기계학습을 쓰면 과적합이 큰 문제가 된다. 같은 표본에서 \(\hat m(X)\), \(\hat e(X)\)를 학습하고 다시 같은 표본으로 \(\theta\)를 계산하면, 잔차가 인위적으로 작아져 편향이 커질 수 있다. 이를 줄이기 위해 DML은 교차 적합을 사용한다.</p>
+<p>가장 단순한 2-fold 예시는 다음과 같다.</p>
+<figure class="figure">
+  <svg viewBox="0 0 880 230" role="img" aria-label="DML 교차 적합">
+    <rect x="40" y="50" width="800" height="42" rx="10" fill="#e2e8f0"/>
+    <rect x="40" y="50" width="400" height="42" rx="10" fill="#bfdbfe"/>
+    <rect x="440" y="50" width="400" height="42" rx="10" fill="#c7f9cc"/>
+    <text x="240" y="78" text-anchor="middle" font-size="18" fill="#1e3a8a">Fold A</text>
+    <text x="640" y="78" text-anchor="middle" font-size="18" fill="#166534">Fold B</text>
+    <text x="240" y="135" text-anchor="middle" font-size="16" fill="#334155">A로 \(\hat m,\hat e\) 학습</text>
+    <text x="640" y="135" text-anchor="middle" font-size="16" fill="#334155">B로 \(\hat m,\hat e\) 학습</text>
+    <text x="240" y="168" text-anchor="middle" font-size="16" fill="#334155">B에 예측값 적용 후 잔차 계산</text>
+    <text x="640" y="168" text-anchor="middle" font-size="16" fill="#334155">A에 예측값 적용 후 잔차 계산</text>
+    <text x="440" y="208" text-anchor="middle" font-size="16" fill="#475569">마지막에 두 fold의 score를 합쳐 \(\hat\theta\) 계산</text>
+  </svg>
+  <figcaption>교차 적합은 nuisance 함수 학습용 표본과 효과 추정용 표본을 분리해 과적합 편향을 줄인다.</figcaption>
+</figure>
+<p>일반적인 \(K\)-fold 교차 적합에서는 각 fold \(k\)에 대해, 그 fold를 제외한 나머지 표본으로 nuisance 함수를 학습하고, fold \(k\)에만 예측값을 적용한다. 그런 다음 모든 fold의 점수를 합쳐 최종 \(\hat\theta\)를 구한다.</p>
+<p>정책평가에서 이것은 특히 중요하다. 행정자료는 표본이 크고 변수도 많기 때문에, 유연한 ML 모형이 쉽게 훈련표본을 과도하게 기억할 수 있기 때문이다.</p>
+<h2 id="1924-정책평가-사례로-보는-dml">19.2.4 정책평가 사례로 보는 DML</h2>
+<p>예를 들어 어떤 지방정부가 청년고용 바우처의 효과를 평가한다고 하자.</p>
+<ul><li>처치 \(D\): 바우처 수혜 여부</li><li>결과 \(Y\): 12개월 후 취업 여부</li><li>공변량 \(X\): 학력, 전공, 이전 일자리 수, 복지수급 여부, 지역 노동시장 상황, 가구배경, 상담참여 이력 등 수백 개 변수</li></ul>
+<p>이 상황에서 단순 회귀는 상호작용과 비선형성을 충분히 담기 어렵다. 반면 DML은 다음처럼 진행할 수 있다.</p>
+<ol><li>lasso나 boosting으로 \(\hat m(X)\)를 추정한다.</li><li>random forest나 boosted tree로 \(\hat e(X)\)를 추정한다.</li><li>교차 적합으로 각 개인의 \(\tilde Y_i\), \(\tilde D_i\)를 만든다.</li><li>최종적으로 \(\hat\theta\)와 표준오차를 계산한다.</li></ol>
+<p>이때 핵심은 “복잡한 행정자료를 더 잘 활용했다”는 것 자체보다, <strong>고차원 공변량 구조를 더 유연하게 제거한 뒤에도 인과효과 추정량이 통계적으로 안정되도록 설계되었다</strong>는 점이다.</p>
+<p>최근 정책평가 문헌에서는 산업정책, 고용보조금, 건강보험, 복지서비스 targeting 평가에서 DML과 orthogonal score를 활용하는 경우가 늘고 있다. 특히 변수 수가 많고 정책수혜 선택이 복잡한 행정자료에서는 DML이 전통적 선형 회귀보다 더 설득력 있는 보정 틀을 제공하는 경우가 많다.</p>
+<p>예를 들어 Yuan과 Liu(2024)는 중국의 산업정책 효과를 분석하며 DML을 활용해 고차원 도시 특성과 정책선정 편의를 더 유연하게 통제하려 했다. 이런 연구들은 DML이 단순한 방법론 유행이 아니라, 실제 정책평가 자료에서 “통제변수는 많지만 구조는 복잡한” 상황에 잘 맞는다는 점을 보여 준다.</p>
+<h2 id="1925-dml의-장점과-한계">19.2.5 DML의 장점과 한계</h2>
+<p>장점은 분명하다.</p>
+<ul><li>고차원 공변량을 유연하게 다룰 수 있다.</li><li>nuisance 함수 추정오차에 덜 민감하다.</li><li>교차 적합을 통해 과적합 문제를 완화한다.</li><li>정책행정 자료처럼 변수가 많은 데이터에 잘 맞는다.</li></ul>
+<p>하지만 한계도 있다.</p>
+<ul><li>DML이 조건부 독립 가정을 없애 주지는 않는다.</li><li>overlap이 나쁘면 아무리 ML을 써도 불안정하다.</li><li>nuisance 함수가 무엇을 학습했는지 해석이 어려울 수 있다.</li><li>행정자료의 측정오차나 선택적 누락을 자동으로 해결하지 않는다.</li></ul>
+<p>즉 DML은 “가정을 줄여 주는 방법”이 아니라, <strong>같은 가정 아래에서 더 유연하고 강건하게 추정하려는 방법</strong>이다.</p>
+<h2 id="1926-정책평가-연구자가-기억할-점">19.2.6 정책평가 연구자가 기억할 점</h2>
+<p>정책평가에서 DML을 사용할 때는 다음을 체크하는 것이 좋다.</p>
+<ol><li>어떤 식별 가정 아래에서 \(\theta\)를 추정하는지 먼저 분명히 쓴다.</li><li>nuisance 함수에 어떤 알고리즘을 썼는지 공개한다.</li><li>교차 적합 fold 구조와 튜닝 방식을 보고한다.</li><li>overlap과 extreme propensity score 문제를 함께 진단한다.</li><li>단순 회귀, AIPW 등과 결과를 비교해 강건성을 점검한다.</li></ol>
+<p>따라서 DML은 “기계학습을 붙인 회귀”가 아니라, <strong>정책효과 추정과 ML 예측을 분리하면서도 연결하는 통계적 설계 원리</strong>로 이해하는 것이 가장 적절하다.</p>
       </section>
       <nav class="chapter-nav">
         <a class="nav-prev" href="ch21-01-causal-ml.html">← 19.1 예측과 인과의 목표 차이</a>

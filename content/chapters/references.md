@@ -33,7 +33,11 @@ description:
 
 - Dehejia, R. H., & Wahba, S. (2002). Propensity score-matching methods for nonexperimental causal studies. *The Review of Economics and Statistics, 84*(1), 151-161. https://doi.org/10.1162/003465302317331982
 
+- Diemer, E. W., Shi, J., & Swanson, S. A. (2024). Partial identification of the effects of sustained treatment strategies. *Epidemiology, 35*(3), 308-312. https://doi.org/10.1097/EDE.0000000000001721
+
 - Elwert, F., & Winship, C. (2014). Endogenous selection bias: The problem of conditioning on a collider variable. *Annual Review of Sociology, 40*, 31-53. https://doi.org/10.1146/annurev-soc-071913-043455
+
+- Esposti, R. (2024). Non-monetary motivations of the EU agri-environmental policy adoption: A causal forest approach. *Journal of Environmental Management, 352*, Article 119992. https://doi.org/10.1016/j.jenvman.2023.119992
 
 - Flanders, W. D., & Ye, D. (2019). Limits for the magnitude of M-bias and certain other types of structural selection bias. *Epidemiology, 30*(3), 358-366. https://doi.org/10.1097/EDE.0000000000000972
 
@@ -95,6 +99,8 @@ description:
 
 - Russell, B. (1913). On the notion of cause. *Proceedings of the Aristotelian Society, 13*, 1-26.
 
+- Rehill, P., & Biddle, N. (2024). Transparency challenges in policy evaluation with causal machine learning: Improving usability and accountability. *Data & Policy, 6*, e43. https://doi.org/10.1017/dap.2024.35
+
 - Rose, E. K., & Shem-Tov, Y. (2024). Instrumental variables for ordered treatments with applications to the Oregon Health Insurance Experiment. *Journal of Econometrics, 240*(2), Article 105639. https://doi.org/10.1016/j.jeconom.2024.105639
 
 - Smith, J. A., & Todd, P. E. (2005). Does matching overcome LaLonde's critique of nonexperimental estimators? *Journal of Econometrics, 125*(1-2), 305-353. https://doi.org/10.1016/j.jeconom.2004.04.011
@@ -106,6 +112,8 @@ description:
 - Sun, L., & Abraham, S. (2021). Estimating dynamic treatment effects in event studies with heterogeneous treatment effects. *Journal of Econometrics, 225*(2), 175-199. https://doi.org/10.1016/j.jeconom.2020.09.006
 
 - Toulmin, S. E. (1950). *An examination of the place of reason in ethics*. Cambridge University Press.
+
+- Yuan, J., & Liu, S. (2024). A double machine learning model for measuring the impact of the Made in China 2025 strategy on green economic growth. *Scientific Reports, 14*, Article 12026. https://doi.org/10.1038/s41598-024-62916-0
 
 - VanderWeele, T. J., & Ding, P. (2017). Sensitivity analysis in observational research: Introducing the E-value. *Annals of Internal Medicine, 167*(4), 268-274. https://doi.org/10.7326/M16-2607
 
