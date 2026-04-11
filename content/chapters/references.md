@@ -122,3 +122,11 @@ description:
 - Hirano, K., Imbens, G. W., & Ridder, G. (2003). Efficient estimation of average treatment effects using the estimated propensity score. *Econometrica, 71*(4), 1161-1189. https://doi.org/10.1111/1468-0262.00442
 
 - Robins, J. M., Hernán, M. A., & Brumback, B. (2000). Marginal structural models and causal inference in epidemiology. *Epidemiology, 11*(5), 550-560. https://doi.org/10.1097/00001648-200009000-00011
+
+- Granger, C. W. J. (1969). Investigating causal relations by econometric models and cross-spectral methods. *Econometrica, 37*(3), 424-438. https://doi.org/10.2307/1912791
+
+- Holtz-Eakin, D., Newey, W., & Rosen, H. S. (1988). Estimating vector autoregressions with panel data. *Econometrica, 56*(6), 1371-1395. https://doi.org/10.2307/1913103
+
+- Leszczensky, L., & Wolbring, T. (2022). How to deal with reverse causality using panel data? Recommendations for researchers based on a simulation study. *Sociological Methods & Research, 51*(2), 837-865. https://doi.org/10.1177/0049124119882473
+
+- Ramos-Herrera, M. D. C., & Sosvilla-Rivero, S. (2025). Granger causality between public debt and economic growth: Further evidence from panel data. *Applied Economics Letters, 32*(3), 429-434. https://doi.org/10.1080/13504851.2023.2274300
