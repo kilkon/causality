@@ -37,6 +37,8 @@ description:
 
 - Cole, S. R., & Stuart, E. A. (2010). Generalizing evidence from randomized clinical trials to target populations: The ACTG 320 trial. *American Journal of Epidemiology, 172*(1), 107-115. https://doi.org/10.1093/aje/kwq084
 
+- Damonte, A., & Negri, F. (Eds.). (2023). *Causality in policy studies: A pluralist toolbox*. Springer. https://doi.org/10.1007/978-3-031-12982-7
+
 - Deaton, A. (2010). Instruments, randomization, and learning about development. *Journal of Economic Literature, 48*(2), 424-455. https://doi.org/10.1257/jel.48.2.424
 
 - Dehejia, R. H., & Wahba, S. (1999). Causal effects in nonexperimental studies: Reevaluating the evaluation of training programs. *Journal of the American Statistical Association, 94*(448), 1053-1062. https://doi.org/10.1080/01621459.1999.10473858
@@ -84,6 +86,8 @@ description:
 - Lewbel, A. (2019). The identification zoo: Meanings of identification in econometrics. *Journal of Economic Literature, 57*(4), 835-903. https://doi.org/10.1257/jel.20181361
 
 - Lewis, D. (1973). *Counterfactuals*. Harvard University Press.
+
+- Little, D. (2023). Causation in the social realm. In A. Damonte & F. Negri (Eds.), *Causality in policy studies: A pluralist toolbox* (pp. 13-34). Springer. https://doi.org/10.1007/978-3-031-12982-7_2
 
 - Manski, C. F. (2013). *Public policy in an uncertain world: Analysis and decisions*. Harvard University Press.
 
