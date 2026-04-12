@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>19.4 인과 숲과 CATE | 인과효과 추론 (Causal Inference)</title>
+  <title>19.4 인과 포레스트와 CATE | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 LLM을 활용하여 전자책 프로그램을 만든 후 내용도 LLM과 논문들을 참고해가면서 함께 수정한 것입니다. 내용에 환각이 없도록 저자가 여러번 살피면서 작업을 하고 있지만 혹시라도 오류가 있는 경우에는 언제든지 알려주시면 감사하겠습니다." />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "ch21-04-s214", "title": "19.4 인과 숲과 CATE", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch21-04-s214.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "ch21-04-s214", "title": "19.4 인과 포레스트와 CATE", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch21-04-s214.md"};</script>
 
 </head>
   <body>
@@ -749,7 +749,7 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch21-04-s214.html" aria-current="page">
                     <span class="sidebar-link-label">19.4</span>
-                    인과 숲과 CATE
+                    인과 포레스트와 CATE
                   </a>
                 </li>
                 
@@ -1015,8 +1015,8 @@
     <article class="chapter-card">
       <header class="chapter-header">
         <p class="breadcrumb">제6부 | 기계학습과 인과추론 쨌 19.4</p>
-        <h1>19.4 인과 숲과 CATE</h1>
-        <p class="description">causal forest가 조건부 평균처치효과를 어떻게 추정하는지, 정책 타기팅과 어떻게 연결되는지 설명한다.</p>
+        <h1>19.4 인과 포레스트와 CATE</h1>
+        <p class="description">causal forest가 조건부 평균처리효과를 어떻게 추정하는지, honest estimation과 bagging이 왜 중요한지, 정책 타기팅에 어떻게 연결되는지를 설명한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>釉뚮씪?곗??먯꽌 ?몄쭛</button>
@@ -1026,64 +1026,114 @@
         
       </header>
       <section class="chapter-body">
-        <h1 id="194-인과-숲과-cate">19.4 인과 숲과 CATE</h1>
-<p>CATE를 추정하려는 이유는 평균효과 하나만으로는 정책설계를 충분히 안내할 수 없기 때문이다. 같은 프로그램이라도 저소득층에게는 효과가 크고 고소득층에게는 작을 수 있으며, 취업취약계층과 비취약계층의 반응도 다를 수 있다. 인과 숲(causal forest)은 이런 <strong>효과의 이질성</strong>을 데이터에서 유연하게 학습하려는 대표적 방법이다.</p>
-<p>핵심 목표는</p>
+        <h1 id="194-인과-포레스트와-cate">19.4 인과 포레스트와 CATE</h1>
+<p>인과 포레스트(causal forest)는 “누구에게 효과가 큰가”를 데이터에서 유연하게 학습하려는 방법이다. 평균처리효과 하나만으로는 정책 타기팅에 필요한 정보를 충분히 주지 못할 때, 인과 포레스트는 공변량 \(X\)에 따라 달라지는 조건부 평균처리효과</p>
 <p>\[ \tau(x)=\mathbb{E}[Y(1)-Y(0)\mid X=x] \]</p>
-<p>를 추정하는 것이다. 즉 공변량 \(X=x\)를 가진 개인이나 집단에서 기대되는 조건부 평균처치효과를 알고 싶은 것이다.</p>
+<p>를 추정하는 데 사용된다.</p>
+<p>정책평가의 맥락에서 보면, 이 방법의 관심은 단순한 예측이 아니다. 핵심은 “같은 정책이라도 어떤 사람, 어떤 기관, 어떤 지역에서 효과가 더 큰가”를 식별 가정 아래에서 보다 유연하게 추정하는 것이다.</p>
 <h2 id="1941-왜-단순-subgroup-분석으로는-부족한가">19.4.1 왜 단순 subgroup 분석으로는 부족한가</h2>
-<p>정책평가에서 흔히 하는 subgroup 분석은 성별, 연령, 소득구간별로 표본을 나누고 각 집단의 평균효과를 비교하는 방식이다. 하지만 이 방법은 몇 가지 한계가 있다.</p>
-<ul><li>연구자가 미리 정한 몇 개 집단만 본다.</li><li>다중비교와 사후탐색 위험이 크다.</li><li>비선형 상호작용을 놓치기 쉽다.</li><li>희귀 하위집단에서는 표본이 너무 작아진다.</li></ul>
-<p>인과 숲은 이런 문제를 줄이기 위해, 회귀나 분류나무의 아이디어를 확장해 <strong>효과 차이가 큰 방향으로 표본을 분할</strong>한다.</p>
-<h2 id="1942-인과-숲의-기본-아이디어">19.4.2 인과 숲의 기본 아이디어</h2>
-<p>전통적 random forest가 예측오차를 줄이기 위해 분할을 반복한다면, causal forest는 <strong>처치효과 이질성을 잘 드러내는 분할</strong>을 찾는다. 직관적으로는 다음과 같은 질문을 반복한다.</p>
-<ul><li>어떤 변수에서 나누면 처치효과 차이가 가장 크게 드러나는가</li><li>어디에서 나누면 각 leaf 안의 처치군과 통제군 비교가 가장 안정적인가</li></ul>
-<p>최종적으로 한 개인 \(i\)의 CATE는 그 개인이 여러 나무에서 떨어지는 leaf 안의 “국소적 평균처치효과”를 평균한 값으로 볼 수 있다.</p>
-<h2 id="1943-honesty와-overfitting-방지">19.4.3 honesty와 overfitting 방지</h2>
-<p>인과 숲의 중요한 특징은 <strong>honesty</strong>다. 같은 데이터로 분할도 하고 효과도 계산하면 과적합이 심해질 수 있다. 그래서 많은 구현에서는 표본을 둘로 나누어</p>
-<ol><li>한쪽 표본으로 split rule을 정하고</li><li>다른 표본으로 leaf 안 효과를 추정한다.</li></ol>
-<p>이렇게 하면 “어디서 나눌지”와 “그 leaf의 효과가 얼마인지”를 분리할 수 있어 과적합을 줄일 수 있다.</p>
+<p>전통적인 subgroup 분석은 연구자가 미리 정한 몇 개 집단, 예를 들어 성별, 연령대, 소득계층별로 효과를 따로 계산하는 방식이다. 그러나 이 방식에는 한계가 있다.</p>
+<ul><li>연구자가 미리 정한 분할만 본다.</li><li>비선형성과 복잡한 상호작용을 잘 포착하지 못한다.</li><li>소표본 subgroup에서는 분산이 급격히 커진다.</li><li>사후적으로 많은 subgroup를 보면 다중비교 문제가 생긴다.</li></ul>
+<p>인과 포레스트는 이 문제를 해결하기 위해, “어디서 나누면 처치효과의 차이가 가장 잘 드러나는가”를 데이터 기반으로 반복 학습한다.</p>
+<h2 id="1942-인과-포레스트의-기본-목표">19.4.2 인과 포레스트의 기본 목표</h2>
+<p>인과 포레스트의 관심은 결과수준 \(Y\) 자체를 잘 예측하는 것이 아니라, 효과 함수 \(\tau(x)\)를 추정하는 것이다. 이를 위해 보통 다음과 같이 생각한다.</p>
+<p>\[ Y_i = m(X_i) + \tau(X_i)D_i + \varepsilon_i \]</p>
+<p>여기서</p>
+<ul><li>\(m(X_i)\): 공변량에 따른 평균 결과 수준</li><li>\(\tau(X_i)\): 공변량에 따라 달라지는 처리효과</li><li>\(D_i\): 처치 여부</li></ul>
+<p>전통적 random forest가 \(m(X)\)를 잘 근사하는 데 초점을 둔다면, causal forest는 \(\tau(X)\)의 지역적 차이를 드러내는 분할을 찾는 데 초점을 둔다.</p>
+<h2 id="1943-단계별로-보는-인과-포레스트-추정-절차">19.4.3 단계별로 보는 인과 포레스트 추정 절차</h2>
+<p>인과 포레스트의 추정은 대체로 다음 순서로 이해하면 된다.</p>
+<h3 id="1단계-표본에서-bootstrap-또는-subsample을-반복-추출한다">1단계. 표본에서 bootstrap 또는 subsample을 반복 추출한다</h3>
+<p>포레스트는 나무 하나로 추정하지 않는다. 전체 표본에서 반복적으로 부분표본을 뽑아 매우 많은 나무를 만든다. 이를 통해 특정 표본분할에 지나치게 의존하는 문제를 줄인다.</p>
+<p>각 나무 \(b=1,\dots,B\)에 대해 표본 \(I_b\)를 만든다고 하자.</p>
+<p>\[ I_b \subset \{1,\dots,n\} \]</p>
+<p>실무적으로는 bootstrap 재표집이나 without-replacement subsampling이 사용된다.</p>
+<h3 id="2단계-각-나무에서-효과-이질성을-가장-잘-드러내는-분할을-찾는다">2단계. 각 나무에서 효과 이질성을 가장 잘 드러내는 분할을 찾는다</h3>
+<p>일반 random forest는 분할 후 결과변수의 분산이 가장 줄어드는 split을 찾는다. 반면 causal forest는 “처치군과 통제군 사이의 효과 차이가 더 이질적으로 드러나는 split”을 찾는다.</p>
+<p>직관적으로는 다음 질문을 반복한다.</p>
+<ul><li>어떤 공변량으로 나누면 leaf 간 처리효과 차이가 커지는가</li><li>각 leaf 안에서 처치군과 통제군이 모두 충분히 남는가</li></ul>
+<p>즉, 분할 규칙은 예측오차 최소화가 아니라 <strong>효과 이질성 최대화와 overlap 유지</strong>를 동시에 고려한다.</p>
+<h3 id="3단계-honesty를-위해-분할용-표본과-효과추정용-표본을-분리한다">3단계. honesty를 위해 분할용 표본과 효과추정용 표본을 분리한다</h3>
+<p>이 단계가 causal forest의 가장 중요한 특징 중 하나다. 같은 표본으로 “어디서 나눌지”도 정하고 “그 leaf의 효과가 얼마인지”도 계산하면 과적합(overfitting)이 쉽게 발생한다. 그래서 많은 구현에서는 한 나무 안에서 표본을 둘로 나눈다.</p>
+<ul><li><code>split sample</code>: 분할 규칙을 정하는 표본</li><li><code>estimation sample</code>: leaf 안의 효과를 계산하는 표본</li></ul>
+<p>이를 형식적으로 쓰면 각 나무의 표본 \(I_b\)를 두 부분으로 나눈다.</p>
+<p>\[ I_b = I_b^{\text{split}} \cup I_b^{\text{est}}, \qquad I_b^{\text{split}} \cap I_b^{\text{est}} = \varnothing \]</p>
+<p><code>split sample</code>에서는 어디에서 가지를 칠지 정하고, <code>estimation sample</code>에서는 그 leaf 안의 처리효과를 계산한다.</p>
+<h3 id="4단계-각-leaf-안에서-지역적-효과를-계산한다">4단계. 각 leaf 안에서 지역적 효과를 계산한다</h3>
+<p>한 나무의 특정 leaf \(L_b(x)\)에 관측치 \(x\)가 속한다고 하자. 그러면 그 leaf 안의 처리효과는 대개 해당 leaf 안 처치군과 통제군의 지역 평균차이, 또는 잔차화(residualization)된 차이로 계산된다.</p>
+<p>가장 단순한 직관은</p>
+<p>\[ \hat\tau_b(x) = \bar{Y}_{L_b(x),D=1}</p>
+<ul><li>\bar{Y}_{L_b(x),D=0}</li></ul>
+<p>\]</p>
+<p>이다. 실제 구현에서는 propensity score와 outcome regression을 반영한 orthogonalized pseudo-outcome을 쓰기도 한다. 하지만 핵심은 같다. <strong>\(x\)와 비슷한 관측치들로 이루어진 leaf 안에서 처치군과 통제군을 비교해 지역적 효과를 계산한다</strong>는 점이다.</p>
+<h3 id="5단계-많은-나무의-결과를-평균해-최종-cate를-만든다">5단계. 많은 나무의 결과를 평균해 최종 CATE를 만든다</h3>
+<p>한 나무의 추정치는 불안정할 수 있다. 따라서 최종 추정치는 많은 나무에서 얻은 지역 효과를 평균해 만든다.</p>
+<p>\[ \hat\tau(x)=\frac{1}{B}\sum_{b=1}^B \hat\tau_b(x) \]</p>
+<p>이 평균화가 바로 포레스트의 핵심이고, 여기서 <code>bagging</code>의 의미가 살아난다.</p>
+<h2 id="1944-honest-estimation이-왜-중요한가">19.4.4 honest estimation이 왜 중요한가</h2>
+<p>honest estimation은 “한 표본으로 구조를 고르고, 다른 표본으로 값을 추정한다”는 원칙이다. 이 원칙이 중요한 이유는, 그렇지 않으면 나무가 우연한 표본 잡음을 따라가면서 효과차이가 큰 것처럼 보이는 분할을 과도하게 선택할 수 있기 때문이다.</p>
+<p>예를 들어 실제로는 효과 이질성이 약한데도 어떤 공변량 분할에서 우연히 처치군 평균과 통제군 평균의 차이가 크게 보일 수 있다. 같은 표본으로 그 split도 고르고, 그 split의 효과도 계산하면 leaf 효과가 과장되기 쉽다.</p>
+<p>honesty를 쓰면</p>
+<ol><li>분할 규칙은 <code>구조를 찾는 문제</code></li><li>leaf 효과 계산은 <code>값을 추정하는 문제</code></li></ol>
+<p>로 분리된다. 이 점이 예측용 tree와 인과용 tree를 가르는 핵심 차이다.</p>
 <figure class="figure">
-  <svg viewBox="0 0 900 270" role="img" aria-label="인과 숲의 기본 구조">
-    <rect x="40" y="32" width="820" height="50" rx="12" fill="#e2e8f0"/>
-    <text x="450" y="63" text-anchor="middle" font-size="22" fill="#334155">전체 표본</text>
-    <rect x="100" y="118" width="280" height="54" rx="12" fill="#bfdbfe" stroke="#2563eb"/>
-    <text x="240" y="150" text-anchor="middle" font-size="19" fill="#1e3a8a">분할 학습 표본</text>
-    <rect x="520" y="118" width="280" height="54" rx="12" fill="#c7f9cc" stroke="#16a34a"/>
-    <text x="660" y="150" text-anchor="middle" font-size="19" fill="#166534">효과 추정 표본</text>
-    <line x1="450" y1="82" x2="240" y2="118" stroke="#64748b" stroke-width="3"/>
-    <line x1="450" y1="82" x2="660" y2="118" stroke="#64748b" stroke-width="3"/>
-    <rect x="120" y="208" width="240" height="34" rx="10" fill="#eff6ff"/>
-    <text x="240" y="230" text-anchor="middle" font-size="15" fill="#1e40af">어떤 변수에서 나눌지 결정</text>
-    <rect x="540" y="208" width="240" height="34" rx="10" fill="#ecfdf5"/>
-    <text x="660" y="230" text-anchor="middle" font-size="15" fill="#166534">leaf 안 CATE 추정</text>
+  <svg viewBox="0 0 920 280" role="img" aria-label="Honest estimation 구조">
+    <rect x="60" y="24" width="800" height="52" rx="12" fill="#e2e8f0" />
+    <text x="460" y="56" text-anchor="middle" font-size="22" fill="#334155">전체 표본</text>
+    <rect x="110" y="122" width="290" height="58" rx="14" fill="#dbeafe" stroke="#2563eb" />
+    <rect x="520" y="122" width="290" height="58" rx="14" fill="#dcfce7" stroke="#16a34a" />
+    <text x="255" y="152" text-anchor="middle" font-size="19" fill="#1d4ed8">분할용 표본</text>
+    <text x="255" y="173" text-anchor="middle" font-size="14" fill="#1d4ed8">어디서 나눌지 결정</text>
+    <text x="665" y="152" text-anchor="middle" font-size="19" fill="#166534">추정용 표본</text>
+    <text x="665" y="173" text-anchor="middle" font-size="14" fill="#166534">leaf 안 효과 계산</text>
+    <line x1="460" y1="76" x2="255" y2="122" stroke="#64748b" stroke-width="3" />
+    <line x1="460" y1="76" x2="665" y2="122" stroke="#64748b" stroke-width="3" />
+    <rect x="220" y="220" width="490" height="34" rx="10" fill="#fff7ed" stroke="#d97706" />
+    <text x="465" y="242" text-anchor="middle" font-size="15" fill="#92400e">같은 표본으로 split과 effect를 동시에 정하지 않도록 분리</text>
   </svg>
-  <figcaption>인과 숲은 나무 분할과 효과 추정을 분리해 overfitting을 줄이려는 설계를 채택한다.</figcaption>
+  <figcaption>honest estimation은 분할 단계와 효과 추정 단계를 분리해 과적합과 편의를 줄이려는 설계다.</figcaption>
 </figure>
-<h2 id="1944-정책평가-사례">19.4.4 정책평가 사례</h2>
-<p>예를 들어 지방정부가 청년취업지원 바우처를 운영한다고 하자. 평균효과는 양(+)으로 나타났지만, 실제 정책질문은 더 구체적일 수 있다.</p>
-<ul><li>누구에게 우선 배정해야 하는가</li><li>어떤 하위집단에서 효과가 특히 큰가</li><li>예산이 제한될 때 타기팅 기준은 무엇이어야 하는가</li></ul>
-<p>이때 인과 숲은 연령, 학력, 이전 실업기간, 정신건강 이력, 지역 노동시장 상황, 복지수급 이력 등 다양한 행정변수를 이용해 \(\hat\tau(x)\)를 추정할 수 있다. 예를 들어 추정 결과가 다음과 같을 수 있다.</p>
-<ul><li>장기실업 + 저학력 + 대도시 거주 청년: \(\hat\tau(x)\)가 큼</li><li>단기실업 + 고학력 + 민간취업지원 접근성이 높은 청년: \(\hat\tau(x)\)가 작음</li></ul>
-<p>이런 결과는 단순한 평균효과보다 정책설계에 훨씬 직접적이다. 예산이 제한된 상황에서 어디에 우선 투입할지 판단하는 근거가 되기 때문이다.</p>
-<h2 id="1945-인과-숲의-결과를-어떻게-읽어야-하는가">19.4.5 인과 숲의 결과를 어떻게 읽어야 하는가</h2>
-<p>인과 숲 결과를 읽을 때 중요한 점은 \(\hat\tau(x)\)가 “개인의 진짜 효과”를 완벽하게 알려 준다고 오해하지 않는 것이다. 인과 숲이 추정하는 것은 어디까지나 조건부 평균효과다. 즉 같은 \(X=x\)를 가진 집단 안에서의 평균적인 효과이지, 각 개인의 개별효과를 직접 관찰한 것은 아니다.</p>
-<p>또한 다음을 함께 점검해야 한다.</p>
-<ul><li>어떤 covariate가 leaf 분할에 반복적으로 등장하는가</li><li>극단적 propensity score 영역에서 효과가 과장되는 것은 아닌가</li><li>상위 decile과 하위 decile의 효과 차이가 통계적으로 안정적인가</li><li>다른 방법론과 결론이 비슷한가</li></ul>
-<h2 id="1946-정책-타기팅과-의사결정">19.4.6 정책 타기팅과 의사결정</h2>
-<p>인과 숲은 종종 개인화 처치규칙(individualized treatment rule, ITR)과 연결된다. 가장 단순한 규칙은</p>
-<p>\[ d^*(x)=\mathbb{1}[\hat\tau(x)&gt;c] \]</p>
-<p>처럼 쓸 수 있다. 여기서 \(c\)는 0일 수도 있고, 예산제약이나 비용-효과 기준을 반영한 임계값일 수도 있다. 예를 들어 프로그램 1인당 비용이 크다면 \(\hat\tau(x)\)가 충분히 큰 집단에만 배정하는 규칙이 더 적절할 수 있다.</p>
-<p>정책평가에서 중요한 점은 이 규칙이 단순한 예측점수 기반이 아니라, <strong>인과효과 기반의 우선순위 규칙</strong>이라는 것이다. 즉 “누가 취업할 가능성이 높은가”가 아니라 “누가 이 정책을 받았을 때 가장 많이 개선되는가”를 묻는다는 점에서 큰 차이가 있다.</p>
-<h2 id="1947-최근-문헌의-흐름과-주의점">19.4.7 최근 문헌의 흐름과 주의점</h2>
-<p>최근 정책평가와 행정데이터 연구에서는 causal forest를 이용해 조직요인, 복지프로그램, 의료서비스, 지역정책의 이질적 효과를 추정하는 연구가 늘고 있다. 다만 최근 문헌도 공통으로 강조하는 점은 다음과 같다.</p>
-<p>Esposti(2024)처럼 농업환경정책 참여의 이질적 효과를 causal forest로 분석하는 연구는, 동일한 정책도 어떤 농가에는 강하게 작동하고 어떤 농가에는 거의 작동하지 않는다는 점을 보여 준다. 반면 Rehill과 Biddle(2024)은 정책평가에서 인과 ML을 사용할 때 투명한 보고와 재현가능성 점검이 뒤따르지 않으면, 정교한 이질성 추정이 오히려 해석을 더 어렵게 만들 수 있다고 지적한다.</p>
-<ul><li>이질성 탐색은 식별 가정보다 앞설 수 없다.</li><li>CATE 결과는 holdout 검증과 calibration이 중요하다.</li><li>설명가능성(explainability)과 정책해석을 분리해서 다뤄야 한다.</li><li>타기팅 규칙은 형평성 문제와 함께 평가해야 한다.</li></ul>
-<p>즉 인과 숲은 “자동으로 정책대상을 골라 주는 알고리즘”이 아니라, <strong>효과의 이질성을 더 유연하게 학습해 정책설계에 참고정보를 제공하는 도구</strong>라고 이해하는 것이 적절하다.</p>
-<h2 id="1948-정책평가-연구자가-기억할-점">19.4.8 정책평가 연구자가 기억할 점</h2>
-<p>정책평가에서 causal forest를 사용할 때는 최소한 다음을 함께 보고하는 것이 좋다.</p>
-<ol><li>어떤 식별 가정 아래에서 CATE를 추정했는가</li><li>overlap이 나쁜 영역은 어떻게 처리했는가</li><li>honesty, sample split, tuning 방식은 무엇인가</li><li>상위·하위 효과 집단에서 실제 covariate profile은 무엇인가</li><li>타기팅 규칙이 효율성과 형평성에 각각 어떤 함의를 가지는가</li></ol>
-<p>결국 인과 숲의 가치는 “복잡한 데이터를 멋지게 돌렸다”는 데 있지 않다. 그 가치의 핵심은 <strong>정책효과가 누구에게 특히 큰지</strong>를 더 정교하게 보여 줌으로써, 평균효과 중심 정책평가를 한 단계 확장해 준다는 데 있다.</p>
+<h2 id="1945-bagging은-어떻게-분산을-줄이는가">19.4.5 bagging은 어떻게 분산을 줄이는가</h2>
+<p>bagging은 <code>bootstrap aggregating</code>의 줄임말이다. 아이디어는 간단하다. 표본이 조금만 바뀌어도 tree는 구조가 크게 달라질 수 있으므로, 한 개의 tree에 의존하면 분산이 매우 커진다. 그래서 많은 재표집에서 tree를 만들고, 그 결과를 평균해 불안정성을 줄인다.</p>
+<p>나무 하나의 추정치를 \(\hat\tau_b(x)\)라고 하고, 각 나무의 분산이 크더라도 서로 완전히 같은 오차를 갖지 않는다고 하자. 그러면 평균 추정치의 분산은 대략</p>
+<p>\[ \operatorname{Var}\big(\hat\tau(x)\big)</p>
+<p>= \operatorname{Var}\left(\frac{1}{B}\sum_{b=1}^B \hat\tau_b(x)\right) \]</p>
+<p>가 되고, 나무들 간 상관이 완전히 1이 아니라면 \(B\)가 커질수록 분산이 줄어든다. 바로 이 점 때문에 bagging은 tree 기반 방법의 변동성을 완화한다.</p>
+<p>정책평가에서는 이 점이 특히 중요하다. 효과 이질성을 찾는 문제는 원래 표본 분할의 불안정성이 크기 때문에, 단일 tree는 해석은 쉬워도 추정이 너무 흔들릴 수 있다. 포레스트는 그 불안정성을 ensemble 평균으로 완화한다.</p>
+<h2 id="1946-인과-포레스트를-실제로-어떻게-실행하는가">19.4.6 인과 포레스트를 실제로 어떻게 실행하는가</h2>
+<p>실제 분석 절차는 대체로 다음과 같이 정리할 수 있다.</p>
+<ol><li><strong>인과 질문과 식별 가정 정리</strong></li></ol>
+<p>예를 들어 \((Y(1),Y(0)) \perp D \mid X\) 가정 아래 CATE를 추정한다고 명시한다.</p>
+<ol><li><strong>공변량 \(X\) 정리</strong></li></ol>
+<p>정책 도입 이전에 측정된 변수만 포함한다. 처치 이후 변수나 매개변수를 넣으면 해석이 꼬일 수 있다.</p>
+<ol><li><strong>overlap 점검</strong></li></ol>
+<p>특정 집단에서 propensity score가 0 또는 1에 가까우면 국소 효과 추정이 불안정해진다.</p>
+<ol><li><strong>forest 적합</strong></li></ol>
+<p>많은 tree를 만들고, honesty를 적용하고, 최소 leaf 크기와 depth 등을 설정한다.</p>
+<ol><li><strong>개별 \(\hat\tau(x)\) 또는 subgroup 평균 계산</strong></li></ol>
+<p>모든 관측치에 대해 CATE를 예측하거나, 상위/하위 decile을 비교한다.</p>
+<ol><li><strong>정책해석</strong></li></ol>
+<p>\(\hat\tau(x)\)가 큰 집단이 누구인지, 그 집단에 우선 개입하는 규칙이 비용 대비 타당한지 검토한다.</p>
+<h2 id="1947-정책평가-예시">19.4.7 정책평가 예시</h2>
+<p>예를 들어 청년 취업지원 바우처를 평가한다고 하자. 평균효과는 양(+)이지만, 정책담당자는 다음이 궁금할 수 있다.</p>
+<ul><li>장기실업자에게 더 큰가</li><li>농촌 거주 청년에게 더 큰가</li><li>정신건강 취약 이력이 있는 집단에서 더 큰가</li><li>고학력 집단보다 저학력 집단에서 더 큰가</li></ul>
+<p>인과 포레스트는 이런 질문에 대해 \(\hat\tau(x)\)를 추정해 준다. 예를 들어</p>
+<ul><li>장기실업 + 저학력 + 교통취약 지역 거주 집단에서는 \(\hat\tau(x)\)가 큼</li><li>단기실업 + 대도시 거주 + 민간훈련 접근성이 높은 집단에서는 \(\hat\tau(x)\)가 작음</li></ul>
+<p>이라는 결과가 나올 수 있다. 그러면 정책담당자는 평균효과 하나만 볼 때보다, 어느 집단에 우선 배분할지 더 정교하게 판단할 수 있다.</p>
+<h2 id="1948-해석할-때의-주의점">19.4.8 해석할 때의 주의점</h2>
+<p>인과 포레스트는 매우 유연하지만, 몇 가지를 분명히 해야 한다.</p>
+<h3 id="1-식별은-forest가-해주는-것이-아니다">1. 식별은 forest가 해주는 것이 아니다</h3>
+<p>causal forest는 어디까지나 추정 도구다. 관측되지 않은 교란이 심하면 아무리 복잡한 포레스트도 편의를 자동으로 없애주지 못한다.</p>
+<h3 id="2-cate는-개인의-진짜-효과를-직접-관찰한-것이-아니다">2. CATE는 개인의 “진짜 효과”를 직접 관찰한 것이 아니다</h3>
+<p>\(\hat\tau(x)\)는 같은 \(X=x\)를 가진 집단 안 평균효과의 추정치이지, 개별 개인의 확정적 효과를 본 것이 아니다.</p>
+<h3 id="3-overlap이-약하면-불안정하다">3. overlap이 약하면 불안정하다</h3>
+<p>특정 공변량 영역에서 처치군이나 통제군이 거의 없으면 leaf 안 비교가 불안정해진다.</p>
+<h3 id="4-설명가능성과-정책가능성을-따로-봐야-한다">4. 설명가능성과 정책가능성을 따로 봐야 한다</h3>
+<p>\(\hat\tau(x)\)가 큰 집단을 찾는 것과, 그 집단에 실제로 정책을 우선 배정하는 것이 규범적으로 정당한지는 별개 문제다.</p>
+<h2 id="1949-정리">19.4.9 정리</h2>
+<p>인과 포레스트는 “평균효과 하나”를 넘어, 정책효과가 누구에게 더 큰지를 유연하게 추정하려는 방법이다. 그 핵심은 다음 세 가지로 요약할 수 있다.</p>
+<ol><li><strong>효과 이질성을 기준으로 나무를 분할한다.</strong></li><li><strong>honest estimation으로 분할과 효과추정을 분리해 과적합을 줄인다.</strong></li><li><strong>bagging으로 많은 나무를 평균해 분산을 낮춘다.</strong></li></ol>
+<p>따라서 causal forest는 단순한 블랙박스 예측기가 아니라, 식별 가정이 주어진 상황에서 <strong>효과 이질성을 안정적으로 추정하고 정책 타기팅에 연결하려는 ensemble 기반 인과추정 도구</strong>로 이해하는 것이 가장 적절하다.</p>
       </section>
       <nav class="chapter-nav">
         <a class="nav-prev" href="ch21-03-s213.html">??19.3 AIPW와 이중견고성</a>

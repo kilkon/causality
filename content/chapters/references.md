@@ -33,6 +33,8 @@ description:
 
 - Brand, J. E., Zhou, X., & Xie, Y. (2023). Recent developments in causal inference and machine learning. *Annual Review of Sociology, 49*, 81-110. https://doi.org/10.1146/annurev-soc-030420-015345
 
+- Breiman, L. (1996). Bagging predictors. *Machine Learning, 24*(2), 123-140. https://doi.org/10.1007/BF00058655
+
 - Breiman, L. (2001). Statistical modeling: The two cultures. *Statistical Science, 16*(3), 199-231. https://doi.org/10.1214/ss/1009213726
 
 - Buchanan, A. L., Hudgens, M. G., Cole, S. R., Mollan, K. R., & Sax, P. E. (2018). Generalizing evidence from randomized trials using inverse probability of sampling weights. *Journal of the Royal Statistical Society: Series A, 181*(4), 1193-1209. https://doi.org/10.1111/rssa.12380
