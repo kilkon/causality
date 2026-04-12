@@ -137,6 +137,8 @@ description:
 
 - Christensen, G., & Miguel, E. (2018). Transparency, reproducibility, and the credibility of economics research. *Journal of Economic Literature, 56*(3), 920-980. https://doi.org/10.1257/jel.20171350
 
+- Bloom, H. S. (1984). Accounting for no-shows in experimental evaluation designs. *Evaluation Review, 8*(2), 225-246. https://doi.org/10.1177/0193841X8400800205
+
 - Smith, J. A., & Todd, P. E. (2005). Does matching overcome LaLonde's critique of nonexperimental estimators? *Journal of Econometrics, 125*(1-2), 305-353. https://doi.org/10.1016/j.jeconom.2004.04.011
 
 - Smith, L. H., & VanderWeele, T. J. (2019). Bounding bias due to selection. *Epidemiology, 30*(4), 509-516. https://doi.org/10.1097/EDE.0000000000001032
@@ -182,5 +184,7 @@ description:
 - Casey, K., Glennerster, R., & Miguel, E. (2012). Reshaping institutions: Evidence on aid impacts using a preanalysis plan. *Quarterly Journal of Economics, 127*(4), 1755-1812. https://doi.org/10.1093/qje/qje027
 
 - Hardwicke, T. E., & Wagenmakers, E.-J. (2023). Reducing bias, increasing transparency and calibrating confidence with preregistration. *Nature Human Behaviour, 7*(1), 15-26. https://doi.org/10.1038/s41562-022-01497-2
+
+- Finkelstein, A., Taubman, S., Wright, B., Bernstein, M., Gruber, J., Newhouse, J. P., Allen, H., Baicker, K., & the Oregon Health Study Group. (2012). The Oregon Health Insurance Experiment: Evidence from the first year. *Quarterly Journal of Economics, 127*(3), 1057-1106. https://doi.org/10.1093/qje/qjs020
 
 - McKenzie, D. (2018). Improving transparency in observational social science research: A pre-analysis plan approach. *Economics Letters, 168*, 56-60. https://doi.org/10.1016/j.econlet.2018.03.006
