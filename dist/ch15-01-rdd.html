@@ -1008,6 +1008,53 @@
         <h1 id="131-배정변수와-임계값의-역할">13.1 배정변수와 임계값의 역할</h1>
 <p>RDD는 배정변수 \(R\)가 임계값 \(c\)를 넘는지 여부로 처치가 결정될 때, \(c\) 근방 단위들 사이의 결과 불연속을 인과효과로 해석하는 설계다. 핵심은 “임계값 바로 좌우는 잠재결과가 연속”이라는 가정이다.</p>
 <h2 id="131-배정변수와-임계값의-역할">13.1 배정변수와 임계값의 역할</h2>
+<p>회귀불연속 설계(regression discontinuity design, RDD)를 이해하는 가장 좋은 출발점은 “점수 하나가 정책을 갈라놓는 상황”을 떠올리는 것이다. 시험점수, 소득인정액, 연령, 위험지수, 대기기간 같은 수치가 기준선을 넘으면 처치를 받고, 넘지 못하면 받지 못한다. 정책평가에서 이런 제도는 매우 흔하다.</p>
+<h2 id="먼저-rdd-개념부터-무엇을-비교하는-설계인가">먼저 RDD 개념부터: 무엇을 비교하는 설계인가</h2>
+<p>RDD의 기본 구조는 다음과 같이 쓸 수 있다.</p>
+<p>\[ D_i=\mathbb{1}[R_i \ge c] \]</p>
+<p>여기서</p>
+<ul><li>\(R_i\): 배정변수(running variable)</li><li>\(c\): 임계값(cutoff)</li><li>\(D_i\): 실제 처치 여부</li></ul>
+<p>이다. 즉 개인 \(i\)의 처치 여부는 \(R_i\)가 \(c\)를 넘는지 여부에 의해 제도적으로 결정된다.</p>
+<p>이때 RDD의 핵심 질문은 “전체 표본에서 누가 더 비슷한가”가 아니다. 오히려 <strong>임계값 바로 위와 바로 아래의 단위들은 제도 규칙만 빼면 거의 같은가</strong>를 묻는다. 따라서 RDD는 전표본 평균 비교가 아니라 <strong>경계 근방의 국소 비교(local comparison)</strong>를 이용하는 설계다.</p>
+<h2 id="수식으로-보면-무엇을-식별하는가">수식으로 보면 무엇을 식별하는가</h2>
+<p>RDD에서 관측되는 결과는</p>
+<p>\[ Y_i = D_iY_i(1) + (1-D_i)Y_i(0) \]</p>
+<p>로 쓸 수 있다. sharp RDD에서 cutoff에서의 인과효과는 보통 다음처럼 정의된다.</p>
+<p>\[ \tau_{SRD}(c) = \lim_{r\downarrow c}\mathbb{E}[Y\mid R=r] - \lim_{r\uparrow c}\mathbb{E}[Y\mid R=r] \]</p>
+<p>이 식은 임계값 바로 오른쪽의 평균 결과와 왼쪽의 평균 결과 차이를 뜻한다. 그런데 이 차이를 인과효과로 읽으려면, 처치가 없었다면 결과함수가 cutoff에서 매끈하게 이어졌을 것이라는 연속성 가정이 필요하다.</p>
+<p>\[ \lim_{r\downarrow c}\mathbb{E}[Y(0)\mid R=r] = \lim_{r\uparrow c}\mathbb{E}[Y(0)\mid R=r] \]</p>
+<p>\[ \lim_{r\downarrow c}\mathbb{E}[Y(1)\mid R=r] = \lim_{r\uparrow c}\mathbb{E}[Y(1)\mid R=r] \]</p>
+<p>이 가정이 설득력 있다면, 관측된 결과의 점프는 처치 때문이라고 해석할 수 있다. 즉 RDD는 “연속적이어야 할 결과가 cutoff에서 갑자기 끊기면, 그 불연속은 제도적 처치 때문에 생긴 것”이라는 논리를 사용한다.</p>
+<h2 id="시각적으로-보면-무엇을-보는가">시각적으로 보면 무엇을 보는가</h2>
+<figure class="figure">
+  <svg viewBox="0 0 940 360" role="img" aria-label="RDD의 기본 개념과 cutoff에서의 점프">
+    <defs>
+      <marker id="arr-rdd-131" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#8f3b1b"></path>
+      </marker>
+    </defs>
+    <rect x="70" y="35" width="800" height="250" rx="18" fill="#fffdf8" stroke="#e9d7c3"/>
+    <line x1="120" y1="250" x2="820" y2="250" stroke="#6b5d52" stroke-width="2.2"/>
+    <line x1="120" y1="250" x2="120" y2="80" stroke="#6b5d52" stroke-width="2.2"/>
+    <text x="470" y="300" text-anchor="middle" font-size="18" fill="#4b5563">배정변수 \(R\)</text>
+    <text x="72" y="165" text-anchor="middle" font-size="18" fill="#4b5563" transform="rotate(-90 72 165)">결과 \(Y\)</text>
+    <line x1="500" y1="85" x2="500" y2="250" stroke="#c2410c" stroke-width="3" stroke-dasharray="10 7"/>
+    <text x="500" y="72" text-anchor="middle" font-size="18" fill="#9a3412">cutoff \(c\)</text>
+    <path d="M150 220 C250 205, 330 185, 485 170" fill="none" stroke="#2563eb" stroke-width="4"/>
+    <path d="M515 135 C610 125, 690 105, 790 92" fill="none" stroke="#16a34a" stroke-width="4"/>
+    <circle cx="485" cy="170" r="6" fill="#2563eb"/>
+    <circle cx="515" cy="135" r="6" fill="#16a34a"/>
+    <line x1="485" y1="170" x2="515" y2="135" stroke="#b91c1c" stroke-width="4" marker-end="url(#arr-rdd-131)"/>
+    <text x="305" y="190" text-anchor="middle" font-size="16" fill="#1d4ed8">cutoff 왼쪽의 평균 결과</text>
+    <text x="685" y="118" text-anchor="middle" font-size="16" fill="#15803d">cutoff 오른쪽의 평균 결과</text>
+    <text x="555" y="160" font-size="16" fill="#b91c1c">불연속 크기 = 국소 효과</text>
+    <text x="470" y="334" text-anchor="middle" font-size="15" fill="#6b5d52">핵심은 cutoff에서의 “점프”를 읽는 것이다.</text>
+  </svg>
+  <figcaption>RDD는 결과함수 전체를 비교하는 것이 아니라, cutoff 바로 좌우에서 발생하는 불연속을 읽는다. 이 점프가 sharp RDD의 핵심 estimand다.</figcaption>
+</figure>
+<p>이 그림에서 중요한 것은 두 가지다.</p>
+<ol><li>cutoff에서 멀리 떨어진 관측치들은 서로 꽤 다를 수 있다.</li><li>하지만 cutoff 바로 근처에서는 좌우 단위들이 매우 비슷하고, 제도 규칙 때문에 처치 여부만 달라질 수 있다.</li></ol>
+<p>따라서 RDD의 직관은 “넓게 보면 다른 집단이지만, 경계 바로 근처에서는 비교 가능한 단위들”이라는 데 있다.</p>
 <p>회귀불연속 설계(RDD)의 출발점은 매우 제도적이다. 어떤 정책이나 프로그램에서 개인의 처치 여부가 시험점수, 소득, 연령, 위험지수 같은 <strong>배정변수(running variable)</strong> \(R_i\)가 특정 임계값 \(c\)를 넘는지에 따라 달라질 때, cutoff는 사실상 처치를 켜고 끄는 스위치가 된다.</p>
 <p>\[ D_i=\mathbb{1}[R_i\ge c] \]</p>
 <p>이 규칙이 엄격히 적용되면, \(R_i\)가 \(c\) 바로 위인 사람과 바로 아래인 사람은 매우 비슷하지만 처치 여부만 달라질 수 있다. RDD는 바로 이 “경계 근방의 비교”를 이용한다. 그래서 RDD는 전체 표본 평균 효과가 아니라 \(R=c\) 근방의 <strong>국소 효과(local effect)</strong>를 목표로 한다.</p>
@@ -1023,6 +1070,9 @@
 <p>그리고 similarly</p>
 <p>\[ \lim_{r\uparrow c}\mathbb{E}[Y(1)\mid R=r] = \lim_{r\downarrow c}\mathbb{E}[Y(1)\mid R=r] \]</p>
 <p>라고 볼 수 있다. 이때 관측된 결과의 불연속은 처치 때문이라고 해석할 수 있다. 즉 cutoff는 단순한 기준점이 아니라, <strong>식별이 발생하는 지점</strong>이다.</p>
+<p>정책평가에서 이 의미는 매우 중요하다. cutoff는 단지 행정 편의상 정한 숫자가 아니라, 연구자가 인과효과를 읽을 수 있는 제도적 경계가 된다. 따라서 좋은 RDD 연구는 단순히 점수 규칙을 소개하는 데서 그치지 않고,</p>
+<ul><li>왜 그 cutoff가 실제로 배정규칙으로 작동했는지</li><li>cutoff 근방 단위들이 왜 비교 가능하다고 볼 수 있는지</li><li>cutoff에서 동시에 다른 정책이 바뀌지는 않는지</li></ul>
+<p>를 함께 설명해야 한다.</p>
 <h2 id="비슷한-사람끼리-비교가-여기서는-어떻게-구현되는가">“비슷한 사람끼리 비교”가 여기서는 어떻게 구현되는가</h2>
 <p>13장의 회귀조정, 매칭, IPW는 공변량 \(X\)를 이용해 처치군과 비교군을 비슷하게 만드는 접근이었다. 반면 RDD는 \(R\)의 아주 좁은 구간에 집중해, cutoff 바로 위와 아래를 비교한다.</p>
 <p>이 점에서 RDD의 핵심 직관은 다음과 같다.</p>
