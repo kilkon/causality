@@ -174,3 +174,13 @@ description:
 - Ramos-Herrera, M. D. C., & Sosvilla-Rivero, S. (2025). Granger causality between public debt and economic growth: Further evidence from panel data. *Applied Economics Letters, 32*(3), 429-434. https://doi.org/10.1080/13504851.2023.2274300
 
 - Robins, J. M., & Greenland, S. (1992). Identifiability and exchangeability for direct and indirect effects. *Epidemiology, 3*(2), 143-155. https://doi.org/10.1097/00001648-199203000-00013
+
+- Banerjee, A., Duflo, E., Finkelstein, A., Katz, L. F., Olken, B. A., & Sautmann, A. (2020). In praise of moderation: Suggestions for the scope and use of pre-analysis plans for RCTs in economics. *NBER Working Paper No. 26993*. https://doi.org/10.3386/w26993
+
+- Brodeur, A., Cook, N., Hartley, J. S., & Heyes, A. (2024). Do preregistration and preanalysis plans reduce p-hacking and publication bias? Evidence from 15,992 test statistics and suggestions for improvement. *Journal of Political Economy Microeconomics, 2*(3), 527-561. https://doi.org/10.1086/730455
+
+- Casey, K., Glennerster, R., & Miguel, E. (2012). Reshaping institutions: Evidence on aid impacts using a preanalysis plan. *Quarterly Journal of Economics, 127*(4), 1755-1812. https://doi.org/10.1093/qje/qje027
+
+- Hardwicke, T. E., & Wagenmakers, E.-J. (2023). Reducing bias, increasing transparency and calibrating confidence with preregistration. *Nature Human Behaviour, 7*(1), 15-26. https://doi.org/10.1038/s41562-022-01497-2
+
+- McKenzie, D. (2018). Improving transparency in observational social science research: A pre-analysis plan approach. *Economics Letters, 168*, 56-60. https://doi.org/10.1016/j.econlet.2018.03.006
