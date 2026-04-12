@@ -995,7 +995,7 @@
       <header class="chapter-header">
         <p class="breadcrumb">제6부 | 기계학습과 인과추론 · 19.1</p>
         <h1>19.1 예측과 인과의 목표 차이</h1>
-        <p class="description">ML은 \(P(Y\mid X)\) 예측에 강하지만, 인과 추론의 목표는 \(P(Y\mid do(D))\) 또는 \(E[Y(1)-Y(0)]\)다. 따라서 높은 예측 성능과 인과 식별은 별개의 문제다. 이 장은 두 세계를 연결하는 실무적 문법을 정리한다.</p>
+        <p class="description">기계학습은 보통 예측오차를 줄이는 데 최적화되어 있지만, 인과추론의 핵심은 개입 효과의 식별이다. 따라서 인과 ML은 예측 알고리즘을 그대로 쓰는 것이 아니라 식별과 추정을 분리해 결합하는 방식으로 이해해야 한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1006,11 +1006,114 @@
       </header>
       <section class="chapter-body">
         <h1 id="191-예측과-인과의-목표-차이">19.1 예측과 인과의 목표 차이</h1>
-<p>ML은 \(P(Y\mid X)\) 예측에 강하지만, 인과 추론의 목표는 \(P(Y\mid do(D))\) 또는 \(E[Y(1)-Y(0)]\)다. 따라서 높은 예측 성능과 인과 식별은 별개의 문제다. 이 장은 두 세계를 연결하는 실무적 문법을 정리한다.</p>
-<h2 id="191-예측과-인과의-목표-차이">19.1 예측과 인과의 목표 차이</h2>
-<p>예측은 손실함수 최소화가 목표이고, 인과는 반사실 효과의 식별·추정이 목표다. 같은 모델이라도 목적함수와 가정이 다르면 해석이 달라진다.</p>
-<p>\[ \text{Prediction target: } f^*(x)=E[Y\mid X=x], \qquad \text{Causal target: } \tau(x)=E[Y(1)-Y(0)\mid X=x]. \]</p>
-<section class="callout note"><div class="callout-title">note</div></section>
+<p>기계학습(machine learning, ML)을 인과효과 측정에 활용하려면 먼저 <strong>예측(prediction)</strong>과 <strong>인과(causal inference)</strong>가 무엇을 목표로 하는지 분명히 구분해야 한다. 이 구분이 흐려지면, 예측력이 높은 모형을 인과모형으로 오해하거나, 반대로 ML 전체를 "상관만 찾는 도구"로 과소평가하는 오류가 생긴다. 정책평가에서 정말 중요한 질문은 "누가 무엇을 잘 예측하느냐"가 아니라, <strong>무엇을 바꾸면 결과가 얼마나 달라지는가</strong>이기 때문이다.</p>
+<h2 id="1911-예측과-인과는-질문-자체가-다르다">19.1.1 예측과 인과는 질문 자체가 다르다</h2>
+<p>예측의 목표는 주어진 공변량 \(X\)로부터 결과 \(Y\)를 가능한 한 정확하게 맞히는 것이다. 이때 표준적인 목표함수는 보통 예측오차 최소화다.</p>
+<p>\[ f^*(x)=\arg\min_f \mathbb{E}\bigl[L(Y,f(X))\bigr] \]</p>
+<p>여기서 \(L(\cdot)\)은 제곱오차, 로그손실, 분류오차 같은 손실함수다. 따라서 예측문제의 핵심 평가지표는 out-of-sample RMSE, accuracy, AUC, log-loss처럼 <strong>표본 밖에서 얼마나 잘 맞히는가</strong>이다.</p>
+<p>반면 인과추론의 목표는 개입적 질문에 답하는 것이다. 예를 들면 다음과 같은 질문이다.</p>
+<ul><li>복지상담 배정 방식을 바꾸면 수급 탈락률이 감소하는가</li><li>학교 현장에 추가 튜터를 배치하면 학업성취도가 올라가는가</li><li>병원 평가 인센티브를 강화하면 재입원율이 감소하는가</li></ul>
+<p>이때 관심 대상은 예측함수 \(E[Y\mid X]\)가 아니라,</p>
+<p>\[ P(Y\mid do(D=d)) \]</p>
+<p>또는 잠재결과 언어로는</p>
+<p>\[ \tau = E[Y(1)-Y(0)], \qquad \tau(x)=E[Y(1)-Y(0)\mid X=x] \]</p>
+<p>와 같은 <strong>개입 효과</strong>다. 따라서 예측과 인과는 같은 데이터를 쓰더라도 묻는 질문이 다르다.</p>
+<h2 id="1912-왜-예측력이-높다고-인과적으로-타당한-것은-아닌가">19.1.2 왜 예측력이 높다고 인과적으로 타당한 것은 아닌가</h2>
+<p>정책평가에서 자주 드는 예가 경찰 배치와 범죄율이다. 어떤 데이터에서 경찰 수가 많은 지역일수록 범죄율도 높게 나타났다고 하자. 예측모형은 이 상관구조를 잘 학습해서 "경찰 수가 많은 지역은 범죄율이 높다"는 패턴을 높은 정확도로 재현할 수 있다. 그러나 이것만으로 "경찰을 늘리면 범죄가 증가한다"고 말할 수는 없다.</p>
+<p>더 그럴듯한 설명은 다음일 수 있다.</p>
+<p>\[ \text{높은 잠재 범죄위험} \rightarrow \text{경찰 추가 배치} \]</p>
+<p>\[ \text{높은 잠재 범죄위험} \rightarrow \text{높은 관측 범죄율} \]</p>
+<p>즉, 경찰 수와 범죄율의 높은 연관은 <strong>정책반응(policy response)</strong> 때문일 수 있다. 예측모형은 이를 잘 맞힐 수 있지만, 인과적으로는 완전히 다른 해석이 된다. 이런 이유로 높은 예측정확도는 곧바로 올바른 인과해석을 보장하지 않는다.</p>
+<p>이 차이를 직관적으로 정리하면 다음과 같다.</p>
+<svg viewBox="0 0 920 280" role="img" aria-label="예측과 인과의 목표 차이" style="width:100%;height:auto;margin:1.2rem 0;border:1px solid #dbe4f0;border-radius:18px;background:#fbfdff">
+  <rect x="30" y="30" width="390" height="220" rx="18" fill="#eef6ff" stroke="#90b4d8"/>
+  <rect x="500" y="30" width="390" height="220" rx="18" fill="#f5f9f2" stroke="#97b88c"/>
+  <text x="225" y="65" text-anchor="middle" font-size="26" font-weight="700" fill="#1d4e89">예측</text>
+  <text x="695" y="65" text-anchor="middle" font-size="26" font-weight="700" fill="#2f6b2f">인과</text>
+  <rect x="80" y="95" width="100" height="46" rx="10" fill="#ffffff" stroke="#7aa6d1"/>
+  <text x="130" y="124" text-anchor="middle" font-size="18" fill="#1f2937">X</text>
+  <rect x="270" y="95" width="100" height="46" rx="10" fill="#ffffff" stroke="#7aa6d1"/>
+  <text x="320" y="124" text-anchor="middle" font-size="18" fill="#1f2937">Y</text>
+  <line x1="180" y1="118" x2="270" y2="118" stroke="#1d4e89" stroke-width="4"/>
+  <polygon points="270,118 258,112 258,124" fill="#1d4e89"/>
+  <text x="225" y="170" text-anchor="middle" font-size="17" fill="#334155">무엇이 Y를 잘 맞히는가?</text>
+  <text x="225" y="198" text-anchor="middle" font-size="16" fill="#475569">평가기준: RMSE, AUC, accuracy</text>
+  <rect x="545" y="95" width="100" height="46" rx="10" fill="#ffffff" stroke="#8eb088"/>
+  <text x="595" y="124" text-anchor="middle" font-size="18" fill="#1f2937">D</text>
+  <rect x="745" y="95" width="100" height="46" rx="10" fill="#ffffff" stroke="#8eb088"/>
+  <text x="795" y="124" text-anchor="middle" font-size="18" fill="#1f2937">Y</text>
+  <line x1="645" y1="118" x2="745" y2="118" stroke="#2f6b2f" stroke-width="4"/>
+  <polygon points="745,118 733,112 733,124" fill="#2f6b2f"/>
+  <text x="695" y="170" text-anchor="middle" font-size="17" fill="#334155">D를 바꾸면 Y가 얼마나 달라지는가?</text>
+  <text x="695" y="198" text-anchor="middle" font-size="16" fill="#475569">평가기준: 식별, 편의, 추정의 강건성</text>
+  <circle cx="695" cy="222" r="16" fill="#dcefd6" stroke="#8eb088"/>
+  <text x="695" y="228" text-anchor="middle" font-size="16" fill="#1f2937">U</text>
+  <line x1="695" y1="206" x2="610" y2="141" stroke="#7a8f7a" stroke-width="3"/>
+  <line x1="695" y1="206" x2="780" y2="141" stroke="#7a8f7a" stroke-width="3"/>
+</svg>
+<p>왼쪽 패널은 관측된 패턴을 얼마나 잘 맞히는지가 핵심이다. 오른쪽 패널은 \(D\)와 \(Y\)의 관계를 왜곡하는 미관측 요인 \(U\)가 있을 수 있기 때문에, 단순한 패턴 학습만으로는 인과효과에 도달할 수 없음을 보여 준다.</p>
+<h2 id="1913-ml이-기본적으로-잘하는-일과-잘하지-못하는-일">19.1.3 ML이 기본적으로 잘하는 일과 잘하지 못하는 일</h2>
+<p>Breiman이 말한 "two cultures"의 구분을 빌리면, 전통적 통계와 ML은 종종 서로 다른 관심사를 갖는다. ML은 대체로 복잡한 함수 근사, 비선형성, 상호작용, 고차원 예측에 강하다. 랜덤포레스트, 부스팅, 신경망, SVM 같은 알고리즘은 주어진 \(X\)에서 \(Y\)의 예측력을 높이도록 설계되어 있다.</p>
+<p>그러나 인과효과 측정에 필요한 것은 단순한 함수 근사만이 아니다. 인과문제에서는 다음 질문이 먼저 해결되어야 한다.</p>
+<ol><li>어떤 estimand를 구하려는가</li></ol>
+<p>예: ATE, ATT, CATE, LATE</p>
+<ol><li>그 estimand는 어떤 가정 아래 식별되는가</li></ol>
+<p>예: 무작위배정, 조건부 독립, 도구변수 가정, 연속성 가정</p>
+<ol><li>그 식별된 양을 실제 표본에서 어떻게 추정할 것인가</li></ol>
+<p>예: 회귀조정, AIPW, DML, causal forest</p>
+<p>즉, <strong>식별은 연구설계와 인과이론의 문제</strong>이고, ML은 이 식별문제를 저절로 해결해 주지 않는다. 그래서 "ML은 예측에는 강하지만 인과에는 약하다"는 평가는 절반은 맞고 절반은 부족하다. 더 정확히 말하면, <strong>off-the-shelf ML은 인과효과를 식별하는 이론이 아니라 예측과 함수학습에 강한 계산 도구</strong>다.</p>
+<h2 id="1914-인과-ml의-핵심-식별과-추정의-분업">19.1.4 인과 ML의 핵심: 식별과 추정의 분업</h2>
+<p>최근 인과 ML 문헌의 핵심 메시지는 ML과 인과추론을 경쟁관계로 보지 말고 <strong>분업 관계</strong>로 보아야 한다는 것이다.</p>
+<ul><li>인과추론이 맡는 일: 연구질문 정식화, 잠재결과 정의, DAG 작성, 식별 가정 정당화</li><li>ML이 맡는 일: 고차원 nuisance function의 유연한 추정, 비선형성과 상호작용 포착, 효과이질성 탐색</li></ul>
+<p>이 관점을 식으로 쓰면 다음과 같다. 조건부 독립 가정 아래 ATE를 추정할 때 우리는 보통 다음 두 nuisance function을 다룬다.</p>
+<p>\[ e(X)=P(D=1\mid X), \qquad m_d(X)=E[Y\mid D=d,X]. \]</p>
+<p>이 함수들은 표적 파라미터 \(\tau\) 자체가 아니라, \(\tau\)를 추정하기 위해 필요한 <strong>보조 함수(nuisance function)</strong>다. 공변량이 많고 함수형이 복잡하면 선형회귀나 단순 로짓만으로는 이 함수들을 잘 근사하기 어렵다. 바로 이 지점에서 ML이 강점을 발휘한다.</p>
+<p>예를 들어 AIPW 또는 DML 계열에서는 다음과 같은 점수함수를 쓸 수 있다.</p>
+<p>\[ \psi(W;\tau,\eta)= \Bigl[m_1(X)-m_0(X)\Bigr] \frac{D\{Y-m_1(X)\}}{e(X)}</p>
+<ul><li>\frac{(1-D)\{Y-m_0(X)\}}{1-e(X)}</li><li>\tau,</li></ul>
+<p>\]</p>
+<p>여기서 \(\eta=\{e,m_0,m_1\}\)는 nuisance function 모음이다. 이 구조에서 ML은 주로 \(e(X)\), \(m_0(X)\), \(m_1(X)\)를 유연하게 추정하는 데 쓰이고, 표적 파라미터 \(\tau\)에 대한 추론은 orthogonal score와 cross-fitting 같은 인과추론 장치를 통해 안정화된다.</p>
+<p>따라서 인과 ML의 핵심 문장은 다음처럼 정리할 수 있다.</p>
+<blockquote><p>ML은 인과효과를 식별하는 이론이 아니라, 식별된 인과문제에서 필요한 고차원 nuisance function을 유연하게 추정하는 계산적 도구다.</p></blockquote>
+<h2 id="1915-왜-그냥-예측모형을-treatment-effect-estimation에-쓰면-안-되는가">19.1.5 왜 그냥 예측모형을 treatment effect estimation에 쓰면 안 되는가</h2>
+<p>정책평가에서는 종종 다음과 같은 유혹이 생긴다.</p>
+<ol><li>먼저 매우 강력한 예측모형을 적합한다.</li><li>그 예측력이 높으면 인과적 해석도 괜찮다고 생각한다.</li></ol>
+<p>하지만 이 접근은 여러 이유로 위험하다.</p>
+<h3 id="1-선택편의는-예측력이-좋아도-사라지지-않는다">(1) 선택편의는 예측력이 좋아도 사라지지 않는다</h3>
+<p>아무리 정교한 랜덤포레스트라도 미관측 교란이 남아 있으면 편향은 제거되지 않는다. 예측문제에서 좋은 성능은 "패턴을 잘 학습했다"는 뜻이지 "반사실 비교가 정당화되었다"는 뜻이 아니다.</p>
+<h3 id="2-regularization-bias가-표적-파라미터를-왜곡할-수-있다">(2) regularization bias가 표적 파라미터를 왜곡할 수 있다</h3>
+<p>라쏘, 트리, 부스팅처럼 shrinkage나 변수선택을 사용하는 알고리즘은 예측에는 강하지만, 정책효과처럼 작은 신호의 편향이 중요한 문제에서는 불리할 수 있다.</p>
+<h3 id="3-같은-표본에서-학습과-효과추정을-동시에-하면-과적합이-생긴다">(3) 같은 표본에서 학습과 효과추정을 동시에 하면 과적합이 생긴다</h3>
+<p>그래서 DML은 sample splitting과 cross-fitting을 사용한다. nuisance function을 학습하는 표본과 표적 파라미터를 계산하는 표본을 분리해, 과적합이 인과효과 추정에 직접 스며드는 것을 줄인다.</p>
+<h3 id="4-feature-importance는-인과-설명이-아니다">(4) feature importance는 인과 설명이 아니다</h3>
+<p>변수중요도나 SHAP 값은 "무엇이 예측에 기여하는가"를 보여 줄 수는 있어도, "무엇을 바꾸면 결과가 달라지는가"를 자동으로 말해 주지 않는다. 인과에서의 설명은 반사실 비교와 개입 가능성에 관한 설명이다.</p>
+<h2 id="1916-dml과-causal-forest는-이-문제를-어떻게-다르게-푸는가">19.1.6 DML과 causal forest는 이 문제를 어떻게 다르게 푸는가</h2>
+<p>이 절 뒤에서 다룰 인과 ML 방법들은 "예측모형을 그대로 인과효과로 읽는 것"과는 다르다.</p>
+<h3 id="dml">DML</h3>
+<p>DML은 평균효과나 부분선형 효과처럼 비교적 명확한 표적 파라미터를 놓고, 그 파라미터와 nuisance function을 분리한다. 그런 다음</p>
+<ul><li>orthogonal score</li><li>cross-fitting</li><li>sample splitting</li></ul>
+<p>을 통해 nuisance 추정 오차가 1차적으로 상쇄되도록 설계한다. 따라서 DML은 "ML을 붙인 회귀"가 아니라, <strong>인과추정에 맞게 ML을 재설계한 절차</strong>다.</p>
+<h3 id="causal-tree-causal-forest">causal tree / causal forest</h3>
+<p>causal forest는 예측트리처럼 \(Y\)를 가장 잘 맞히는 분할을 찾는 것이 아니라, <strong>처리효과 이질성을 잘 드러내는 분할</strong>을 찾는다. 즉 관심은</p>
+<p>\[ \tau(x)=E[Y(1)-Y(0)\mid X=x] \]</p>
+<p>가 어떤 \(x\)에서 큰지, 어떤 집단에서 작은지에 있다. 정책평가에서는 이것이 매우 중요하다. 예를 들어 취업지원 프로그램의 평균효과가 0에 가깝더라도,</p>
+<ul><li>청년층에는 큰 양(+)의 효과</li><li>장기실업자 중 일부에는 작은 효과</li><li>이미 민간지원이 풍부한 집단에는 거의 효과 없음</li></ul>
+<p>처럼 나타날 수 있다. 이런 구조를 탐색하는 데 causal forest는 강한 도구가 된다.</p>
+<h2 id="1917-정책평가에서-예측-ml과-인과-ml을-어떻게-구분해-써야-하는가">19.1.7 정책평가에서 예측 ML과 인과 ML을 어떻게 구분해 써야 하는가</h2>
+<p>행정자료와 정책자료에서는 두 접근이 모두 필요하지만 쓰임새가 다르다.</p>
+<h3 id="예측-ml이-특히-유용한-경우">예측 ML이 특히 유용한 경우</h3>
+<ul><li>어떤 수급자가 탈락 위험이 높은지 조기경보를 만들 때</li><li>어떤 지역에서 다음 분기 의료수요가 급증할지 예측할 때</li><li>민원 폭증, 재입원, 장기실업 가능성을 조기에 식별할 때</li></ul>
+<p>이 경우 관심은 보통 \(P(Y\mid X)\)의 정확한 근사다.</p>
+<h3 id="인과-ml이-필요한-경우">인과 ML이 필요한 경우</h3>
+<ul><li>사례관리 강도를 높이면 재수급률이 얼마나 줄어드는가</li><li>직업훈련 바우처를 제공하면 취업률이 얼마나 올라가는가</li><li>복지상담 개입이 누구에게 특히 큰 효과를 가지는가</li></ul>
+<p>이 경우 관심은 \(P(Y\mid do(D=d))\), \(ATE\), \(CATE\), \(policy value\)다. 따라서 연구설계와 식별전략이 먼저 제시되어야 하며, ML은 그 다음 단계에서 사용된다.</p>
+<h2 id="1918-예측-대-인과가-아니라-질문에-맞는-결합이-핵심이다">19.1.8 "예측 대 인과"가 아니라 "질문에 맞는 결합"이 핵심이다</h2>
+<p>정리하면, ML과 인과추론은 서로를 대체하는 관계가 아니다.</p>
+<ul><li>ML만으로는 인과효과를 자동으로 식별할 수 없다.</li><li>그렇다고 ML이 인과문제에 쓸모없는 것도 아니다.</li><li>핵심은 식별은 인과추론이 맡고, 추정의 유연성과 확장성은 ML이 맡는다는 점이다.</li></ul>
+<p>이 관점에서 최근 인과 ML 문헌은 "예측 중심 알고리즘을 인과에 오용하는 것"이 아니라, <strong>인과추론의 식별 논리를 유지하면서 추정 단계에서 ML의 계산적 강점을 활용하는 방법론적 발전</strong>으로 이해하는 것이 가장 정확하다.</p>
+<p>정책평가 연구자에게 실무적으로 중요한 체크리스트는 다음과 같다.</p>
+<ol><li>먼저 estimand와 식별 가정을 명확히 적는다.</li><li>그 다음 nuisance function을 어떤 ML로 추정할지 결정한다.</li><li>sample splitting, cross-fitting, overlap 점검을 함께 수행한다.</li><li>평균효과와 이질적 효과를 구분해 해석한다.</li><li>예측성능 지표와 인과적 타당성 지표를 혼동하지 않는다.</li></ol>
+<p>이 절의 핵심은 간단하다. <strong>예측과 인과는 경쟁하는 목표가 아니라 질문이 다른 문제</strong>이며, 인과 ML은 그 둘의 장점을 무비판적으로 섞는 것이 아니라 역할을 분리한 뒤 다시 결합하는 접근이다.</p>
       </section>
       <nav class="chapter-nav">
         <a class="nav-prev" href="ch21-00-ml-foundations.html">← 19 기계학습 방법의 이해</a>

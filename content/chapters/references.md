@@ -15,11 +15,21 @@ description:
 
 - Athey, S., & Imbens, G. W. (2017). The state of applied econometrics: Causality and policy evaluation. *Journal of Economic Perspectives, 31*(2), 3-32. https://doi.org/10.1257/jep.31.2.3
 
+- Athey, S., & Imbens, G. W. (2019). Machine learning methods that economists should know about. *Annual Review of Economics, 11*, 685-725. https://doi.org/10.1146/annurev-economics-080217-053433
+
+- Athey, S. (2017). Beyond prediction: Using big data for policy problems. *Science, 355*(6324), 483-485. https://doi.org/10.1126/science.aal4321
+
+- Athey, S., & Imbens, G. W. (2016). Recursive partitioning for heterogeneous causal effects. *Proceedings of the National Academy of Sciences, 113*(27), 7353-7360. https://doi.org/10.1073/pnas.1510489113
+
 - Banack, H. R., Mayeda, E. R., Fox, M. P., Naimi, A. I., & Whitcomb, B. W. (2025). Collider stratification bias II: Magnitude of bias. *American Journal of Epidemiology, 194*(4), 774-785. https://doi.org/10.1093/aje/kwae353
 
 - Bareinboim, E., & Pearl, J. (2013). Causal transportability with limited experiments. *Proceedings of the AAAI Conference on Artificial Intelligence, 27*(1), 95-101. https://doi.org/10.1609/aaai.v27i1.8692
 
 - Bernard, C. (1957). *An introduction to the study of experimental medicine* (H. C. Greene, Trans.). Dover Publications. (Original work published 1865)
+
+- Brand, J. E., Zhou, X., & Xie, Y. (2023). Recent developments in causal inference and machine learning. *Annual Review of Sociology, 49*, 81-110. https://doi.org/10.1146/annurev-soc-030420-015345
+
+- Breiman, L. (2001). Statistical modeling: The two cultures. *Statistical Science, 16*(3), 199-231. https://doi.org/10.1214/ss/1009213726
 
 - Buchanan, A. L., Hudgens, M. G., Cole, S. R., Mollan, K. R., & Sax, P. E. (2018). Generalizing evidence from randomized trials using inverse probability of sampling weights. *Journal of the Royal Statistical Society: Series A, 181*(4), 1193-1209. https://doi.org/10.1111/rssa.12380
 
@@ -69,6 +79,8 @@ description:
 
 - Lloyd, T., & Yang, D. (2025). The long shadow of early education: Evidence from a natural experiment in the Philippines. *NBER Working Paper* No. 33600. https://doi.org/10.3386/w33600
 
+- Mullainathan, S., & Spiess, J. (2017). Machine learning: An applied econometric approach. *Journal of Economic Perspectives, 31*(2), 87-106. https://doi.org/10.1257/jep.31.2.87
+
 - Lewbel, A. (2019). The identification zoo: Meanings of identification in econometrics. *Journal of Economic Literature, 57*(4), 835-903. https://doi.org/10.1257/jel.20181361
 
 - Lewis, D. (1973). *Counterfactuals*. Harvard University Press.
@@ -107,6 +119,8 @@ description:
 
 - Rose, E. K., & Shem-Tov, Y. (2024). Instrumental variables for ordered treatments with applications to the Oregon Health Insurance Experiment. *Journal of Econometrics, 240*(2), Article 105639. https://doi.org/10.1016/j.jeconom.2024.105639
 
+- Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C., Newey, W., & Robins, J. M. (2018). Double/debiased machine learning for treatment and structural parameters. *The Econometrics Journal, 21*(1), C1-C68. https://doi.org/10.1111/ectj.12097
+
 - Smith, J. A., & Todd, P. E. (2005). Does matching overcome LaLonde's critique of nonexperimental estimators? *Journal of Econometrics, 125*(1-2), 305-353. https://doi.org/10.1016/j.jeconom.2004.04.011
 
 - Smith, L. H., & VanderWeele, T. J. (2019). Bounding bias due to selection. *Epidemiology, 30*(4), 509-516. https://doi.org/10.1097/EDE.0000000000001032
@@ -126,6 +140,8 @@ description:
 - VanderWeele, T. J., & Robins, J. M. (2009). Properties of monotonic effects on directed acyclic graphs. *Journal of Machine Learning Research, 10*, 699-718.
 
 - Woodward, J. (2003). *Making things happen: A theory of causal explanation*. Oxford University Press.
+
+- Wager, S., & Athey, S. (2018). Estimation and inference of heterogeneous treatment effects using random forests. *Journal of the American Statistical Association, 113*(523), 1228-1242. https://doi.org/10.1080/01621459.2017.1319839
 
 - Hirano, K., Imbens, G. W., & Ridder, G. (2003). Efficient estimation of average treatment effects using the estimated propensity score. *Econometrica, 71*(4), 1161-1189. https://doi.org/10.1111/1468-0262.00442
 
