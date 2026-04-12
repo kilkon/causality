@@ -57,6 +57,8 @@ description:
 
 - Holland, P. W. (1986). Statistics and causal inference. *Journal of the American Statistical Association, 81*(396), 945-960. https://doi.org/10.1080/01621459.1986.10478354
 
+- Hernán, M. A. (2016). Does water kill? A call for less casual causal inferences. *Annals of Epidemiology, 26*(10), 674-680. https://doi.org/10.1016/j.annepidem.2016.08.016
+
 - Imbens, G. W., & Rubin, D. B. (2015). *Causal inference for statistics, social, and biomedical sciences: An introduction*. Cambridge University Press.
 
 - Jiang, Z., & Ding, P. (2017). The directions of selection bias. *Statistics & Probability Letters, 131*, 166-172. https://doi.org/10.1016/j.spl.2017.08.028
@@ -97,6 +99,8 @@ description:
 
 - Rubin, D. B. (1980). Randomization analysis of experimental data: The Fisher randomization test comment. *Journal of the American Statistical Association, 75*(371), 591-593. https://doi.org/10.1080/01621459.1980.10477520
 
+- Rubin, D. B. (2005). Causal inference using potential outcomes: Design, modeling, decisions. *Journal of the American Statistical Association, 100*(469), 322-331. https://doi.org/10.1198/016214504000001880
+
 - Russell, B. (1913). On the notion of cause. *Proceedings of the Aristotelian Society, 13*, 1-26.
 
 - Rehill, P., & Biddle, N. (2024). Transparency challenges in policy evaluation with causal machine learning: Improving usability and accountability. *Data & Policy, 6*, e43. https://doi.org/10.1017/dap.2024.35
@@ -117,7 +121,11 @@ description:
 
 - VanderWeele, T. J., & Ding, P. (2017). Sensitivity analysis in observational research: Introducing the E-value. *Annals of Internal Medicine, 167*(4), 268-274. https://doi.org/10.7326/M16-2607
 
+- VanderWeele, T. J., & Hernán, M. A. (2013). Causal inference under multiple versions of treatment. *Journal of Causal Inference, 1*(1), 1-20. https://doi.org/10.1515/jci-2012-0005
+
 - VanderWeele, T. J., & Robins, J. M. (2009). Properties of monotonic effects on directed acyclic graphs. *Journal of Machine Learning Research, 10*, 699-718.
+
+- Woodward, J. (2003). *Making things happen: A theory of causal explanation*. Oxford University Press.
 
 - Hirano, K., Imbens, G. W., & Ridder, G. (2003). Efficient estimation of average treatment effects using the estimated propensity score. *Econometrica, 71*(4), 1161-1189. https://doi.org/10.1111/1468-0262.00442
 
@@ -130,3 +138,5 @@ description:
 - Leszczensky, L., & Wolbring, T. (2022). How to deal with reverse causality using panel data? Recommendations for researchers based on a simulation study. *Sociological Methods & Research, 51*(2), 837-865. https://doi.org/10.1177/0049124119882473
 
 - Ramos-Herrera, M. D. C., & Sosvilla-Rivero, S. (2025). Granger causality between public debt and economic growth: Further evidence from panel data. *Applied Economics Letters, 32*(3), 429-434. https://doi.org/10.1080/13504851.2023.2274300
+
+- Robins, J. M., & Greenland, S. (1992). Identifiability and exchangeability for direct and indirect effects. *Epidemiology, 3*(2), 143-155. https://doi.org/10.1097/00001648-199203000-00013
