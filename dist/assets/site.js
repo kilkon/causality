@@ -6,6 +6,7 @@
   var currentLink = document.querySelector(".sidebar-link[aria-current='page']");
   var openSourceButtons = document.querySelectorAll("[data-open-source]");
   var openPathButtons = document.querySelectorAll("[data-open-path]");
+  var visitorCounter = document.querySelector("[data-visitor-counter]");
   var protocol = window.location.protocol;
   var canUseApi = protocol === "http:" || protocol === "https:";
 
@@ -20,6 +21,78 @@
       currentLink.scrollIntoView({ block: "center", inline: "nearest" });
     });
   }
+
+  function initVisitorCounter() {
+    if (!visitorCounter) return;
+
+    var valueTarget = visitorCounter.querySelector("[data-visitor-counter-value]");
+    var noteTarget = visitorCounter.querySelector("[data-visitor-counter-note]");
+    var ns = visitorCounter.getAttribute("data-counter-ns") || "kilkon.github.io";
+    var action = visitorCounter.getAttribute("data-counter-action") || "view";
+    var key = visitorCounter.getAttribute("data-counter-key") || "causality-homepage";
+    var host = window.location.hostname;
+    var isPublicSite = host === "kilkon.github.io";
+    var sessionKey = ["counterapi", ns, action, key].join("::");
+    var alreadyCounted = false;
+
+    try {
+      alreadyCounted = window.sessionStorage.getItem(sessionKey) === "1";
+    } catch (error) {
+      alreadyCounted = false;
+    }
+
+    var endpoint =
+      "https://counterapi.com/api/" +
+      encodeURIComponent(ns) +
+      "/" +
+      encodeURIComponent(action) +
+      "/" +
+      encodeURIComponent(key);
+
+    if (!isPublicSite || alreadyCounted) {
+      endpoint += "?readOnly=true";
+    }
+
+    fetch(endpoint)
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("counter_failed");
+        }
+        return response.json();
+      })
+      .then(function (payload) {
+        var formatted = new Intl.NumberFormat("ko-KR").format(payload.value || 0);
+        if (valueTarget) {
+          valueTarget.textContent = formatted + "명";
+        }
+        if (noteTarget) {
+          if (isPublicSite) {
+            noteTarget.textContent = alreadyCounted
+              ? "이 세션에서는 이미 집계된 공개 사이트 방문입니다."
+              : "공개 사이트 방문 시 한 세션당 한 번 집계됩니다.";
+          } else {
+            noteTarget.textContent = "로컬/미리보기에서는 읽기 전용으로 표시됩니다.";
+          }
+        }
+        if (isPublicSite && !alreadyCounted) {
+          try {
+            window.sessionStorage.setItem(sessionKey, "1");
+          } catch (error) {
+            // Ignore storage failures.
+          }
+        }
+      })
+      .catch(function () {
+        if (valueTarget) {
+          valueTarget.textContent = "표시 불가";
+        }
+        if (noteTarget) {
+          noteTarget.textContent = "방문자 수를 불러오지 못했습니다.";
+        }
+      });
+  }
+
+  initVisitorCounter();
 
   function setStatus(message, kind) {
     var status = document.querySelector("[data-editor-status]");

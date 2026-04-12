@@ -426,6 +426,17 @@ def build_index(book: dict, editable: bool) -> None:
       <p class="subtitle">{html.escape(book['subtitle'])}</p>
       <p class="meta">{html.escape(book['description'])}</p>
       <p class="lead">{html.escape(book['lead'])}</p>
+      <div
+        class="visitor-counter"
+        data-visitor-counter
+        data-counter-ns="kilkon.github.io"
+        data-counter-action="view"
+        data-counter-key="causality-homepage"
+      >
+        <span class="visitor-counter-label">누적 방문</span>
+        <strong class="visitor-counter-value" data-visitor-counter-value>불러오는 중...</strong>
+        <span class="visitor-counter-note" data-visitor-counter-note>공개 사이트 기준 방문 수를 표시합니다.</span>
+      </div>
       {hero_editor}
     </section>
     <section class="section-block">

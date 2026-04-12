@@ -214,6 +214,34 @@ a {
   border-radius: 0 14px 14px 0;
 }
 
+.visitor-counter {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 1.15rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(29, 107, 74, 0.16);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(29, 107, 74, 0.08), rgba(29, 107, 74, 0.03));
+}
+
+.visitor-counter-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.visitor-counter-value {
+  font-size: 1.4rem;
+  line-height: 1.1;
+  color: #1d6b4a;
+}
+
+.visitor-counter-note {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .section-block {
   max-width: var(--content-w);
   margin: 1.5rem auto 0;
@@ -748,6 +776,11 @@ a {
   .hero h1,
   .chapter-header h1 {
     font-size: clamp(1.6rem, 7vw, 2.25rem);
+  }
+
+  .visitor-counter {
+    display: flex;
+    width: 100%;
   }
 
   .chapter-header .breadcrumb,
