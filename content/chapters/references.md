@@ -21,6 +21,8 @@ description:
 
 - Athey, S., & Imbens, G. W. (2016). Recursive partitioning for heterogeneous causal effects. *Proceedings of the National Academy of Sciences, 113*(27), 7353-7360. https://doi.org/10.1073/pnas.1510489113
 
+- Athey, S., Tibshirani, J., & Wager, S. (2019). Generalized random forests. *The Annals of Statistics, 47*(2), 1148-1178. https://doi.org/10.1214/18-AOS1709
+
 - Banack, H. R., Mayeda, E. R., Fox, M. P., Naimi, A. I., & Whitcomb, B. W. (2025). Collider stratification bias II: Magnitude of bias. *American Journal of Epidemiology, 194*(4), 774-785. https://doi.org/10.1093/aje/kwae353
 
 - Bareinboim, E., & Pearl, J. (2013). Causal transportability with limited experiments. *Proceedings of the AAAI Conference on Artificial Intelligence, 27*(1), 95-101. https://doi.org/10.1609/aaai.v27i1.8692
@@ -32,6 +34,8 @@ description:
 - Bernard, C. (1957). *An introduction to the study of experimental medicine* (H. C. Greene, Trans.). Dover Publications. (Original work published 1865)
 
 - Brand, J. E., Zhou, X., & Xie, Y. (2023). Recent developments in causal inference and machine learning. *Annual Review of Sociology, 49*, 81-110. https://doi.org/10.1146/annurev-soc-030420-015345
+
+- Battocchi, K., Dillon, E., Hei, M., Lewis, G., Oka, P., Oprescu, M., Syrgkanis, V., & Wu, Z. S. (2019). EconML: A Python package for ML-based heterogeneous treatment effects estimation. *arXiv*. https://arxiv.org/abs/1906.0107
 
 - Breiman, L. (1996). Bagging predictors. *Machine Learning, 24*(2), 123-140. https://doi.org/10.1007/BF00058655
 
