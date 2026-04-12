@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>부록 C. 통계적 추론과 가설검정 | 인과효과 추론 (Causal Inference)</title>
+  <title>25장. 사례기반 인과효과 연구 | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 인과효과 추론 강의를 위해 준비했습니다. 계속 수정중인 원고입니다" />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "app-c", "title": "부록 C. 통계적 추론과 가설검정", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\app-c.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "ch27-01-case-based-causal-research", "title": "25장. 사례기반 인과효과 연구", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch27-01-case-based-causal-research.md"};</script>
 
 </head>
   <body>
@@ -928,7 +928,7 @@
                 </li>
                 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch27-01-case-based-causal-research.html">
+                  <a class="sidebar-link" href="ch27-01-case-based-causal-research.html" aria-current="page">
                     <span class="sidebar-link-label">25</span>
                     사례기반 인과효과 연구
                   </a>
@@ -969,7 +969,7 @@
                 </li>
                 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="app-c.html" aria-current="page">
+                  <a class="sidebar-link" href="app-c.html">
                     <span class="sidebar-link-label">부록 C</span>
                     통계적 추론과 가설검정
                   </a>
@@ -1014,189 +1014,43 @@
       
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">부록 · 부록 C</p>
-        <h1>부록 C. 통계적 추론과 가설검정</h1>
-        <p class="description">표준오차, 신뢰구간, 검정통계량, p값, 유의수준, 다중검정, 점근추론을 중심으로 인과추론에서 자주 쓰는 통계적 추론의 원리를 정리한다.</p>
+        <p class="breadcrumb">제7부 | 박사 수준: 반모수 이론과 효율성 · 25</p>
+        <h1>25장. 사례기반 인과효과 연구</h1>
+        <p class="description">정책학에서는 대규모 표본 기반 평균효과 연구만으로 충분하지 않은 경우가 많다. 이 장은 소수 사례 비교, 조건의 조합, 메커니즘 검증을 통해 인과를 추론하는 사례기반 접근의 위치를 정리한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
-          <button type="button" class="editor-button" data-open-source="app-c" title="C:\Users\owner\causal inference\causal inference2\content\chapters\app-c.md">Markdown 열기</button>
-          <span class="editor-path">C:\Users\owner\causal inference\causal inference2\content\chapters\app-c.md</span>
+          <button type="button" class="editor-button" data-open-source="ch27-01-case-based-causal-research" title="C:\Users\owner\causal inference\causal inference2\content\chapters\ch27-01-case-based-causal-research.md">Markdown 열기</button>
+          <span class="editor-path">C:\Users\owner\causal inference\causal inference2\content\chapters\ch27-01-case-based-causal-research.md</span>
         </div>
         
       </header>
       <section class="chapter-body">
-        <h1 id="부록-c-통계적-추론과-가설검정">부록 C. 통계적 추론과 가설검정</h1>
-<p>부록 A에서는 확률론의 기본 언어를 정리했고, 부록 B에서는 회귀모형을 어떻게 추정하는지 살펴보았다. 이제 자연스럽게 따라오는 질문은 이것이다. 어떤 추정량을 얻었다면, 그 값이 얼마나 불확실한지, 그리고 우리가 세운 가설과 얼마나 일치하는지를 어떻게 판단할 것인가.</p>
-<p>이 질문에 답하는 것이 통계적 추론(statistical inference)이다. 인과추론에서는 효과의 점추정치(point estimate)만 제시해서는 충분하지 않다. 평균처치효과가 0.12라고 해도, 그 값이 표본오차에 비해 충분히 정밀한지, 신뢰구간은 얼마나 넓은지, 설계와 표준오차 계산이 맞는지, 유의하지 않다는 말이 정말 "효과가 없다"는 뜻인지 따져봐야 한다.</p>
-<p>이 부록은 바로 그 언어를 정리한다.</p>
-<h2 id="c1-통계적-추론이란-무엇인가">C.1 통계적 추론이란 무엇인가</h2>
-<p>통계적 추론은 표본으로부터 모집단의 미지의 특성에 대해 판단하는 과정이다. 예를 들어 모집단 평균 \(\mu\), 회귀계수 \(\beta\), 평균처치효과 \(ATE\) 같은 양은 대개 직접 알 수 없고, 표본을 통해 추정한다.</p>
-<p>추론의 핵심 질문은 보통 세 가지다.</p>
-<ol><li>점추정치가 무엇인가</li><li>그 추정이 얼마나 불확실한가</li><li>특정 가설과 데이터가 얼마나 양립 가능한가</li></ol>
-<p>이 질문에 답하기 위해 표준오차, 신뢰구간, 검정통계량, p값, 유의수준, 점근분포 같은 도구를 사용한다.</p>
-<h2 id="c2-표집분포와-표준오차">C.2 표집분포와 표준오차</h2>
-<p>통계적 추론의 출발점은 추정량(estimator)도 확률변수라는 사실이다. 예를 들어 표본평균</p>
-<p>\[ \bar X = \frac{1}{n}\sum_{i=1}^n X_i \]</p>
-<p>는 표본이 달라질 때마다 값이 달라진다. 즉 \(\bar X\)에는 표집분포(sampling distribution)가 있다.</p>
-<p>표준오차(standard error)는 추정량의 표준편차를 뜻한다. 예를 들어 \(\bar X\)의 표준오차는</p>
-<p>\[ \mathrm{se}(\bar X)=\sqrt{\mathrm{Var}(\bar X)}. \]</p>
-<p>i.i.d. 표본에서</p>
-<p>\[ \mathrm{Var}(\bar X)=\frac{\sigma^2}{n} \]</p>
-<p>이므로</p>
-<p>\[ \mathrm{se}(\bar X)=\frac{\sigma}{\sqrt{n}}. \]</p>
-<p>실제로는 \(\sigma\)를 모르므로 표본표준편차 \(s\)로 대체해</p>
-<p>\[ \widehat{\mathrm{se}}(\bar X)=\frac{s}{\sqrt{n}} \]</p>
-<p>를 사용한다.</p>
-<p>인과추론에서도 마찬가지다. 평균차이 추정량, 회귀계수, ATT, ATE, DID 추정량 모두 각자 표집분포와 표준오차를 가진다.</p>
-<h2 id="c3-표준오차가-말해주는-것과-말해주지-못하는-것">C.3 표준오차가 말해주는 것과 말해주지 못하는 것</h2>
-<p>표준오차는 추정의 정밀성(precision)을 말해 준다. 표준오차가 작을수록 동일한 점추정치라도 더 정밀하게 추정되었다고 볼 수 있다.</p>
-<p>하지만 표준오차는 편향(bias)을 말해주지 않는다. 예를 들어 표본이 매우 커서 표준오차가 작아도, 식별 전략이 잘못되어 편향된 추정량이면 그 추정은 정밀하게 틀릴 수 있다. 따라서 인과추론에서는 표준오차를 해석할 때 항상 식별 가정과 함께 읽어야 한다.</p>
-<h2 id="c4-신뢰구간">C.4 신뢰구간</h2>
-<p>점추정치 하나만 제시하는 대신, 추정의 불확실성을 구간으로 나타내는 것이 신뢰구간(confidence interval)이다. 가장 기본적인 형태는</p>
-<p>\[ \hat\theta \pm z_{\alpha/2}\cdot \mathrm{se}(\hat\theta) \]</p>
-<p>이다. 여기서 \(z_{\alpha/2}\)는 표준정규분포의 분위수이다. 예를 들어 95% 신뢰구간이라면 보통 \(z_{0.025}\approx 1.96\)을 사용한다.</p>
-<p>즉</p>
-<p>\[ \hat\theta \pm 1.96\cdot \mathrm{se}(\hat\theta) \]</p>
-<p>가 대표적인 95% 신뢰구간이다.</p>
-<p>작은 표본에서 분산을 추정해야 할 때는 \(t\)-분포를 사용한다.</p>
-<p>\[ \hat\theta \pm t_{n-k-1,\alpha/2}\cdot \mathrm{se}(\hat\theta). \]</p>
-<h3 id="신뢰구간의-정확한-해석">신뢰구간의 정확한 해석</h3>
-<p>신뢰구간은 자주 오해된다. 95% 신뢰구간이란 "이 특정 구간에 모수가 들어갈 확률이 95%"라는 뜻이 아니다. 고전적 빈도주의 해석에서는 모수는 고정되어 있고, 표본을 반복 추출했을 때 이렇게 구성한 구간이 장기적으로 95%의 경우 참모수를 포함한다는 뜻이다.</p>
-<p>실무적으로는 "데이터와 추정 불확실성을 감안할 때, 모수의 plausible range가 어느 정도인가"를 보여주는 도구로 이해하면 좋다.</p>
-<h2 id="c5-가설검정의-기본-구조">C.5 가설검정의 기본 구조</h2>
-<p>가설검정(hypothesis testing)은 데이터가 어떤 가설과 얼마나 양립 가능한지를 판단하는 절차이다. 보통 영가설(null hypothesis)과 대립가설(alternative hypothesis)을 세운다.</p>
-<p>예를 들어 평균처치효과에 대해</p>
-<p>\[ H_0:\tau=0, \qquad H_1:\tau\neq 0 \]</p>
-<p>를 생각할 수 있다.</p>
-<p>회귀계수에 대해서도</p>
-<p>\[ H_0:\beta_j=0, \qquad H_1:\beta_j\neq 0 \]</p>
-<p>같은 검정을 자주 한다.</p>
-<p>가설검정의 일반 절차는 다음과 같다.</p>
-<ol><li>영가설과 대립가설을 정한다.</li><li>검정통계량을 계산한다.</li><li>그 통계량이 영가설 아래 얼마나 극단적인지 본다.</li><li>임계값 또는 p값을 이용해 판단한다.</li></ol>
-<h2 id="c6-t-통계량과-z-통계량">C.6 t-통계량과 z-통계량</h2>
-<p>가장 기본적인 검정통계량은 추정량을 표준화한 형태이다.</p>
-<p>\[ T=\frac{\hat\theta-\theta_0}{\mathrm{se}(\hat\theta)}. \]</p>
-<p>표본이 크거나 정규근사가 잘 작동하면</p>
-<p>\[ T \approx N(0,1) \]</p>
-<p>로 볼 수 있다. 작은 표본에서 정규선형모형 가정이 적절하면 \(t\)-분포를 사용한다.</p>
-<p>회귀계수 검정에서 매우 자주 보는 식은</p>
-<p>\[ t_j = \frac{\hat\beta_j-\beta_{j,0}}{\mathrm{se}(\hat\beta_j)}. \]</p>
-<p>특히 \(\beta_{j,0}=0\)이면</p>
-<p>\[ t_j = \frac{\hat\beta_j}{\mathrm{se}(\hat\beta_j)} \]</p>
-<p>가 된다.</p>
-<h2 id="c7-p값">C.7 p값</h2>
-<p>p값(p-value)은 영가설이 참이라고 가정했을 때, 관측된 통계량만큼 또는 그보다 더 극단적인 값이 나올 확률이다.</p>
-<p>양측검정에서는 보통</p>
-<p>\[ p = P(|T|\ge |t_{\mathrm{obs}}|\mid H_0) \]</p>
-<p>로 쓴다.</p>
-<p>예를 들어 \(p=0.03\)이면, 영가설이 참일 때 지금 관측한 정도의 극단성이 나올 확률이 3%라는 뜻이다.</p>
-<h3 id="p값의-흔한-오해">p값의 흔한 오해</h3>
-<p>p값은 다음을 뜻하지 않는다.</p>
-<ul><li>영가설이 참일 확률</li><li>대립가설이 참일 확률</li><li>효과의 크기</li><li>결과가 "중요하다"는 뜻</li></ul>
-<p>즉 p값은 데이터와 영가설의 적합성에 관한 지표이지, 연구질문의 중요성이나 정책효과의 실질적 크기를 직접 말해주지는 않는다.</p>
-<h2 id="c8-유의수준과-제1종-오류">C.8 유의수준과 제1종 오류</h2>
-<p>유의수준(significance level) \(\alpha\)는 영가설이 참인데도 기각할 확률을 미리 정한 기준이다. 흔히 0.05를 사용한다.</p>
-<p>\[ \alpha = P(\text{reject }H_0 \mid H_0 \text{ true}) \]</p>
-<p>이를 제1종 오류(Type I error)라고 한다.</p>
-<p>반대로 영가설이 거짓인데 기각하지 못하는 오류를 제2종 오류(Type II error)라고 한다.</p>
-<p>\[ \beta = P(\text{fail to reject }H_0 \mid H_1 \text{ true}) \]</p>
-<p>검정력(power)은</p>
-<p>\[ 1-\beta \]</p>
-<p>로 정의되며, 대립가설이 참일 때 영가설을 올바르게 기각할 확률이다.</p>
-<h2 id="c9-검정력">C.9 검정력</h2>
-<p>검정력은 실증연구에서 매우 중요하지만 자주 충분히 논의되지 않는다. 표본이 작거나 효과가 작거나 분산이 크면 진짜 효과가 있어도 유의하지 않을 수 있다. 따라서 "유의하지 않다"는 결과는 곧바로 "효과가 없다"는 뜻이 아니다.</p>
-<p>검정력은 대체로 다음 요인의 영향을 받는다.</p>
-<ul><li>표본크기 \(n\)</li><li>효과크기</li><li>오차분산</li><li>유의수준 \(\alpha\)</li><li>연구설계의 효율성</li></ul>
-<p>인과추론에서는 특히 설계가 비효율적이면 검정력이 크게 떨어질 수 있다. 예를 들어 공통지지가 약한 표본, 드문 처치, 과도한 가중치 불안정은 정밀성을 크게 해친다.</p>
-<h2 id="c10-신뢰구간과-검정의-관계">C.10 신뢰구간과 검정의 관계</h2>
-<p>많은 경우 신뢰구간과 가설검정은 같은 정보를 다른 형식으로 표현한다. 예를 들어 95% 신뢰구간이 0을 포함하지 않으면, 5% 유의수준에서</p>
-<p>\[ H_0:\theta=0 \]</p>
-<p>를 기각하게 된다.</p>
-<p>따라서 실무적으로는 p값만 제시하기보다 신뢰구간을 함께 제시하는 것이 훨씬 좋다. 신뢰구간은 유의 여부뿐 아니라 효과크기의 plausible range를 보여 주기 때문이다.</p>
-<h2 id="c11-단측검정과-양측검정">C.11 단측검정과 양측검정</h2>
-<p>검정은 단측(one-sided) 또는 양측(two-sided)일 수 있다. 예를 들어</p>
-<p>\[ H_0:\tau=0,\qquad H_1:\tau&gt;0 \]</p>
-<p>는 단측검정이고,</p>
-<p>\[ H_0:\tau=0,\qquad H_1:\tau\neq 0 \]</p>
-<p>는 양측검정이다.</p>
-<p>단측검정은 방향이 사전에 강하게 정당화될 때만 신중하게 사용해야 한다. 결과를 보고 나서 사후적으로 단측검정을 선택하면 유의수준 통제가 무너질 수 있다.</p>
-<h2 id="c12-점근추론">C.12 점근추론</h2>
-<p>현대 계량경제학과 인과추론의 많은 추론은 점근이론(asymptotic theory)에 기대고 있다. 핵심은 표본크기 \(n\)이 커질 때 추정량이 다음과 같은 형태를 만족한다는 것이다.</p>
-<p>\[ \sqrt{n}(\hat\theta-\theta_0)\xrightarrow{d}N(0,V). \]</p>
-<p>그러면 큰 표본에서</p>
-<p>\[ \hat\theta \approx N\left(\theta_0,\frac{V}{n}\right) \]</p>
-<p>로 근사할 수 있으므로, 표준오차와 신뢰구간, 검정을 구성할 수 있다.</p>
-<p>회귀계수, DID 추정량, IPW 추정량, 이중강건 추정량, 2SLS 추정량 등은 대부분 이런 점근정규성 위에서 추론이 이루어진다.</p>
-<h2 id="c13-wald-검정">C.13 Wald 검정</h2>
-<p>점근추론에서 가장 흔한 검정은 Wald 검정이다. 단일 제약 \(H_0:\theta=\theta_0\)에 대해서는</p>
-<p>\[ W=\frac{\hat\theta-\theta_0}{\mathrm{se}(\hat\theta)} \]</p>
-<p>가 기본적인 Wald 통계량이다.</p>
-<p>여러 제약 \(H_0:R\beta=r\)에 대해서는</p>
-<p>\[ W=(R\hat\beta-r)' \left[ R\widehat{\mathrm{Var}}(\hat\beta)R' \right]^{-1} (R\hat\beta-r) \]</p>
-<p>를 사용한다. 이 통계량은 적절한 조건 아래 카이제곱 분포를 따른다.</p>
-<p>회귀분석의 다중제약 검정, 선형조합 검정, 정책효과의 동시성 검정 등에 모두 등장한다.</p>
-<h2 id="c14-우도비-검정과-lm-검정">C.14 우도비 검정과 LM 검정</h2>
-<p>가능도 기반 모형에서는 우도비 검정(likelihood ratio test)과 라그랑주 승수 검정(Lagrange multiplier test, score test)도 자주 사용된다.</p>
-<p>우도비 검정은 제한모형과 비제한모형의 로그가능도 차이를 사용한다.</p>
-<p>\[ LR = 2\{\ell(\hat\theta_{\text{unrestricted}})-\ell(\hat\theta_{\text{restricted}})\}. \]</p>
-<p>LM 검정은 제한모형에서의 기울기(score)를 사용한다. 큰 표본에서 Wald, LR, LM은 서로 밀접한 관계를 가지며 동일한 귀무가설 아래 비슷한 분포를 갖는다.</p>
-<p>인과추론 본문에서는 Wald 검정을 가장 자주 보게 되지만, MLE 기반 모형에서는 LR 검정도 널리 쓰인다.</p>
-<h2 id="c15-f-검정과-여러-제약의-동시검정">C.15 F-검정과 여러 제약의 동시검정</h2>
-<p>회귀분석에서는 여러 계수가 동시에 0인지 검정할 때 F-검정을 자주 사용한다. 예를 들어</p>
-<p>\[ H_0:\beta_2=\beta_3=\beta_4=0 \]</p>
-<p>같은 가설을 생각해 보자.</p>
-<p>제한모형의 잔차제곱합을 \(SSR_r\), 비제한모형의 잔차제곱합을 \(SSR_u\)라 하면, 고전적 가정 아래</p>
-<p>\[ F= \frac{(SSR_r-SSR_u)/q}{SSR_u/(n-k-1)} \]</p>
-<p>를 사용한다. 여기서 \(q\)는 제약의 개수이다.</p>
-<p>정책평가에서 event-study의 사전추세 계수들이 동시에 0인지 보는 검정, 더미변수 묶음의 공동 유의성 검정 등이 대표적이다.</p>
-<h2 id="c16-군집표준오차와-추론">C.16 군집표준오차와 추론</h2>
-<p>인과추론에서 자주 만나는 중요한 문제는 관측치가 독립이 아닐 수 있다는 점이다. 같은 학교, 같은 지역, 같은 개인의 반복 관측은 서로 상관되어 있을 수 있다. 이 경우 보통 군집표준오차(cluster-robust standard errors)를 사용한다.</p>
-<p>기본 아이디어는 군집 내부 상관을 허용한 상태에서 분산을 추정하는 것이다. 군집을 \(g=1,\dots,G\)라고 하면 샌드위치 분산추정량은</p>
-<p>\[ \widehat{\mathrm{Var}}_{\mathrm{cluster}}(\hat\beta) = (X'X)^{-1} \left( \sum_{g=1}^G X_g'\hat u_g \hat u_g' X_g \right) (X'X)^{-1} \]</p>
-<p>처럼 쓸 수 있다.</p>
-<p>예를 들어 DID에서 주 단위 정책을 평가하면서 개인 수준 자료를 쓰는 경우, 개인 관측치가 많다고 해서 독립 표본이 많은 것은 아니다. 중요한 독립 단위는 실제로는 정책이 달라지는 군집 수일 수 있다.</p>
-<h2 id="c17-부트스트랩">C.17 부트스트랩</h2>
-<p>부트스트랩(bootstrap)은 추정량의 표집분포를 데이터 재표집으로 근사하는 방법이다. 표준오차를 해석적으로 계산하기 어렵거나, 비선형 추정량의 분포가 복잡할 때 유용하다.</p>
-<p>기본 절차는 다음과 같다.</p>
-<ol><li>원자료에서 복원추출로 부트스트랩 표본을 만든다.</li><li>각 표본에서 관심 추정량 \(\hat\theta^{*(b)}\)를 계산한다.</li><li>이를 여러 번 반복하여 분포를 근사한다.</li></ol>
-<p>부트스트랩 표준오차는</p>
-<p>\[ \widehat{\mathrm{se}}_{\mathrm{boot}}(\hat\theta) = \sqrt{ \frac{1}{B-1} \sum_{b=1}^B \left(\hat\theta^{<em>(b)}-\bar\theta^</em>\right)^2 } \]</p>
-<p>처럼 계산한다.</p>
-<p>다만 인과추론에서는 설계에 맞는 재표집이 중요하다. 군집구조가 있으면 cluster bootstrap을 써야 하고, 패널구조가 있으면 단위 또는 군집 수준 재표집이 더 적절할 수 있다.</p>
-<h2 id="c18-다중검정-문제">C.18 다중검정 문제</h2>
-<p>하나의 검정만 하면 5% 유의수준은 제1종 오류를 적절히 통제한다. 하지만 많은 가설을 동시에 검정하면 우연히 유의한 결과가 나올 확률이 커진다. 이를 다중검정(multiple testing) 문제라고 한다.</p>
-<p>예를 들어 서로 독립인 20개의 영가설을 모두 5% 수준에서 검정하면, 적어도 하나가 우연히 기각될 확률은</p>
-<p>\[ 1-(1-0.05)^{20}\approx 0.64 \]</p>
-<p>이다.</p>
-<p>정책평가에서 하위집단 효과를 많이 살펴보거나, 여러 결과변수를 동시에 검정하거나, event-study 계수를 많이 보고하면 이 문제가 심각해진다.</p>
-<p>대표적 보정 방법은 다음과 같다.</p>
-<ul><li>Bonferroni 보정</li><li>Holm 보정</li><li>Benjamini-Hochberg 방식(FDR 통제)</li></ul>
-<h2 id="c19-p값-중심-해석의-한계">C.19 p값 중심 해석의 한계</h2>
-<p>실증연구에서는 결과를 "유의하다 / 유의하지 않다"로만 나누는 습관이 강하다. 하지만 이분법적 해석은 여러 문제를 낳는다.</p>
-<ul><li>\(p=0.049\)와 \(p=0.051\)은 거의 다르지 않다.</li><li>큰 표본에서는 아주 작은 효과도 쉽게 유의해질 수 있다.</li><li>작은 표본에서는 실질적으로 큰 효과도 유의하지 않을 수 있다.</li><li>정책적으로 중요한 것은 종종 효과크기와 불확실성의 범위이다.</li></ul>
-<p>따라서 인과추론 연구에서는 가능하면 점추정치, 표준오차, 신뢰구간, 설계적 가정, 강건성 분석을 함께 제시하는 것이 바람직하다. p값은 그중 한 조각일 뿐이다.</p>
-<h2 id="c20-무효결과null-result의-해석">C.20 무효결과(null result)의 해석</h2>
-<p>유의하지 않은 결과는 두 가지 전혀 다른 뜻을 가질 수 있다.</p>
-<ol><li>효과가 실제로 0에 가깝다.</li><li>효과는 있지만 표본이 작거나 분산이 커서 정밀하게 구분하지 못했다.</li></ol>
-<p>따라서 무효결과를 해석할 때는 반드시 신뢰구간을 함께 보아야 한다. 예를 들어 추정치가 0.10이고 95% 신뢰구간이 \([-0.30,0.50]\)이라면, 이는 "효과가 없다"기보다 "효과를 정밀하게 모른다"에 가깝다.</p>
-<p>정책평가에서 이런 구분은 매우 중요하다. 왜냐하면 정책을 중단할지, 유지할지, 더 실험할지의 판단이 이 해석에 달려 있기 때문이다.</p>
-<h2 id="c21-인과추론에서-자주-보는-검정의-예">C.21 인과추론에서 자주 보는 검정의 예</h2>
-<p>인과추론에서 통계적 추론은 다음과 같이 다양한 형태로 등장한다.</p>
-<ul><li>RCT: 처치군과 통제군 평균차이에 대한 t-검정</li><li>회귀조정: 회귀계수와 강건 표준오차</li><li>DID: 정책계수에 대한 군집표준오차와 사전추세 공동검정</li><li>IV: 1단계 F-통계량, 약한 도구변수 검정</li><li>RDD: cutoff 근처 국소회귀의 점근추론과 밴드폭 민감도</li><li>CATE 분석: 하위집단 효과의 동시검정 및 다중검정 문제</li></ul>
-<p>즉 통계적 추론은 별도 부록 주제가 아니라, 본문 전체에 스며 있는 공통 도구라고 보는 편이 맞다.</p>
-<h2 id="c22-보고의-원칙">C.22 보고의 원칙</h2>
-<p>좋은 실증연구는 검정 결과를 단순히 별표(stars)로만 요약하지 않는다. 다음 항목을 함께 제시하는 것이 바람직하다.</p>
-<ul><li>점추정치</li><li>표준오차의 계산 방식</li><li>신뢰구간</li><li>표본크기와 독립 군집 수</li><li>유의수준과 검정방법</li><li>다중검정 보정 여부</li><li>설계 가정과 강건성 결과</li></ul>
-<p>특히 인과추론에서는 "유의했다"는 사실보다 "어떤 설계와 어떤 추론 방식 아래에서 어느 정도 크기의 효과가 얼마나 정밀하게 추정되었는가"가 더 중요하다.</p>
-<h2 id="c23-정리">C.23 정리</h2>
-<p>이 부록의 핵심은 다음과 같다.</p>
-<ul><li>통계적 추론은 점추정치의 불확실성을 정량화하고, 가설과 데이터의 양립 가능성을 판단하는 과정이다.</li><li>표준오차는 정밀성을 말하지만 편향을 말해주지는 않는다.</li><li>신뢰구간은 효과크기의 plausible range를 보여 주므로 p값보다 정보량이 많다.</li><li>가설검정은 영가설, 검정통계량, 유의수준, p값의 구조로 이해할 수 있다.</li><li>인과추론에서는 점근추론, 강건 표준오차, 군집표준오차, 부트스트랩이 특히 중요하다.</li><li>다중검정과 무효결과의 해석은 정책평가에서 매우 중요하다.</li></ul>
-<p>부록 A가 확률론의 문법을, 부록 B가 회귀추정의 계산 원리를 제공했다면, 이 부록 C는 그 추정량을 어떻게 해석하고 보고할 것인가를 다룬다. 결국 인과추론은 "효과를 추정하는 일"만이 아니라, "그 추정의 불확실성을 정직하게 전달하는 일"까지 포함한다.</p>
+        <h1 id="25장-사례기반-인과효과-연구">25장. 사례기반 인과효과 연구</h1>
+<p>지금까지의 책은 주로 평균처리효과, 실험, 준실험, 관측자료 식별, 인과 ML처럼 <strong>변수 중심(variable-centered)</strong> 인과추론을 다루었다. 이 접근은 정책평가에서 매우 강력하다. 그러나 정책학의 실제 연구질문은 종종 그보다 더 복잡하다.</p>
+<ul><li>왜 어떤 지역은 같은 정책을 도입해도 성공하고 다른 지역은 실패하는가</li><li>어떤 조건들의 조합이 있을 때 정책혁신이 가능해지는가</li><li>한 번의 제도변화가 어떤 메커니즘을 거쳐 특정 결과를 만들어 냈는가</li></ul>
+<p>이런 질문은 대개 소수의 사례, 깊은 맥락, 제도적 이질성, 역사적 경로를 포함한다. 그래서 정책학에서는 회귀나 실험만이 아니라 <strong>사례기반 인과연구(case-based causal research)</strong> 도 중요한 위치를 가진다.</p>
+<p>사례기반 접근은 "정량연구의 약한 대체물"이 아니다. 오히려 다음과 같은 상황에서 독자적 강점을 가진다.</p>
+<ul><li>표본 수가 작고 사례 간 맥락 차이가 매우 클 때</li><li>원인이 단일 변수가 아니라 조건의 조합(configuration)일 때</li><li>평균효과보다 메커니즘과 경로를 더 자세히 알고 싶을 때</li><li>정책이 한 번의 충격이 아니라 제도 변화와 집행과정의 연속으로 나타날 때</li></ul>
+<p>이 장은 사례기반 인과추론의 두 축을 소개한다.</p>
+<ol><li><strong>QCA(Qualitative Comparative Analysis)</strong>: 조건의 조합이 결과를 만드는 방식을 집합론적으로 분석하는 방법</li><li><strong>과정추적(process tracing)</strong>: 한 사례 내부에서 메커니즘이 실제로 작동했는지를 단계적으로 검증하는 방법</li></ol>
+<p>이 두 접근은 서로 대체관계가 아니라 보완관계에 있다. QCA는 여러 사례를 비교해 어떤 조합이 성공이나 실패와 연결되는지를 찾는 데 강하고, 과정추적은 특정 사례 내부에서 그 조합이 실제로 어떤 경로로 작동했는지를 검증하는 데 강하다.</p>
+<h2 id="2501-사례기반-인과연구는-무엇을-더해-주는가">25.0.1 사례기반 인과연구는 무엇을 더해 주는가</h2>
+<p>정량적 평균효과 연구는 대개 다음 질문에 강하다.</p>
+<p>\[ E[Y(1)-Y(0)] \]</p>
+<p>즉 평균적으로 정책효과가 있는가를 잘 묻는다. 반면 사례기반 접근은 보다 이런 질문에 강하다.</p>
+<ul><li>어떤 조건 <strong>조합</strong>이 결과를 만들었는가</li><li>같은 정책이 왜 어떤 맥락에서는 작동하고 다른 맥락에서는 실패했는가</li><li>관찰된 결과가 정말 특정 메커니즘을 통해 만들어졌는가</li></ul>
+<p>정책연구에서는 이 두 질문이 자주 함께 필요하다. 예를 들어 "주민참여예산제가 효과가 있었는가"라는 평균효과 질문만으로는 충분하지 않다. 실제로는</p>
+<ul><li>강한 시장 리더십이 있을 때만 효과가 나는지</li><li>시민사회 역량과 재정여력이 함께 있을 때만 효과가 나는지</li><li>형식적 도입이 아니라 실제 참여 과정이 열렸을 때만 효과가 나는지</li></ul>
+<p>같은 질문이 더 중요할 수 있다. 사례기반 접근은 바로 이 빈틈을 메운다.</p>
+<h2 id="2502-이-장을-읽는-방법">25.0.2 이 장을 읽는 방법</h2>
+<p>QCA와 과정추적은 회귀나 실험처럼 하나의 단일 추정식으로 끝나는 방법이 아니다. 둘 다 연구자의 이론적 판단, 사례 선택, 메커니즘 가설이 중요하다. 따라서 이 장은 "버튼 하나로 계산하는 기법"을 가르치기보다, 정책학 연구자가 다음을 어떻게 설계해야 하는지 보여 주는 데 초점을 둔다.</p>
+<ul><li>무엇을 사례로 볼 것인가</li><li>어떤 조건을 핵심 요인으로 둘 것인가</li><li>결과를 집합이나 메커니즘으로 어떻게 정의할 것인가</li><li>사례비교와 사례내 증거를 어떻게 결합할 것인가</li></ul>
+<p>다음 절에서는 먼저 QCA와 구성적 인과효과를 다룬 뒤, 이어서 과정추적을 통해 메커니즘을 어떻게 검증할 수 있는지를 본다.</p>
       </section>
       <nav class="chapter-nav">
-        <a class="nav-prev" href="app-b.html">← 부록 B 회귀모형 추정 방법</a>
-        <a class="nav-next" href="app-d.html">부록 D R · Python 실습 코드 (장별) →</a>
+        <a class="nav-prev" href="ch26-05-s264.html">← 24.4 정책 해석에서 내부·외부 타당도의 분리 보고</a>
+        <a class="nav-next" href="ch27-02-s271.html">25.1 QCA와 구성적 인과효과 →</a>
       </nav>
     </article>
     
@@ -1212,7 +1066,7 @@
       </div>
       <textarea class="editor-textarea" data-editor-textarea spellcheck="false"></textarea>
       <div class="editor-status" data-editor-status data-kind="neutral">편집기를 열면 원고를 불러옵니다.</div>
-      <div class="chapter-edit-status" data-open-source-status="app-c"></div>
+      <div class="chapter-edit-status" data-open-source-status="ch27-01-case-based-causal-research"></div>
     </aside>
         
     

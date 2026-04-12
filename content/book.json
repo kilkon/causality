@@ -788,6 +788,24 @@
                                            "source":  "chapters/ch26-05-s264.md",
                                            "label":  "24.4",
                                            "title":  "24.4 정책 해석에서 내부·외부 타당도의 분리 보고"
+                                       },
+                                       {
+                                           "slug":  "ch27-01-case-based-causal-research",
+                                           "source":  "chapters/ch27-01-case-based-causal-research.md",
+                                           "label":  "25",
+                                           "title":  "25장. 사례기반 인과효과 연구"
+                                       },
+                                       {
+                                           "slug":  "ch27-02-s271",
+                                           "source":  "chapters/ch27-02-s271.md",
+                                           "label":  "25.1",
+                                           "title":  "25.1 QCA와 구성적 인과효과"
+                                       },
+                                       {
+                                           "slug":  "ch27-03-s272",
+                                           "source":  "chapters/ch27-03-s272.md",
+                                           "label":  "25.2",
+                                           "title":  "25.2 과정추적 방법론"
                                        }
                                    ]
                   },

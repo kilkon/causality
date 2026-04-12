@@ -25,6 +25,10 @@ description:
 
 - Bareinboim, E., & Pearl, J. (2013). Causal transportability with limited experiments. *Proceedings of the AAAI Conference on Artificial Intelligence, 27*(1), 95-101. https://doi.org/10.1609/aaai.v27i1.8692
 
+- Beach, D., & Pedersen, R. B. (2019). *Process-tracing methods: Foundations and guidelines* (2nd ed.). University of Michigan Press.
+
+- Bennett, A., & Checkel, J. T. (Eds.). (2015). *Process tracing: From metaphor to analytic tool*. Cambridge University Press.
+
 - Bernard, C. (1957). *An introduction to the study of experimental medicine* (H. C. Greene, Trans.). Dover Publications. (Original work published 1865)
 
 - Brand, J. E., Zhou, X., & Xie, Y. (2023). Recent developments in causal inference and machine learning. *Annual Review of Sociology, 49*, 81-110. https://doi.org/10.1146/annurev-soc-030420-015345
@@ -107,6 +111,10 @@ description:
 
 - Pearl, J., Cinelli, C., & Forney, A. (2019, August 14). A crash course in good and bad control. *Causal Analysis in Theory and Practice*. https://causality.cs.ucla.edu/blog/index.php/2019/08/14/a-crash-course-in-good-and-bad-control/
 
+- Ragin, C. C. (1987). *The comparative method: Moving beyond qualitative and quantitative strategies*. University of California Press.
+
+- Ragin, C. C. (2008). *Redesigning social inquiry: Fuzzy sets and beyond*. University of Chicago Press.
+
 - Rosenbaum, P. R., & Rubin, D. B. (1983). The central role of the propensity score in observational studies for causal effects. *Biometrika, 70*(1), 41-55. https://doi.org/10.1093/biomet/70.1.41
 
 - Rubin, D. B. (1974). Estimating causal effects of treatments in randomized and nonrandomized studies. *Journal of Educational Psychology, 66*(5), 688-701. https://doi.org/10.1037/h0037350
@@ -128,6 +136,8 @@ description:
 - Smith, J. A., & Todd, P. E. (2005). Does matching overcome LaLonde's critique of nonexperimental estimators? *Journal of Econometrics, 125*(1-2), 305-353. https://doi.org/10.1016/j.jeconom.2004.04.011
 
 - Smith, L. H., & VanderWeele, T. J. (2019). Bounding bias due to selection. *Epidemiology, 30*(4), 509-516. https://doi.org/10.1097/EDE.0000000000001032
+
+- Schneider, C. Q., & Wagemann, C. (2012). *Set-theoretic methods for the social sciences: A guide to qualitative comparative analysis*. Cambridge University Press.
 
 - Stuart, E. A., Bradshaw, C. P., & Leaf, P. J. (2015). Assessing the generalizability of randomized trial results to target populations. *Prevention Science, 16*(3), 475-485. https://doi.org/10.1007/s11121-014-0513-z
 
