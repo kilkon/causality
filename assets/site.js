@@ -28,11 +28,10 @@
     var valueTarget = visitorCounter.querySelector("[data-visitor-counter-value]");
     var noteTarget = visitorCounter.querySelector("[data-visitor-counter-note]");
     var ns = visitorCounter.getAttribute("data-counter-ns") || "kilkon.github.io";
-    var action = visitorCounter.getAttribute("data-counter-action") || "view";
     var key = visitorCounter.getAttribute("data-counter-key") || "causality-homepage";
     var host = window.location.hostname;
     var isPublicSite = host === "kilkon.github.io";
-    var sessionKey = ["counterapi", ns, action, key].join("::");
+    var sessionKey = ["counterapi", ns, key].join("::");
     var alreadyCounted = false;
 
     try {
@@ -41,39 +40,58 @@
       alreadyCounted = false;
     }
 
-    var endpoint =
-      "https://counterapi.com/api/" +
-      encodeURIComponent(ns) +
-      "/" +
-      encodeURIComponent(action) +
-      "/" +
-      encodeURIComponent(key);
-
-    if (!isPublicSite || alreadyCounted) {
-      endpoint += "?readOnly=true";
+    function buildCounterUrl(mode) {
+      return (
+        "https://api.counterapi.dev/v1/" +
+        encodeURIComponent(ns) +
+        "/" +
+        encodeURIComponent(key) +
+        (mode === "up" ? "/up" : "")
+      );
     }
 
-    fetch(endpoint)
-      .then(function (response) {
+    function requestCounter(mode) {
+      return fetch(buildCounterUrl(mode)).then(function (response) {
         if (!response.ok) {
           throw new Error("counter_failed");
         }
         return response.json();
+      });
+    }
+
+    var primaryMode = isPublicSite && !alreadyCounted ? "up" : "get";
+    var fallbackMode = primaryMode === "up" ? "get" : null;
+
+    requestCounter(primaryMode)
+      .catch(function (error) {
+        if (!fallbackMode) {
+          throw error;
+        }
+        return requestCounter(fallbackMode);
       })
       .then(function (payload) {
-        var formatted = new Intl.NumberFormat("ko-KR").format(payload.value || 0);
+        var rawCount =
+          payload && typeof payload.count !== "undefined"
+            ? payload.count
+            : payload && typeof payload.value !== "undefined"
+              ? payload.value
+              : 0;
+        var formatted = new Intl.NumberFormat("ko-KR").format(rawCount);
+
         if (valueTarget) {
           valueTarget.textContent = formatted + "명";
         }
+
         if (noteTarget) {
           if (isPublicSite) {
             noteTarget.textContent = alreadyCounted
-              ? "이 세션에서는 이미 집계된 공개 사이트 방문입니다."
-              : "공개 사이트 방문 시 한 세션당 한 번 집계됩니다.";
+              ? "현재 세션에서는 이미 집계되었고, 공개 사이트 누적 방문 수를 표시합니다."
+              : "공개 사이트 방문 시 현재 세션당 한 번만 집계합니다.";
           } else {
-            noteTarget.textContent = "로컬/미리보기에서는 읽기 전용으로 표시됩니다.";
+            noteTarget.textContent = "로컬 또는 미리보기에서는 읽기 전용으로 현재 누적값만 표시합니다.";
           }
         }
+
         if (isPublicSite && !alreadyCounted) {
           try {
             window.sessionStorage.setItem(sessionKey, "1");
@@ -87,7 +105,7 @@
           valueTarget.textContent = "표시 불가";
         }
         if (noteTarget) {
-          noteTarget.textContent = "방문자 수를 불러오지 못했습니다.";
+          noteTarget.textContent = "방문자 수를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
         }
       });
   }
@@ -254,7 +272,8 @@
   }
 
   if (!canUseApi && hint) {
-    hint.textContent = "이 페이지를 file://로 열면 편집 기능이 동작하지 않습니다. `python scripts\\serve.py`로 실행한 localhost 페이지에서 사용해 주세요.";
+    hint.textContent =
+      "이 페이지를 file://로 열면 편집 기능이 동작하지 않습니다. `python scripts\\serve.py`로 실행한 localhost 페이지에서 사용해 주세요.";
   }
 
   if (openButton) {

@@ -446,6 +446,25 @@ def build_index(book: dict, editable: bool) -> None:
     {editor_drawer}
     """
     page = page_shell(book, build_sidebar(book, None), content, book["title"], editor_config=editor_config)
+    page = page.replace('data-counter-action="view"', "")
+    page = re.sub(
+        r'<span class="visitor-counter-label">.*?</span>',
+        '<span class="visitor-counter-label">누적 방문</span>',
+        page,
+        count=1,
+    )
+    page = re.sub(
+        r'<strong class="visitor-counter-value" data-visitor-counter-value>.*?</strong>',
+        '<strong class="visitor-counter-value" data-visitor-counter-value>불러오는 중...</strong>',
+        page,
+        count=1,
+    )
+    page = re.sub(
+        r'<span class="visitor-counter-note" data-visitor-counter-note>.*?</span>',
+        '<span class="visitor-counter-note" data-visitor-counter-note>공개 사이트 기준 누적 방문 수를 표시합니다.</span>',
+        page,
+        count=1,
+    )
     (DIST_DIR / "index.html").write_text(page, encoding="utf-8")
 
 

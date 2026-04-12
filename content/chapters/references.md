@@ -137,6 +137,8 @@ description:
 
 - Christensen, G., & Miguel, E. (2018). Transparency, reproducibility, and the credibility of economics research. *Journal of Economic Literature, 56*(3), 920-980. https://doi.org/10.1257/jel.20171350
 
+- Mayo-Wilson, E., Grant, S., & Supplee, L. H. (2022). Clearinghouse standards of evidence on the transparency, openness, and reproducibility of intervention evaluations. *Prevention Science, 23*(5), 774-786. https://doi.org/10.1007/s11121-021-01284-x
+
 - Bloom, H. S. (1984). Accounting for no-shows in experimental evaluation designs. *Evaluation Review, 8*(2), 225-246. https://doi.org/10.1177/0193841X8400800205
 
 - Smith, J. A., & Todd, P. E. (2005). Does matching overcome LaLonde's critique of nonexperimental estimators? *Journal of Econometrics, 125*(1-2), 305-353. https://doi.org/10.1016/j.jeconom.2004.04.011
