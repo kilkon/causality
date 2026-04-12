@@ -111,6 +111,8 @@ description:
 
 - Pearl, J., Cinelli, C., & Forney, A. (2019, August 14). A crash course in good and bad control. *Causal Analysis in Theory and Practice*. https://causality.cs.ucla.edu/blog/index.php/2019/08/14/a-crash-course-in-good-and-bad-control/
 
+- Peng, R. D. (2011). Reproducible research in computational science. *Science, 334*(6060), 1226-1227. https://doi.org/10.1126/science.1213847
+
 - Ragin, C. C. (1987). *The comparative method: Moving beyond qualitative and quantitative strategies*. University of California Press.
 
 - Ragin, C. C. (2008). *Redesigning social inquiry: Fuzzy sets and beyond*. University of Chicago Press.
@@ -132,6 +134,8 @@ description:
 - Rose, E. K., & Shem-Tov, Y. (2024). Instrumental variables for ordered treatments with applications to the Oregon Health Insurance Experiment. *Journal of Econometrics, 240*(2), Article 105639. https://doi.org/10.1016/j.jeconom.2024.105639
 
 - Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C., Newey, W., & Robins, J. M. (2018). Double/debiased machine learning for treatment and structural parameters. *The Econometrics Journal, 21*(1), C1-C68. https://doi.org/10.1111/ectj.12097
+
+- Christensen, G., & Miguel, E. (2018). Transparency, reproducibility, and the credibility of economics research. *Journal of Economic Literature, 56*(3), 920-980. https://doi.org/10.1257/jel.20171350
 
 - Smith, J. A., & Todd, P. E. (2005). Does matching overcome LaLonde's critique of nonexperimental estimators? *Journal of Econometrics, 125*(1-2), 305-353. https://doi.org/10.1016/j.jeconom.2004.04.011
 
