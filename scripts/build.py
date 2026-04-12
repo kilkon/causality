@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import argparse
 import html
@@ -52,7 +52,7 @@ def normalize_display_title(title: str, label: str) -> str:
             return stripped.strip()
 
     if title.startswith(label):
-        stripped = title[len(label):].lstrip(" .:-–—")
+        stripped = title[len(label):].lstrip(" .:-")
         if stripped:
             return stripped
 
@@ -336,14 +336,13 @@ def page_shell(book: dict, sidebar: str, content: str, title: str, editor_config
     <main class="page">
       <div class="mobile-bar">
         <strong>{html.escape(book['title'])}</strong>
-        <button type="button" data-nav-toggle>목차</button>
+        <button type="button" data-nav-toggle>紐⑹감</button>
       </div>
       {content}
     </main>
   </div>
   <div class="page-credit" aria-label="copyright">
-    &copy; 서울대 행정대학원 고길곤
-  </div>
+    &copy; ?쒖슱? ?됱젙??숈썝 怨좉만怨?  </div>
   </body>
   </html>
   """
@@ -361,7 +360,7 @@ def build_index(book: dict, editable: bool) -> None:
             if editable:
                 edit_controls = (
                     f'<button type="button" class="chapter-edit-link" data-open-source="{flat_chapter["slug"]}" '
-                    f'title="{html.escape(flat_chapter["source_path"])}">Markdown 열기</button>'
+                    f'title="{html.escape(flat_chapter["source_path"])}">Markdown ?닿린</button>'
                     f'<span class="chapter-edit-status" data-open-source-status="{flat_chapter["slug"]}"></span>'
                 )
             label_html = ""
@@ -394,29 +393,29 @@ def build_index(book: dict, editable: bool) -> None:
     if editable:
         hero_editor = f"""
       <div class="editor-actions hero-actions">
-        <button type="button" class="editor-button secondary" data-editor-open>표지 메타 열기</button>
-        <button type="button" class="editor-button" data-open-path="content/book.json" title="{html.escape(str((CONTENT_DIR / 'book.json').resolve()))}">Markdown 열기</button>
+        <button type="button" class="editor-button secondary" data-editor-open>?쒖? 硫뷀? ?닿린</button>
+        <button type="button" class="editor-button" data-open-path="content/book.json" title="{html.escape(str((CONTENT_DIR / 'book.json').resolve()))}">Markdown ?닿린</button>
         <span class="chapter-edit-status" data-open-path-status="content/book.json"></span>
       </div>
         """
         editor_drawer = """
     <aside class="editor-drawer" data-editor-root hidden>
       <div class="editor-drawer-header">
-        <strong>표지 메타 편집기</strong>
-        <button type="button" class="editor-close" data-editor-close>닫기</button>
+        <strong>?쒖? 硫뷀? ?몄쭛湲?/strong>
+        <button type="button" class="editor-close" data-editor-close>?リ린</button>
       </div>
-      <p class="editor-hint" data-editor-hint>책 제목, 부제, 설명, 리드 문구를 담고 있는 `content/book.json`을 브라우저에서 바로 수정할 수 있습니다.</p>
+      <p class="editor-hint" data-editor-hint>梨??쒕ぉ, 遺?? ?ㅻ챸, 由щ뱶 臾멸뎄瑜??닿퀬 ?덈뒗 `content/book.json`??釉뚮씪?곗??먯꽌 諛붾줈 ?섏젙?????덉뒿?덈떎.</p>
       <div class="editor-toolbar">
-        <button type="button" class="editor-mini-button" data-editor-load>다시 불러오기</button>
-        <button type="button" class="editor-mini-button primary" data-editor-save>저장</button>
+        <button type="button" class="editor-mini-button" data-editor-load>?ㅼ떆 遺덈윭?ㅺ린</button>
+        <button type="button" class="editor-mini-button primary" data-editor-save>???/button>
       </div>
       <textarea class="editor-textarea" data-editor-textarea spellcheck="false"></textarea>
-      <div class="editor-status" data-editor-status data-kind="neutral">편집기를 열면 표지 메타 파일을 불러옵니다.</div>
+      <div class="editor-status" data-editor-status data-kind="neutral">?몄쭛湲곕? ?대㈃ ?쒖? 硫뷀? ?뚯씪??遺덈윭?듬땲??</div>
     </aside>
         """
         editor_config = {
             "path": "content/book.json",
-            "title": "표지 메타",
+            "title": "?쒖? 硫뷀?",
             "sourcePath": str((CONTENT_DIR / "book.json").resolve()),
         }
 
@@ -426,45 +425,15 @@ def build_index(book: dict, editable: bool) -> None:
       <p class="subtitle">{html.escape(book['subtitle'])}</p>
       <p class="meta">{html.escape(book['description'])}</p>
       <p class="lead">{html.escape(book['lead'])}</p>
-      <div
-        class="visitor-counter"
-        data-visitor-counter
-        data-counter-ns="kilkon.github.io"
-        data-counter-action="view"
-        data-counter-key="causality-homepage"
-      >
-        <span class="visitor-counter-label">누적 방문</span>
-        <strong class="visitor-counter-value" data-visitor-counter-value>불러오는 중...</strong>
-        <span class="visitor-counter-note" data-visitor-counter-note>공개 사이트 기준 방문 수를 표시합니다.</span>
-      </div>
       {hero_editor}
     </section>
     <section class="section-block">
-      <h2>목차</h2>
+      <h2>紐⑹감</h2>
       {''.join(part_cards)}
     </section>
     {editor_drawer}
     """
     page = page_shell(book, build_sidebar(book, None), content, book["title"], editor_config=editor_config)
-    page = page.replace('data-counter-action="view"', "")
-    page = re.sub(
-        r'<span class="visitor-counter-label">.*?</span>',
-        '<span class="visitor-counter-label">누적 방문</span>',
-        page,
-        count=1,
-    )
-    page = re.sub(
-        r'<strong class="visitor-counter-value" data-visitor-counter-value>.*?</strong>',
-        '<strong class="visitor-counter-value" data-visitor-counter-value>불러오는 중...</strong>',
-        page,
-        count=1,
-    )
-    page = re.sub(
-        r'<span class="visitor-counter-note" data-visitor-counter-note>.*?</span>',
-        '<span class="visitor-counter-note" data-visitor-counter-note>공개 사이트 기준 누적 방문 수를 표시합니다.</span>',
-        page,
-        count=1,
-    )
     (DIST_DIR / "index.html").write_text(page, encoding="utf-8")
 
 
@@ -477,14 +446,14 @@ def write_chapter_page(book: dict, flat: list[dict], index: int, editable: bool)
     prev_link = None if index == 0 else flat[index - 1]
     next_link = None if index == len(flat) - 1 else flat[index + 1]
     prev_html = (
-        f'<a class="nav-prev" href="{prev_link["slug"]}.html">← {html.escape(prev_link["label"])} {html.escape(prev_link["display_title"])}</a>'
+        f'<a class="nav-prev" href="{prev_link["slug"]}.html">??{html.escape(prev_link["label"])} {html.escape(prev_link["display_title"])}</a>'
         if prev_link
-        else '<span class="disabled">← 첫 장입니다</span>'
+        else '<span class="disabled">??泥??μ엯?덈떎</span>'
     )
     next_html = (
-        f'<a class="nav-next" href="{next_link["slug"]}.html">{html.escape(next_link["label"])} {html.escape(next_link["display_title"])} →</a>'
+        f'<a class="nav-next" href="{next_link["slug"]}.html">{html.escape(next_link["label"])} {html.escape(next_link["display_title"])} ??/a>'
         if next_link
-        else '<span class="disabled nav-next">마지막 장입니다 →</span>'
+        else '<span class="disabled nav-next">留덉?留??μ엯?덈떎 ??/span>'
     )
 
     header_controls = ""
@@ -493,24 +462,24 @@ def write_chapter_page(book: dict, flat: list[dict], index: int, editable: bool)
     if editable:
         header_controls = f"""
         <div class="editor-actions">
-          <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
-          <button type="button" class="editor-button" data-open-source="{chapter['slug']}" title="{html.escape(chapter['source_path'])}">Markdown 열기</button>
+          <button type="button" class="editor-button secondary" data-editor-open>釉뚮씪?곗??먯꽌 ?몄쭛</button>
+          <button type="button" class="editor-button" data-open-source="{chapter['slug']}" title="{html.escape(chapter['source_path'])}">Markdown ?닿린</button>
           <span class="editor-path">{html.escape(chapter['source_path'])}</span>
         </div>
         """
         editor_drawer = f"""
     <aside class="editor-drawer" data-editor-root hidden>
       <div class="editor-drawer-header">
-        <strong>Markdown 편집기</strong>
-        <button type="button" class="editor-close" data-editor-close>닫기</button>
+        <strong>Markdown ?몄쭛湲?/strong>
+        <button type="button" class="editor-close" data-editor-close>?リ린</button>
       </div>
-      <p class="editor-hint" data-editor-hint>현재 장의 Markdown 원고를 불러와 바로 저장할 수 있습니다.</p>
+      <p class="editor-hint" data-editor-hint>?꾩옱 ?μ쓽 Markdown ?먭퀬瑜?遺덈윭? 諛붾줈 ??ν븷 ???덉뒿?덈떎.</p>
       <div class="editor-toolbar">
-        <button type="button" class="editor-mini-button" data-editor-load>다시 불러오기</button>
-        <button type="button" class="editor-mini-button primary" data-editor-save>저장</button>
+        <button type="button" class="editor-mini-button" data-editor-load>?ㅼ떆 遺덈윭?ㅺ린</button>
+        <button type="button" class="editor-mini-button primary" data-editor-save>???/button>
       </div>
       <textarea class="editor-textarea" data-editor-textarea spellcheck="false"></textarea>
-      <div class="editor-status" data-editor-status data-kind="neutral">편집기를 열면 원고를 불러옵니다.</div>
+      <div class="editor-status" data-editor-status data-kind="neutral">?몄쭛湲곕? ?대㈃ ?먭퀬瑜?遺덈윭?듬땲??</div>
       <div class="chapter-edit-status" data-open-source-status="{chapter['slug']}"></div>
     </aside>
         """
@@ -523,7 +492,7 @@ def write_chapter_page(book: dict, flat: list[dict], index: int, editable: bool)
     content = f"""
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">{html.escape(chapter['part_title'])} · {html.escape(chapter['label'])}</p>
+        <p class="breadcrumb">{html.escape(chapter['part_title'])} 쨌 {html.escape(chapter['label'])}</p>
         <h1>{html.escape(chapter['meta_title'])}</h1>
         <p class="description">{html.escape(chapter['meta_description'])}</p>
         {header_controls}
@@ -592,3 +561,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
