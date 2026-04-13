@@ -1048,14 +1048,15 @@
 <p>예: 「성별의 임금 인과효과」는 처치(개입)를 무엇으로 둘지가 불명확할 수 있다. 이력서상 이름·표기를 바꾸는 실험은 조작 가능한 처치로 정의하기 쉽지만, 생물학적 성별 자체를 바꾸는 개입은 다른 종류의 질문이다. 정의가 흐리면 \(Y_i(\text{여성}) - Y_i(\text{남성})\)의 의미도 흐려진다.</p>
 <p><strong>처치 버전 문제(treatment version problem).</strong> VanderWeele &amp;amp; Hernán(2013) 등이 지적하듯, 명목상 같은 처치라도 실제 내용(운동 종류·강도·지속)이 단위마다 다르면, 이진 표시 \(T_i=1\) 안에 서로 다른 「버전」이 섞일 수 있다. 세부 버전을 \(K_i\)라 하면 잠재결과는 \(Y_i(1)\)보다 \(Y_i(1, K_i)\)처럼 써야 할 수 있다. 버전이 무작위로 배정되거나 결과에 영향을 주지 않는다는 등의 추가 가정이 없으면, 처치를 더 잘게 정의하거나 측정해야 한다.</p>
 <h2 id="214-잠재결과potential-outcomes의-정의">2.1.4 잠재결과(Potential Outcomes)의 정의</h2>
-<p><strong>기본 정의.</strong> 잠재결과(potential outcomes)는 단위가 어떤 처치 상태에 놓였을 때 나타날 결과 변수의 값이다. 이진 처치에서는</p>
-<p>\[\begin{aligned} Y_i(1) &amp;\equiv \text{단위 } i \text{가 처치 수준 } 1 \text{을 받았을 때의 결과},\\ Y_i(0) &amp;\equiv \text{단위 } i \text{가 처치 수준 } 0 \text{을 받았을 때의 결과} \end{aligned}\]</p>
-<section class="callout note"><div class="callout-title">note</div><p>로 둔다. \(K\)개 수준이면 \(\{Y_i(0),\ldots,Y_i(K)\}\), 연속 처치면 \(Y_i(t)\)가 \(t\)의 함수(용량–반응 함수)로 확장된다.</p>
+<p><strong>기본 정의.</strong> 잠재결과(potential outcomes)는 단위가 어떤 처치 상태에 놓였을 때 나타날 결과 변수의 값이다. 이 절에서는 이진 처치지표를 \(D_i \in \{0,1\}\)로 쓰겠다. 그러면 잠재결과는</p>
+<p>\[ \begin{aligned} Y_i(1) &amp;\equiv \text{단위 } i \text{가 처치를 받았을 때의 결과},\\ Y_i(0) &amp;\equiv \text{단위 } i \text{가 처치를 받지 않았을 때의 결과} \end{aligned} \]</p>
+<p>로 둔다. \(K\)개 수준이면 \(\{Y_i(0),\ldots,Y_i(K)\}\), 연속 처치면 \(Y_i(t)\)가 \(t\)의 함수(용량–반응 함수)로 확장된다.</p>
 <p><strong>사전 존재성(pre-existence).</strong> \(Y_i(1)\)과 \(Y_i(0)\)은 <strong>할당 전에도 단위에 붙어 있는 값</strong>으로 상상하는 것이 전형적이다. 처치는 잠재결과를 「만들어 내는」 것이 아니라, 그중 하나를 <strong>실현(observed)</strong>시키는 역할에 가깝다고 본다. 잡음이 크면 \(Y_i(t)\) 자체를 확률변수로 두고, SCM에서는 외생 \(U_i\)의 함수로 쓴다.</p>
-<p><strong>일관성(consistency).</strong> 관측 결과와 잠재결과를 잇는 중심 가정은</p>
-<p>\[ Y_i^{\mathrm{obs}} = Y_i(T_i) = T_i\, Y_i(1) + (1-T_i)\, Y_i(0) \]</p></section>
+<p><strong>일관성(consistency).</strong> 관측 결과와 잠재결과를 잇는 중심 가정은 다음과 같다.</p>
+<p>\[ Y_i^{\mathrm{obs}} = Y_i(D_i) = D_i\, Y_i(1) + (1-D_i)\, Y_i(0) \]</p>
 <p>이다. 실제로 받은 처치에 해당하는 잠재결과가 관측된다는 뜻이다. 여기에는 (i) 같은 처치 수준에 도달하는 경로와 무관하게 잠재결과가 같다는 <strong>처치 정의의 일관성</strong>, (ii) 다른 단위의 처치가 \(i\)의 잠재결과를 바꾸지 않는다는 <strong>간섭 없음</strong> 등이 포함되며, 이를 SUTVA와 함께 다음 절에서 정리한다.</p>
-<p><strong>표기.</strong> 문헌에 따라 \(Y_i(t)\), \(W_i\)를 처치로 쓰는 Rubin 표기, Pearl의 \(Y_x\)류, 계량에서 \(Y_{1i}, Y_{0i}\) 등이 혼재한다. 이 노트에서는 \(Y_i(1), Y_i(0)\)을 기본으로 쓴다.</p>
+<p>이 식은 매우 중요하다. 실제 데이터에서는 \(Y_i(1)\)과 \(Y_i(0)\)을 동시에 관찰하는 것이 아니라, \(D_i\)가 1이면 \(Y_i(1)\)만, \(D_i\)가 0이면 \(Y_i(0)\)만 관찰한다는 점을 보여 주기 때문이다. 바로 이 구조 때문에 인과추론은 관측된 평균차이를 곧바로 인과효과로 읽을 수 없고, 추가적인 설계나 가정이 필요해진다.</p>
+<p><strong>표기.</strong> 문헌에 따라 \(Y_i(t)\), \(W_i\)를 처치로 쓰는 Rubin 표기, Pearl의 \(Y_x\)류, 계량에서 \(Y_{1i}, Y_{0i}\) 등이 혼재한다. 이 노트에서는 잠재결과는 \(Y_i(1), Y_i(0)\), 이진 처치지표는 \(D_i\)를 기본으로 쓴다.</p>
       </section>
       <nav class="chapter-nav">
         <a class="nav-prev" href="ch02-00-potential-outcomes-framework-overview.html">이전: 2 잠재결과 프레임워크</a>
