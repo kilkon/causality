@@ -70,9 +70,7 @@ ATE는 전체 모집단에 대해 처치를 시행했을 때의 평균 효과다
 무작위배정이 성립해 \(\{Y_i(1),Y_i(0)\}\perp\!\!\!\perp D_i\)라면 ATE는 관측집단 평균차이로 식별된다.
 
 \[
-\mathrm{ATE}
-= \mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=1]
-- \mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=0].
+\mathrm{ATE} = \mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=1] - \mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=0].
 \]
 
 즉 처치군과 통제군의 평균차이는 무작위실험에서 ATE의 비편향 추정량이 된다.

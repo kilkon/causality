@@ -1059,9 +1059,7 @@
 <p>\[ \mathrm{ATE} \equiv \mathbb{E}[\tau_i] = \mathbb{E}[Y_i(1)-Y_i(0)] = \mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]. \]</p>
 <p>ATE는 전체 모집단에 대해 처치를 시행했을 때의 평균 효과다. 보편 정책의 평균 성과를 묻는 질문에 자연스럽다.</p>
 <p>무작위배정이 성립해 \(\{Y_i(1),Y_i(0)\}\perp\!\!\!\perp D_i\)라면 ATE는 관측집단 평균차이로 식별된다.</p>
-<p>\[ \mathrm{ATE} = \mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=1]</p>
-<ul><li>\mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=0].</li></ul>
-<p>\]</p>
+<p>\[ \mathrm{ATE} = \mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=1] - \mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=0]. \]</p>
 <p>즉 처치군과 통제군의 평균차이는 무작위실험에서 ATE의 비편향 추정량이 된다.</p>
 <h2 id="224-처치군-평균-인과효과att">2.2.4 처치군 평균 인과효과(ATT)</h2>
 <p>처치군 평균 인과효과는 실제로 처치를 받은 사람들을 기준으로 정의된다.</p>
