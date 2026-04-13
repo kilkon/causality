@@ -1039,10 +1039,10 @@
 <p>이는 동일 단위 \(i\)의 두 잠재결과 차이이며, 둘 중 하나는 반드시 반사실이다. 따라서 ICE는 원칙적으로 직접 관측되지 않는다.</p>
 <p><strong>이질성.</strong> 일반적으로 \(\tau_i \neq \tau_j\)이며, 이것이 처치 효과 이질성이다. 원천은 관측 가능한 \(\mathbf{X}_i\) 기반 이질성과 관측 불가능한 \(U_i\) 기반 이질성으로 나눠 볼 수 있다.</p>
 <p><strong>관측 가능성의 수식.</strong></p>
-<p>\[ Y_i^{\mathrm{obs}} = \begin{cases} Y_i(1) &amp; \text{if } T_i = 1, \\ Y_i(0) &amp; \text{if } T_i = 0. \end{cases} \]</p></section>
+<p>\[ Y_i^{\mathrm{obs}} = \begin{cases} Y_i(1) &amp; \text{if } D_i = 1, \\ Y_i(0) &amp; \text{if } D_i = 0. \end{cases} \]</p></section>
 <table class="po-table" aria-label="ICE 관측 불가능성 예시">
       <thead>
-        <tr><th>단위 \(i\)</th><th>\(T_i\)</th><th>\(Y_i(1)\)</th><th>\(Y_i(0)\)</th><th>\(\tau_i\)</th></tr>
+        <tr><th>단위 \(i\)</th><th>\(D_i\)</th><th>\(Y_i(1)\)</th><th>\(Y_i(0)\)</th><th>\(\tau_i\)</th></tr>
       </thead>
       <tbody>
         <tr><td>1</td><td>1</td><td><strong>8</strong></td><td>?</td><td>?</td></tr>
@@ -1057,28 +1057,28 @@
 <h2 id="223-평균-인과효과ate">2.2.3 평균 인과효과(ATE)</h2>
 <p>\[ \mathrm{ATE} \equiv \mathbb{E}[\tau_i] = \mathbb{E}[Y_i(1)-Y_i(0)] = \mathbb{E}[Y_i(1)]-\mathbb{E}[Y_i(0)]. \]</p>
 <section class="callout note"><div class="callout-title">note</div><p>ATE는 전체 모집단에 대한 평균 효과다. 보편 정책의 평균 효과를 묻는 질문에 자연스럽다.</p>
-<p><strong>무작위 배정 하 식별.</strong> \(\{Y_i(1),Y_i(0)\}\perp\!\!\!\perp T_i\)이면</p>
-<p>\[ \mathrm{ATE} = \mathbb{E}[Y_i^{\mathrm{obs}} \mid T_i=1]</p>
-<ul><li>\mathbb{E}[Y_i^{\mathrm{obs}} \mid T_i=0].</li></ul>
+<p><strong>무작위 배정 하 식별.</strong> \(\{Y_i(1),Y_i(0)\}\perp\!\!\!\perp D_i\)이면</p>
+<p>\[ \mathrm{ATE} = \mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=1]</p>
+<ul><li>\mathbb{E}[Y_i^{\mathrm{obs}} \mid D_i=0].</li></ul>
 <p>\]</p></section>
 <p>즉 처치군-통제군의 평균 차이가 ATE의 비편향 추정량이 된다.</p>
 <h2 id="224-처치군-평균-인과효과att">2.2.4 처치군 평균 인과효과(ATT)</h2>
-<p>\[ \mathrm{ATT} \equiv \mathbb{E}[\tau_i \mid T_i=1] = \mathbb{E}[Y_i(1)\mid T_i=1] - \mathbb{E}[Y_i(0)\mid T_i=1]. \]</p>
+<p>\[ \mathrm{ATT} \equiv \mathbb{E}[\tau_i \mid D_i=1] = \mathbb{E}[Y_i(1)\mid D_i=1] - \mathbb{E}[Y_i(0)\mid D_i=1]. \]</p>
 <section class="callout note"><div class="callout-title">note</div><p>ATT는 실제 처치군에서의 평균 효과다. 프로그램 유지·성과 평가처럼 「현재 참여자에게 효과가 있었는가」를 묻는 맥락에 맞다.</p>
 <p><strong>관측 차이의 분해.</strong></p>
-<p>\[ \underbrace{\mathbb{E}[Y_i^{\mathrm{obs}}\mid T_i=1]-\mathbb{E}[Y_i^{\mathrm{obs}}\mid T_i=0]}_{\text{관측 평균 차이}} = \underbrace{\mathrm{ATT}}_{\text{처치군 효과}} + \underbrace{\mathbb{E}[Y_i(0)\mid T_i=1]-\mathbb{E}[Y_i(0)\mid T_i=0]}_{\text{선택 편향}}. \]</p></section>
+<p>\[ \underbrace{\mathbb{E}[Y_i^{\mathrm{obs}}\mid D_i=1]-\mathbb{E}[Y_i^{\mathrm{obs}}\mid D_i=0]}_{\text{관측 평균 차이}} = \underbrace{\mathrm{ATT}}_{\text{처치군 효과}} + \underbrace{\mathbb{E}[Y_i(0)\mid D_i=1]-\mathbb{E}[Y_i(0)\mid D_i=0]}_{\text{선택 편향}}. \]</p></section>
 <p>관측 연구가 어려운 핵심은 마지막 선택 편향 항을 직접 볼 수 없다는 점이다.</p>
 <h2 id="225-통제군-평균-인과효과atc">2.2.5 통제군 평균 인과효과(ATC)</h2>
-<p>\[ \mathrm{ATC} \equiv \mathbb{E}[\tau_i \mid T_i=0] = \mathbb{E}[Y_i(1)\mid T_i=0] - \mathbb{E}[Y_i(0)\mid T_i=0]. \]</p>
+<p>\[ \mathrm{ATC} \equiv \mathbb{E}[\tau_i \mid D_i=0] = \mathbb{E}[Y_i(1)\mid D_i=0] - \mathbb{E}[Y_i(0)\mid D_i=0]. \]</p>
 <section class="callout note"><div class="callout-title">note</div><p>ATC는 현재 통제군(비참여자)에게 처치를 확대했을 때의 평균 효과다. 정책 확장(scale-up) 평가에서 중요하다.</p>
 <h2 id="226-세-추정량의-관계">2.2.6 세 추정량의 관계</h2>
-<p>처치 비율 \(\pi \equiv P(T_i=1)\)일 때</p>
+<p>처치 비율 \(\pi \equiv P(D_i=1)\)일 때</p>
 <p>\[ \mathrm{ATE} = \pi\cdot \mathrm{ATT} + (1-\pi)\cdot \mathrm{ATC}. \]</p></section>
-<p>또한 \(\{Y_i(1),Y_i(0)\}\perp\!\!\!\perp T_i\)이면 \(\mathrm{ATE}=\mathrm{ATT}=\mathrm{ATC}\)가 성립한다.</p>
+<p>또한 \(\{Y_i(1),Y_i(0)\}\perp\!\!\!\perp D_i\)이면 \(\mathrm{ATE}=\mathrm{ATT}=\mathrm{ATC}\)가 성립한다.</p>
 <p><strong>수치 예시.</strong> 아래 완전 잠재결과(설명용)에서는 ATT가 가장 크고 ATC가 가장 작다.</p>
 <table class="po-table" aria-label="ATE ATT ATC 수치 예시">
       <thead>
-        <tr><th>단위 \(i\)</th><th>\(T_i\)</th><th>\(Y_i(1)\)</th><th>\(Y_i(0)\)</th><th>\(\tau_i\)</th></tr>
+        <tr><th>단위 \(i\)</th><th>\(D_i\)</th><th>\(Y_i(1)\)</th><th>\(Y_i(0)\)</th><th>\(\tau_i\)</th></tr>
       </thead>
       <tbody>
         <tr><td>1</td><td>1</td><td>8</td><td>4</td><td><strong>4</strong></td></tr>
@@ -1090,11 +1090,11 @@
       </tbody>
     </table>
 <p>\[ \mathrm{ATE}=\frac{14}{6}\approx 2.33,\quad \mathrm{ATT}=\frac{11}{3}\approx 3.67,\quad \mathrm{ATC}=1.00. \]</p>
-<section class="callout note"><div class="callout-title">note</div><p>\[ \mathbb{E}[Y^{\mathrm{obs}}\mid T=1]-\mathbb{E}[Y^{\mathrm{obs}}\mid T=0] = \frac{10}{3}\approx 3.33 = \underbrace{3.67}_{\mathrm{ATT}} + \underbrace{(-0.33)}_{\text{선택 편향}}. \]</p></section>
+<section class="callout note"><div class="callout-title">note</div><p>\[ \mathbb{E}[Y^{\mathrm{obs}}\mid D=1]-\mathbb{E}[Y^{\mathrm{obs}}\mid D=0] = \frac{10}{3}\approx 3.33 = \underbrace{3.67}_{\mathrm{ATT}} + \underbrace{(-0.33)}_{\text{선택 편향}}. \]</p></section>
 <h2 id="227-cate조건부-평균-처치효과">2.2.7 CATE(조건부 평균 처치효과)</h2>
 <p>\[ \tau(\mathbf{x}) \equiv \mathbb{E}[\tau_i \mid \mathbf{X}_i=\mathbf{x}] = \mathbb{E}[Y_i(1)-Y_i(0)\mid \mathbf{X}_i=\mathbf{x}]. \]</p>
 <section class="callout note"><div class="callout-title">note</div><p>CATE는 이질성 구조를 \(\mathbf{X}\)의 함수로 나타낸다. ATE·ATT·ATC는 CATE를 서로 다른 분포로 주변화한 값이다.</p>
-<p>\[ \mathrm{ATE}=\int \tau(\mathbf{x})\,dP(\mathbf{x}),\quad \mathrm{ATT}=\int \tau(\mathbf{x})\,dP(\mathbf{x}\mid T=1),\quad \mathrm{ATC}=\int \tau(\mathbf{x})\,dP(\mathbf{x}\mid T=0). \]</p></section>
+<p>\[ \mathrm{ATE}=\int \tau(\mathbf{x})\,dP(\mathbf{x}),\quad \mathrm{ATT}=\int \tau(\mathbf{x})\,dP(\mathbf{x}\mid D=1),\quad \mathrm{ATC}=\int \tau(\mathbf{x})\,dP(\mathbf{x}\mid D=0). \]</p></section>
 <p>최적 처치 규칙의 기본형은 \(d^*(\mathbf{x})=\mathbb{1}[\tau(\mathbf{x})&gt;0]\)처럼 쓸 수 있다.</p>
 <h2 id="228-효과-척도-차이-vs-비율">2.2.8 효과 척도: 차이 vs 비율</h2>
 <p>\[ \mathrm{RD}=P(Y_i(1)=1)-P(Y_i(0)=1),\quad \mathrm{RR}=\frac{P(Y_i(1)=1)}{P(Y_i(0)=1)}, \]</p>
@@ -1105,7 +1105,7 @@
 <p>\[ \mathrm{LATE} \equiv \mathbb{E}[\tau_i \mid \text{complier}]. \]</p>
 <section class="callout note"><div class="callout-title">note</div><p>LATE는 ATE/ATT/ATC와 다른 목표 모수이며, 외부 타당도 해석을 별도로 요구한다.</p>
 <h2 id="2210-효과-측도의-통합-지도">2.2.10 효과 측도의 통합 지도</h2>
-<p>\[ \underbrace{\tau_i = Y_i(1)-Y_i(0)}_{\text{ICE}} \;\rightarrow\; \underbrace{\tau(\mathbf{x})=\mathbb{E}[\tau_i\mid \mathbf{X}_i=\mathbf{x}]}_{\text{CATE}} \;\rightarrow\; \begin{cases} \mathrm{ATE}=\int \tau(\mathbf{x})\,dP(\mathbf{x}) \\ \mathrm{ATT}=\int \tau(\mathbf{x})\,dP(\mathbf{x}\mid T=1) \\ \mathrm{ATC}=\int \tau(\mathbf{x})\,dP(\mathbf{x}\mid T=0) \end{cases} \]</p></section>
+<p>\[ \underbrace{\tau_i = Y_i(1)-Y_i(0)}_{\text{ICE}} \;\rightarrow\; \underbrace{\tau(\mathbf{x})=\mathbb{E}[\tau_i\mid \mathbf{X}_i=\mathbf{x}]}_{\text{CATE}} \;\rightarrow\; \begin{cases} \mathrm{ATE}=\int \tau(\mathbf{x})\,dP(\mathbf{x}) \\ \mathrm{ATT}=\int \tau(\mathbf{x})\,dP(\mathbf{x}\mid D=1) \\ \mathrm{ATC}=\int \tau(\mathbf{x})\,dP(\mathbf{x}\mid D=0) \end{cases} \]</p></section>
 <p>연구 질문이 무엇인지(보편 정책, 현재 참여자 평가, 정책 확대, 개인화 의사결정)를 먼저 정해야 목표 모수와 추정 전략이 정해진다.</p>
 <section class="callout note"><div class="callout-title">note</div><p>summary</p>
 <p>2.2 핵심 요약</p>
