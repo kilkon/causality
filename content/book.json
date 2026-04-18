@@ -468,12 +468,18 @@
                                            "label":  "14.4",
                                            "title":  "14.4 스태거드 도입과 현대적 DID"
                                        },
-                                       {
-                                           "slug":  "ch16-05-s165",
-                                           "source":  "chapters/ch16-05-s165.md",
-                                           "label":  "14.5",
-                                           "title":  "14.5 평행추세와 핵심 가정, 진단"
-                                       },
+                                        {
+                                            "slug":  "ch16-05-s165",
+                                            "source":  "chapters/ch16-05-s165.md",
+                                            "label":  "14.5",
+                                            "title":  "14.5 합성 이중차분법"
+                                        },
+                                        {
+                                            "slug":  "ch16-06-s166",
+                                            "source":  "chapters/ch16-06-s166.md",
+                                            "label":  "14.6",
+                                            "title":  "14.6 평행추세와 핵심 가정, 진단"
+                                        },
                                        {
                                            "slug":  "ch17-00-panel-models-intro",
                                            "source":  "chapters/ch17-00-panel-models-intro.md",

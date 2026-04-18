@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>14.5 합성 이중차분법 | 인과효과 추론 (Causal Inference)</title>
+  <title>14.6 평행추세와 핵심 가정, 진단 | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 LLM을 활용하여 전자책 프로그램을 만든 후 내용도 LLM과 논문들을 참고해가면서 함께 수정한 것입니다. 내용에 환각이 없도록 저자가 여러번 살피면서 작업을 하고 있지만 혹시라도 오류가 있는 경우에는 언제든지 알려주시면 감사하겠습니다." />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "ch16-05-s165", "title": "14.5 합성 이중차분법", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch16-05-s165.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "ch16-06-s166", "title": "14.6 평행추세와 핵심 가정, 진단", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch16-06-s166.md"};</script>
 
 </head>
   <body>
@@ -560,14 +560,14 @@
                 </li>
                 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch16-05-s165.html" aria-current="page">
+                  <a class="sidebar-link" href="ch16-05-s165.html">
                     <span class="sidebar-link-label">14.5</span>
                     합성 이중차분법
                   </a>
                 </li>
                 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="ch16-06-s166.html">
+                  <a class="sidebar-link" href="ch16-06-s166.html" aria-current="page">
                     <span class="sidebar-link-label">14.6</span>
                     평행추세와 핵심 가정, 진단
                   </a>
@@ -1021,98 +1021,55 @@
       
     <article class="chapter-card">
       <header class="chapter-header">
-        <p class="breadcrumb">제4부 | 조건부 독립과 준실험의 식별 전략 쨌 14.5</p>
-        <h1>14.5 합성 이중차분법</h1>
-        <p class="description">Synthetic DID는 DID의 시간 고정효과 논리와 synthetic control의 가중치 구성 논리를 결합해 비교집단의 반사실 경로를 더 정교하게 맞추려는 방법이다.</p>
+        <p class="breadcrumb">제4부 | 조건부 독립과 준실험의 식별 전략 쨌 14.6</p>
+        <h1>14.6 평행추세와 핵심 가정, 진단</h1>
+        <p class="description">DID를 인과적으로 읽으려면 평행추세뿐 아니라 anticipation, 구성 안정성, SUTVA, 적절한 비교집단, 추론 방식까지 함께 점검해야 한다. 이 절은 DID의 핵심 진단을 정리한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
-          <button type="button" class="editor-button" data-open-source="ch16-05-s165" title="C:\Users\owner\causal inference\causal inference2\content\chapters\ch16-05-s165.md">Markdown 열기</button>
-          <span class="editor-path">C:\Users\owner\causal inference\causal inference2\content\chapters\ch16-05-s165.md</span>
+          <button type="button" class="editor-button" data-open-source="ch16-06-s166" title="C:\Users\owner\causal inference\causal inference2\content\chapters\ch16-06-s166.md">Markdown 열기</button>
+          <span class="editor-path">C:\Users\owner\causal inference\causal inference2\content\chapters\ch16-06-s166.md</span>
         </div>
         
       </header>
       <section class="chapter-body">
-        <h1 id="145-합성-이중차분법">14.5 합성 이중차분법</h1>
-<p>스태거드 도입과 이질적 효과 문제가 드러나면서, 연구자들은 단순 TWFE를 넘어 비교군 자체를 더 정교하게 구성하려는 방향으로 발전해 왔다. 그 대표적 방법이 <strong>합성 이중차분법(synthetic difference-in-differences, synthetic DiD)</strong>이다. 이 방법은 이름 그대로 전통적 DID와 synthetic control의 장점을 결합하려는 시도다.</p>
-<p>핵심 아이디어는 간단하다. DID는 시간 고정효과와 집단 고정효과를 통해 공통 충격을 제거하는 데 강하지만, 비교군이 처치군과 충분히 비슷하지 않으면 반사실 경로가 어긋날 수 있다. 반대로 synthetic control은 처치 전 경로를 잘 맞추는 가중비교군을 만들 수 있지만, 표준 DID처럼 집단 전체의 평균적 시간 차분 논리를 바로 제공하지는 않는다. Synthetic DiD는 이 둘을 결합해 <strong>처치 전 경로를 잘 맞추는 가중치</strong>와 <strong>차분을 통한 공통 충격 제거</strong>를 함께 사용한다.</p>
-<h2 id="왜-synthetic-did가-필요한가">왜 synthetic DiD가 필요한가</h2>
-<p>전통적 DID는 다음과 같은 암묵적 비교를 한다.</p>
-<p>\[ \big(\bar Y_{post}^{T}-\bar Y_{pre}^{T}\big) - \big(\bar Y_{post}^{C}-\bar Y_{pre}^{C}\big) \]</p>
-<p>여기서 중요한 전제는 비교군 \(C\)의 사전 추세가 처치군 \(T\)의 반사실 경로를 잘 대변한다는 것이다. 그런데 실제 정책평가에서는 이 조건이 자주 약하다. 예를 들어 어떤 지역이 다른 지역보다 원래 성장 속도나 산업구조, 인구변화가 달랐다면, 단순 평균 비교군은 처치 전 경로를 충분히 재현하지 못한다.</p>
-<p>Synthetic DiD는 이 문제를 완화하기 위해, 처치군과 유사한 처치 전 경로를 가진 비교단위에 더 큰 가중치를 주어 "합성 비교군"을 만든다. 즉 단순 평균 비교군 대신 <strong>가중 평균 비교군</strong>을 사용한다.</p>
-<h2 id="시각적으로-보면-어떻게-다른가">시각적으로 보면 어떻게 다른가</h2>
-<svg width="760" height="300" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, 'Malgun Gothic', sans-serif">
-  <rect x="0" y="0" width="760" height="300" fill="#ffffff"/>
-  <line x1="90" y1="245" x2="705" y2="245" stroke="#546e7a" stroke-width="2"/>
-  <line x1="90" y1="40" x2="90" y2="245" stroke="#546e7a" stroke-width="2"/>
-  <line x1="410" y1="40" x2="410" y2="245" stroke="#c62828" stroke-width="2" stroke-dasharray="7 5"/>
-  <text x="410" y="30" text-anchor="middle" font-size="12" fill="#c62828">정책 도입</text>
-  <text x="82" y="35" font-size="12" fill="#37474f">결과</text>
-  <text x="700" y="265" text-anchor="end" font-size="12" fill="#37474f">시간</text>
-  <polyline fill="none" stroke="#1565c0" stroke-width="4"
-    points="120,200 180,184 240,165 300,150 360,132 420,108 480,96 540,86 600,79 660,72"/>
-  <text x="660" y="68" font-size="12" fill="#1565c0">처치군</text>
-  <polyline fill="none" stroke="#90a4ae" stroke-width="3"
-    points="120,214 180,205 240,192 300,182 360,173 420,163 480,156 540,148 600,141 660,135"/>
-  <text x="646" y="152" font-size="12" fill="#607d8b">단순 비교군 평균</text>
-  <polyline fill="none" stroke="#2e7d32" stroke-width="4" stroke-dasharray="10 5"
-    points="120,201 180,186 240,166 300,151 360,133 420,124 480,118 540,111 600,105 660,99"/>
-  <text x="640" y="108" font-size="12" fill="#2e7d32">합성 비교군</text>
-  <text x="185" y="285" font-size="12" fill="#607d8b">사전기간</text>
-  <text x="560" y="285" font-size="12" fill="#607d8b">사후기간</text>
-</svg>
-<p>그림에서 회색선은 단순 비교군 평균이고, 초록 점선은 사전기간을 더 잘 맞춘 합성 비교군이다. Synthetic DiD는 사후기간 효과를 계산할 때 이 초록 점선을 반사실 경로의 기준선으로 사용한다.</p>
-<h2 id="모형식은-어떻게-쓰는가">모형식은 어떻게 쓰는가</h2>
-<p>가장 기본적인 패널 설정에서 \(i=1,\dots,N\), \(t=1,\dots,T\)라 하고, 어떤 집단들이 특정 시점 이후 처치를 받는다고 하자. Synthetic DiD는 먼저 사전기간 결과행렬을 기준으로 단위 가중치 \(\omega_i\)와 시간 가중치 \(\lambda_t\)를 찾는다. 직관적으로는 다음 조건을 만족하도록 한다.</p>
-<p>\[ \sum_{i \in C}\omega_i Y_{it} \approx \bar Y_{t}^{T} \qquad \text{for all pre-treatment } t \]</p>
-<p>즉 비교집단의 가중 평균이 처치집단의 사전기간 경로를 최대한 잘 따라가도록 \(\omega_i\)를 정한다.</p>
-<p>이후 추정량은 DID 형태를 유지하되, 단순 평균 대신 가중 평균을 쓴다.</p>
-<p>\[ \hat\tau_{SDID} = \sum_{t \in post}\lambda_t \left( \bar Y_t^{T} - \sum_{i\in C}\omega_i Y_{it} \right) - \sum_{t \in pre}\lambda_t \left( \bar Y_t^{T} - \sum_{i\in C}\omega_i Y_{it} \right) \]</p>
-<p>이 식의 의미는 분명하다. 먼저 처치군과 합성 비교군의 차이를 각 시점마다 계산한 뒤, 그 차이를 사전과 사후로 다시 차분한다. 그래서 이름이 synthetic DiD다.</p>
-<h2 id="실제-추정은-어떻게-이루어지는가">실제 추정은 어떻게 이루어지는가</h2>
-<p>실무적으로는 다음 네 단계를 거친다고 이해하면 쉽다.</p>
-<h3 id="1-사전기간을-기준으로-합성-가중치를-찾는다">1. 사전기간을 기준으로 합성 가중치를 찾는다</h3>
-<p>처치 전 결과경로가 처치군과 가장 비슷해지도록 비교단위별 가중치 \(\omega_i\)를 최적화한다. 보통 제약은</p>
-<p>\[ \omega_i \ge 0,\qquad \sum_{i\in C}\omega_i=1 \]</p>
-<p>처럼 둔다. 이 가중치는 synthetic control과 유사하게 작동하지만, 여기서는 이후 DID 차분에 사용된다는 점이 다르다.</p>
-<h3 id="2-시간-가중치를-함께-정한다">2. 시간 가중치를 함께 정한다</h3>
-<p>어떤 pre/post 시점이 더 비교에 중요할지 반영하기 위해 시간 가중치 \(\lambda_t\)도 구한다. 이 역시 처치군과 합성 비교군의 사전 오차를 줄이는 방향으로 설정된다.</p>
-<h3 id="3-가중-반사실-경로를-만든다">3. 가중 반사실 경로를 만든다</h3>
-<p>\[ \widehat{Y_t^{C,synthetic}} = \sum_{i\in C}\omega_i Y_{it} \]</p>
-<p>처럼 합성 비교군의 경로를 만든다. 이 경로가 사전기간에 처치군과 잘 맞는지 먼저 확인해야 한다.</p>
-<h3 id="4-차분을-통해-효과를-계산한다">4. 차분을 통해 효과를 계산한다</h3>
-<p>마지막으로 사후기간에서 처치군과 합성 비교군의 차이를 보고, 사전기간 평균 차이를 한 번 더 빼서 정책효과를 계산한다.</p>
-<h2 id="회귀식으로는-어떻게-이해할-수-있는가">회귀식으로는 어떻게 이해할 수 있는가</h2>
-<p>Synthetic DiD는 완전히 새로운 "회귀계수 한 개"만의 방법이라기보다, <strong>가중치를 먼저 만든 뒤 DID 회귀를 수행하는 방법</strong>으로 이해하는 편이 정확하다. 가중치를 구한 뒤에는 다음과 같은 가중 회귀식으로도 표현할 수 있다.</p>
-<p>\[ Y_{it} = \alpha_i+\lambda_t+\tau W_{it}+u_{it} \]</p>
-<p>여기서 회귀는 관측치별 가중치 \(\omega_i\lambda_t\)를 부여해 적합한다. 즉 \(\tau\)는 더 이상 단순 평균 비교군에 대한 DID 계수가 아니라, 합성 비교군으로 재가중된 반사실 경로를 기준으로 한 효과가 된다.</p>
-<h2 id="해석은-어떻게-해야-하는가">해석은 어떻게 해야 하는가</h2>
-<p>Synthetic DiD의 \(\hat\tau_{SDID}\)는 "처치군의 사전 경로를 가장 잘 재현하도록 구성된 합성 비교군을 기준으로 했을 때의 평균 정책효과"로 읽는 것이 가장 적절하다.</p>
-<p>이 해석은 전통적 DID보다 더 국소적일 수 있다. 왜냐하면 실제로는 전체 비교군 평균이 아니라, 특정 몇 개 집단에 높은 가중치를 준 합성 비교군과의 차이를 보고 있기 때문이다. 따라서 결과를 읽을 때는</p>
-<ul><li>어떤 집단에 큰 가중치가 부여되었는지</li><li>합성 비교군이 얼마나 잘 맞았는지</li><li>효과가 전체 모집단 평균효과인지, 아니면 특정 비교가능한 집단에 대한 효과인지</li></ul>
-<p>를 함께 설명해야 한다.</p>
-<h2 id="가정-검토는-어떻게-해야-하는가">가정 검토는 어떻게 해야 하는가</h2>
-<p>Synthetic DiD는 DID와 synthetic control의 장점을 결합하지만, 자동으로 모든 문제가 해결되지는 않는다. 적어도 다음을 점검해야 한다.</p>
-<h3 id="1-사전-적합도pre-fit">1. 사전 적합도(pre-fit)</h3>
-<p>가장 먼저 봐야 할 것은 사전기간에서 처치군과 합성 비교군의 경로가 얼마나 잘 맞는가이다. 사전 적합이 나쁘면 사후 효과 해석도 약해진다.</p>
-<h3 id="2-비교가능성">2. 비교가능성</h3>
-<p>가중치가 극단적으로 특정 몇 집단에만 몰리면, 추정이 사실상 매우 좁은 비교에 의존할 수 있다. 어떤 단위가 큰 가중치를 받았는지 보고해야 한다.</p>
-<h3 id="3-평행추세의-완화된-버전">3. 평행추세의 완화된 버전</h3>
-<p>Synthetic DiD는 단순 DID보다 평행추세 가정을 완화하는 데 도움을 주지만, 완전히 없애 주지는 않는다. 특히 사전기간 밖의 잠재 경로가 구조적으로 달라질 수 있다면 여전히 해석에 주의가 필요하다.</p>
-<h3 id="4-placebo와-leave-one-out-점검">4. placebo와 leave-one-out 점검</h3>
-<p>특정 비교집단 하나가 결과를 좌우하는지 보기 위해 leave-one-out 분석을 하고, 가짜 도입 시점을 둔 placebo 테스트를 통해 효과가 우연한 패턴이 아닌지 확인하는 것이 좋다.</p>
-<h3 id="5-추론-방식">5. 추론 방식</h3>
-<p>Synthetic DiD에서는 표준오차뿐 아니라 재표본추출, placebo 분포, permutation 기반 추론을 함께 검토하는 경우가 많다. 특히 단위 수가 적은 정책평가에서는 단순 점근근사만으로 유의성을 해석하면 과신할 수 있다.</p>
-<h2 id="정책평가-사례에서-어떻게-쓸-수-있는가">정책평가 사례에서 어떻게 쓸 수 있는가</h2>
-<p>예를 들어 특정 광역자치단체가 2019년에 청년수당을 먼저 도입했고, 다른 지역들은 순차적으로 도입하거나 아직 도입하지 않았다고 하자. 단순 DID는 모든 비도입 지역 평균을 비교군으로 쓰지만, Synthetic DiD는 사전 고용률, 청년 인구구조, 경기 흐름이 더 유사한 지역들에 높은 가중치를 주어 반사실 경로를 맞춘다. 그런 뒤 사후기간의 가중 비교 차이를 차분해 청년수당의 평균효과를 추정한다.</p>
-<p>또 환경규제, 지역혁신클러스터, 교육특구, 복지전달체계 개편처럼 특정 지역이 먼저 정책을 도입하는 경우에도 Synthetic DiD는 유용하다. 특히 처치군이 하나이거나 소수이고, 비교군 평균이 사전 경로를 잘 못 맞추는 상황에서 강점을 가진다.</p>
+        <h1 id="146-평행추세와-핵심-가정-진단">14.6 평행추세와 핵심 가정, 진단</h1>
+<p>이제 DiD의 방법 자체를 본 뒤, 마지막으로 그 방법이 인과적으로 설득력을 갖기 위해 무엇을 점검해야 하는지 정리할 차례다. 가장 유명한 가정은 <strong>평행추세(parallel trends)</strong>지만, 그것만으로 충분하지는 않다.</p>
+<h2 id="평행추세-가정">평행추세 가정</h2>
+<p>가장 단순한 2집단 2시점 설정에서 평행추세는</p>
+<p>\[ E[Y_{post}(0)-Y_{pre}(0)\mid G=1] = E[Y_{post}(0)-Y_{pre}(0)\mid G=0] \]</p>
+<p>을 뜻한다. 즉 정책이 없었더라면 처치군과 비교군의 평균 변화가 같았을 것이라는 의미다.</p>
+<p>중요한 점은 이것이 <strong>수준이 같다</strong>는 뜻이 아니라, <strong>변화 경로가 같다</strong>는 뜻이라는 것이다. 처치군과 비교군의 출발점이 달라도, 정책이 없었더라면 변화가 비슷했을 것이라면 DiD는 여전히 작동할 수 있다.</p>
+<h2 id="왜-평행추세가-중요한가">왜 평행추세가 중요한가</h2>
+<p>DiD의 반사실은 비교군의 변화 경로를 빌려와 만드는 것이다. 만약 정책이 없었더라도 처치군이 원래 더 빠르게 좋아지거나 더 빠르게 나빠졌을 집단이었다면, DiD 추정치는 정책효과와 고유 추세 차이를 구분하지 못한다.</p>
+<p>예를 들어 쇠퇴지역에만 고용정책이 먼저 도입되었다면, 정책이 없어도 그 지역의 고용지표는 다른 추세를 보였을 가능성이 있다. 이 경우 단순 DID는 정책의 효과를 과소 또는 과대 추정할 수 있다.</p>
+<h2 id="평행추세는-어떻게-점검하는가">평행추세는 어떻게 점검하는가</h2>
+<p>평행추세는 데이터만으로 완전히 증명할 수는 없지만, 다음 방식으로 설득력을 높일 수 있다.</p>
+<ul><li>정책 이전 여러 기간의 추세를 그래프로 비교</li><li>event-study의 사전계수(lead) 점검</li><li>placebo 시점이나 placebo outcome 사용</li><li>유사한 집단만 남긴 재표본화 또는 matching과 결합</li><li>공변량 추세를 포함한 강건성 분석</li></ul>
+<p>하지만 사전계수가 유의하지 않다고 해서 평행추세가 증명되는 것은 아니다. 검정력이 약하거나, 짧은 사전기간 때문에 차이를 놓칠 수 있기 때문이다.</p>
+<h2 id="평행추세-외에-중요한-가정-1-anticipation이-없어야-한다">평행추세 외에 중요한 가정 1: anticipation이 없어야 한다</h2>
+<p>정책이 시행되기 전에 이미 사람들이 정책을 예상하고 행동을 바꾸면, 사전기간 결과가 오염된다. 이를 anticipation 또는 pre-treatment behavioral response라고 한다.</p>
+<p>예를 들어 장학금 확대가 예고된 뒤 학생들이 사전학기에 이미 수강행태를 바꾸거나, 환경규제 예고 후 기업이 미리 설비투자를 조정하면, 정책 이전 데이터가 더 이상 깨끗한 기준선이 아니다.</p>
+<h2 id="중요한-가정-2-비교집단이-적절해야-한다">중요한 가정 2: 비교집단이 적절해야 한다</h2>
+<p>비교군은 단순히 “정책을 받지 않았다”는 이유만으로 적절해지지 않는다. 정책이 도입되지 않은 이유가 완전히 다르거나, 구조적으로 너무 이질적인 집단이면 반사실 경로 대용으로 부적절할 수 있다.</p>
+<p>이 때문에 실무에서는</p>
+<ul><li>비슷한 정책환경을 가진 집단만 남기기</li><li>never-treated보다 아직 미처치 집단을 비교군으로 쓰기</li><li>matching 또는 weighting과 결합하기</li><li>synthetic control 또는 synthetic DiD를 대안으로 보기</li></ul>
+<p>같은 선택이 중요해진다.</p>
+<h2 id="중요한-가정-3-구성-안정성과-sutva">중요한 가정 3: 구성 안정성과 SUTVA</h2>
+<p>정책 도입 전후에 관측대상 구성 자체가 크게 바뀌면 DiD 해석이 어려워진다. 예를 들어 노동시장 정책 이후 표본에 남는 사람의 구성이 달라지거나, 학교정책 이후 학생 이동이 급격히 늘어나면, 결과 변화가 정책효과인지 구성변화인지 구분하기 어렵다.</p>
+<p>또한 한 집단의 처치가 다른 집단에 영향을 주는 spillover가 크면 SUTVA가 흔들린다. 최저임금 인접지역 효과, 환경규제의 산업이동, 병원정책의 환자이동이 대표적 예다.</p>
+<h2 id="중요한-가정-4-추론과-표준오차">중요한 가정 4: 추론과 표준오차</h2>
+<p>DiD는 패널 자료를 자주 쓰기 때문에 오차의 직렬상관과 군집구조를 고려해야 한다. 정책배정 단위가 주 또는 지역이라면, 그 수준에서 군집 표준오차를 계산하는 것이 보통 중요하다. 그렇지 않으면 통계적 유의성이 과장될 수 있다.</p>
+<h2 id="실무-체크리스트">실무 체크리스트</h2>
+<ul><li>정책 이전 추세를 충분한 기간 동안 비교했는가</li><li>사전행동 변화 가능성을 논의했는가</li><li>비교군 선정 이유가 명확한가</li><li>spillover와 표본구성 변화를 점검했는가</li><li>군집 표준오차와 대체 사양을 보고했는가</li><li>현대적 DID 추정과 고전적 TWFE 결과를 교차검증했는가</li></ul>
+<h2 id="정책평가-사례">정책평가 사례</h2>
+<p>최저임금 연구에서는 인상 주와 비인상 주의 사전고용 추세를 먼저 비교해야 한다. Medicaid 확대 연구에서는 확대 전 건강보험 가입률이나 의료이용 추세를 비교할 수 있다. 교육재정 개편 연구에서는 지원학교와 비지원학교의 사전 성취도 추세, 학생구성 변화, 인접학교 spillover를 함께 봐야 한다.</p>
 <h2 id="정리">정리</h2>
-<p>Synthetic DiD는 "좋은 비교군을 만들고 싶다"는 synthetic control의 직관과 "공통 충격을 제거하고 싶다"는 DID의 직관을 결합한 방법이다. 그래서 스태거드 도입이나 비교가능성 문제가 강한 정책평가에서 매우 유용한 대안이 된다. 다만 이 방법 역시 자동으로 인과효과를 보장해 주는 것은 아니므로, 사전 적합도, 가중치 구조, placebo 분석, 해석 범위를 함께 제시해야 설득력 있는 연구가 된다.</p>
+<p>DiD의 핵심 가정은 평행추세지만, 실제 연구에서는 그것을 포함한 더 넓은 진단 체계가 필요하다. 좋은 DID 연구는 단지 추정량을 제시하는 연구가 아니라, 왜 이 비교가 반사실 경로의 좋은 대용인지 끝까지 설득하는 연구다.</p>
       </section>
       <nav class="chapter-nav">
-        <a class="nav-prev" href="ch16-04-s164.html">이전: 14.4 스태거드 도입과 현대적 DID</a>
-        <a class="nav-next" href="ch16-06-s166.html">14.6 평행추세와 핵심 가정, 진단 다음</a>
+        <a class="nav-prev" href="ch16-05-s165.html">이전: 14.5 합성 이중차분법</a>
+        <a class="nav-next" href="ch17-00-panel-models-intro.html">15 패널모형 다음</a>
       </nav>
     </article>
     
@@ -1128,7 +1085,7 @@
       </div>
       <textarea class="editor-textarea" data-editor-textarea spellcheck="false"></textarea>
       <div class="editor-status" data-editor-status data-kind="neutral">편집기를 열면 원고를 불러옵니다.</div>
-      <div class="chapter-edit-status" data-open-source-status="ch16-05-s165"></div>
+      <div class="chapter-edit-status" data-open-source-status="ch16-06-s166"></div>
     </aside>
         
     
