@@ -382,7 +382,7 @@
                                            "slug":  "ch14-02-s142",
                                            "source":  "chapters/ch14-02-s142.md",
                                            "label":  "12.2",
-                                           "title":  "12.2 Wald 추정량과 2SLS"
+                                            "title":  "12.2 IV 추정절차"
                                        },
                                        {
                                            "slug":  "ch14-03-s143",

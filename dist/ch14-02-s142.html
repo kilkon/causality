@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>12.2 Wald 추정량과 2SLS | 인과효과 추론 (Causal Inference)</title>
+  <title>12.2 IV 추정절차 | 인과효과 추론 (Causal Inference)</title>
   <meta name="description" content="이 책은 LLM을 활용하여 전자책 프로그램을 만든 후 내용도 LLM과 논문들을 참고해가면서 함께 수정한 것입니다. 내용에 환각이 없도록 저자가 여러번 살피면서 작업을 하고 있지만 혹시라도 오류가 있는 경우에는 언제든지 알려주시면 감사하겠습니다." />
   <link rel="stylesheet" href="assets/site.css" />
   <script>
@@ -13,7 +13,7 @@
   </script>
   <script defer src="assets/site.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>window.__BOOK_EDITOR__ = {"slug": "ch14-02-s142", "title": "12.2 Wald 추정량과 2SLS", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch14-02-s142.md"};</script>
+  <script>window.__BOOK_EDITOR__ = {"slug": "ch14-02-s142", "title": "12.2 IV 추정절차", "sourcePath": "C:\\Users\\owner\\causal inference\\causal inference2\\content\\chapters\\ch14-02-s142.md"};</script>
 
 </head>
   <body>
@@ -457,7 +457,7 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch14-02-s142.html" aria-current="page">
                     <span class="sidebar-link-label">12.2</span>
-                    Wald 추정량과 2SLS
+                    IV 추정절차
                   </a>
                 </li>
                 
@@ -1015,8 +1015,8 @@
     <article class="chapter-card">
       <header class="chapter-header">
         <p class="breadcrumb">제4부 | 조건부 독립과 준실험의 식별 전략 쨌 12.2</p>
-        <h1>12.2 Wald 추정량과 2SLS</h1>
-        <p class="description">이 절은 12.2 Wald 추정량과 2SLS의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
+        <h1>12.2 IV 추정절차</h1>
+        <p class="description">이 절은 IV 추정절차의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
         
         <div class="editor-actions">
           <button type="button" class="editor-button secondary" data-editor-open>브라우저에서 편집</button>
@@ -1026,9 +1026,9 @@
         
       </header>
       <section class="chapter-body">
-        <h1 id="122-wald-추정량과-2sls">12.2 Wald 추정량과 2SLS</h1>
-<p>이 절은 <strong>12.2 Wald 추정량과 2SLS</strong>의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
-<h2 id="122-wald-추정량과-2sls">12.2 Wald 추정량과 2SLS</h2>
+        <h1 id="122-iv-추정절차">12.2 IV 추정절차</h1>
+<p>이 절은 <strong>12.2 IV 추정절차</strong>의 핵심 개념과 식별 가정, 해석상의 주의점을 연결해 정리한다.</p>
+<h2 id="122-iv-추정절차">12.2 IV 추정절차</h2>
 <p>Wald 추정량과 2단계 최소제곱(2SLS)은 IV 논리를 실제 계산으로 바꾸는 기본 도구다. 핵심 아이디어는 간단하다. 도구 \(Z\)가 결과 \(Y\)를 얼마나 움직였는지 보되, 그 변화 중 처치 \(D\)를 통해 유도된 부분만 비율 형태로 떼어내는 것이다.</p>
 <h2 id="wald-추정량의-직관">Wald 추정량의 직관</h2>
 <p>이진 도구 \(Z\in\{0,1\}\)와 이진 처치 \(D\in\{0,1\}\)에서는 가장 기본적인 추정량이 Wald 비율이다.</p>
