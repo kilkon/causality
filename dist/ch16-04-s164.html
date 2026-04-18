@@ -75,7 +75,7 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch02-02-ice-ate-att-atc.html">
                     
-                    2.2 개인 인과효과와 평균 인과효과 — ICE · ATE · ATT · ATC
+                    2.2 개인 인과효과와 평균 인과효과 - ICE · ATE · ATT · ATC
                   </a>
                 </li>
                 
@@ -457,7 +457,7 @@
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="ch14-02-s142.html">
                     <span class="sidebar-link-label">12.2</span>
-                    Wald 추정량과 2SLS
+                    IV 추정절차
                   </a>
                 </li>
                 
@@ -1028,11 +1028,48 @@
       <section class="chapter-body">
         <h1 id="144-스태거드-도입과-현대적-did">14.4 스태거드 도입과 현대적 DID</h1>
 <p>현실의 정책은 모든 집단에 동시에 도입되지 않는 경우가 많다. 어떤 지역은 2018년에, 다른 지역은 2020년에 정책을 도입하고, 어떤 지역은 끝내 도입하지 않을 수 있다. 이런 구조를 <strong>staggered adoption</strong>이라고 한다.</p>
+<svg width="760" height="280" viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, 'Malgun Gothic', sans-serif">
+  <rect x="0" y="0" width="760" height="280" fill="#ffffff"/>
+  <text x="110" y="42" font-size="15" font-weight="700" fill="#263238">집단별 정책 도입 시점</text>
+  <text x="235" y="75" font-size="12" text-anchor="middle" fill="#455a64">2017</text>
+  <text x="335" y="75" font-size="12" text-anchor="middle" fill="#455a64">2018</text>
+  <text x="435" y="75" font-size="12" text-anchor="middle" fill="#455a64">2019</text>
+  <text x="535" y="75" font-size="12" text-anchor="middle" fill="#455a64">2020</text>
+  <text x="635" y="75" font-size="12" text-anchor="middle" fill="#455a64">2021</text>
+  <text x="115" y="112" font-size="12" font-weight="700" fill="#37474f">A 지역</text>
+  <text x="115" y="152" font-size="12" font-weight="700" fill="#37474f">B 지역</text>
+  <text x="115" y="192" font-size="12" font-weight="700" fill="#37474f">C 지역</text>
+  <text x="115" y="232" font-size="12" font-weight="700" fill="#37474f">D 지역</text>
+  <rect x="200" y="92" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="300" y="92" width="100" height="24" fill="#c8e6c9" stroke="#43a047"/>
+  <rect x="400" y="92" width="100" height="24" fill="#c8e6c9" stroke="#43a047"/>
+  <rect x="500" y="92" width="100" height="24" fill="#c8e6c9" stroke="#43a047"/>
+  <rect x="600" y="92" width="100" height="24" fill="#c8e6c9" stroke="#43a047"/>
+  <rect x="200" y="132" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="300" y="132" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="400" y="132" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="500" y="132" width="100" height="24" fill="#c8e6c9" stroke="#43a047"/>
+  <rect x="600" y="132" width="100" height="24" fill="#c8e6c9" stroke="#43a047"/>
+  <rect x="200" y="172" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="300" y="172" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="400" y="172" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="500" y="172" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="600" y="172" width="100" height="24" fill="#c8e6c9" stroke="#43a047"/>
+  <rect x="200" y="212" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="300" y="212" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="400" y="212" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="500" y="212" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <rect x="600" y="212" width="100" height="24" fill="#eceff1" stroke="#90a4ae"/>
+  <text x="450" y="258" font-size="12" fill="#2e7d32">초록: 도입 이후</text>
+  <text x="560" y="258" font-size="12" fill="#607d8b">회색: 아직 미도입</text>
+</svg>
+<p>이 그림의 핵심은 각 집단이 서로 다른 시점에 "처치 상태"로 들어간다는 점이다. A 지역은 2018년에, B 지역은 2020년에, C 지역은 2021년에 도입되며 D 지역은 끝까지 비교집단으로 남아 있다고 하자. 이런 구조에서는 어떤 시점에는 A가 처치군이고 B·C·D가 비교군이지만, 시간이 지나면 B 역시 처치군이 된다. 바로 이 점 때문에 "누구를 누구와 비교하고 있는가"가 전통적 DID보다 훨씬 중요해진다.</p>
 <h2 id="왜-문제가-되는가">왜 문제가 되는가</h2>
 <p>전통적 TWFE DID는 보통</p>
 <p>\[ Y_{it} = \alpha_i + \lambda_t + \tau D_{it} + u_{it} \]</p>
 <p>처럼 쓴다. 과거에는 \(\tau\)를 평균 DID 효과처럼 읽는 경우가 많았다. 하지만 도입시점이 서로 다르고 효과가 cohort별, 시점별로 달라지면 이 계수는 여러 2x2 비교의 복합 가중평균이 된다.</p>
 <p>특히 이미 처치받은 집단이 아직 처치받지 않은 집단의 비교군이 되는 것뿐 아니라, 나중에는 다른 처치집단의 비교군처럼 쓰일 수 있다. 이 때문에 음수 가중치나 해석 왜곡 문제가 발생할 수 있다.</p>
+<p>즉 스태거드 도입 환경에서는 단순히 \(\tau\)라는 한 계수를 추정하는 것으로는 충분하지 않다. 각 코호트가 언제 도입되었고, 특정 시점에 어떤 집단이 아직 순수 비교군으로 남아 있는지를 명시적으로 구분해야 한다.</p>
 <h2 id="goodman-bacon-분해의-직관">Goodman-Bacon 분해의 직관</h2>
 <p>Goodman-Bacon은 TWFE DID를 여러 2x2 DID의 가중평균으로 분해할 수 있음을 보였다. 이 결과의 핵심 교훈은 단순하다. TWFE 한 계수는 “처치군 vs 순수 비교군”만 비교하는 것이 아니라, 여러 코호트 간 비교를 섞고 있을 수 있다.</p>
 <p>이질적 처치효과가 존재하면 그 혼합 자체가 문제가 된다.</p>
@@ -1040,6 +1077,58 @@
 <p>최근 문헌은 먼저 cohort \(g\)와 시점 \(t\)별 효과를 분리해서 생각한다.</p>
 <p>\[ ATT(g,t) = \mathbb{E}[Y_t(1)-Y_t(0)\mid G=g,\; t\ge g]. \]</p>
 <p>이 식은 “시점 \(g\)에 처음 처치된 집단이, 시점 \(t\)에서 보이는 평균 처치효과”를 뜻한다. 이렇게 분해하면 어떤 집단의 어떤 시점 효과를 보고 있는지가 훨씬 명확해진다.</p>
+<p>이 표현을 쓰는 이유는 추정량을 다시 질문에 맞게 정렬하기 위해서다. 예컨대 "2018년에 도입된 지역의 도입 2년 후 효과"와 "2020년에 도입된 지역의 도입 직후 효과"는 서로 다른 양이다. 이를 하나의 \(\tau\)로 평균내면 해석이 흐려질 수 있다.</p>
+<h2 id="스태거드-도입에서-추정모형은-어떻게-써야-하는가">스태거드 도입에서 추정모형은 어떻게 써야 하는가</h2>
+<p>가장 단순한 TWFE DID 모형은</p>
+<p>\[ Y_{it} = \alpha_i + \lambda_t + \tau D_{it} + u_{it} \]</p>
+<p>이지만, 스태거드 도입과 이질적 효과가 있는 경우 이 식의 \(\tau\)는 여러 비교를 섞은 값이 된다. 그래서 현대적 DID는 보통 다음 세 방향 중 하나로 추정모형을 재구성한다.</p>
+<h3 id="1-group-time-효과를-직접-추정하는-방식">1. group-time 효과를 직접 추정하는 방식</h3>
+<p>Callaway and Sant'Anna류 접근은 먼저 각 도입 코호트 \(g\)와 시점 \(t\)에 대해</p>
+<p>\[ \widehat{ATT}(g,t) = \Big( \bar Y_{t}^{g}-\bar Y_{g-1}^{g} \Big) - \Big( \bar Y_{t}^{C(g,t)}-\bar Y_{g-1}^{C(g,t)} \Big) \]</p>
+<p>를 계산한다. 여기서 \(C(g,t)\)는 아직 미처치 상태인 집단 또는 never-treated 집단이다. 핵심은 "이미 처치된 집단을 비교군으로 쓰지 않는다"는 점이다.</p>
+<h3 id="2-상대시점event-time-회귀를-코호트별로-재구성하는-방식">2. 상대시점(event time) 회귀를 코호트별로 재구성하는 방식</h3>
+<p>Sun and Abraham류 접근은 상대시점 \(l=t-g\)에 대한 event-study를 코호트별 상호작용으로 쓴다.</p>
+<p>\[ Y_{it} = \alpha_i+\lambda_t+ \sum_{g\in \mathcal{G}} \sum_{l\neq -1} \beta_{g,l}\, 1\{G_i=g\}\,1\{t-g=l\} +u_{it} \]</p>
+<p>그 다음 \(\beta_{g,l}\)를 상대시점별로 적절히 집계한다. 이렇게 하면 도입 전후 효과를 시각적으로 볼 수 있고, 전통적 TWFE event-study에서 생기는 왜곡을 줄일 수 있다.</p>
+<h3 id="3-imputation-또는-예측-기반-반사실-경로를-만드는-방식">3. imputation 또는 예측 기반 반사실 경로를 만드는 방식</h3>
+<p>Borusyak, Jaravel, Spiess류 접근은 먼저 미처치 관측치로 반사실 모형을 적합한 뒤, 처치집단의 미처치 잠재결과를 예측한다.</p>
+<p>\[ \widehat{Y_{it}(0)} = \hat\alpha_i+\hat\lambda_t+\hat X_{it}'\hat\gamma \]</p>
+<p>그리고 실제 결과와의 차이</p>
+<p>\[ \widehat{\tau}_{it}=Y_{it}-\widehat{Y_{it}(0)} \]</p>
+<p>를 도입 코호트와 상대시점별로 평균내어 효과를 추정한다. 이 방식은 "예상되었을 반사실 경로"를 먼저 구성한 뒤 효과를 읽는다는 점에서 직관적이다.</p>
+<h2 id="실제-계수값은-어떻게-추정하고-읽어야-하는가">실제 계수값은 어떻게 추정하고 읽어야 하는가</h2>
+<h3 id="twfe-한-계수를-그대로-읽는-경우">TWFE 한 계수를 그대로 읽는 경우</h3>
+<p>전통적 모형에서 \(\hat\tau\)는 표면적으로는 "평균적인 DID 효과"처럼 보인다. 하지만 스태거드 도입 환경에서는 이 계수가</p>
+<ul><li>일찍 도입된 집단과 never-treated의 비교</li><li>늦게 도입된 집단과 never-treated의 비교</li><li>일찍 도입된 집단과 늦게 도입된 집단의 비교</li></ul>
+<p>를 모두 섞어서 만든 가중평균일 수 있다. 그래서 \(\hat\tau\)의 부호나 크기가 개별 코호트 효과와 다르게 나타날 수 있다.</p>
+<h3 id="group-time-계수를-읽는-경우">group-time 계수를 읽는 경우</h3>
+<p>\(\widehat{ATT}(g,t)\)는 훨씬 해석이 명료하다. 예를 들어</p>
+<p>\[ \widehat{ATT}(2018,2020)=2.4 \]</p>
+<p>라면 "2018년에 정책을 도입한 집단의 2020년 효과는 2.4"라고 직접 읽을 수 있다. 이후 전체 평균을 구하고 싶다면</p>
+<p>\[ \widehat{ATT}^{overall} = \sum_{g}\sum_{t\ge g} w_{g,t}\widehat{ATT}(g,t) \]</p>
+<p>처럼 명시적 가중치 \(w_{g,t}\)로 집계한다. 이때 가중치가 무엇인지도 함께 보고해야 해석이 투명해진다.</p>
+<h3 id="event-study-계수를-읽는-경우">event-study 계수를 읽는 경우</h3>
+<p>상대시점 계수 \(\beta_l\)는 "도입 \(l\)기 전/후의 평균 효과"로 읽는다. 예를 들어 \(\beta_{+2}\)는 도입 후 2기 경과 효과, \(\beta_{-2}\)는 도입 전 2기 선행 추세를 나타낸다. 그래서 event-study는 동태적 효과와 사전 추세를 한 화면에서 함께 보여주는 장점이 있다.</p>
+<h2 id="스태거드-도입-did의-실제-분석-절차">스태거드 도입 DID의 실제 분석 절차</h2>
+<p>정책평가 연구에서 스태거드 도입 DID를 수행할 때는 보통 다음 순서가 적절하다.</p>
+<ol><li><strong>처음 도입 시점 \(G_i\)를 정의한다.</strong></li></ol>
+<p>각 집단이 언제 처음 정책에 노출되었는지 코호트 변수를 만든다.</p>
+<ol><li><strong>never-treated와 not-yet-treated 집단을 구분한다.</strong></li></ol>
+<p>어떤 집단을 비교군으로 쓸지 먼저 정해야 한다.</p>
+<ol><li><strong>기본 TWFE를 참고용으로만 적합한다.</strong></li></ol>
+<p>전통적 계수가 얼마나 달라질 수 있는지 보는 참고치로는 쓸 수 있지만, 최종 해석을 여기에만 의존하지 않는다.</p>
+<ol><li><strong>group-time ATT 또는 cohort-specific event-study를 추정한다.</strong></li></ol>
+<p>추정의 기본 단위를 코호트와 시점으로 나눈다.</p>
+<ol><li><strong>도입 전 계수로 평행추세의 타당성을 점검한다.</strong></li></ol>
+<p>event-study의 \(l&lt;0\) 계수들이 체계적으로 0에서 벗어나는지 본다.</p>
+<ol><li><strong>효과를 적절히 집계한다.</strong></li></ol>
+<p>전체 평균효과, 도입 직후 효과, 장기효과를 따로 보고한다.</p>
+<ol><li><strong>가중치와 비교집단 선택에 대한 민감도 분석을 한다.</strong></li></ol>
+<p>never-treated 기준, not-yet-treated 기준, 표본 제한 여부에 따라 결과가 얼마나 달라지는지 확인한다.</p>
+<h2 id="정책평가에서-자주-쓰는-보고-형식">정책평가에서 자주 쓰는 보고 형식</h2>
+<p>실무적으로는 다음 세 결과를 같이 제시하는 것이 가장 설득력 있다.</p>
+<ul><li>스태거드 도입 구조를 보여주는 도입 시점 도표</li><li>상대시점 계수를 보여주는 event-study 그림</li><li>\(\widehat{ATT}(g,t)\) 또는 집계된 평균효과 표</li></ul>
+<p>이렇게 해야 독자가 "정책이 언제 도입되었고", "비교가 누구 사이에서 이루어졌으며", "효과가 단기와 장기에서 어떻게 다른지"를 함께 파악할 수 있다.</p>
 <h2 id="주요-현대적-접근">주요 현대적 접근</h2>
 <ul><li><strong>Callaway and Sant'Anna</strong>: 아직 처치받지 않은 집단 또는 never-treated 집단을 비교군으로 사용해 \(ATT(g,t)\)를 추정하고 이후 집계</li><li><strong>Sun and Abraham</strong>: event-study를 cohort별 상대시점 효과로 재구성해 전통적 TWFE event-study 왜곡을 줄임</li><li><strong>de Chaisemartin and D'Haultfœuille</strong>: TWFE의 편향 가능성을 분석하고 대안적 DID 추정 제시</li><li><strong>Borusyak, Jaravel, Spiess</strong>: imputation 기반 DID 접근을 제안</li></ul>
 <p>이 접근들의 공통점은 “누구를 누구와 비교하는가”를 명시적으로 통제한다는 점이다.</p>
