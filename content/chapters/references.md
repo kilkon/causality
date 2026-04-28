@@ -11,6 +11,8 @@ description:
 
 - Angrist, J. D., & Pischke, J.-S. (2009). *Mostly harmless econometrics: An empiricist's companion*. Princeton University Press.
 
+- Angrist, J. D., Imbens, G. W., & Rubin, D. B. (1996). Identification of causal effects using instrumental variables. *Journal of the American Statistical Association, 91*(434), 444-455. https://doi.org/10.1080/01621459.1996.10476902
+
 - Angrist, J., Hull, P., & Walters, C. R. (2024). Time-varying treatments and new targeted IV estimands: A strategy trial analysis of revascularization. *AEA Papers and Proceedings, 114*, 604-609. https://doi.org/10.1257/pandp.20241065
 
 - Athey, S. (2017). Beyond prediction: Using big data for policy problems. *Science, 355*(6324), 483-485. https://doi.org/10.1126/science.aal4321
@@ -75,6 +77,8 @@ description:
 
 - Finkelstein, A., Taubman, S., Wright, B., Bernstein, M., Gruber, J., Newhouse, J. P., Allen, H., Baicker, K., & the Oregon Health Study Group. (2012). The Oregon Health Insurance Experiment: Evidence from the first year. *Quarterly Journal of Economics, 127*(3), 1057-1106. https://doi.org/10.1093/qje/qjs020
 
+- Firpo, S. (2007). Efficient semiparametric estimation of quantile treatment effects. *Econometrica, 75*(1), 259-276. https://doi.org/10.1111/j.1468-0262.2007.00738.x
+
 - Flanders, W. D., & Ye, D. (2019). Limits for the magnitude of M-bias and certain other types of structural selection bias. *Epidemiology, 30*(3), 358-366. https://doi.org/10.1097/EDE.0000000000000972
 
 - Goodman-Bacon, A. (2021). Difference-in-differences with variation in treatment timing. *Journal of Econometrics, 225*(2), 254-277. https://doi.org/10.1016/j.jeconom.2021.03.014
@@ -91,6 +95,8 @@ description:
 
 - Heckman, J. J., Ichimura, H., Smith, J., & Todd, P. E. (1998). Characterizing selection bias using experimental data. *Econometrica, 66*(5), 1017-1098. https://doi.org/10.2307/2999630
 
+- Heckman, J. J., Urzua, S., & Vytlacil, E. (2006). Understanding instrumental variables in models with essential heterogeneity. *The Review of Economics and Statistics, 88*(3), 389-432. https://doi.org/10.1162/rest.88.3.389
+
 - Hernán, M. A. (2016). Does water kill? A call for less casual causal inferences. *Annals of Epidemiology, 26*(10), 674-680. https://doi.org/10.1016/j.annepidem.2016.08.016
 
 - Hernán, M. A., Hernández-Díaz, S., & Robins, J. M. (2004). A structural approach to selection bias. *Epidemiology, 15*(5), 615-625. https://doi.org/10.1097/01.ede.0000135174.63482.43
@@ -102,6 +108,8 @@ description:
 - Holland, P. W. (1986). Statistics and causal inference. *Journal of the American Statistical Association, 81*(396), 945-960. https://doi.org/10.1080/01621459.1986.10478354
 
 - Holtz-Eakin, D., Newey, W., & Rosen, H. S. (1988). Estimating vector autoregressions with panel data. *Econometrica, 56*(6), 1371-1395. https://doi.org/10.2307/1913103
+
+- Imbens, G. W., & Wooldridge, J. M. (2009). Recent developments in the econometrics of program evaluation. *Journal of Economic Literature, 47*(1), 5-86. https://doi.org/10.1257/jel.47.1.5
 
 - Imbens, G. W., & Rubin, D. B. (2015). *Causal inference for statistics, social, and biomedical sciences: An introduction*. Cambridge University Press.
 
