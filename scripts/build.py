@@ -5,6 +5,7 @@ import html
 import json
 import re
 import shutil
+from html.parser import HTMLParser
 from pathlib import Path
 
 
@@ -12,6 +13,111 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT_DIR = ROOT / "content"
 ASSETS_DIR = ROOT / "assets"
 DIST_DIR = ROOT / "dist"
+BLOCKED_HTML_TAGS = {"script", "iframe", "object", "embed", "base", "meta"}
+URL_ATTRS = {"href", "xlink:href", "src", "action", "formaction", "poster"}
+
+
+def is_safe_url(value: str) -> bool:
+    candidate = value.strip().lower()
+    if not candidate:
+        return True
+    if candidate.startswith(("#", "/", "./", "../")):
+        return True
+    return not (
+        candidate.startswith("javascript:")
+        or candidate.startswith("vbscript:")
+        or candidate.startswith("data:text/html")
+    )
+
+
+class HtmlSanitizer(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=False)
+        self.parts: list[str] = []
+        self.block_depth = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        lowered = tag.lower()
+        if lowered in BLOCKED_HTML_TAGS:
+            self.block_depth += 1
+            return
+        if self.block_depth:
+            return
+
+        safe_attrs: list[str] = []
+        for key, value in attrs:
+            attr_name = key.lower()
+            if attr_name.startswith("on"):
+                continue
+            if value is None:
+                safe_attrs.append(html.escape(key, quote=True))
+                continue
+            if attr_name in URL_ATTRS and not is_safe_url(value):
+                continue
+            safe_attrs.append(f'{html.escape(key, quote=True)}="{html.escape(value, quote=True)}"')
+
+        attr_text = f" {' '.join(safe_attrs)}" if safe_attrs else ""
+        self.parts.append(f"<{tag}{attr_text}>")
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        lowered = tag.lower()
+        if lowered in BLOCKED_HTML_TAGS or self.block_depth:
+            return
+
+        safe_attrs: list[str] = []
+        for key, value in attrs:
+            attr_name = key.lower()
+            if attr_name.startswith("on"):
+                continue
+            if value is None:
+                safe_attrs.append(html.escape(key, quote=True))
+                continue
+            if attr_name in URL_ATTRS and not is_safe_url(value):
+                continue
+            safe_attrs.append(f'{html.escape(key, quote=True)}="{html.escape(value, quote=True)}"')
+
+        attr_text = f" {' '.join(safe_attrs)}" if safe_attrs else ""
+        self.parts.append(f"<{tag}{attr_text} />")
+
+    def handle_endtag(self, tag: str) -> None:
+        lowered = tag.lower()
+        if lowered in BLOCKED_HTML_TAGS:
+            if self.block_depth:
+                self.block_depth -= 1
+            return
+        if self.block_depth:
+            return
+        self.parts.append(f"</{tag}>")
+
+    def handle_data(self, data: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(html.escape(data, quote=False))
+
+    def handle_comment(self, data: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(f"<!--{html.escape(data, quote=False)}-->")
+
+    def handle_entityref(self, name: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(f"&{name};")
+
+    def handle_charref(self, name: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(f"&#{name};")
+
+    def get_html(self) -> str:
+        return "".join(self.parts)
+
+
+def sanitize_raw_html_block(raw_html: str) -> str:
+    sanitizer = HtmlSanitizer()
+    sanitizer.feed(raw_html)
+    sanitizer.close()
+    return sanitizer.get_html()
 
 
 def parse_front_matter(text: str) -> tuple[dict[str, str], str]:
@@ -157,7 +263,7 @@ def render_markdown(markdown: str) -> tuple[str, list[dict[str, str]]]:
             while i < len(lines) and lines[i].strip():
                 html_lines.append(lines[i])
                 i += 1
-            out.append("\n".join(html_lines))
+            out.append(sanitize_raw_html_block("\n".join(html_lines)))
             continue
 
         if stripped.startswith("```"):
