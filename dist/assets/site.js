@@ -8,6 +8,9 @@
   var openPathButtons = document.querySelectorAll("[data-open-path]");
   var protocol = window.location.protocol;
   var canUseApi = protocol === "http:" || protocol === "https:";
+  var editorHeaders = {
+    "X-Book-Editor": "1"
+  };
 
   if (toggle) {
     toggle.addEventListener("click", function () {
@@ -39,7 +42,7 @@
     try {
       var response = await fetch("/__api/open", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: Object.assign({ "Content-Type": "application/json" }, editorHeaders),
         body: JSON.stringify(payload)
       });
       var result = await response.json();
@@ -138,7 +141,9 @@
 
     setStatus("원고를 불러오는 중입니다...", "neutral");
     try {
-      var response = await fetch(getEditorLoadUrl());
+      var response = await fetch(getEditorLoadUrl(), {
+        headers: editorHeaders
+      });
       if (!response.ok) {
         throw new Error("load_failed");
       }
@@ -161,7 +166,7 @@
     try {
       var response = await fetch(getEditorSaveUrl(), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: Object.assign({ "Content-Type": "application/json" }, editorHeaders),
         body: JSON.stringify(getEditorSavePayload())
       });
       var payload = await response.json();

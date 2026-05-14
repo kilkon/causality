@@ -15,6 +15,10 @@ DIST_DIR = ROOT / "dist"
 CONTENT_DIR = ROOT / "content"
 BOOK_JSON = CONTENT_DIR / "book.json"
 BUILD_SCRIPT = ROOT / "scripts" / "build.py"
+CHAPTERS_DIR = CONTENT_DIR / "chapters"
+EDITOR_HEADER = "X-Book-Editor"
+EDITOR_HEADER_VALUE = "1"
+LOCAL_HOSTS = {"127.0.0.1", "localhost"}
 
 
 def load_book() -> dict:
@@ -51,6 +55,23 @@ def normalize_content(value) -> str:
     return str(value)
 
 
+def is_allowed_editor_path(path: Path) -> bool:
+    try:
+        resolved = path.resolve()
+    except OSError:
+        return False
+
+    if resolved == BOOK_JSON.resolve():
+        return True
+
+    try:
+        resolved.relative_to(CHAPTERS_DIR.resolve())
+    except ValueError:
+        return False
+
+    return resolved.suffix.lower() == ".md"
+
+
 class BookHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(DIST_DIR), **kwargs)
@@ -58,9 +79,13 @@ class BookHandler(SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         if parsed.path == "/__api/chapter":
+            if not self.require_editor_request():
+                return
             self.handle_get_chapter(parsed)
             return
         if parsed.path == "/__api/file":
+            if not self.require_editor_request():
+                return
             self.handle_get_file(parsed)
             return
         super().do_GET()
@@ -68,12 +93,18 @@ class BookHandler(SimpleHTTPRequestHandler):
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
         if parsed.path == "/__api/chapter":
+            if not self.require_editor_request(require_json=True):
+                return
             self.handle_save_chapter()
             return
         if parsed.path == "/__api/file":
+            if not self.require_editor_request(require_json=True):
+                return
             self.handle_save_file()
             return
         if parsed.path == "/__api/open":
+            if not self.require_editor_request(require_json=True):
+                return
             self.handle_open_chapter()
             return
         self.send_error(HTTPStatus.NOT_FOUND, "Not found")
@@ -88,6 +119,34 @@ class BookHandler(SimpleHTTPRequestHandler):
         except ValueError:
             return None
         return path
+
+    def is_allowed_local_url(self, candidate: str) -> bool:
+        parsed = urlparse(candidate)
+        if parsed.scheme not in {"http", "https"}:
+            return False
+        return (parsed.hostname or "").lower() in LOCAL_HOSTS
+
+    def require_editor_request(self, require_json: bool = False) -> bool:
+        if self.headers.get(EDITOR_HEADER) != EDITOR_HEADER_VALUE:
+            self.send_json({"ok": False, "error": "missing_editor_header"}, HTTPStatus.FORBIDDEN)
+            return False
+
+        origin = self.headers.get("Origin")
+        referer = self.headers.get("Referer")
+        if origin and not self.is_allowed_local_url(origin):
+            self.send_json({"ok": False, "error": "invalid_origin"}, HTTPStatus.FORBIDDEN)
+            return False
+        if referer and not self.is_allowed_local_url(referer):
+            self.send_json({"ok": False, "error": "invalid_referer"}, HTTPStatus.FORBIDDEN)
+            return False
+
+        if require_json:
+            content_type = self.headers.get("Content-Type", "")
+            if "application/json" not in content_type.lower():
+                self.send_json({"ok": False, "error": "invalid_content_type"}, HTTPStatus.BAD_REQUEST)
+                return False
+
+        return True
 
     def handle_get_chapter(self, parsed) -> None:
         slug = parse_qs(parsed.query).get("slug", [""])[0]
@@ -116,6 +175,9 @@ class BookHandler(SimpleHTTPRequestHandler):
         path = self.resolve_safe_path(path_value)
         if not path:
             self.send_json({"ok": False, "error": "invalid_path"}, HTTPStatus.BAD_REQUEST)
+            return
+        if not is_allowed_editor_path(path):
+            self.send_json({"ok": False, "error": "path_not_allowed"}, HTTPStatus.FORBIDDEN)
             return
         if not path.exists():
             self.send_json({"ok": False, "error": "missing_path"}, HTTPStatus.NOT_FOUND)
@@ -171,6 +233,9 @@ class BookHandler(SimpleHTTPRequestHandler):
         if not path:
             self.send_json({"ok": False, "error": "invalid_path"}, HTTPStatus.BAD_REQUEST)
             return
+        if not is_allowed_editor_path(path):
+            self.send_json({"ok": False, "error": "path_not_allowed"}, HTTPStatus.FORBIDDEN)
+            return
 
         path.write_text(content, encoding="utf-8")
         ok, output = run_build()
@@ -194,6 +259,9 @@ class BookHandler(SimpleHTTPRequestHandler):
             path = self.resolve_safe_path(path_value)
             if not path:
                 self.send_json({"ok": False, "error": "invalid_path"}, HTTPStatus.BAD_REQUEST)
+                return
+            if not is_allowed_editor_path(path):
+                self.send_json({"ok": False, "error": "path_not_allowed"}, HTTPStatus.FORBIDDEN)
                 return
         else:
             slug = payload.get("slug", "")
@@ -221,6 +289,8 @@ class BookHandler(SimpleHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
         self.end_headers()
         self.wfile.write(body)
 
