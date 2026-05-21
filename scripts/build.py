@@ -13,8 +13,108 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT_DIR = ROOT / "content"
 ASSETS_DIR = ROOT / "assets"
 DIST_DIR = ROOT / "dist"
-BLOCKED_HTML_TAGS = {"script", "iframe", "object", "embed", "base", "meta"}
+FEEDBACK_EMAIL = "kilkon@snu.ac.kr"
+ALLOWED_HTML_TAGS = {
+    "svg",
+    "g",
+    "defs",
+    "marker",
+    "lineargradient",
+    "stop",
+    "path",
+    "line",
+    "polyline",
+    "polygon",
+    "rect",
+    "circle",
+    "text",
+    "title",
+    "desc",
+    "style",
+    "figure",
+    "figcaption",
+    "table",
+    "thead",
+    "tbody",
+    "tr",
+    "th",
+    "td",
+}
 URL_ATTRS = {"href", "xlink:href", "src", "action", "formaction", "poster"}
+GLOBAL_ATTRS = {
+    "id",
+    "class",
+    "role",
+    "scope",
+    "xmlns",
+    "aria-label",
+    "aria-labelledby",
+}
+SVG_ATTRS = {
+    "viewbox",
+    "width",
+    "height",
+    "x",
+    "y",
+    "x1",
+    "x2",
+    "y1",
+    "y2",
+    "cx",
+    "cy",
+    "r",
+    "rx",
+    "ry",
+    "d",
+    "points",
+    "fill",
+    "fill-opacity",
+    "stroke",
+    "stroke-width",
+    "stroke-dasharray",
+    "font-size",
+    "font-weight",
+    "font-style",
+    "font-family",
+    "text-anchor",
+    "transform",
+    "offset",
+    "orient",
+    "refx",
+    "refy",
+    "markerwidth",
+    "markerheight",
+    "markerunits",
+    "marker-end",
+}
+STYLE_ATTRS = {"style"}
+
+
+def is_allowed_attr(tag: str, attr_name: str) -> bool:
+    if attr_name in GLOBAL_ATTRS or attr_name in URL_ATTRS or attr_name in STYLE_ATTRS:
+        return True
+    if attr_name.startswith(("aria-", "data-")):
+        return True
+    if tag in {
+        "svg",
+        "g",
+        "defs",
+        "marker",
+        "lineargradient",
+        "stop",
+        "path",
+        "line",
+        "polyline",
+        "polygon",
+        "rect",
+        "circle",
+        "text",
+        "title",
+        "desc",
+        "style",
+    }:
+        return attr_name in SVG_ATTRS
+    return False
 
 
 def is_safe_url(value: str) -> bool:
@@ -30,82 +130,114 @@ def is_safe_url(value: str) -> bool:
     )
 
 
+def is_safe_css_url(value: str) -> bool:
+    candidate = value.strip().strip("'\"").lower()
+    return candidate.startswith("#")
+
+
+def sanitize_css(value: str) -> str:
+    lowered = value.lower()
+    if any(token in lowered for token in ("@import", "expression(", "javascript:", "vbscript:", "<script")):
+        return ""
+
+    def replace_url(match: re.Match[str]) -> str:
+        target = match.group(1)
+        return match.group(0) if is_safe_css_url(target) else ""
+
+    sanitized = re.sub(r"url\(\s*([^)]+?)\s*\)", replace_url, value, flags=re.IGNORECASE)
+    if "data:text/html" in sanitized.lower():
+        return ""
+    return sanitized.strip()
+
+
 class HtmlSanitizer(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=False)
         self.parts: list[str] = []
-        self.block_depth = 0
+        self.skip_content_stack: list[str] = []
+        self.current_tag_stack: list[str] = []
+
+    def in_skipped_content(self) -> bool:
+        return bool(self.skip_content_stack)
+
+    def sanitize_attrs(self, tag: str, attrs: list[tuple[str, str | None]]) -> list[str]:
+        safe_attrs: list[str] = []
+        for key, value in attrs:
+            attr_name = key.lower()
+            if attr_name.startswith("on"):
+                continue
+            if not is_allowed_attr(tag, attr_name):
+                continue
+            if value is None:
+                safe_attrs.append(html.escape(key, quote=True))
+                continue
+            if attr_name in URL_ATTRS and not is_safe_url(value):
+                continue
+            if attr_name == "style":
+                sanitized_style = sanitize_css(value)
+                if not sanitized_style:
+                    continue
+                safe_attrs.append(f'{html.escape(key, quote=True)}="{html.escape(sanitized_style, quote=True)}"')
+                continue
+            safe_attrs.append(f'{html.escape(key, quote=True)}="{html.escape(value, quote=True)}"')
+        return safe_attrs
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         lowered = tag.lower()
-        if lowered in BLOCKED_HTML_TAGS:
-            self.block_depth += 1
+        if lowered not in ALLOWED_HTML_TAGS:
+            self.skip_content_stack.append(lowered)
             return
-        if self.block_depth:
+        if self.in_skipped_content():
             return
 
-        safe_attrs: list[str] = []
-        for key, value in attrs:
-            attr_name = key.lower()
-            if attr_name.startswith("on"):
-                continue
-            if value is None:
-                safe_attrs.append(html.escape(key, quote=True))
-                continue
-            if attr_name in URL_ATTRS and not is_safe_url(value):
-                continue
-            safe_attrs.append(f'{html.escape(key, quote=True)}="{html.escape(value, quote=True)}"')
-
+        safe_attrs = self.sanitize_attrs(lowered, attrs)
         attr_text = f" {' '.join(safe_attrs)}" if safe_attrs else ""
         self.parts.append(f"<{tag}{attr_text}>")
+        self.current_tag_stack.append(lowered)
 
     def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         lowered = tag.lower()
-        if lowered in BLOCKED_HTML_TAGS or self.block_depth:
+        if lowered not in ALLOWED_HTML_TAGS or self.in_skipped_content():
             return
 
-        safe_attrs: list[str] = []
-        for key, value in attrs:
-            attr_name = key.lower()
-            if attr_name.startswith("on"):
-                continue
-            if value is None:
-                safe_attrs.append(html.escape(key, quote=True))
-                continue
-            if attr_name in URL_ATTRS and not is_safe_url(value):
-                continue
-            safe_attrs.append(f'{html.escape(key, quote=True)}="{html.escape(value, quote=True)}"')
-
+        safe_attrs = self.sanitize_attrs(lowered, attrs)
         attr_text = f" {' '.join(safe_attrs)}" if safe_attrs else ""
         self.parts.append(f"<{tag}{attr_text} />")
 
     def handle_endtag(self, tag: str) -> None:
         lowered = tag.lower()
-        if lowered in BLOCKED_HTML_TAGS:
-            if self.block_depth:
-                self.block_depth -= 1
+        if self.in_skipped_content():
+            if self.skip_content_stack and self.skip_content_stack[-1] == lowered:
+                self.skip_content_stack.pop()
             return
-        if self.block_depth:
+        if lowered not in ALLOWED_HTML_TAGS:
             return
         self.parts.append(f"</{tag}>")
+        if self.current_tag_stack:
+            self.current_tag_stack.pop()
 
     def handle_data(self, data: str) -> None:
-        if self.block_depth:
+        if self.in_skipped_content():
+            return
+        if self.current_tag_stack and self.current_tag_stack[-1] == "style":
+            sanitized = sanitize_css(data)
+            if sanitized:
+                self.parts.append(sanitized)
             return
         self.parts.append(html.escape(data, quote=False))
 
     def handle_comment(self, data: str) -> None:
-        if self.block_depth:
+        if self.in_skipped_content():
             return
         self.parts.append(f"<!--{html.escape(data, quote=False)}-->")
 
     def handle_entityref(self, name: str) -> None:
-        if self.block_depth:
+        if self.in_skipped_content():
             return
         self.parts.append(f"&{name};")
 
     def handle_charref(self, name: str) -> None:
-        if self.block_depth:
+        if self.in_skipped_content():
             return
         self.parts.append(f"&#{name};")
 
@@ -410,6 +542,36 @@ def build_sidebar(book: dict, current_slug: str | None) -> str:
     """
 
 
+def feedback_form_html(subject: str, page_title: str, page_slug: str, *, scope_label: str, summary_label: str) -> str:
+    return f"""
+    <details class="feedback-form-box">
+      <summary>{html.escape(summary_label)}</summary>
+      <form class="feedback-form" data-feedback-form data-feedback-email="{html.escape(FEEDBACK_EMAIL)}" data-feedback-subject="{html.escape(subject)}" data-feedback-page="{html.escape(page_title)}" data-feedback-slug="{html.escape(page_slug)}">
+        <label>
+          <span>이름 또는 별명(선택)</span>
+          <input type="text" name="nickname" autocomplete="name" placeholder="익명" />
+        </label>
+        <label>
+          <span>답장을 받을 이메일(선택)</span>
+          <input type="email" name="reply_email" autocomplete="email" placeholder="남기지 않아도 됩니다." />
+        </label>
+        <label>
+          <span>의견 범위</span>
+          <input type="text" name="scope" value="{html.escape(scope_label)}" readonly />
+        </label>
+        <label class="feedback-message-field">
+          <span>의견</span>
+          <textarea name="message" rows="6" required placeholder="오탈자, 설명 보강 제안, 수식 오류, 추가하면 좋은 논문이나 정책 사례를 자유롭게 남겨주세요."></textarea>
+        </label>
+        <div class="feedback-actions">
+          <button type="submit" class="editor-button">메일 앱으로 의견 보내기</button>
+          <p class="feedback-help">별명과 답장 이메일을 비워 두면 본문에는 익명 의견으로 정리됩니다. 다만 `mailto:` 방식이라 방문자의 메일 프로그램에 설정된 발신 주소는 노출될 수 있습니다.</p>
+        </div>
+      </form>
+    </details>
+    """
+
+
 def page_shell(book: dict, sidebar: str, content: str, title: str, editor_config: dict | None = None) -> str:
     editor_script = ""
     if editor_config is not None:
@@ -532,6 +694,13 @@ def build_index(book: dict, editable: bool) -> None:
       <p class="subtitle">{html.escape(book['subtitle'])}</p>
       <p class="meta">{html.escape(book['description'])}</p>
       <p class="lead">{html.escape(book['lead'])}</p>
+      {feedback_form_html(
+          f"[인과효과 추론 책 의견] 책 전체 의견",
+          book["title"],
+          "index",
+          scope_label="책 전체 의견",
+          summary_label="익명 의견 남기기",
+      )}
       {hero_editor}
     </section>
     <section class="section-block">
@@ -606,6 +775,17 @@ def write_chapter_page(book: dict, flat: list[dict], index: int, editable: bool)
       </header>
       <section class="chapter-body">
         {rendered}
+      </section>
+      <section class="chapter-feedback">
+        <h2>의견 보내기</h2>
+        <p>이 절의 설명을 보강하거나 오류를 바로잡는 데 도움이 되는 의견을 메일로 보낼 수 있습니다.</p>
+        {feedback_form_html(
+            f"[인과효과 추론 책 의견] {chapter['meta_title']}",
+            chapter["meta_title"],
+            chapter["slug"],
+            scope_label=chapter["meta_title"],
+            summary_label="이 절에 대한 의견 남기기",
+        )}
       </section>
       <nav class="chapter-nav">
         {prev_html}

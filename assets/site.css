@@ -353,6 +353,96 @@ a {
   color: var(--muted);
 }
 
+.feedback-form-box {
+  margin-top: 1.25rem;
+  border: 1px solid rgba(143, 59, 27, 0.16);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(255, 253, 249, 0.98));
+  overflow: hidden;
+}
+
+.feedback-form-box summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.95rem 1.1rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  background: rgba(143, 59, 27, 0.06);
+}
+
+.feedback-form-box summary::-webkit-details-marker {
+  display: none;
+}
+
+.feedback-form-box[open] summary {
+  border-bottom: 1px solid rgba(143, 59, 27, 0.12);
+}
+
+.feedback-form {
+  padding: 1rem 1.1rem 1.15rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.feedback-form label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.feedback-form label span {
+  font-size: 0.9rem;
+  color: var(--accent-deep);
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  border: 1px solid #d7c6b6;
+  border-radius: 12px;
+  padding: 0.75rem 0.85rem;
+  font: inherit;
+  color: var(--ink);
+  background: #fffdfa;
+}
+
+.feedback-form input[readonly] {
+  background: #f7f1e8;
+  color: var(--muted);
+}
+
+.feedback-form textarea {
+  resize: vertical;
+  min-height: 9rem;
+}
+
+.feedback-actions {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.feedback-help {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.chapter-feedback {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.chapter-feedback h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  color: var(--accent-deep);
+}
+
+.chapter-feedback p {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+}
+
 .editor-actions {
   display: flex;
   flex-wrap: wrap;

@@ -6,6 +6,7 @@
   var currentLink = document.querySelector(".sidebar-link[aria-current='page']");
   var openSourceButtons = document.querySelectorAll("[data-open-source]");
   var openPathButtons = document.querySelectorAll("[data-open-path]");
+  var feedbackForms = document.querySelectorAll("[data-feedback-form]");
   var protocol = window.location.protocol;
   var canUseApi = protocol === "http:" || protocol === "https:";
   var editorHeaders = {
@@ -78,6 +79,46 @@
         { path: path },
         document.querySelector("[data-open-path-status=\"" + path + "\"]")
       );
+    });
+  });
+
+  function buildFeedbackMailto(form) {
+    var email = form.getAttribute("data-feedback-email") || "";
+    var subject = form.getAttribute("data-feedback-subject") || "의견";
+    var page = form.getAttribute("data-feedback-page") || "";
+    var slug = form.getAttribute("data-feedback-slug") || "";
+    var nickname = (form.querySelector("[name='nickname']") || {}).value || "";
+    var replyEmail = (form.querySelector("[name='reply_email']") || {}).value || "";
+    var scope = (form.querySelector("[name='scope']") || {}).value || "";
+    var message = (form.querySelector("[name='message']") || {}).value || "";
+
+    var bodyLines = [
+      "책/절: " + page,
+      "파일: " + slug + ".html",
+      "의견 범위: " + scope,
+      "이름 또는 별명: " + (nickname.trim() || "익명"),
+      "답장 이메일: " + (replyEmail.trim() || "미기재"),
+      "",
+      "[의견]",
+      message.trim()
+    ];
+
+    return "mailto:" + encodeURIComponent(email) +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(bodyLines.join("\n"));
+  }
+
+  feedbackForms.forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var messageField = form.querySelector("[name='message']");
+      if (!messageField || !messageField.value.trim()) {
+        if (messageField) {
+          messageField.focus();
+        }
+        return;
+      }
+      window.location.href = buildFeedbackMailto(form);
     });
   });
 
